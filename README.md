@@ -38,6 +38,7 @@ To run the site locally:
 
 ```bash
 git clone https://github.com/anormalm/personal-website.git
+#Make your own!
 cd personal-website
 npm install
 npm run dev
