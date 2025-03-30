@@ -1,12 +1,46 @@
-# React + Vite
+# Anormalm | Personal Portfolio Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a personal portfolio website built with React and Vite. It showcases selected projects, writings, and a professional profile, and includes sections such as About Me, CV, and Contact.
 
-Currently, two official plugins are available:
+The project emphasizes minimal design, accessibility, responsive layout, and interactive UI elements powered by modern React tools.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Live Deployment
 
-## Expanding the ESLint configuration
+The site is deployed via GitHub Pages and available at:
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+**https://anormalm.github.io/personal-website**
+
+## Features
+
+- Multi-page SPA using React Router
+- Responsive layout using Tailwind CSS
+- Dark/light theme toggle with smooth transitions
+- Typewriter animation for hero section
+- Projects and writings displayed using reusable card components
+- Custom CV page with timeline and skill highlights
+- Contact form submission via Formspree
+- Static Spotify "Now Playing" section (configurable)
+
+## Technology Stack
+
+- **React** – Component-based UI
+- **Vite** – Fast development server and bundler
+- **Tailwind CSS** – Utility-first CSS framework
+- **React Router** – Client-side routing
+- **Framer Motion** – Animation library for React
+- **React Icons** – Icon set integration
+- **Formspree** – Contact form handling
+- **GitHub Pages** – Static site hosting
+
+## Installation
+
+To run the site locally:
+
+```bash
+git clone https://github.com/anormalm/personal-website.git
+cd personal-website
+npm install
+npm run dev
+npm run build
+npm run deploy
+```
