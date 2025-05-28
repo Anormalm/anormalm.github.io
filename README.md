@@ -8,7 +8,7 @@ The project emphasizes minimal design, accessibility, responsive layout, and int
 
 The site is deployed via GitHub Pages and available at:
 
-**https://anormalm.github.io/personal-website**
+**https://anormalm.github.io**
 
 ## Features
 
