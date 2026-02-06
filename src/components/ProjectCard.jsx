@@ -1,25 +1,41 @@
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { FiArrowUpRight } from 'react-icons/fi';
 
 const ProjectCard = ({ title, description, link }) => {
+  const isExternal = link?.startsWith('http');
+
+  const content = (
+    <>
+      <div className="text-xs uppercase tracking-[0.25em] text-[var(--muted)]">Project</div>
+      <h3 className="font-display mt-3 text-2xl">{title}</h3>
+      <p className="mt-2 text-sm text-[var(--muted)]">{description}</p>
+      {link && (
+        <span className="mt-5 inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-[var(--accent)]">
+          View project <FiArrowUpRight />
+        </span>
+      )}
+    </>
+  );
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
       viewport={{ once: true }}
-      className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 transition-all hover:scale-105 hover:shadow-xl"
+      className="glass-card p-6 transition hover:translate-y-[-2px]"
     >
-      <h3 className="text-2xl font-semibold mb-2 text-gray-900 dark:text-white">{title}</h3>
-      <p className="text-gray-700 dark:text-gray-300 mb-4">{description}</p>
-      {link && (
-        <a
-          href={link}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-indigo-600 dark:text-indigo-400 hover:underline font-medium"
-        >
-          View Project →
-        </a>
+      {link ? (
+        isExternal ? (
+          <a href={link} target="_blank" rel="noopener noreferrer">
+            {content}
+          </a>
+        ) : (
+          <Link to={link}>{content}</Link>
+        )
+      ) : (
+        content
       )}
     </motion.div>
   );

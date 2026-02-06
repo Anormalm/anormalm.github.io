@@ -24,7 +24,7 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen transition-colors duration-500 bg-white text-gray-900 dark:bg-gray-900 dark:text-white">
+    <div className="min-h-screen transition-colors duration-500 bg-[var(--paper)] text-[var(--ink)]">
       {isLoading ? (
         <Loader />
       ) : (

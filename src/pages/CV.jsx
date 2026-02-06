@@ -1,120 +1,125 @@
 const CV = () => {
   return (
-    <div className="p-8 min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-500 max-w-4xl mx-auto">
-      <h1 className="text-4xl font-bold mb-4 text-center">Curriculum Vitae</h1>
-
-      {/* PDF Download */}
-      <div className="text-center mb-10">
+    <div className="min-h-screen">
+      <section className="section">
+        <div className="flex flex-wrap items-end justify-between gap-6">
+          <div>
+            <div className="text-xs uppercase tracking-[0.25em] text-[var(--muted)]">Curriculum Vitae</div>
+            <h1 className="font-display text-4xl">Anormalm</h1>
+            <p className="mt-3 max-w-2xl text-sm text-[var(--muted)]">
+              Creative technologist focused on research tooling, poetic interfaces, and calm systems.
+            </p>
+          </div>
           <a
             href="/CV-Revised-June-2025.pdf"
             download
-            className="inline-block bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 dark:hover:bg-indigo-500 transition font-medium"
+            className="rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-white transition hover:opacity-90"
           >
-            Download CV (PDF) 
-          </a >
+            Download PDF
+          </a>
         </div>
 
-      {/* Education Timeline */}
-      <section className="mb-12">
-        <h2 className="text-2xl font-semibold mb-6 text-indigo-600 dark:text-indigo-400">🎓 Education</h2>
-        <div className="border-l-2 border-indigo-600 dark:border-indigo-400 pl-6 space-y-6">
-          <div>
-            <p className="text-sm text-gray-500 dark:text-gray-400">Aug 2024 – Present</p >
-            <h3 className="text-lg font-semibold">Bachelor of Engineering in Computer Engineering (IoT Specialization)</h3>
-            <p className="text-gray-700 dark:text-gray-300">National University of Singapore</p >
-            <p className="text-sm text-gray-600 dark:text-gray-400">Second Major: Innovation and Design, Minor: Mathematics, GPA: 4.6/5.0</p >
-          </div>
-          <div>
-            <p className="text-sm text-gray-500 dark:text-gray-400">Jun 2025 – Jul 2025</p >
-            <h3 className="text-lg font-semibold">Summer School</h3>
-            <p className="text-gray-700 dark:text-gray-300">Shanghai Jiao Tong University</p >
-            <p className="text-sm text-gray-600 dark:text-gray-400">Courses: Algebra, Statistical Inference — Grade: A</p >
-          </div>
-        </div>
-      </section>
-
-      {/* Experience Timeline */}
-      <section className="mb-12">
-        <h2 className="text-2xl font-semibold mb-6 text-indigo-600 dark:text-indigo-400">💼 Experience</h2>
-        <div className="border-l-2 border-indigo-600 dark:border-indigo-400 pl-6 space-y-6">
-          <div>
-            <p className="text-sm text-gray-500 dark:text-gray-400">Jan 2025 – May 2025</p >
-            <h3 className="text-lg font-semibold">Lead Developer – National University of Singapore</h3>
-            <ul className="list-disc pl-5 text-gray-700 dark:text-gray-300 text-sm mt-1">
-              <li>Designed an autonomous robot integrating ROS2, SLAM, and AMG8833 for thermal targeting and projectile firing.</li>
-              <li>Implemented multi-pass exploration and A* navigation with dynamic LiDAR-based avoidance.</li>
-              <li>Developed exclusion-zone logic and adaptive rotation using tf2 pose tracking.</li>
-            </ul>
-          </div>
-          <div>
-            <p className="text-sm text-gray-500 dark:text-gray-400">Feb 2025 – Apr 2025</p >
-            <h3 className="text-lg font-semibold">Robotics Group Leader – National University of Singapore</h3>
-            <ul className="list-disc pl-5 text-gray-700 dark:text-gray-300 text-sm mt-1">
-              <li>Built encoder-tracked C++ firmware for Arduino with command parsing and multi-servo control.</li>
-              <li>Implemented IR-based sensing, ultrasonic braking, and Raspberry Pi-based serial interface.</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      {/* Skills Section */}
-      <section className="mb-12">
-        <h2 className="text-2xl font-semibold mb-6 text-indigo-600 dark:text-indigo-400">🔧 Skills</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 text-sm text-gray-800 dark:text-gray-300">
-          {[
-            'Python', 'C/C++', 'ROS2', 'PyTorch',
-            'PettingZoo', 'RLlib', 'Git/GitHub', 'LaTeX',
-            'Raspberry Pi', 'Arduino', 'AMG8833', 'LiDAR'
-          ].map((skill, idx) => (
-            <div key={idx} className="bg-white dark:bg-gray-800 p-3 rounded-lg shadow text-center">
-              {skill}
+        <div className="mt-10 grid gap-6">
+          <section className="glass-card p-6">
+            <h2 className="font-display text-2xl">Education</h2>
+            <div className="mt-4 space-y-4 text-sm text-[var(--muted)]">
+              <div>
+                <div className="text-xs uppercase tracking-[0.2em]">Aug 2024 - Present</div>
+                <div className="mt-1 font-semibold text-[var(--ink)]">
+                  Bachelor of Engineering in Computer Engineering (IoT)
+                </div>
+                <div>National University of Singapore</div>
+                <div className="text-xs text-[var(--muted)]">
+                  Second Major: Innovation and Design. Minor: Mathematics. GPA: 4.6/5.0
+                </div>
+              </div>
+              <div>
+                <div className="text-xs uppercase tracking-[0.2em]">Jun 2025 - Jul 2025</div>
+                <div className="mt-1 font-semibold text-[var(--ink)]">Summer School</div>
+                <div>Shanghai Jiao Tong University</div>
+                <div className="text-xs text-[var(--muted)]">Courses: Algebra, Statistical Inference. Grade: A</div>
+              </div>
             </div>
-          ))}
+          </section>
+
+          <section className="glass-card p-6">
+            <h2 className="font-display text-2xl">Experience</h2>
+            <div className="mt-4 space-y-5 text-sm text-[var(--muted)]">
+              <div>
+                <div className="text-xs uppercase tracking-[0.2em]">Jan 2025 - May 2025</div>
+                <div className="mt-1 font-semibold text-[var(--ink)]">Lead Developer, National University of Singapore</div>
+                <ul className="mt-2 list-disc pl-5">
+                  <li>Designed an autonomous robot integrating ROS2, SLAM, and AMG8833 for thermal targeting.</li>
+                  <li>Implemented multi-pass exploration and A* navigation with LiDAR-based avoidance.</li>
+                  <li>Built exclusion-zone logic and adaptive rotation using tf2 pose tracking.</li>
+                </ul>
+              </div>
+              <div>
+                <div className="text-xs uppercase tracking-[0.2em]">Feb 2025 - Apr 2025</div>
+                <div className="mt-1 font-semibold text-[var(--ink)]">Robotics Group Leader, National University of Singapore</div>
+                <ul className="mt-2 list-disc pl-5">
+                  <li>Built encoder-tracked C++ firmware for Arduino with command parsing and multi-servo control.</li>
+                  <li>Implemented IR-based sensing, ultrasonic braking, and Raspberry Pi serial interface.</li>
+                </ul>
+              </div>
+              <div>
+                <div className="text-xs uppercase tracking-[0.2em]">May 2025 - Jun 2025</div>
+                <div className="mt-1 font-semibold text-[var(--ink)]">
+                  Digital Design Engineer Intern (AI), Shanghai MAHLE Thermal Systems
+                </div>
+                <ul className="mt-2 list-disc pl-5">
+                  <li>Built a real-time meeting transcriber and translator (Vosk + MarianMT).</li>
+                  <li>Developed YOLO-based blueprint detector and OCR pipelines for multilingual diagrams.</li>
+                  <li>Designed a predictive model for factory quality stoppage using LightGBM logs.</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <section className="glass-card p-6">
+            <h2 className="font-display text-2xl">Skills</h2>
+            <div className="mt-4 grid grid-cols-2 gap-3 text-sm md:grid-cols-4">
+              {[
+                'Python',
+                'C/C++',
+                'ROS2',
+                'PyTorch',
+                'PettingZoo',
+                'RLlib',
+                'Git/GitHub',
+                'LaTeX',
+                'Raspberry Pi',
+                'Arduino',
+                'AMG8833',
+                'LiDAR',
+              ].map((skill) => (
+                <div key={skill} className="surface-strong rounded-2xl border border-[var(--line)] px-3 py-2 text-center">
+                  {skill}
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section className="glass-card p-6">
+            <h2 className="font-display text-2xl">Certifications</h2>
+            <ul className="mt-4 list-disc pl-5 text-sm text-[var(--muted)]">
+              <li>WorldQuant BRAIN Challenge Silver Medal - Feb 2025</li>
+              <li>MCM 2025 Meritorious Winner - COMAP</li>
+            </ul>
+          </section>
+
+          <section className="glass-card p-6">
+            <h2 className="font-display text-2xl">Publications</h2>
+            <ul className="mt-4 list-disc pl-5 text-sm text-[var(--muted)]">
+              <li>Hu Lifan, "Learning Lie Group Generators From Trajectories," arXiv.org, Apr 2025</li>
+              <li>
+                Hu Lifan, "GNN-Augmented RL for Fraud Detection in DeFi," CONF-SEML 2025 (published)
+                DOI: 10.54254/2755-2721/2025.22856
+              </li>
+            </ul>
+          </section>
         </div>
       </section>
-
-      {/* Internship Section */}
-  <section className="mb-12">
-    <h2 className="text-2xl font-semibold mb-6 text-indigo-600 dark:text-indigo-400">💼 Internship</h2>
-    <ul className="list-disc pl-6 text-gray-700 dark:text-gray-300 text-sm space-y-2">
-                  <p className="text-sm text-gray-500 dark:text-gray-400">May 2025 – Jun 2025</p >
-
-        <span className="font-medium">Digital Design Engineer Intern (AI)</span> –Shanghai MAHLE Thermal Systems
-      <li>
-        Built real-time meeting transcriber & translator (Vosk + MarianMT); offline-capable, accurate speech segmentation.
-      </li>
-      <li>
-        Developed YOLO-based blueprint detector and OCR pipelines for tables, diagrams, and multilingual annotations.
-      </li>
-      <li>
-        Designed predictive model for factory quality stoppage using LightGBM & industrial sensor logs (Q-Predict).
-      </li>
-    </ul>
-  </section>
-
-
-      {/* Certifications Section */}
-      <section className="mb-12">
-        <h2 className="text-2xl font-semibold mb-6 text-indigo-600 dark:text-indigo-400">📜 Certifications</h2>
-        <ul className="list-disc pl-6 text-gray-700 dark:text-gray-300 text-sm space-y-2">
-          <li>Worldquant BRAIN Challenge Silver Medal – Feb 2025</li>
-          <li>MCM 2025 Meritorious Winner – COMAP</li>
-        </ul>
-      </section>
-
-     {/* Achievements Section */}
-      <section className="mb-12">
-        <h2 className="text-2xl font-semibold mb-6 text-indigo-600 dark:text-indigo-400">🏆 Publications</h2>
-        <ul className="list-disc pl-6 text-gray-700 dark:text-gray-300 text-sm space-y-2">
-          <li>Hu Lifan, "Learning Lie Group Generators From Trajectories," arXiv.org, Apr 2025</li>
-          <li>Hu Lifan, "GNN-Augmented RL for Fraud Detection in DeFi," CONF-SEML 2025 (published) DOI: 10.54254/2755-2721/2025.22856</li>
-        </ul>
-      </section>
-
-      {/* Footer line */}
-      <div className="text-center text-sm text-gray-500 dark:text-gray-400 mt-12">
-        Developed by React/Vite
-      </div>
     </div>
   );
 };
