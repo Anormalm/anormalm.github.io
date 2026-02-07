@@ -36,6 +36,10 @@
     text-rendering: optimizeLegibility;
   }
 
+  canvas {
+    display: block;
+  }
+
   ::selection {
     background: color-mix(in srgb, var(--accent) 30%, transparent);
   }

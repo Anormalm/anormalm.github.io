@@ -2,7 +2,7 @@
   "name": "personal-website",
   "version": "0.0.0",
   "private": true,
-  "homepage": "https://anormalm.github.io/personal-website",
+  "homepage": "https://anormalm.github.io/",
   "type": "module",
   "scripts": {
     "dev": "vite",

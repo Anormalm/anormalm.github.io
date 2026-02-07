@@ -1,6 +1,58 @@
+import { useMemo } from 'react';
 import ProjectCard from '../components/ProjectCard';
+import { useGlobalSearch } from '../context/SearchContext';
 
 const Projects = () => {
+  const { query, tags } = useGlobalSearch();
+  const projects = [
+    {
+      title: 'Personal Website',
+      description: 'A portfolio website built with React and Tailwind CSS. This is recursive somehow.',
+      link: 'https://github.com/anormalm/personal-website',
+      tags: ['product', 'interfaces'],
+    },
+    {
+      title: 'Creative Writing Archive',
+      description: 'A digital archive of my short stories.',
+      link: '/writings',
+      tags: ['writing', 'systems'],
+    },
+    {
+      title: 'Autonomous Robot',
+      description: 'A ROS2-powered heat-seeking robot using SLAM, frontier exploration, AMG8833, and A* navigation with firing logic.',
+      tags: ['robotics', 'systems'],
+    },
+    {
+      title: 'Lie Group Trajectory Encoder',
+      description: 'Learned Lie group generators from motion sequences in SE(2), SE(3), SO(3), and SL(2,R). Includes visualizations and manifold modeling.',
+      link: 'https://github.com/Anormalm/LieRL-on-Trajectories',
+      tags: ['research', 'ml', 'systems'],
+    },
+    {
+      title: 'BPCompanion',
+      description: 'A blood pressure logging and prediction toolkit with anomaly detection, LSTM modeling, and a Tkinter GUI for elderly users.',
+      link: 'https://github.com/anormalm/bpcompanion',
+      tags: ['product', 'ml'],
+    },
+    {
+      title: 'TopoTrace',
+      description: 'A topology-aware anomaly detection toolkit using persistent homology to analyze dynamic system traces.',
+      link: 'https://github.com/anormalm/topotrace',
+      tags: ['research', 'ml', 'tooling'],
+    },
+  ];
+
+  const filteredProjects = useMemo(() => {
+    return projects.filter((project) => {
+      const matchesQuery =
+        query.trim().length === 0 ||
+        project.title.toLowerCase().includes(query.toLowerCase()) ||
+        project.description.toLowerCase().includes(query.toLowerCase());
+      const matchesTags = tags.length === 0 || tags.every((tag) => project.tags?.includes(tag));
+      return matchesQuery && matchesTags;
+    });
+  }, [projects, query, tags]);
+
   return (
     <div className="min-h-screen">
       <section className="section">
@@ -18,35 +70,19 @@ const Projects = () => {
         </div>
 
         <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2">
-          <ProjectCard
-            title="Personal Website"
-            description="A portfolio website built with React and Tailwind CSS. This is recursive somehow."
-            link="https://github.com/anormalm/personal-website"
-          />
-          <ProjectCard
-            title="Creative Writing Archive"
-            description="A digital archive of my short stories."
-            link="/writings"
-          />
-          <ProjectCard
-            title="Autonomous Robot"
-            description="A ROS2-powered heat-seeking robot using SLAM, frontier exploration, AMG8833, and A* navigation with firing logic."
-          />
-          <ProjectCard
-            title="Lie Group Trajectory Encoder"
-            description="Learned Lie group generators from motion sequences in SE(2), SE(3), SO(3), and SL(2,R). Includes visualizations and manifold modeling."
-            link="https://github.com/Anormalm/LieRL-on-Trajectories"
-          />
-          <ProjectCard
-            title="BPCompanion"
-            description="A blood pressure logging and prediction toolkit with anomaly detection, LSTM modeling, and a Tkinter GUI for elderly users."
-            link="https://github.com/anormalm/bpcompanion"
-          />
-          <ProjectCard
-            title="TopoTrace"
-            description="A topology-aware anomaly detection toolkit using persistent homology to analyze dynamic system traces."
-            link="https://github.com/anormalm/topotrace"
-          />
+          {filteredProjects.map((project) => (
+            <ProjectCard
+              key={project.title}
+              title={project.title}
+              description={project.description}
+              link={project.link}
+            />
+          ))}
+          {filteredProjects.length === 0 && (
+            <div className="glass-card p-6 text-sm text-[var(--muted)]">
+              No projects match the current search. Try adjusting the global tags.
+            </div>
+          )}
         </div>
       </section>
     </div>

@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
 import { FiArrowUpRight, FiMail, FiDownload } from 'react-icons/fi';
+import { useGlobalSearch } from '../context/SearchContext';
 
 const Home = () => {
   const moods = [
@@ -47,6 +48,7 @@ const Home = () => {
   const [activeMoodId, setActiveMoodId] = useState(moods[0].id);
   const activeMood = moods.find((mood) => mood.id === activeMoodId) || moods[0];
 
+  const { query, tags } = useGlobalSearch();
   const projectCategories = ['All', 'Product', 'Research', 'Writing', 'Play'];
   const [projectFilter, setProjectFilter] = useState('All');
   const projects = [
@@ -57,6 +59,7 @@ const Home = () => {
       type: 'Product',
       stack: ['React', 'Tailwind', 'Framer Motion'],
       link: '/projects',
+      tags: ['product', 'interfaces', 'systems'],
     },
     {
       title: 'GNN MARL Fraud Study',
@@ -65,6 +68,7 @@ const Home = () => {
       type: 'Research',
       stack: ['Python', 'PyTorch', 'Writing'],
       link: '/writings/GNNMARLFraud',
+      tags: ['research', 'ml', 'systems'],
     },
     {
       title: 'Fragments of Disenchantment',
@@ -73,6 +77,7 @@ const Home = () => {
       type: 'Writing',
       stack: ['React', 'Typography'],
       link: '/writings/Fragments',
+      tags: ['writing', 'interfaces'],
     },
     {
       title: 'Signal Garden',
@@ -81,17 +86,19 @@ const Home = () => {
       type: 'Play',
       stack: ['Canvas', 'Creative Coding'],
       link: '/projects',
+      tags: ['generative', 'canvas', 'interfaces'],
     },
   ];
 
-  const filteredProjects =
-    projectFilter === 'All'
-      ? projects
-      : projects.filter((project) => project.type === projectFilter);
-
-  const writingTags = ['All', 'Essay', 'Notes', 'Fiction', 'Research'];
-  const [writingFilter, setWritingFilter] = useState('All');
-  const [query, setQuery] = useState('');
+  const filteredProjects = projects.filter((project) => {
+    const matchesCategory = projectFilter === 'All' || project.type === projectFilter;
+    const matchesQuery =
+      query.trim().length === 0 ||
+      project.title.toLowerCase().includes(query.toLowerCase()) ||
+      project.description.toLowerCase().includes(query.toLowerCase());
+    const matchesTags = tags.length === 0 || tags.every((tag) => project.tags?.includes(tag));
+    return matchesCategory && matchesQuery && matchesTags;
+  });
 
   const writings = [
     {
@@ -100,6 +107,7 @@ const Home = () => {
       date: 'Jan 2026',
       summary: 'On designing interfaces that behave like good rooms.',
       link: '/writings/Disenchantment',
+      tags: ['writing', 'interfaces'],
     },
     {
       title: 'Notes on GNN + MARL Fraud',
@@ -107,6 +115,7 @@ const Home = () => {
       date: 'Nov 2025',
       summary: 'Field notes from a systems-level investigation.',
       link: '/writings/GNNMARLFraud',
+      tags: ['research', 'ml', 'systems'],
     },
     {
       title: 'Fragments',
@@ -114,6 +123,7 @@ const Home = () => {
       date: 'Oct 2024',
       summary: 'Micro-stories that read like a glitching diary.',
       link: '/writings/Fragments',
+      tags: ['writing', 'interfaces'],
     },
     {
       title: 'Operational Calm',
@@ -121,19 +131,20 @@ const Home = () => {
       date: 'Aug 2024',
       summary: 'A checklist for building calm in complex systems.',
       link: '/writings',
+      tags: ['writing', 'systems'],
     },
   ];
 
   const filteredWritings = useMemo(() => {
     return writings.filter((writing) => {
-      const matchesTag = writingFilter === 'All' || writing.tag === writingFilter;
       const matchesQuery =
         query.trim().length === 0 ||
         writing.title.toLowerCase().includes(query.toLowerCase()) ||
         writing.summary.toLowerCase().includes(query.toLowerCase());
-      return matchesTag && matchesQuery;
+      const matchesTags = tags.length === 0 || tags.every((tag) => writing.tags?.includes(tag));
+      return matchesQuery && matchesTags;
     });
-  }, [writingFilter, query, writings]);
+  }, [query, tags, writings]);
 
   return (
     <motion.div
@@ -351,29 +362,8 @@ const Home = () => {
               Essays, research notes, and fragments that map the studio's thinking.
             </p>
 
-            <div className="mt-6 flex flex-wrap gap-2">
-              {writingTags.map((tag) => (
-                <button
-                  key={tag}
-                  onClick={() => setWritingFilter(tag)}
-                  className={`rounded-full border px-4 py-2 text-xs uppercase tracking-[0.25em] transition ${
-                    writingFilter === tag
-                      ? 'border-[var(--accent)] text-[var(--accent)]'
-                      : 'border-[var(--line)] text-[var(--muted)] hover:border-[var(--accent)]'
-                  }`}
-                >
-                  {tag}
-                </button>
-              ))}
-            </div>
-
-            <div className="mt-4">
-              <input
-                value={query}
-                onChange={(event) => setQuery(event.target.value)}
-                placeholder="Search essays or notes"
-                className="surface-strong w-full rounded-2xl border border-[var(--line)] px-4 py-3 text-sm outline-none transition focus:border-[var(--accent)]"
-              />
+            <div className="mt-6 text-xs uppercase tracking-[0.25em] text-[var(--muted)]">
+              Filtered by global search and tags
             </div>
 
             <div className="mt-6 grid gap-4">
