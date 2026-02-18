@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { motion as Motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
@@ -32,18 +33,39 @@ const STATUS = [
 ];
 
 const Home = () => {
+  const [ghostMode, setGhostMode] = useState(false);
   const [typedText] = useTypewriter({
     words: [
-      'designing robust interfaces',
-      'building applied ML systems',
-      'shipping technical products',
-      'writing engineering notes',
+      'Building practical systems for research and production',
+      'Engineering resilient products for real-world constraints',
+      'Designing scalable workflows for technical teams',
+      'Prototyping intelligent tools for human decision-making',
     ],
     loop: 0,
-    typeSpeed: 62,
-    deleteSpeed: 34,
-    delaySpeed: 1600,
+    typeSpeed: 48,
+    deleteSpeed: 28,
+    delaySpeed: 1500,
   });
+  const [ghostTypedText] = useTypewriter({
+    words: [
+      'Tracing hidden routes in distributed memory',
+      'Recovering signals from digital ruins',
+      'Stitching runtime fragments into coherent systems',
+      'Listening for state changes in the noise floor',
+    ],
+    loop: 0,
+    typeSpeed: 42,
+    deleteSpeed: 26,
+    delaySpeed: 1300,
+  });
+
+  useEffect(() => {
+    if (!ghostMode) return undefined;
+    const timer = setTimeout(() => {
+      setGhostMode(false);
+    }, 20_000);
+    return () => clearTimeout(timer);
+  }, [ghostMode]);
 
   return (
     <Motion.div
@@ -60,16 +82,16 @@ const Home = () => {
           <div className="relative z-10 grid gap-8 lg:grid-cols-[1.25fr_0.75fr]">
             <div>
               <div className="chip font-mono border-[var(--accent)]/40 text-[var(--accent)]">SYSTEM PORTFOLIO</div>
-              <h1 className="font-display mt-5 text-4xl leading-tight md:text-6xl">
-                Technical systems
-                <span className="block text-gradient">with clear execution.</span>
+              <h1 className="font-display mt-5 min-h-[132px] text-4xl leading-tight md:min-h-[156px] md:text-6xl">
+                <span
+                  className="text-gradient"
+                  onDoubleClick={() => setGhostMode(true)}
+                  title="double-click to unlock ghost typing"
+                >
+                  {ghostMode ? ghostTypedText : typedText}
+                </span>
+                <Cursor cursorStyle="|" cursorColor="var(--accent)" />
               </h1>
-
-              <div className="font-mono mt-5 rounded-2xl border border-[var(--line)] bg-[var(--paper)]/70 px-4 py-3 text-sm text-[var(--muted)]">
-                <span className="text-[var(--accent)]">&gt; </span>
-                {typedText}
-                <Cursor cursorStyle="_" cursorColor="var(--accent)" />
-              </div>
 
               <p className="mt-5 max-w-2xl text-sm text-[var(--muted)] md:text-base">
                 I focus on machine learning systems, engineering workflows, and production-ready web interfaces.

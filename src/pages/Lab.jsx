@@ -32,6 +32,11 @@ const defaultParams = {
   kalman: { sigma: 13, processNoise: 0.4, trail: 240 },
 };
 
+const randomInRange = (min, max, step = 1) => {
+  const span = Math.floor((max - min) / step);
+  return min + Math.floor(Math.random() * (span + 1)) * step;
+};
+
 const Lab = () => {
   const canvasRef = useRef(null);
   const animationRef = useRef(null);
@@ -47,6 +52,36 @@ const Lab = () => {
   useEffect(() => {
     const test = document.createElement('canvas');
     setSupportsCanvas(Boolean(test.getContext && test.getContext('2d')));
+  }, []);
+
+  useEffect(() => {
+    const onKeyDown = (event) => {
+      if (event.key.toLowerCase() !== 'c') return;
+      const targetTag = event.target?.tagName?.toLowerCase();
+      if (targetTag === 'input' || targetTag === 'textarea') return;
+
+      setParams({
+        hamiltonian: {
+          particles: randomInRange(120, 1200, 20),
+          speed: Number(randomInRange(2, 25, 1) / 10),
+          intensity: randomInRange(10, 50, 1),
+        },
+        cursor: {
+          spacing: randomInRange(16, 44, 2),
+          influence: randomInRange(80, 360, 10),
+          arrowLength: randomInRange(6, 24, 1),
+        },
+        kalman: {
+          sigma: randomInRange(4, 24, 1),
+          processNoise: Number(randomInRange(1, 24, 1) / 20),
+          trail: randomInRange(80, 360, 10),
+        },
+      });
+      setStatusMessage('Chaos seed applied (press C again to randomize).');
+    };
+
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
   }, []);
 
   useEffect(() => {

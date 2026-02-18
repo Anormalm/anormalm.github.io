@@ -46,6 +46,12 @@
     --accent-2: #47cbff;
   }
 
+  :root[data-overclock='on'] {
+    --accent: #00e6ff;
+    --accent-2: #00ff9c;
+    --accent-3: #8d7bff;
+  }
+
   html {
     scroll-behavior: smooth;
   }
@@ -168,6 +174,53 @@
   pointer-events: none;
 }
 
+.app-shell::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 55;
+  transition: opacity 180ms ease;
+}
+
+:root[data-overclock='on'] .app-shell::before {
+  opacity: 0.2;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(0, 230, 255, 0.25), transparent 40%),
+    radial-gradient(circle at 90% 85%, rgba(0, 255, 156, 0.22), transparent 45%);
+}
+
+@keyframes glitch-shift {
+  0% { transform: translate(0, 0); filter: none; }
+  20% { transform: translate(-1px, 0); filter: hue-rotate(5deg); }
+  40% { transform: translate(1px, -1px); filter: hue-rotate(-8deg); }
+  60% { transform: translate(-1px, 1px); filter: hue-rotate(12deg); }
+  80% { transform: translate(1px, 0); filter: hue-rotate(-6deg); }
+  100% { transform: translate(0, 0); filter: none; }
+}
+
+:root[data-glitch='on'] .app-shell {
+  animation: glitch-shift 220ms steps(2, end) infinite;
+}
+
+:root[data-glitch='on'] .app-shell::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 56;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.06) 0px,
+      rgba(255, 255, 255, 0.06) 1px,
+      transparent 2px,
+      transparent 4px
+    );
+  mix-blend-mode: screen;
+}
+
 @keyframes scan {
   to {
     transform: translateY(100%);
@@ -218,7 +271,9 @@
 @media (prefers-reduced-motion: reduce) {
   .float-slow,
   .shimmer-line::after,
-  .scanline::after {
+  .scanline::after,
+  .app-shell,
+  .app-shell::after {
     animation: none !important;
   }
 }

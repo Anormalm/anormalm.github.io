@@ -10,6 +10,7 @@ import Writings from './pages/Writings';
 import CV from './pages/CV';
 import Contact from './pages/Contact';
 import Lab from './pages/Lab';
+import Node from './pages/Node';
 import GNNMARLFraud from './pages/writings/GNNMARLFraud';
 import Disenchantment from './pages/writings/Disenchantment';
 import Fragments from './pages/writings/Fragments';
@@ -20,10 +21,13 @@ const getAmbientMode = (hour) => {
   if (hour >= 17 && hour < 21) return 'evening';
   return 'night';
 };
+const KONAMI_PATTERN = ['up', 'up', 'down', 'down', 'left', 'right', 'left', 'right', 'b', 'a', 'b', 'a'];
 
 function AppShell() {
   const location = useLocation();
   const [ambientMode, setAmbientMode] = useState(() => getAmbientMode(new Date().getHours()));
+  const [overclockMode, setOverclockMode] = useState(false);
+  const [glitchMode, setGlitchMode] = useState(false);
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   useEffect(() => {
@@ -39,6 +43,47 @@ function AppShell() {
   useEffect(() => {
     document.documentElement.dataset.ambient = ambientMode;
   }, [ambientMode]);
+
+  useEffect(() => {
+    document.documentElement.dataset.overclock = overclockMode ? 'on' : 'off';
+  }, [overclockMode]);
+
+  useEffect(() => {
+    document.documentElement.dataset.glitch = glitchMode ? 'on' : 'off';
+  }, [glitchMode]);
+
+  useEffect(() => {
+    const buffer = [];
+    const normalize = (key) => {
+      const k = key.toLowerCase();
+      if (k === 'arrowup') return 'up';
+      if (k === 'arrowdown') return 'down';
+      if (k === 'arrowleft') return 'left';
+      if (k === 'arrowright') return 'right';
+      if (k === 'a' || k === 'b') return k;
+      return '';
+    };
+
+    const onKeyDown = (event) => {
+      if (event.ctrlKey && event.shiftKey && event.key.toLowerCase() === 'g') {
+        setGlitchMode((prev) => !prev);
+        return;
+      }
+
+      const token = normalize(event.key);
+      if (!token) return;
+
+      buffer.push(token);
+      if (buffer.length > KONAMI_PATTERN.length) buffer.shift();
+      if (buffer.join('|') === KONAMI_PATTERN.join('|')) {
+        setOverclockMode((prev) => !prev);
+        buffer.length = 0;
+      }
+    };
+
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, []);
 
   return (
     <>
@@ -58,6 +103,7 @@ function AppShell() {
             <Route path="/lab" element={<Lab />} />
             <Route path="/cv" element={<CV />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/node" element={<Node />} />
             <Route path="/writings/GNNMARLFraud" element={<GNNMARLFraud />} />
             <Route path="/writings/Disenchantment" element={<Disenchantment />} />
             <Route path="/writings/Fragments" element={<Fragments />} />
@@ -81,7 +127,7 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen transition-colors duration-500 bg-[var(--paper)] text-[var(--ink)]">
+    <div className="app-shell min-h-screen transition-colors duration-500 bg-[var(--paper)] text-[var(--ink)]">
       {isLoading ? (
         <Loader />
       ) : (
