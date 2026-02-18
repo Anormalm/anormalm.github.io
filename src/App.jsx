@@ -2,8 +2,6 @@ import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Loader from './components/Loader';
-import GlobalSearchBar from './components/GlobalSearchBar';
-import { SearchProvider } from './context/SearchContext';
 import Home from './pages/Home';
 import Projects from './pages/Projects';
 import Writings from './pages/Writings';
@@ -32,21 +30,18 @@ function App() {
         <Loader />
       ) : (
         <Router>
-          <SearchProvider>
-            <Navbar />
-            <GlobalSearchBar />
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/projects" element={<Projects />} />
-              <Route path="/writings" element={<Writings />} />
-              <Route path="/lab" element={<Lab />} />
-              <Route path="/cv" element={<CV />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/writings/GNNMARLFraud" element={<GNNMARLFraud />} /> 
-              <Route path="/writings/Disenchantment" element={<Disenchantment />} />
-              <Route path="/writings/Fragments" element={<Fragments />} />
-            </Routes>
-          </SearchProvider>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/projects" element={<Projects />} />
+            <Route path="/writings" element={<Writings />} />
+            <Route path="/lab" element={<Lab />} />
+            <Route path="/cv" element={<CV />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/writings/GNNMARLFraud" element={<GNNMARLFraud />} /> 
+            <Route path="/writings/Disenchantment" element={<Disenchantment />} />
+            <Route path="/writings/Fragments" element={<Fragments />} />
+          </Routes>
         </Router>
       )}
     </div>

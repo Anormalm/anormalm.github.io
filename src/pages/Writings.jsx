@@ -1,6 +1,5 @@
 import { useMemo } from 'react';
 import WritingCard from '../components/WritingCard';
-import { useGlobalSearch } from '../context/SearchContext';
 
 const WRITINGS = [
   {
@@ -24,18 +23,7 @@ const WRITINGS = [
 ];
 
 const Writings = () => {
-  const { query } = useGlobalSearch();
-
-  const filteredWritings = useMemo(() => {
-    const normalizedQuery = query.trim().toLowerCase();
-    return WRITINGS.filter((writing) => {
-      const matchesQuery =
-        normalizedQuery.length === 0 ||
-        writing.title.toLowerCase().includes(normalizedQuery) ||
-        writing.excerpt.toLowerCase().includes(normalizedQuery);
-      return matchesQuery;
-    });
-  }, [query]);
+  const writings = useMemo(() => WRITINGS, []);
 
   return (
     <div className="min-h-screen">
@@ -54,7 +42,7 @@ const Writings = () => {
         </div>
 
         <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2">
-          {filteredWritings.map((writing) => (
+          {writings.map((writing) => (
             <WritingCard
               key={writing.title}
               title={writing.title}
@@ -63,11 +51,6 @@ const Writings = () => {
               link={writing.link}
             />
           ))}
-          {filteredWritings.length === 0 && (
-            <div className="glass-card p-6 text-sm text-[var(--muted)]">
-              No writings match the current search.
-            </div>
-          )}
         </div>
       </section>
     </div>

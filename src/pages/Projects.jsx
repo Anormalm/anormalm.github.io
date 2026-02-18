@@ -1,6 +1,4 @@
-import { useMemo } from 'react';
 import ProjectCard from '../components/ProjectCard';
-import { useGlobalSearch } from '../context/SearchContext';
 
 const PROJECTS = [
   {
@@ -35,19 +33,6 @@ const PROJECTS = [
 ];
 
 const Projects = () => {
-  const { query } = useGlobalSearch();
-
-  const filteredProjects = useMemo(() => {
-    const normalizedQuery = query.trim().toLowerCase();
-    return PROJECTS.filter((project) => {
-      const matchesQuery =
-        normalizedQuery.length === 0 ||
-        project.title.toLowerCase().includes(normalizedQuery) ||
-        project.description.toLowerCase().includes(normalizedQuery);
-      return matchesQuery;
-    });
-  }, [query]);
-
   return (
     <div className="min-h-screen">
       <section className="section">
@@ -65,7 +50,7 @@ const Projects = () => {
         </div>
 
         <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2">
-          {filteredProjects.map((project) => (
+          {PROJECTS.map((project) => (
             <ProjectCard
               key={project.title}
               title={project.title}
@@ -73,11 +58,6 @@ const Projects = () => {
               link={project.link}
             />
           ))}
-          {filteredProjects.length === 0 && (
-            <div className="glass-card p-6 text-sm text-[var(--muted)]">
-              No projects match the current search.
-            </div>
-          )}
         </div>
       </section>
     </div>

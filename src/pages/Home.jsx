@@ -3,7 +3,6 @@ import { motion as Motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { FiArrowUpRight, FiMail, FiDownload } from 'react-icons/fi';
-import { useGlobalSearch } from '../context/SearchContext';
 
 const HOME_PROJECTS = [
   {
@@ -114,28 +113,14 @@ const Home = () => {
   const [activeMoodId, setActiveMoodId] = useState(moods[0].id);
   const activeMood = moods.find((mood) => mood.id === activeMoodId) || moods[0];
 
-  const { query } = useGlobalSearch();
   const projectCategories = ['All', 'Product', 'Research', 'Writing', 'Play'];
   const [projectFilter, setProjectFilter] = useState('All');
-  const normalizedQuery = query.trim().toLowerCase();
   const filteredProjects = HOME_PROJECTS.filter((project) => {
     const matchesCategory = projectFilter === 'All' || project.type === projectFilter;
-    const matchesQuery =
-      normalizedQuery.length === 0 ||
-      project.title.toLowerCase().includes(normalizedQuery) ||
-      project.description.toLowerCase().includes(normalizedQuery);
-    return matchesCategory && matchesQuery;
+    return matchesCategory;
   });
 
-  const filteredWritings = useMemo(() => {
-    return HOME_WRITINGS.filter((writing) => {
-      const matchesQuery =
-        normalizedQuery.length === 0 ||
-        writing.title.toLowerCase().includes(normalizedQuery) ||
-        writing.summary.toLowerCase().includes(normalizedQuery);
-      return matchesQuery;
-    });
-  }, [normalizedQuery]);
+  const writings = useMemo(() => HOME_WRITINGS, []);
 
   return (
     <Motion.div
@@ -245,7 +230,7 @@ const Home = () => {
 
                 <div className="flex flex-wrap gap-3">
                   <a
-                    href="mailto:hulifan55555@gmail.com"
+                    href="mailto:lifan.hu@u.nus.edu"
                     className="flex items-center gap-2 rounded-full border border-[var(--line)] px-4 py-2 text-xs uppercase tracking-[0.2em] transition hover:border-[var(--accent)]"
                   >
                     <FiMail />
@@ -353,12 +338,8 @@ const Home = () => {
               Essays, research notes, and short-form writing.
             </p>
 
-            <div className="mt-6 text-xs uppercase tracking-[0.25em] text-[var(--muted)]">
-              Filtered by global search
-            </div>
-
             <div className="mt-6 grid gap-4">
-              {filteredWritings.map((writing) => (
+              {writings.map((writing) => (
                 <Link
                   key={writing.title}
                   to={writing.link}
@@ -488,7 +469,7 @@ const Home = () => {
                 Contact
               </Link>
               <a
-                href="mailto:hulifan55555@gmail.com"
+                href="mailto:lifan.hu@u.nus.edu"
                 className="rounded-full border border-[var(--line)] px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] transition hover:border-[var(--accent)]"
               >
                 Send Email
@@ -505,7 +486,7 @@ const Home = () => {
               <FaGithub />
             </a>
             <a
-              href="https://www.linkedin.com/in/lifan-hu-46728b324"
+              href="https://www.linkedin.com/in/anormalm/"
               target="_blank"
               rel="noreferrer"
               className="hover:text-[var(--accent)]"
