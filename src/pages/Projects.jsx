@@ -39,9 +39,9 @@ const Projects = () => {
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
             <div className="text-xs uppercase tracking-[0.25em] text-[var(--muted)]">Projects</div>
-            <h1 className="font-display text-4xl">Systems, experiments, and products.</h1>
+            <h1 className="font-display text-4xl">Systems, products, and applied research.</h1>
             <p className="mt-3 max-w-2xl text-sm text-[var(--muted)]">
-              A living archive of the work. These are in-progress artifacts as much as they are finished builds.
+              Project index covering production builds, prototypes, and engineering experiments.
             </p>
           </div>
           <div className="rounded-full border border-[var(--line)] px-4 py-2 text-xs uppercase tracking-[0.2em] text-[var(--muted)]">

@@ -4,25 +4,25 @@
 
 @layer base {
   :root {
-    --paper: #f5f1ea;
-    --ink: #16130f;
-    --muted: #6f655d;
-    --line: #d7cdc4;
-    --accent: #ff5a36;
-    --accent-2: #138a6f;
-    --accent-3: #e2a817;
-    --font-display: "Fraunces", "Times New Roman", serif;
+    --paper: #eef3fa;
+    --ink: #101726;
+    --muted: #5c667b;
+    --line: #cfd9e8;
+    --accent: #1d6fff;
+    --accent-2: #00a4d6;
+    --accent-3: #00c987;
+    --font-display: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
     --font-body: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
   }
 
   .dark {
-    --paper: #0b0c0f;
-    --ink: #f6f1eb;
-    --muted: #b2a496;
-    --line: #2b2f36;
-    --accent: #ff7a59;
-    --accent-2: #45c09d;
-    --accent-3: #f0c14b;
+    --paper: #090f1b;
+    --ink: #eaf1ff;
+    --muted: #9ba8c2;
+    --line: #263248;
+    --accent: #4b90ff;
+    --accent-2: #33c6f7;
+    --accent-3: #23d39b;
   }
 
   html {
@@ -62,7 +62,7 @@
   .glass-card {
     @apply rounded-3xl border shadow-[0_24px_80px_rgba(0,0,0,0.08)] backdrop-blur;
     border-color: var(--line);
-    background: color-mix(in srgb, var(--paper) 85%, transparent);
+    background: color-mix(in srgb, var(--paper) 90%, white 10%);
   }
 
   .surface {
@@ -82,17 +82,24 @@
 
 .bg-aurora {
   background:
-    radial-gradient(circle at 20% 20%, rgba(255, 136, 90, 0.35), transparent 55%),
-    radial-gradient(circle at 85% 10%, rgba(19, 138, 111, 0.28), transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(226, 168, 23, 0.25), transparent 60%),
-    linear-gradient(140deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0));
+    radial-gradient(circle at 20% 20%, rgba(29, 111, 255, 0.3), transparent 55%),
+    radial-gradient(circle at 85% 10%, rgba(0, 164, 214, 0.26), transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(0, 201, 135, 0.22), transparent 60%),
+    linear-gradient(140deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0));
 }
 
 .bg-grid {
   background-image:
-    linear-gradient(to right, color-mix(in srgb, var(--line) 55%, transparent) 1px, transparent 1px),
-    linear-gradient(to bottom, color-mix(in srgb, var(--line) 55%, transparent) 1px, transparent 1px);
-  background-size: 36px 36px;
+    linear-gradient(to right, color-mix(in srgb, var(--line) 45%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--line) 45%, transparent) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+
+.bg-tech {
+  background:
+    radial-gradient(circle at 10% 0%, rgba(29, 111, 255, 0.18), transparent 45%),
+    radial-gradient(circle at 100% 100%, rgba(0, 164, 214, 0.2), transparent 50%),
+    linear-gradient(160deg, rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0.08));
 }
 
 .text-gradient {
