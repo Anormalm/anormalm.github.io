@@ -65,6 +65,7 @@ const Lab = () => {
         cancelAnimationFrame(animationRef.current);
       }
     };
+    let disposeExperiment = () => {};
 
     const drawHamiltonianFlow = () => {
       const ctx = canvas.getContext('2d');
@@ -357,10 +358,105 @@ const Lab = () => {
       tick();
     };
 
+    const drawCursorVectorField = () => {
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      const width = () => canvas.width / dpr;
+      const height = () => canvas.height / dpr;
+      const spacing = 28;
+      const arrowLength = 14;
+      const influence = 210;
+      const mouse = { x: width() * 0.5, y: height() * 0.5, active: false };
+      let phase = 0;
+
+      const onMove = (event) => {
+        const rect = canvas.getBoundingClientRect();
+        mouse.x = event.clientX - rect.left;
+        mouse.y = event.clientY - rect.top;
+        mouse.active = true;
+      };
+      const onLeave = () => {
+        mouse.active = false;
+      };
+
+      window.addEventListener('mousemove', onMove);
+      window.addEventListener('mouseleave', onLeave);
+      disposeExperiment = () => {
+        window.removeEventListener('mousemove', onMove);
+        window.removeEventListener('mouseleave', onLeave);
+      };
+
+      const drawArrow = (x, y, angle, length, color) => {
+        const x2 = x + Math.cos(angle) * length;
+        const y2 = y + Math.sin(angle) * length;
+        const head = 4;
+
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 1.2;
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+        ctx.lineTo(x2, y2);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(x2, y2);
+        ctx.lineTo(
+          x2 - Math.cos(angle - 0.42) * head,
+          y2 - Math.sin(angle - 0.42) * head
+        );
+        ctx.moveTo(x2, y2);
+        ctx.lineTo(
+          x2 - Math.cos(angle + 0.42) * head,
+          y2 - Math.sin(angle + 0.42) * head
+        );
+        ctx.stroke();
+      };
+
+      const tick = () => {
+        if (!running) return;
+
+        ctx.fillStyle = 'rgba(8, 15, 27, 0.2)';
+        ctx.fillRect(0, 0, width(), height());
+
+        for (let y = spacing * 0.6; y < height(); y += spacing) {
+          for (let x = spacing * 0.6; x < width(); x += spacing) {
+            let angle = Math.sin((x + phase) * 0.01) * 0.6 + Math.cos((y - phase) * 0.011) * 0.6;
+
+            if (mouse.active) {
+              const dx = mouse.x - x;
+              const dy = mouse.y - y;
+              const dist = Math.hypot(dx, dy);
+              const attract = clamp(1 - dist / influence, 0, 1);
+              const target = Math.atan2(dy, dx);
+              angle = (1 - attract) * angle + attract * target;
+            }
+
+            const mag = mouse.active
+              ? clamp(1 + (influence - Math.hypot(mouse.x - x, mouse.y - y)) / influence, 0.7, 1.8)
+              : 1;
+            drawArrow(x, y, angle, arrowLength * mag, 'rgba(76, 144, 255, 0.78)');
+          }
+        }
+
+        phase += 1.4;
+        animationRef.current = requestAnimationFrame(tick);
+      };
+
+      ctx.fillStyle = '#080f1b';
+      ctx.fillRect(0, 0, width(), height());
+      tick();
+    };
+
     const drawSpectralShader = () => {
-      const gl = canvas.getContext('webgl', { antialias: true });
+      const gl =
+        canvas.getContext('webgl2', { antialias: true }) ||
+        canvas.getContext('webgl', { antialias: true }) ||
+        canvas.getContext('experimental-webgl', { antialias: true });
       if (!gl) {
-        setRenderError('WebGL unavailable in this browser/device.');
+        setRenderError('WebGL unavailable. Fallback active: Cursor Vector Field.');
+        drawCursorVectorField();
         return;
       }
 
@@ -408,8 +504,9 @@ const Lab = () => {
         const ok = gl.getShaderParameter(shader, gl.COMPILE_STATUS);
         if (!ok) {
           const info = gl.getShaderInfoLog(shader) || 'Shader compile error';
-          setRenderError(info);
+          setRenderError(`Shader issue. Fallback active: Cursor Vector Field. (${info})`);
           gl.deleteShader(shader);
+          drawCursorVectorField();
           return null;
         }
         return shader;
@@ -425,8 +522,9 @@ const Lab = () => {
       gl.attachShader(program, fragmentShader);
       gl.linkProgram(program);
       if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
-        setRenderError(gl.getProgramInfoLog(program) || 'Program link error');
+        setRenderError('Program link issue. Fallback active: Cursor Vector Field.');
         gl.deleteProgram(program);
+        drawCursorVectorField();
         return;
       }
 
@@ -465,6 +563,7 @@ const Lab = () => {
 
     return () => {
       stop();
+      disposeExperiment();
       window.removeEventListener('resize', resize);
     };
   }, [activeId]);
@@ -494,7 +593,13 @@ const Lab = () => {
               {current?.title}
             </div>
             {renderError && (
-              <div className="absolute bottom-4 left-4 right-4 rounded-xl border border-red-400/40 bg-black/60 px-4 py-3 text-xs text-red-200">
+              <div
+                className={`absolute bottom-4 left-4 right-4 rounded-xl border bg-black/60 px-4 py-3 text-xs ${
+                  renderError.includes('Fallback active')
+                    ? 'border-sky-400/40 text-sky-200'
+                    : 'border-red-400/40 text-red-200'
+                }`}
+              >
                 Render error: {renderError}
               </div>
             )}

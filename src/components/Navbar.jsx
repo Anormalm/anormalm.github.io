@@ -30,7 +30,7 @@ const Navbar = () => {
           <div>
             <div className="font-display text-lg tracking-tight">Anormalm</div>
             <div className="text-xs uppercase tracking-[0.25em] text-[var(--muted)]">
-              Tech Systems
+              Personal Page
             </div>
           </div>
         </Link>

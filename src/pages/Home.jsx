@@ -161,7 +161,7 @@ const Home = () => {
               <FaLinkedin />
             </a>
           </div>
-          <div>Built by Hu Lifan.</div>
+          <div>Built by Anormalm.</div>
         </div>
       </footer>
     </Motion.div>

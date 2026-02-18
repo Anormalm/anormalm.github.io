@@ -11,7 +11,7 @@ const Contact = () => {
             </p>
           </div>
           <div className="rounded-full border border-[var(--line)] px-4 py-2 text-xs uppercase tracking-[0.2em] text-[var(--muted)]">
-            Based in the US
+            Based in SG/CN
           </div>
         </div>
 
