@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import ProjectCard from '../components/ProjectCard';
 
 const PROJECTS = [
@@ -30,9 +31,23 @@ const PROJECTS = [
     description: 'A topology-aware anomaly detection toolkit using persistent homology to analyze dynamic system traces.',
     link: 'https://github.com/anormalm/topotrace',
   },
+  {
+    title: 'Ancient-lm',
+    description:
+      'A stylized text generator fine-tuned from GPT-2 on Tao Te Ching, Analects, and Bhagavad Gita. Supports theme-based generation, CPU/GPU execution, and extensible corpus pipelines.',
+    link: 'https://github.com/Anormalm/Ancient-lm',
+  },
+  {
+    title: 'Recursive Web',
+    description:
+      'A browser-based multi-level ARG puzzle with terminal-style commands, hidden clues, binary hints, and an ASCII-art finale. Live at anormalm.com/recursive-web.',
+    link: 'https://anormalm.com/recursive-web',
+  },
 ];
 
 const Projects = () => {
+  const [systemView, setSystemView] = useState(true);
+
   return (
     <div className="min-h-screen">
       <section className="section">
@@ -44,8 +59,16 @@ const Projects = () => {
               Project index covering production builds, prototypes, and engineering experiments.
             </p>
           </div>
-          <div className="rounded-full border border-[var(--line)] px-4 py-2 text-xs uppercase tracking-[0.2em] text-[var(--muted)]">
-            Updated Feb 2026
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => setSystemView((prev) => !prev)}
+              className="rounded-full border border-[var(--line)] px-4 py-2 text-xs uppercase tracking-[0.2em] text-[var(--muted)] transition hover:border-[var(--accent)]"
+            >
+              {systemView ? 'System View On' : 'System View Off'}
+            </button>
+            <div className="rounded-full border border-[var(--line)] px-4 py-2 text-xs uppercase tracking-[0.2em] text-[var(--muted)]">
+              Updated Feb 2026
+            </div>
           </div>
         </div>
 
@@ -56,6 +79,7 @@ const Projects = () => {
               title={project.title}
               description={project.description}
               link={project.link}
+              systemView={systemView}
             />
           ))}
         </div>

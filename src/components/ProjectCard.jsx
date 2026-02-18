@@ -2,14 +2,55 @@ import { motion as Motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { FiArrowUpRight } from 'react-icons/fi';
 
-const ProjectCard = ({ title, description, link }) => {
+const projectTelemetry = (title) => {
+  const seed = title.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+  return {
+    health: 70 + (seed % 25),
+    velocity: 45 + ((seed * 3) % 45),
+    complexity: 35 + ((seed * 5) % 60),
+    status: seed % 2 === 0 ? 'active' : 'stable',
+  };
+};
+
+const ProjectCard = ({ title, description, link, systemView = true }) => {
   const isExternal = link?.startsWith('http');
+  const telemetry = projectTelemetry(title);
 
   const content = (
     <>
-      <div className="text-xs uppercase tracking-[0.25em] text-[var(--muted)]">Project</div>
+      <div className="flex items-center justify-between">
+        <div className="text-xs uppercase tracking-[0.25em] text-[var(--muted)]">Project</div>
+        {systemView && (
+          <div className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-[var(--accent)]">
+            <span className="h-2 w-2 rounded-full bg-[var(--accent)]"></span>
+            {telemetry.status}
+          </div>
+        )}
+      </div>
       <h3 className="font-display mt-3 text-2xl">{title}</h3>
       <p className="mt-2 text-sm text-[var(--muted)]">{description}</p>
+      {systemView && (
+        <div className="mt-4 space-y-2">
+          {[
+            ['health', telemetry.health],
+            ['velocity', telemetry.velocity],
+            ['complexity', telemetry.complexity],
+          ].map(([label, value]) => (
+            <div key={label}>
+              <div className="mb-1 flex items-center justify-between text-[10px] uppercase tracking-[0.2em] text-[var(--muted)]">
+                <span>{label}</span>
+                <span>{value}%</span>
+              </div>
+              <div className="h-1.5 rounded-full bg-[var(--line)]">
+                <div
+                  className="h-1.5 rounded-full bg-[var(--accent)]"
+                  style={{ width: `${value}%` }}
+                ></div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
       {link && (
         <span className="mt-5 inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-[var(--accent)]">
           View project <FiArrowUpRight />

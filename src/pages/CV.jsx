@@ -34,7 +34,7 @@ const CV = () => {
             <ul className="mt-4 list-disc pl-5 text-sm text-[var(--muted)]">
               <li>NUS B.Eng (Computer Engineering, IoT), Aug 2024 - Present</li>
               <li>Second Major: Innovation and Design Program</li>
-              <li>Minor: Mathematics | GPA: 4.6/5.0</li>
+              <li>Minor: Mathematics</li>
               <li>Summer School, Shanghai Jiao Tong University (Jun 2025 - Jul 2025)</li>
             </ul>
           </section>

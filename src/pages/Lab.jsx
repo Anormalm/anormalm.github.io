@@ -1,52 +1,68 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 const EXPERIMENTS = [
   {
     id: 'hamiltonian-flow',
     title: 'Hamiltonian Flow Field',
-    description:
-      'Particle advection in an incompressible vector field derived from stream function psi(x,y)=sin(ax)sin(by).',
+    description: 'Divergence-free particle advection from a stream function.',
     mode: 'canvas',
-    math: 'Divergence-free flow, RK2 integration',
+    math: 'RK2 + incompressible field',
   },
   {
-    id: 'spectral-shader',
-    title: 'Spectral Interference Shader',
-    description:
-      'Real-time Fourier-style superposition of directional wave modes rendered in WebGL.',
-    mode: 'webgl',
-    math: 'Wave summation and phase evolution',
+    id: 'cursor-vector',
+    title: 'Cursor Vector Field',
+    description: 'Arrow lattice with local vector attraction toward cursor.',
+    mode: 'canvas',
+    math: 'Discrete vector dynamics',
   },
   {
     id: 'kalman-tracker',
     title: 'Kalman Target Tracker',
-    description:
-      '2D constant-velocity Kalman filter estimating trajectory from noisy observations.',
+    description: '2D constant-velocity filter under noisy observations.',
     mode: 'canvas',
-    math: 'State estimation with Gaussian noise',
+    math: 'Linear Gaussian estimation',
   },
 ];
 
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 
+const defaultParams = {
+  hamiltonian: { particles: 520, speed: 1.0, intensity: 28 },
+  cursor: { spacing: 28, influence: 210, arrowLength: 14 },
+  kalman: { sigma: 13, processNoise: 0.4, trail: 240 },
+};
+
 const Lab = () => {
   const canvasRef = useRef(null);
   const animationRef = useRef(null);
   const [activeId, setActiveId] = useState(EXPERIMENTS[0].id);
-  const [renderError, setRenderError] = useState('');
+  const [params, setParams] = useState(defaultParams);
+  const [statusMessage, setStatusMessage] = useState('');
+  const [supportsCanvas, setSupportsCanvas] = useState(true);
+  const reducedMotion = useMemo(
+    () => window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+    []
+  );
 
   useEffect(() => {
+    const test = document.createElement('canvas');
+    setSupportsCanvas(Boolean(test.getContext && test.getContext('2d')));
+  }, []);
+
+  useEffect(() => {
+    if (!supportsCanvas) return undefined;
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (!canvas) return undefined;
     const experiment = EXPERIMENTS.find((item) => item.id === activeId);
-    if (!experiment) return;
+    if (!experiment) return undefined;
 
-    setRenderError('');
-
+    setStatusMessage(reducedMotion ? 'Reduced-motion mode active: lower simulation intensity.' : '');
     let running = true;
     const dpr = window.devicePixelRatio || 1;
     const parent = canvas.parentElement;
-    if (!parent) return;
+    if (!parent) return undefined;
+
+    window.__labRenderMode = 'canvas';
 
     const resize = () => {
       const { width, height } = parent.getBoundingClientRect();
@@ -55,26 +71,26 @@ const Lab = () => {
       canvas.style.width = `${width}px`;
       canvas.style.height = `${height}px`;
     };
-
     resize();
     window.addEventListener('resize', resize);
 
     const stop = () => {
       running = false;
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
-      }
+      if (animationRef.current) cancelAnimationFrame(animationRef.current);
     };
     let disposeExperiment = () => {};
 
-    const drawHamiltonianFlow = () => {
+    const drawHamiltonian = () => {
       const ctx = canvas.getContext('2d');
       if (!ctx) return;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
       const width = () => canvas.width / dpr;
       const height = () => canvas.height / dpr;
-      const particleCount = 520;
+
+      const cfg = params.hamiltonian;
+      const particleCount = reducedMotion ? Math.floor(cfg.particles * 0.35) : cfg.particles;
+      const speed = reducedMotion ? cfg.speed * 0.35 : cfg.speed;
+      const intensity = cfg.intensity;
       let time = 0;
 
       const particles = Array.from({ length: particleCount }, () => ({
@@ -83,15 +99,13 @@ const Lab = () => {
       }));
 
       const field = (x, y, t) => {
-        const w = width();
-        const h = height();
-        const xn = (x / w) * (2 * Math.PI) - Math.PI;
-        const yn = (y / h) * (2 * Math.PI) - Math.PI;
+        const xn = (x / width()) * (2 * Math.PI) - Math.PI;
+        const yn = (y / height()) * (2 * Math.PI) - Math.PI;
         const a = 1.6 + 0.2 * Math.sin(t * 0.00025);
         const b = 1.2 + 0.15 * Math.cos(t * 0.00019);
         const vx = b * Math.sin(a * xn) * Math.cos(b * yn);
         const vy = -a * Math.cos(a * xn) * Math.sin(b * yn);
-        return { vx: vx * 28, vy: vy * 28 };
+        return { vx: vx * intensity, vy: vy * intensity };
       };
 
       ctx.fillStyle = '#080f1b';
@@ -106,21 +120,17 @@ const Lab = () => {
 
         for (const p of particles) {
           const k1 = field(p.x, p.y, time);
-          const mx = p.x + 0.5 * k1.vx * 0.016;
-          const my = p.y + 0.5 * k1.vy * 0.016;
+          const mx = p.x + 0.5 * k1.vx * 0.016 * speed;
+          const my = p.y + 0.5 * k1.vy * 0.016 * speed;
           const k2 = field(mx, my, time + 8);
-
-          const nx = p.x + k2.vx * 0.016;
-          const ny = p.y + k2.vy * 0.016;
-
+          const nx = p.x + k2.vx * 0.016 * speed;
+          const ny = p.y + k2.vy * 0.016 * speed;
           ctx.beginPath();
           ctx.moveTo(p.x, p.y);
           ctx.lineTo(nx, ny);
           ctx.stroke();
-
           p.x = nx;
           p.y = ny;
-
           if (p.x < 0 || p.x > width() || p.y < 0 || p.y > height()) {
             p.x = Math.random() * width();
             p.y = Math.random() * height();
@@ -130,23 +140,101 @@ const Lab = () => {
         time += 16;
         animationRef.current = requestAnimationFrame(tick);
       };
-
       tick();
     };
 
-    const drawKalmanTracker = () => {
+    const drawCursorVector = () => {
       const ctx = canvas.getContext('2d');
       if (!ctx) return;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
       const width = () => canvas.width / dpr;
       const height = () => canvas.height / dpr;
+      const cfg = params.cursor;
+      const spacing = reducedMotion ? cfg.spacing + 10 : cfg.spacing;
+      const influence = cfg.influence;
+      const arrowLength = cfg.arrowLength;
+      const mouse = { x: width() * 0.5, y: height() * 0.5, active: false };
+      let phase = 0;
+
+      const onMove = (event) => {
+        const rect = canvas.getBoundingClientRect();
+        mouse.x = event.clientX - rect.left;
+        mouse.y = event.clientY - rect.top;
+        mouse.active = true;
+      };
+      const onLeave = () => {
+        mouse.active = false;
+      };
+
+      window.addEventListener('mousemove', onMove);
+      window.addEventListener('mouseleave', onLeave);
+      disposeExperiment = () => {
+        window.removeEventListener('mousemove', onMove);
+        window.removeEventListener('mouseleave', onLeave);
+      };
+
+      const drawArrow = (x, y, angle, length, color) => {
+        const x2 = x + Math.cos(angle) * length;
+        const y2 = y + Math.sin(angle) * length;
+        const head = 4;
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 1.2;
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+        ctx.lineTo(x2, y2);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(x2, y2);
+        ctx.lineTo(x2 - Math.cos(angle - 0.42) * head, y2 - Math.sin(angle - 0.42) * head);
+        ctx.moveTo(x2, y2);
+        ctx.lineTo(x2 - Math.cos(angle + 0.42) * head, y2 - Math.sin(angle + 0.42) * head);
+        ctx.stroke();
+      };
+
+      const tick = () => {
+        if (!running) return;
+        ctx.fillStyle = 'rgba(8, 15, 27, 0.2)';
+        ctx.fillRect(0, 0, width(), height());
+
+        for (let y = spacing * 0.6; y < height(); y += spacing) {
+          for (let x = spacing * 0.6; x < width(); x += spacing) {
+            let angle = Math.sin((x + phase) * 0.01) * 0.6 + Math.cos((y - phase) * 0.011) * 0.6;
+            if (mouse.active) {
+              const dx = mouse.x - x;
+              const dy = mouse.y - y;
+              const dist = Math.hypot(dx, dy);
+              const attract = clamp(1 - dist / influence, 0, 1);
+              const target = Math.atan2(dy, dx);
+              angle = (1 - attract) * angle + attract * target;
+            }
+            const mag = mouse.active
+              ? clamp(1 + (influence - Math.hypot(mouse.x - x, mouse.y - y)) / influence, 0.7, 1.8)
+              : 1;
+            drawArrow(x, y, angle, arrowLength * mag, 'rgba(76, 144, 255, 0.78)');
+          }
+        }
+        phase += reducedMotion ? 0.7 : 1.4;
+        animationRef.current = requestAnimationFrame(tick);
+      };
+      ctx.fillStyle = '#080f1b';
+      ctx.fillRect(0, 0, width(), height());
+      tick();
+    };
+
+    const drawKalman = () => {
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const width = () => canvas.width / dpr;
+      const height = () => canvas.height / dpr;
 
       const dt = 1 / 60;
-      const sigma = 13;
-      const q = 0.4;
+      const cfg = params.kalman;
+      const sigma = reducedMotion ? cfg.sigma * 0.7 : cfg.sigma;
+      const q = cfg.processNoise;
+      const trailCap = cfg.trail;
       let t = 0;
-
       let xTrue = width() * 0.25;
       let yTrue = height() * 0.5;
       let xPrev = xTrue;
@@ -172,21 +260,10 @@ const Lab = () => {
         [dt, 0, 1, 0],
         [0, dt, 0, 1],
       ];
-      const H = [
-        [1, 0, 0, 0],
-        [0, 1, 0, 0],
-      ];
-      const Ht = [
-        [1, 0],
-        [0, 1],
-        [0, 0],
-        [0, 0],
-      ];
       const R = [
         [sigma * sigma, 0],
         [0, sigma * sigma],
       ];
-
       const q11 = 0.25 * dt * dt * dt * dt * q;
       const q13 = 0.5 * dt * dt * dt * q;
       const q33 = dt * dt * q;
@@ -206,20 +283,17 @@ const Lab = () => {
         }
         return out;
       };
-
       const matVec4 = (A, v) => [
         A[0][0] * v[0] + A[0][1] * v[1] + A[0][2] * v[2] + A[0][3] * v[3],
         A[1][0] * v[0] + A[1][1] * v[1] + A[1][2] * v[2] + A[1][3] * v[3],
         A[2][0] * v[0] + A[2][1] * v[1] + A[2][2] * v[2] + A[2][3] * v[3],
         A[3][0] * v[0] + A[3][1] * v[1] + A[3][2] * v[2] + A[3][3] * v[3],
       ];
-
       const gaussian = () => {
         const u1 = Math.max(Math.random(), 1e-10);
         const u2 = Math.max(Math.random(), 1e-10);
         return Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2);
       };
-
       const invert2 = (M) => {
         const det = M[0][0] * M[1][1] - M[0][1] * M[1][0];
         if (Math.abs(det) < 1e-9) return null;
@@ -236,12 +310,21 @@ const Lab = () => {
       let rmseAccum = 0;
       let rmseCount = 0;
 
+      const polyline = (pts, stroke, widthPx) => {
+        if (pts.length < 2) return;
+        ctx.strokeStyle = stroke;
+        ctx.lineWidth = widthPx;
+        ctx.beginPath();
+        ctx.moveTo(pts[0][0], pts[0][1]);
+        for (let i = 1; i < pts.length; i += 1) ctx.lineTo(pts[i][0], pts[i][1]);
+        ctx.stroke();
+      };
+
       ctx.fillStyle = '#0a111d';
       ctx.fillRect(0, 0, width(), height());
 
       const tick = () => {
         if (!running) return;
-
         t += dt;
         const xt = width() * 0.5 + width() * 0.34 * Math.cos(0.55 * t) + width() * 0.09 * Math.cos(1.8 * t);
         const yt = height() * 0.52 + height() * 0.3 * Math.sin(0.72 * t);
@@ -249,21 +332,15 @@ const Lab = () => {
         yPrev = yTrue;
         xTrue = xt;
         yTrue = yt;
-
         const vxTrue = (xTrue - xPrev) / dt;
         const vyTrue = (yTrue - yPrev) / dt;
 
         const z = [xTrue + sigma * gaussian(), yTrue + sigma * gaussian()];
-
         x = matVec4(F, x);
         P = matMul4(matMul4(F, P), Ft);
-        for (let i = 0; i < 4; i += 1) {
-          for (let j = 0; j < 4; j += 1) {
-            P[i][j] += Q[i][j];
-          }
-        }
+        for (let i = 0; i < 4; i += 1) for (let j = 0; j < 4; j += 1) P[i][j] += Q[i][j];
 
-        const y = [z[0] - x[0], z[1] - x[1]];
+        const residual = [z[0] - x[0], z[1] - x[1]];
         const S = [
           [P[0][0] + R[0][0], P[0][1] + R[0][1]],
           [P[1][0] + R[1][0], P[1][1] + R[1][1]],
@@ -284,10 +361,10 @@ const Lab = () => {
         }
 
         x = [
-          x[0] + K[0][0] * y[0] + K[0][1] * y[1],
-          x[1] + K[1][0] * y[0] + K[1][1] * y[1],
-          x[2] + K[2][0] * y[0] + K[2][1] * y[1],
-          x[3] + K[3][0] * y[0] + K[3][1] * y[1],
+          x[0] + K[0][0] * residual[0] + K[0][1] * residual[1],
+          x[1] + K[1][0] * residual[0] + K[1][1] * residual[1],
+          x[2] + K[2][0] * residual[0] + K[2][1] * residual[1],
+          x[3] + K[3][0] * residual[0] + K[3][1] * residual[1],
         ];
 
         const KH = [
@@ -307,29 +384,15 @@ const Lab = () => {
         const err = Math.hypot(x[0] - xTrue, x[1] - yTrue);
         rmseAccum += err * err;
         rmseCount += 1;
-
         trueTrail.push([xTrue, yTrue]);
         measurementTrail.push([z[0], z[1]]);
         estimateTrail.push([x[0], x[1]]);
-        if (trueTrail.length > 240) trueTrail.shift();
-        if (measurementTrail.length > 120) measurementTrail.shift();
-        if (estimateTrail.length > 240) estimateTrail.shift();
+        if (trueTrail.length > trailCap) trueTrail.shift();
+        if (measurementTrail.length > Math.floor(trailCap * 0.5)) measurementTrail.shift();
+        if (estimateTrail.length > trailCap) estimateTrail.shift();
 
         ctx.fillStyle = 'rgba(10, 17, 29, 0.18)';
         ctx.fillRect(0, 0, width(), height());
-
-        const polyline = (pts, stroke, widthPx) => {
-          if (pts.length < 2) return;
-          ctx.strokeStyle = stroke;
-          ctx.lineWidth = widthPx;
-          ctx.beginPath();
-          ctx.moveTo(pts[0][0], pts[0][1]);
-          for (let i = 1; i < pts.length; i += 1) {
-            ctx.lineTo(pts[i][0], pts[i][1]);
-          }
-          ctx.stroke();
-        };
-
         polyline(trueTrail, 'rgba(44, 208, 157, 0.85)', 2.2);
         polyline(estimateTrail, 'rgba(76, 144, 255, 0.92)', 2.2);
 
@@ -351,224 +414,80 @@ const Lab = () => {
         ctx.font = '12px "Space Grotesk", sans-serif';
         ctx.fillText(`RMSE: ${Math.sqrt(rmseAccum / Math.max(rmseCount, 1)).toFixed(2)} px`, 14, 24);
         ctx.fillText(`|v_true|: ${Math.hypot(vxTrue, vyTrue).toFixed(1)} px/s`, 14, 42);
-
         animationRef.current = requestAnimationFrame(tick);
       };
-
       tick();
     };
 
-    const drawCursorVectorField = () => {
-      const ctx = canvas.getContext('2d');
-      if (!ctx) return;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-      const width = () => canvas.width / dpr;
-      const height = () => canvas.height / dpr;
-      const spacing = 28;
-      const arrowLength = 14;
-      const influence = 210;
-      const mouse = { x: width() * 0.5, y: height() * 0.5, active: false };
-      let phase = 0;
-
-      const onMove = (event) => {
-        const rect = canvas.getBoundingClientRect();
-        mouse.x = event.clientX - rect.left;
-        mouse.y = event.clientY - rect.top;
-        mouse.active = true;
-      };
-      const onLeave = () => {
-        mouse.active = false;
-      };
-
-      window.addEventListener('mousemove', onMove);
-      window.addEventListener('mouseleave', onLeave);
-      disposeExperiment = () => {
-        window.removeEventListener('mousemove', onMove);
-        window.removeEventListener('mouseleave', onLeave);
-      };
-
-      const drawArrow = (x, y, angle, length, color) => {
-        const x2 = x + Math.cos(angle) * length;
-        const y2 = y + Math.sin(angle) * length;
-        const head = 4;
-
-        ctx.strokeStyle = color;
-        ctx.lineWidth = 1.2;
-        ctx.beginPath();
-        ctx.moveTo(x, y);
-        ctx.lineTo(x2, y2);
-        ctx.stroke();
-
-        ctx.beginPath();
-        ctx.moveTo(x2, y2);
-        ctx.lineTo(
-          x2 - Math.cos(angle - 0.42) * head,
-          y2 - Math.sin(angle - 0.42) * head
-        );
-        ctx.moveTo(x2, y2);
-        ctx.lineTo(
-          x2 - Math.cos(angle + 0.42) * head,
-          y2 - Math.sin(angle + 0.42) * head
-        );
-        ctx.stroke();
-      };
-
-      const tick = () => {
-        if (!running) return;
-
-        ctx.fillStyle = 'rgba(8, 15, 27, 0.2)';
-        ctx.fillRect(0, 0, width(), height());
-
-        for (let y = spacing * 0.6; y < height(); y += spacing) {
-          for (let x = spacing * 0.6; x < width(); x += spacing) {
-            let angle = Math.sin((x + phase) * 0.01) * 0.6 + Math.cos((y - phase) * 0.011) * 0.6;
-
-            if (mouse.active) {
-              const dx = mouse.x - x;
-              const dy = mouse.y - y;
-              const dist = Math.hypot(dx, dy);
-              const attract = clamp(1 - dist / influence, 0, 1);
-              const target = Math.atan2(dy, dx);
-              angle = (1 - attract) * angle + attract * target;
-            }
-
-            const mag = mouse.active
-              ? clamp(1 + (influence - Math.hypot(mouse.x - x, mouse.y - y)) / influence, 0.7, 1.8)
-              : 1;
-            drawArrow(x, y, angle, arrowLength * mag, 'rgba(76, 144, 255, 0.78)');
-          }
-        }
-
-        phase += 1.4;
-        animationRef.current = requestAnimationFrame(tick);
-      };
-
-      ctx.fillStyle = '#080f1b';
-      ctx.fillRect(0, 0, width(), height());
-      tick();
-    };
-
-    const drawSpectralShader = () => {
-      const gl =
-        canvas.getContext('webgl2', { antialias: true }) ||
-        canvas.getContext('webgl', { antialias: true }) ||
-        canvas.getContext('experimental-webgl', { antialias: true });
-      if (!gl) {
-        setRenderError('WebGL unavailable. Fallback active: Cursor Vector Field.');
-        drawCursorVectorField();
-        return;
-      }
-
-      const vertexSource = `
-        attribute vec2 a_position;
-        void main() {
-          gl_Position = vec4(a_position, 0.0, 1.0);
-        }
-      `;
-
-      const fragmentSource = `
-        precision highp float;
-        uniform vec2 u_resolution;
-        uniform float u_time;
-
-        float wave(vec2 p, vec2 k, float w, float phase) {
-          return sin(dot(p, k) + w * u_time + phase);
-        }
-
-        void main() {
-          vec2 uv = (gl_FragCoord.xy / u_resolution) * 2.0 - 1.0;
-          uv.x *= u_resolution.x / u_resolution.y;
-
-          float f =
-            0.42 * wave(uv, vec2(4.0, 1.7), 1.05, 0.0) +
-            0.31 * wave(uv, vec2(-2.4, 5.2), -0.82, 1.2) +
-            0.20 * wave(uv, vec2(7.1, -3.8), 0.57, 2.4) +
-            0.14 * wave(uv, vec2(-8.3, -2.1), -0.44, 0.7);
-
-          float g = smoothstep(-0.25, 0.55, f);
-          vec3 c0 = vec3(0.06, 0.10, 0.20);
-          vec3 c1 = vec3(0.12, 0.44, 0.95);
-          vec3 c2 = vec3(0.00, 0.78, 0.68);
-          vec3 color = mix(mix(c0, c1, g), c2, smoothstep(0.52, 1.0, g));
-
-          gl_FragColor = vec4(color, 1.0);
-        }
-      `;
-
-      const compileShader = (type, source) => {
-        const shader = gl.createShader(type);
-        if (!shader) return null;
-        gl.shaderSource(shader, source);
-        gl.compileShader(shader);
-        const ok = gl.getShaderParameter(shader, gl.COMPILE_STATUS);
-        if (!ok) {
-          const info = gl.getShaderInfoLog(shader) || 'Shader compile error';
-          setRenderError(`Shader issue. Fallback active: Cursor Vector Field. (${info})`);
-          gl.deleteShader(shader);
-          drawCursorVectorField();
-          return null;
-        }
-        return shader;
-      };
-
-      const vertexShader = compileShader(gl.VERTEX_SHADER, vertexSource);
-      const fragmentShader = compileShader(gl.FRAGMENT_SHADER, fragmentSource);
-      if (!vertexShader || !fragmentShader) return;
-
-      const program = gl.createProgram();
-      if (!program) return;
-      gl.attachShader(program, vertexShader);
-      gl.attachShader(program, fragmentShader);
-      gl.linkProgram(program);
-      if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
-        setRenderError('Program link issue. Fallback active: Cursor Vector Field.');
-        gl.deleteProgram(program);
-        drawCursorVectorField();
-        return;
-      }
-
-      gl.useProgram(program);
-
-      const buffer = gl.createBuffer();
-      gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-      gl.bufferData(
-        gl.ARRAY_BUFFER,
-        new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]),
-        gl.STATIC_DRAW
-      );
-
-      const position = gl.getAttribLocation(program, 'a_position');
-      gl.enableVertexAttribArray(position);
-      gl.vertexAttribPointer(position, 2, gl.FLOAT, false, 0, 0);
-
-      const resolutionUniform = gl.getUniformLocation(program, 'u_resolution');
-      const timeUniform = gl.getUniformLocation(program, 'u_time');
-
-      const tick = (ms) => {
-        if (!running) return;
-        gl.viewport(0, 0, canvas.width, canvas.height);
-        gl.uniform2f(resolutionUniform, canvas.width, canvas.height);
-        gl.uniform1f(timeUniform, ms * 0.001);
-        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-        animationRef.current = requestAnimationFrame(tick);
-      };
-
-      tick(0);
-    };
-
-    if (experiment.id === 'hamiltonian-flow') drawHamiltonianFlow();
-    if (experiment.id === 'kalman-tracker') drawKalmanTracker();
-    if (experiment.id === 'spectral-shader') drawSpectralShader();
+    if (activeId === 'hamiltonian-flow') drawHamiltonian();
+    if (activeId === 'cursor-vector') drawCursorVector();
+    if (activeId === 'kalman-tracker') drawKalman();
 
     return () => {
       stop();
       disposeExperiment();
       window.removeEventListener('resize', resize);
     };
-  }, [activeId]);
+  }, [activeId, params, supportsCanvas, reducedMotion]);
 
   const current = EXPERIMENTS.find((item) => item.id === activeId);
+
+  const activeControls = useMemo(() => {
+    if (activeId === 'hamiltonian-flow') {
+      return [
+        { key: 'particles', label: 'Particles', min: 120, max: 1200, step: 20, group: 'hamiltonian' },
+        { key: 'speed', label: 'Speed', min: 0.2, max: 2.5, step: 0.1, group: 'hamiltonian' },
+        { key: 'intensity', label: 'Intensity', min: 10, max: 50, step: 1, group: 'hamiltonian' },
+      ];
+    }
+    if (activeId === 'cursor-vector') {
+      return [
+        { key: 'spacing', label: 'Grid spacing', min: 16, max: 44, step: 2, group: 'cursor' },
+        { key: 'influence', label: 'Influence radius', min: 80, max: 360, step: 10, group: 'cursor' },
+        { key: 'arrowLength', label: 'Arrow length', min: 6, max: 24, step: 1, group: 'cursor' },
+      ];
+    }
+    return [
+      { key: 'sigma', label: 'Measurement noise', min: 4, max: 24, step: 1, group: 'kalman' },
+      { key: 'processNoise', label: 'Process noise', min: 0.05, max: 1.2, step: 0.05, group: 'kalman' },
+      { key: 'trail', label: 'Trail length', min: 80, max: 360, step: 10, group: 'kalman' },
+    ];
+  }, [activeId]);
+
+  const updateParam = (group, key, value) => {
+    setParams((prev) => ({
+      ...prev,
+      [group]: {
+        ...prev[group],
+        [key]: Number(value),
+      },
+    }));
+  };
+
+  if (!supportsCanvas) {
+    return (
+      <div className="min-h-screen">
+        <section className="section">
+          <div className="glass-card p-8">
+            <div className="text-xs uppercase tracking-[0.25em] text-[var(--muted)]">Lab Fallback</div>
+            <h1 className="font-display mt-3 text-4xl">Interactive rendering unavailable.</h1>
+            <p className="mt-3 max-w-2xl text-sm text-[var(--muted)]">
+              Canvas is not available in this environment. Static descriptions are shown as a progressive fallback layer.
+            </p>
+            <div className="mt-6 grid gap-4 md:grid-cols-3">
+              {EXPERIMENTS.map((item) => (
+                <div key={item.id} className="surface rounded-2xl border border-[var(--line)] p-4">
+                  <div className="text-xs uppercase tracking-[0.2em] text-[var(--accent)]">{item.mode}</div>
+                  <div className="font-display mt-2 text-xl">{item.title}</div>
+                  <p className="mt-2 text-sm text-[var(--muted)]">{item.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen">
@@ -578,11 +497,11 @@ const Lab = () => {
             <div className="text-xs uppercase tracking-[0.25em] text-[var(--muted)]">Lab</div>
             <h1 className="font-display text-4xl">Mathematical interactive systems.</h1>
             <p className="mt-3 max-w-2xl text-sm text-[var(--muted)]">
-              Experiments based on numerical integration, spectral methods, and state estimation.
+              Canvas-only modules with parameter controls and progressive fallback behavior.
             </p>
           </div>
           <div className="rounded-full border border-[var(--line)] px-4 py-2 text-xs uppercase tracking-[0.2em] text-[var(--muted)]">
-            Canvas + WebGL + Estimation
+            Canvas + Estimation
           </div>
         </div>
 
@@ -592,15 +511,9 @@ const Lab = () => {
             <div className="absolute left-6 top-6 rounded-full border border-[var(--line)] bg-[var(--paper)]/85 px-4 py-2 text-xs uppercase tracking-[0.25em] text-[var(--muted)]">
               {current?.title}
             </div>
-            {renderError && (
-              <div
-                className={`absolute bottom-4 left-4 right-4 rounded-xl border bg-black/60 px-4 py-3 text-xs ${
-                  renderError.includes('Fallback active')
-                    ? 'border-sky-400/40 text-sky-200'
-                    : 'border-red-400/40 text-red-200'
-                }`}
-              >
-                Render error: {renderError}
+            {statusMessage && (
+              <div className="absolute bottom-4 left-4 right-4 rounded-xl border border-sky-400/40 bg-black/60 px-4 py-3 text-xs text-sky-200">
+                {statusMessage}
               </div>
             )}
           </div>
@@ -626,6 +539,32 @@ const Lab = () => {
                   </div>
                 </button>
               ))}
+            </div>
+
+            <div className="mt-6 border-t border-[var(--line)] pt-5">
+              <div className="text-xs uppercase tracking-[0.22em] text-[var(--muted)]">Parameters</div>
+              <div className="mt-4 space-y-4">
+                {activeControls.map((control) => {
+                  const value = params[control.group][control.key];
+                  return (
+                    <label key={control.key} className="block">
+                      <div className="mb-2 flex items-center justify-between text-xs uppercase tracking-[0.2em] text-[var(--muted)]">
+                        <span>{control.label}</span>
+                        <span>{value}</span>
+                      </div>
+                      <input
+                        type="range"
+                        min={control.min}
+                        max={control.max}
+                        step={control.step}
+                        value={value}
+                        onChange={(event) => updateParam(control.group, control.key, event.target.value)}
+                        className="w-full accent-[var(--accent)]"
+                      />
+                    </label>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>

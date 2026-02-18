@@ -25,6 +25,26 @@
     --accent-3: #23d39b;
   }
 
+  :root[data-ambient='morning'] {
+    --accent: #2e82ff;
+    --accent-2: #1db7ea;
+  }
+
+  :root[data-ambient='day'] {
+    --accent: #1d6fff;
+    --accent-2: #00a4d6;
+  }
+
+  :root[data-ambient='evening'] {
+    --accent: #2c72ff;
+    --accent-2: #2d8de7;
+  }
+
+  :root[data-ambient='night'] {
+    --accent: #58a1ff;
+    --accent-2: #47cbff;
+  }
+
   html {
     scroll-behavior: smooth;
   }
@@ -141,4 +161,11 @@
   inset: 0;
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
   animation: shimmer-line 3.2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .float-slow,
+  .shimmer-line::after {
+    animation: none !important;
+  }
 }

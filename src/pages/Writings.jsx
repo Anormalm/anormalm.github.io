@@ -4,19 +4,19 @@ import WritingCard from '../components/WritingCard';
 const WRITINGS = [
   {
     title: 'The Disenchantment of Modern Life (GEC1052 @NUS)',
-    excerpt: 'An essay exploring how rationalization shapes culture and identity.',
+    excerpt: 'Content removed. Card retained for future update.',
     date: 'March 2025',
     link: '/writings/Disenchantment',
   },
   {
     title: 'Fragments of a Digital Mind',
-    excerpt: 'Reflections on attention, algorithms, and the self in the age of screens.',
+    excerpt: 'Content removed. Card retained for future update.',
     date: 'February 2025',
     link: '/writings/Fragments',
   },
   {
     title: 'Graphs, Agents, and Adversaries',
-    excerpt: 'Lessons from building a fraud detection system using GNNs and multi-agent reinforcement learning.',
+    excerpt: 'Content removed. Card retained for future update.',
     date: 'April 2025',
     link: '/writings/GNNMARLFraud',
   },
