@@ -32,6 +32,21 @@ const STATUS = [
   { label: 'Mode', value: 'Build', tone: 'text-sky-500' },
 ];
 
+const PERSONAL_PRINCIPLES = [
+  {
+    title: 'Creativity',
+    detail: 'I keep building room for strange ideas and unconventional prototypes.',
+  },
+  {
+    title: 'Execution',
+    detail: 'I prioritize shipping systems that work in real conditions.',
+  },
+  {
+    title: 'Enjoyment',
+    detail: 'I build and code whenever I want to.',
+  },
+];
+
 const Home = () => {
   const [ghostMode, setGhostMode] = useState(false);
   const [typedText] = useTypewriter({
@@ -135,6 +150,36 @@ const Home = () => {
                   <div>/contact</div>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section pt-2">
+        <div className="tech-panel rounded-3xl p-8">
+          <div className="font-mono text-xs uppercase tracking-[0.25em] text-[var(--muted)]">Personal Signature</div>
+          <h2 className="font-display mt-2 text-3xl">
+            I build and code whenever I want to.
+          </h2>
+          <p className="mt-3 text-sm text-[var(--muted)]">
+            Current obsession: <span className="font-mono text-[var(--accent)]">LLM Fusion</span>
+          </p>
+
+          <div className="mt-6 grid gap-4 md:grid-cols-3">
+            {PERSONAL_PRINCIPLES.map((item) => (
+              <div key={item.title} className="rounded-2xl border border-[var(--line)] bg-[var(--paper)]/70 p-4">
+                <div className="font-mono text-xs uppercase tracking-[0.22em] text-[var(--accent)]">{item.title}</div>
+                <p className="mt-2 text-sm text-[var(--muted)]">{item.detail}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-6 grid gap-4 md:grid-cols-2">
+            <div className="rounded-xl border border-[var(--line)] bg-[var(--paper)]/70 px-4 py-3 text-sm text-[var(--muted)]">
+              Non-tech signal: listening to <span className="font-mono">Gaspard de la Nuit</span> by Maurice Ravel.
+            </div>
+            <div className="rounded-xl border border-[var(--line)] bg-[var(--paper)]/70 px-4 py-3 text-sm text-[var(--muted)]">
+              Last updated by me: <span className="font-mono">Feb 2026</span>
             </div>
           </div>
         </div>

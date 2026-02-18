@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import ProjectCard from '../components/ProjectCard';
 
 const PROJECTS = [
@@ -46,8 +45,6 @@ const PROJECTS = [
 ];
 
 const Projects = () => {
-  const [systemView, setSystemView] = useState(true);
-
   return (
     <div className="min-h-screen">
       <section className="section">
@@ -57,19 +54,11 @@ const Projects = () => {
               <div className="font-mono text-xs uppercase tracking-[0.25em] text-[var(--muted)]">Projects</div>
               <h1 className="font-display text-4xl">Systems, products, and applied research.</h1>
               <p className="mt-3 max-w-2xl text-sm text-[var(--muted)]">
-              Project index covering production builds, prototypes, and engineering experiments.
+                Project index covering production builds, prototypes, and engineering experiments.
               </p>
             </div>
-            <div className="flex items-center gap-3">
-              <button
-                onClick={() => setSystemView((prev) => !prev)}
-                className="font-mono rounded-full border border-[var(--line)] px-4 py-2 text-xs uppercase tracking-[0.2em] text-[var(--muted)] transition hover:border-[var(--accent)]"
-              >
-                {systemView ? 'System View On' : 'System View Off'}
-              </button>
-              <div className="font-mono rounded-full border border-[var(--line)] px-4 py-2 text-xs uppercase tracking-[0.2em] text-[var(--muted)]">
-                Updated Feb 2026
-              </div>
+            <div className="font-mono rounded-full border border-[var(--line)] px-4 py-2 text-xs uppercase tracking-[0.2em] text-[var(--muted)]">
+              Updated Feb 2026
             </div>
           </div>
         </div>
@@ -81,7 +70,6 @@ const Projects = () => {
               title={project.title}
               description={project.description}
               link={project.link}
-              systemView={systemView}
             />
           ))}
         </div>
