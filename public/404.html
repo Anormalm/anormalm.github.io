@@ -1,17 +1,15 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Redirecting...</title>
     <script>
-      (function () {
-        const path = window.location.pathname;
-        const search = window.location.search;
-        const hash = window.location.hash;
-        const target = `/?p=${encodeURIComponent(path)}&q=${encodeURIComponent(search.slice(1))}${hash}`;
-        window.location.replace(target);
-      })();
+      const path = window.location.pathname.replace(/\/$/, '');
+      const query = window.location.search;
+      const hash = window.location.hash;
+      const redirect = `/?redirect=${encodeURIComponent(path + query + hash)}`;
+      window.location.replace(redirect);
     </script>
   </head>
   <body></body>

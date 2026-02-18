@@ -1,9 +1,83 @@
 import { useMemo, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion as Motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
 import { FiArrowUpRight, FiMail, FiDownload } from 'react-icons/fi';
 import { useGlobalSearch } from '../context/SearchContext';
+
+const HOME_PROJECTS = [
+  {
+    title: 'Atlas of Quiet Systems',
+    description: 'A modular product suite for calm, high-signal workflows.',
+    year: '2025',
+    type: 'Product',
+    stack: ['React', 'Tailwind', 'Framer Motion'],
+    link: '/projects',
+    tags: ['product', 'interfaces', 'systems'],
+  },
+  {
+    title: 'GNN MARL Fraud Study',
+    description: 'Research narrative on graph learning and multi-agent systems.',
+    year: '2024',
+    type: 'Research',
+    stack: ['Python', 'PyTorch', 'Writing'],
+    link: '/writings/GNNMARLFraud',
+    tags: ['research', 'ml', 'systems'],
+  },
+  {
+    title: 'Fragments of Disenchantment',
+    description: 'Interactive essay with layered typographic motion.',
+    year: '2023',
+    type: 'Writing',
+    stack: ['React', 'Typography'],
+    link: '/writings/Fragments',
+    tags: ['writing', 'interfaces'],
+  },
+  {
+    title: 'Signal Garden',
+    description: 'Generative visuals exploring ordered chaos and rhythm.',
+    year: '2025',
+    type: 'Play',
+    stack: ['Canvas', 'Creative Coding'],
+    link: '/projects',
+    tags: ['generative', 'canvas', 'interfaces'],
+  },
+];
+
+const HOME_WRITINGS = [
+  {
+    title: 'The Discipline of Small Interfaces',
+    tag: 'Essay',
+    date: 'Jan 2026',
+    summary: 'On designing interfaces that behave like good rooms.',
+    link: '/writings/Disenchantment',
+    tags: ['writing', 'interfaces'],
+  },
+  {
+    title: 'Notes on GNN + MARL Fraud',
+    tag: 'Research',
+    date: 'Nov 2025',
+    summary: 'Field notes from a systems-level investigation.',
+    link: '/writings/GNNMARLFraud',
+    tags: ['research', 'ml', 'systems'],
+  },
+  {
+    title: 'Fragments',
+    tag: 'Fiction',
+    date: 'Oct 2024',
+    summary: 'Micro-stories that read like a glitching diary.',
+    link: '/writings/Fragments',
+    tags: ['writing', 'interfaces'],
+  },
+  {
+    title: 'Operational Calm',
+    tag: 'Notes',
+    date: 'Aug 2024',
+    summary: 'A checklist for building calm in complex systems.',
+    link: '/writings',
+    tags: ['writing', 'systems'],
+  },
+];
 
 const Home = () => {
   const moods = [
@@ -51,103 +125,32 @@ const Home = () => {
   const { query, tags } = useGlobalSearch();
   const projectCategories = ['All', 'Product', 'Research', 'Writing', 'Play'];
   const [projectFilter, setProjectFilter] = useState('All');
-  const projects = [
-    {
-      title: 'Atlas of Quiet Systems',
-      description: 'A modular product suite for calm, high-signal workflows.',
-      year: '2025',
-      type: 'Product',
-      stack: ['React', 'Tailwind', 'Framer Motion'],
-      link: '/projects',
-      tags: ['product', 'interfaces', 'systems'],
-    },
-    {
-      title: 'GNN MARL Fraud Study',
-      description: 'Research narrative on graph learning and multi-agent systems.',
-      year: '2024',
-      type: 'Research',
-      stack: ['Python', 'PyTorch', 'Writing'],
-      link: '/writings/GNNMARLFraud',
-      tags: ['research', 'ml', 'systems'],
-    },
-    {
-      title: 'Fragments of Disenchantment',
-      description: 'Interactive essay with layered typographic motion.',
-      year: '2023',
-      type: 'Writing',
-      stack: ['React', 'Typography'],
-      link: '/writings/Fragments',
-      tags: ['writing', 'interfaces'],
-    },
-    {
-      title: 'Signal Garden',
-      description: 'Generative visuals exploring ordered chaos and rhythm.',
-      year: '2025',
-      type: 'Play',
-      stack: ['Canvas', 'Creative Coding'],
-      link: '/projects',
-      tags: ['generative', 'canvas', 'interfaces'],
-    },
-  ];
-
-  const filteredProjects = projects.filter((project) => {
+  const normalizedQuery = query.trim().toLowerCase();
+  const filteredProjects = HOME_PROJECTS.filter((project) => {
     const matchesCategory = projectFilter === 'All' || project.type === projectFilter;
     const matchesQuery =
-      query.trim().length === 0 ||
-      project.title.toLowerCase().includes(query.toLowerCase()) ||
-      project.description.toLowerCase().includes(query.toLowerCase());
-    const matchesTags = tags.length === 0 || tags.every((tag) => project.tags?.includes(tag));
+      normalizedQuery.length === 0 ||
+      project.title.toLowerCase().includes(normalizedQuery) ||
+      project.description.toLowerCase().includes(normalizedQuery) ||
+      project.tags?.some((tag) => tag.includes(normalizedQuery));
+    const matchesTags = tags.length === 0 || tags.some((tag) => project.tags?.includes(tag));
     return matchesCategory && matchesQuery && matchesTags;
   });
 
-  const writings = [
-    {
-      title: 'The Discipline of Small Interfaces',
-      tag: 'Essay',
-      date: 'Jan 2026',
-      summary: 'On designing interfaces that behave like good rooms.',
-      link: '/writings/Disenchantment',
-      tags: ['writing', 'interfaces'],
-    },
-    {
-      title: 'Notes on GNN + MARL Fraud',
-      tag: 'Research',
-      date: 'Nov 2025',
-      summary: 'Field notes from a systems-level investigation.',
-      link: '/writings/GNNMARLFraud',
-      tags: ['research', 'ml', 'systems'],
-    },
-    {
-      title: 'Fragments',
-      tag: 'Fiction',
-      date: 'Oct 2024',
-      summary: 'Micro-stories that read like a glitching diary.',
-      link: '/writings/Fragments',
-      tags: ['writing', 'interfaces'],
-    },
-    {
-      title: 'Operational Calm',
-      tag: 'Notes',
-      date: 'Aug 2024',
-      summary: 'A checklist for building calm in complex systems.',
-      link: '/writings',
-      tags: ['writing', 'systems'],
-    },
-  ];
-
   const filteredWritings = useMemo(() => {
-    return writings.filter((writing) => {
+    return HOME_WRITINGS.filter((writing) => {
       const matchesQuery =
-        query.trim().length === 0 ||
-        writing.title.toLowerCase().includes(query.toLowerCase()) ||
-        writing.summary.toLowerCase().includes(query.toLowerCase());
-      const matchesTags = tags.length === 0 || tags.every((tag) => writing.tags?.includes(tag));
+        normalizedQuery.length === 0 ||
+        writing.title.toLowerCase().includes(normalizedQuery) ||
+        writing.summary.toLowerCase().includes(normalizedQuery) ||
+        writing.tags?.some((tag) => tag.includes(normalizedQuery));
+      const matchesTags = tags.length === 0 || tags.some((tag) => writing.tags?.includes(tag));
       return matchesQuery && matchesTags;
     });
-  }, [query, tags, writings]);
+  }, [normalizedQuery, tags]);
 
   return (
-    <motion.div
+    <Motion.div
       initial={{ opacity: 0, y: 18 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7, ease: 'easeOut' }}
@@ -528,7 +531,7 @@ const Home = () => {
           <div>Designed and built by Anormalm.</div>
         </div>
       </footer>
-    </motion.div>
+    </Motion.div>
   );
 };
 

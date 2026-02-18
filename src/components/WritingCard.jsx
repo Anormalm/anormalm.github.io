@@ -1,10 +1,10 @@
-import { motion } from 'framer-motion';
+import { motion as Motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { FiArrowUpRight } from 'react-icons/fi';
 
 const WritingCard = ({ title, excerpt, date, link }) => {
   return (
-    <motion.div
+    <Motion.div
       initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
@@ -19,7 +19,7 @@ const WritingCard = ({ title, excerpt, date, link }) => {
           Read more <FiArrowUpRight />
         </Link>
       )}
-    </motion.div>
+    </Motion.div>
   );
 };
 

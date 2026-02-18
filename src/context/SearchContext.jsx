@@ -23,7 +23,7 @@ const parseParams = (searchParams) => {
   const tags = tagsRaw
     .split(',')
     .map((tag) => tag.trim())
-    .filter(Boolean);
+    .filter((tag) => tag && TAGS.includes(tag));
   return { q, tags };
 };
 

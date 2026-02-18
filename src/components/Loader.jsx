@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion as Motion, AnimatePresence } from 'framer-motion';
 
 const Loader = () => {
   const [showLoader, setShowLoader] = useState(true);
@@ -15,7 +15,7 @@ const Loader = () => {
   return (
     <AnimatePresence>
       {showLoader && (
-        <motion.div
+        <Motion.div
           initial={{ opacity: 1 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -23,11 +23,11 @@ const Loader = () => {
           className="fixed inset-0 z-50 flex items-center justify-center bg-[var(--paper)]"
         >
           <div className="flex flex-col items-center gap-6">
-            <motion.div
+            <Motion.div
               animate={{ rotate: 360 }}
               transition={{ repeat: Infinity, duration: 2.2, ease: 'linear' }}
               className="h-20 w-20 rounded-full border border-[var(--line)] bg-aurora"
-            ></motion.div>
+            ></Motion.div>
             <div className="text-center">
               <div className="font-display text-2xl tracking-tight">Preparing the studio</div>
               <div className="text-xs uppercase tracking-[0.3em] text-[var(--muted)]">
@@ -35,7 +35,7 @@ const Loader = () => {
               </div>
             </div>
           </div>
-        </motion.div>
+        </Motion.div>
       )}
     </AnimatePresence>
   );

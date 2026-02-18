@@ -1,46 +1,48 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useGlobalSearch } from '../context/SearchContext';
 
+const EXPERIMENTS = [
+  {
+    id: 'flow-field',
+    title: 'Flow Field Atlas',
+    description: 'Particle traces steered by a slow noise field.',
+    mode: 'canvas',
+    tags: ['canvas', 'generative', 'systems'],
+  },
+  {
+    id: 'prism-shader',
+    title: 'Prism Shader',
+    description: 'WebGL plasma gradient with time-driven distortion.',
+    mode: 'webgl',
+    tags: ['webgl', 'generative', 'interfaces'],
+  },
+  {
+    id: 'signal-scan',
+    title: 'Signal Scan',
+    description: 'A sweeping radar-like scan with reactive noise.',
+    mode: 'canvas',
+    tags: ['canvas', 'tooling', 'interfaces'],
+  },
+];
+
 const Lab = () => {
   const canvasRef = useRef(null);
   const animationRef = useRef(null);
   const [activeId, setActiveId] = useState('flow-field');
   const { query, tags } = useGlobalSearch();
 
-  const experiments = [
-    {
-      id: 'flow-field',
-      title: 'Flow Field Atlas',
-      description: 'Particle traces steered by a slow noise field.',
-      mode: 'canvas',
-      tags: ['canvas', 'generative', 'systems'],
-    },
-    {
-      id: 'prism-shader',
-      title: 'Prism Shader',
-      description: 'WebGL plasma gradient with time-driven distortion.',
-      mode: 'webgl',
-      tags: ['webgl', 'generative', 'interfaces'],
-    },
-    {
-      id: 'signal-scan',
-      title: 'Signal Scan',
-      description: 'A sweeping radar-like scan with reactive noise.',
-      mode: 'canvas',
-      tags: ['canvas', 'tooling', 'interfaces'],
-    },
-  ];
-
   const filteredExperiments = useMemo(() => {
-    return experiments.filter((experiment) => {
+    const normalizedQuery = query.trim().toLowerCase();
+    return EXPERIMENTS.filter((experiment) => {
       const matchesQuery =
-        query.trim().length === 0 ||
-        experiment.title.toLowerCase().includes(query.toLowerCase()) ||
-        experiment.description.toLowerCase().includes(query.toLowerCase());
-      const matchesTags = tags.length === 0 || tags.every((tag) => experiment.tags.includes(tag));
+        normalizedQuery.length === 0 ||
+        experiment.title.toLowerCase().includes(normalizedQuery) ||
+        experiment.description.toLowerCase().includes(normalizedQuery) ||
+        experiment.tags.some((tag) => tag.includes(normalizedQuery));
+      const matchesTags = tags.length === 0 || tags.some((tag) => experiment.tags.includes(tag));
       return matchesQuery && matchesTags;
     });
-  }, [experiments, query, tags]);
+  }, [query, tags]);
 
   useEffect(() => {
     if (filteredExperiments.length === 0) return;
@@ -53,7 +55,7 @@ const Lab = () => {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const experiment = experiments.find((item) => item.id === activeId);
+    const experiment = EXPERIMENTS.find((item) => item.id === activeId);
     if (!experiment) return;
 
     let running = true;
@@ -242,7 +244,7 @@ const Lab = () => {
       stopAnimation();
       window.removeEventListener('resize', resize);
     };
-  }, [activeId, experiments]);
+  }, [activeId]);
 
   return (
     <div className="min-h-screen">
@@ -264,7 +266,7 @@ const Lab = () => {
           <div className="glass-card relative min-h-[420px] overflow-hidden p-0">
             <canvas ref={canvasRef} className="h-full w-full"></canvas>
             <div className="absolute left-6 top-6 rounded-full border border-[var(--line)] bg-[var(--paper)]/80 px-4 py-2 text-xs uppercase tracking-[0.25em] text-[var(--muted)]">
-              {experiments.find((item) => item.id === activeId)?.title ?? 'Select an experiment'}
+              {EXPERIMENTS.find((item) => item.id === activeId)?.title ?? 'Select an experiment'}
             </div>
           </div>
 
