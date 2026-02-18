@@ -1,4 +1,31 @@
+import { useState } from 'react';
+
 const CV = () => {
+  const [showGate, setShowGate] = useState(false);
+  const [gateMessage, setGateMessage] = useState('');
+
+  const triggerDownload = () => {
+    const link = document.createElement('a');
+    link.href = '/CV-Lifan-Latest.pdf';
+    link.download = 'CV-Lifan-Latest.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const onEmployerChoice = (isEmployer) => {
+    setGateMessage(
+      isEmployer
+        ? 'Access granted. Good to meet you.'
+        : 'Access granted anyway. Thanks for checking out the page.'
+    );
+    triggerDownload();
+    setTimeout(() => {
+      setShowGate(false);
+      setGateMessage('');
+    }, 1200);
+  };
+
   return (
     <div className="min-h-screen">
       <section className="section">
@@ -11,13 +38,13 @@ const CV = () => {
               Executive summary below. For full details, download the complete CV PDF.
             </p>
             </div>
-            <a
-              href="/CV-Lifan-Latest.pdf"
-              download
+            <button
+              type="button"
+              onClick={() => setShowGate(true)}
               className="font-mono rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-white transition hover:opacity-90"
             >
               Download Full CV (PDF)
-            </a>
+            </button>
           </div>
         </div>
 
@@ -95,6 +122,51 @@ const CV = () => {
           </section>
         </div>
       </section>
+
+      {showGate && (
+        <div className="fixed inset-0 z-[95] flex items-center justify-center bg-black/45 px-6">
+          <div className="tech-panel w-full max-w-lg rounded-3xl p-6">
+            <div className="font-mono text-xs uppercase tracking-[0.25em] text-[var(--muted)]">
+              Access Check
+            </div>
+            <h3 className="font-display mt-2 text-2xl">Quick gate for fun:</h3>
+            <p className="mt-2 text-sm text-[var(--muted)]">Are you an employer?</p>
+
+            <div className="mt-5 flex flex-wrap gap-3">
+              <button
+                type="button"
+                onClick={() => onEmployerChoice(true)}
+                className="font-mono rounded-full bg-[var(--accent)] px-5 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-white transition hover:opacity-90"
+              >
+                Yes, employer
+              </button>
+              <button
+                type="button"
+                onClick={() => onEmployerChoice(false)}
+                className="font-mono rounded-full border border-[var(--line)] px-5 py-3 text-xs font-semibold uppercase tracking-[0.2em] transition hover:border-[var(--accent)]"
+              >
+                Just browsing
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setShowGate(false);
+                  setGateMessage('');
+                }}
+                className="font-mono rounded-full border border-[var(--line)] px-5 py-3 text-xs font-semibold uppercase tracking-[0.2em] transition hover:border-[var(--accent)]"
+              >
+                Cancel
+              </button>
+            </div>
+
+            {gateMessage && (
+              <div className="mt-4 rounded-xl border border-[var(--line)] bg-[var(--paper)]/70 px-4 py-3 text-sm text-[var(--muted)]">
+                {gateMessage}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
