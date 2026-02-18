@@ -28,16 +28,18 @@ const Writings = () => {
   return (
     <div className="min-h-screen">
       <section className="section">
-        <div className="flex flex-wrap items-end justify-between gap-6">
-          <div>
-            <div className="text-xs uppercase tracking-[0.25em] text-[var(--muted)]">Writings</div>
-            <h1 className="font-display text-4xl">Technical notes and essays.</h1>
-            <p className="mt-3 max-w-2xl text-sm text-[var(--muted)]">
+        <div className="tech-panel rounded-3xl p-6 md:p-8">
+          <div className="flex flex-wrap items-end justify-between gap-6">
+            <div>
+              <div className="font-mono text-xs uppercase tracking-[0.25em] text-[var(--muted)]">Writings</div>
+              <h1 className="font-display text-4xl">Technical notes and essays.</h1>
+              <p className="mt-3 max-w-2xl text-sm text-[var(--muted)]">
               Documentation, research commentary, and engineering reflections.
-            </p>
-          </div>
-          <div className="rounded-full border border-[var(--line)] px-4 py-2 text-xs uppercase tracking-[0.2em] text-[var(--muted)]">
-            Ongoing
+              </p>
+            </div>
+            <div className="font-mono rounded-full border border-[var(--line)] px-4 py-2 text-xs uppercase tracking-[0.2em] text-[var(--muted)]">
+              Ongoing
+            </div>
           </div>
         </div>
 

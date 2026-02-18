@@ -2,25 +2,27 @@ const CV = () => {
   return (
     <div className="min-h-screen">
       <section className="section">
-        <div className="flex flex-wrap items-end justify-between gap-6">
-          <div>
-            <div className="text-xs uppercase tracking-[0.25em] text-[var(--muted)]">Curriculum Vitae</div>
+        <div className="tech-panel rounded-3xl p-6 md:p-8">
+          <div className="flex flex-wrap items-end justify-between gap-6">
+            <div>
+              <div className="font-mono text-xs uppercase tracking-[0.25em] text-[var(--muted)]">Curriculum Vitae</div>
             <h1 className="font-display text-4xl">Hu Lifan</h1>
             <p className="mt-3 max-w-3xl text-sm text-[var(--muted)]">
               Executive summary below. For full details, download the complete CV PDF.
             </p>
+            </div>
+            <a
+              href="/CV-Lifan-Latest.pdf"
+              download
+              className="font-mono rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-white transition hover:opacity-90"
+            >
+              Download Full CV (PDF)
+            </a>
           </div>
-          <a
-            href="/CV-Lifan-Latest.pdf"
-            download
-            className="rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-white transition hover:opacity-90"
-          >
-            Download Full CV (PDF)
-          </a>
         </div>
 
         <div className="mt-10 grid gap-6 md:grid-cols-2">
-          <section className="glass-card p-6 md:col-span-2">
+          <section className="tech-panel rounded-3xl p-6 md:col-span-2">
             <h2 className="font-display text-2xl">Profile</h2>
             <p className="mt-3 text-sm text-[var(--muted)]">
               Computer Engineering (IoT) student at the National University of Singapore focused on machine learning systems,
@@ -29,7 +31,7 @@ const CV = () => {
             </p>
           </section>
 
-          <section className="glass-card p-6">
+          <section className="tech-panel rounded-3xl p-6">
             <h2 className="font-display text-2xl">Education</h2>
             <ul className="mt-4 list-disc pl-5 text-sm text-[var(--muted)]">
               <li>NUS B.Eng (Computer Engineering, IoT), Aug 2024 - Present</li>
@@ -39,7 +41,7 @@ const CV = () => {
             </ul>
           </section>
 
-          <section className="glass-card p-6">
+          <section className="tech-panel rounded-3xl p-6">
             <h2 className="font-display text-2xl">Selected Publications</h2>
             <ul className="mt-4 list-disc pl-5 text-sm text-[var(--muted)]">
               <li>Learning Lie Group Generators From Trajectories (arXiv, Apr 2025)</li>
@@ -48,7 +50,7 @@ const CV = () => {
             </ul>
           </section>
 
-          <section className="glass-card p-6">
+          <section className="tech-panel rounded-3xl p-6">
             <h2 className="font-display text-2xl">Research Highlights</h2>
             <ul className="mt-4 list-disc pl-5 text-sm text-[var(--muted)]">
               <li>GNN + MARL DeFi fraud detection with PettingZoo and PPO on 50K+ Ethereum records</li>
@@ -58,7 +60,7 @@ const CV = () => {
             </ul>
           </section>
 
-          <section className="glass-card p-6">
+          <section className="tech-panel rounded-3xl p-6">
             <h2 className="font-display text-2xl">Industry / Engineering</h2>
             <ul className="mt-4 list-disc pl-5 text-sm text-[var(--muted)]">
               <li>Digital Developer Intern, Shanghai MAHLE Thermal Systems (May 2025 - Jul 2025)</li>
@@ -68,7 +70,7 @@ const CV = () => {
             </ul>
           </section>
 
-          <section className="glass-card p-6 md:col-span-2">
+          <section className="tech-panel rounded-3xl p-6 md:col-span-2">
             <h2 className="font-display text-2xl">Core Skills</h2>
             <div className="mt-4 grid grid-cols-2 gap-3 text-sm md:grid-cols-4">
               {[

@@ -26,11 +26,13 @@ const Navbar = () => {
     <nav className="sticky top-0 z-40 border-b border-[var(--line)] bg-[var(--paper)] backdrop-blur">
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-4 md:px-10">
         <Link to="/" className="flex items-center gap-3">
-          <div className="h-10 w-10 rounded-full border border-[var(--line)] bg-aurora"></div>
+          <div className="relative h-10 w-10 rounded-full border border-[var(--line)] bg-aurora">
+            <span className="absolute right-1 top-1 h-2 w-2 rounded-full bg-emerald-500"></span>
+          </div>
           <div>
             <div className="font-display text-lg tracking-tight">Anormalm</div>
-            <div className="text-xs uppercase tracking-[0.25em] text-[var(--muted)]">
-              Personal Page
+            <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-[var(--muted)]">
+              Personal Node
             </div>
           </div>
         </Link>

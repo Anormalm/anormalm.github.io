@@ -2,16 +2,18 @@ const Contact = () => {
   return (
     <div className="min-h-screen">
       <section className="section">
-        <div className="flex flex-wrap items-end justify-between gap-6">
-          <div>
-            <div className="text-xs uppercase tracking-[0.25em] text-[var(--muted)]">Contact</div>
-            <h1 className="font-display text-4xl">Let's work together.</h1>
-            <p className="mt-3 max-w-2xl text-sm text-[var(--muted)]">
+        <div className="tech-panel rounded-3xl p-6 md:p-8">
+          <div className="flex flex-wrap items-end justify-between gap-6">
+            <div>
+              <div className="font-mono text-xs uppercase tracking-[0.25em] text-[var(--muted)]">Contact</div>
+              <h1 className="font-display text-4xl">Let's work together.</h1>
+              <p className="mt-3 max-w-2xl text-sm text-[var(--muted)]">
               Send a note about your idea, research, or collaboration. I usually reply within a few days.
-            </p>
-          </div>
-          <div className="rounded-full border border-[var(--line)] px-4 py-2 text-xs uppercase tracking-[0.2em] text-[var(--muted)]">
-            Based in SG/CN
+              </p>
+            </div>
+            <div className="font-mono rounded-full border border-[var(--line)] px-4 py-2 text-xs uppercase tracking-[0.2em] text-[var(--muted)]">
+              Based in SG/CN
+            </div>
           </div>
         </div>
 
@@ -19,7 +21,7 @@ const Contact = () => {
           <form
             action="https://formspree.io/f/mkgjnbdd"
             method="POST"
-            className="glass-card grid gap-4 p-6"
+            className="tech-panel rounded-3xl grid gap-4 p-6"
           >
             <input
               type="text"
@@ -44,14 +46,14 @@ const Contact = () => {
             />
             <button
               type="submit"
-              className="rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-white transition hover:opacity-90"
+              className="font-mono rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-white transition hover:opacity-90"
             >
               Send message
             </button>
           </form>
 
-          <div className="glass-card p-6">
-            <div className="text-xs uppercase tracking-[0.25em] text-[var(--muted)]">Studio Notes</div>
+          <div className="tech-panel rounded-3xl p-6">
+            <div className="font-mono text-xs uppercase tracking-[0.25em] text-[var(--muted)]">Studio Notes</div>
             <h2 className="font-display mt-3 text-2xl">Availability</h2>
             <p className="mt-2 text-sm text-[var(--muted)]">
               I am currently open to a small number of collaborations in product design, research tooling,

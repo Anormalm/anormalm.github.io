@@ -19,9 +19,9 @@ const ProjectCard = ({ title, description, link, systemView = true }) => {
   const content = (
     <>
       <div className="flex items-center justify-between">
-        <div className="text-xs uppercase tracking-[0.25em] text-[var(--muted)]">Project</div>
+        <div className="font-mono text-xs uppercase tracking-[0.25em] text-[var(--muted)]">Project</div>
         {systemView && (
-          <div className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-[var(--accent)]">
+          <div className="font-mono inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-[var(--accent)]">
             <span className="h-2 w-2 rounded-full bg-[var(--accent)]"></span>
             {telemetry.status}
           </div>
@@ -38,8 +38,8 @@ const ProjectCard = ({ title, description, link, systemView = true }) => {
           ].map(([label, value]) => (
             <div key={label}>
               <div className="mb-1 flex items-center justify-between text-[10px] uppercase tracking-[0.2em] text-[var(--muted)]">
-                <span>{label}</span>
-                <span>{value}%</span>
+                <span className="font-mono">{label}</span>
+                <span className="font-mono">{value}%</span>
               </div>
               <div className="h-1.5 rounded-full bg-[var(--line)]">
                 <div
@@ -52,7 +52,7 @@ const ProjectCard = ({ title, description, link, systemView = true }) => {
         </div>
       )}
       {link && (
-        <span className="mt-5 inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-[var(--accent)]">
+        <span className="font-mono mt-5 inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-[var(--accent)]">
           View project <FiArrowUpRight />
         </span>
       )}
@@ -65,7 +65,7 @@ const ProjectCard = ({ title, description, link, systemView = true }) => {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
       viewport={{ once: true }}
-      className="glass-card p-6 transition hover:translate-y-[-2px]"
+      className="tech-panel scanline rounded-3xl p-6 transition hover:translate-y-[-2px]"
     >
       {link ? (
         isExternal ? (

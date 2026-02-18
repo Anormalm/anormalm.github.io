@@ -9,13 +9,13 @@ const WritingCard = ({ title, excerpt, date, link }) => {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
       viewport={{ once: true }}
-      className="glass-card p-6 transition hover:translate-y-[-2px]"
+      className="tech-panel scanline rounded-3xl p-6 transition hover:translate-y-[-2px]"
     >
-      <div className="text-xs uppercase tracking-[0.25em] text-[var(--muted)]">{date}</div>
+      <div className="font-mono text-xs uppercase tracking-[0.25em] text-[var(--muted)]">{date}</div>
       <div className="font-display mt-3 text-2xl">{title}</div>
       <p className="mt-2 text-sm text-[var(--muted)]">{excerpt}</p>
       {link && (
-        <Link to={link} className="mt-5 inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-[var(--accent)]">
+        <Link to={link} className="font-mono mt-5 inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-[var(--accent)]">
           Read more <FiArrowUpRight />
         </Link>
       )}
