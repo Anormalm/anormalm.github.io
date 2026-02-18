@@ -7,7 +7,7 @@ const CV = () => {
             <div className="text-xs uppercase tracking-[0.25em] text-[var(--muted)]">Curriculum Vitae</div>
             <h1 className="font-display text-4xl">Anormalm</h1>
             <p className="mt-3 max-w-2xl text-sm text-[var(--muted)]">
-              Creative technologist focused on research tooling, poetic interfaces, and calm systems.
+              Creative technologist focused on research tooling, interface design, and software systems.
             </p>
           </div>
           <a

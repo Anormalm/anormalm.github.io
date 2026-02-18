@@ -8,26 +8,23 @@ const WRITINGS = [
     excerpt: 'An essay exploring how rationalization shapes culture and identity.',
     date: 'March 2025',
     link: '/writings/Disenchantment',
-    tags: ['writing', 'research'],
   },
   {
     title: 'Fragments of a Digital Mind',
     excerpt: 'Reflections on attention, algorithms, and the self in the age of screens.',
     date: 'February 2025',
     link: '/writings/Fragments',
-    tags: ['writing', 'interfaces'],
   },
   {
     title: 'Graphs, Agents, and Adversaries',
     excerpt: 'Lessons from building a fraud detection system using GNNs and multi-agent reinforcement learning.',
     date: 'April 2025',
     link: '/writings/GNNMARLFraud',
-    tags: ['research', 'ml', 'systems'],
   },
 ];
 
 const Writings = () => {
-  const { query, tags } = useGlobalSearch();
+  const { query } = useGlobalSearch();
 
   const filteredWritings = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
@@ -35,12 +32,10 @@ const Writings = () => {
       const matchesQuery =
         normalizedQuery.length === 0 ||
         writing.title.toLowerCase().includes(normalizedQuery) ||
-        writing.excerpt.toLowerCase().includes(normalizedQuery) ||
-        writing.tags?.some((tag) => tag.includes(normalizedQuery));
-      const matchesTags = tags.length === 0 || tags.some((tag) => writing.tags?.includes(tag));
-      return matchesQuery && matchesTags;
+        writing.excerpt.toLowerCase().includes(normalizedQuery);
+      return matchesQuery;
     });
-  }, [query, tags]);
+  }, [query]);
 
   return (
     <div className="min-h-screen">
@@ -70,7 +65,7 @@ const Writings = () => {
           ))}
           {filteredWritings.length === 0 && (
             <div className="glass-card p-6 text-sm text-[var(--muted)]">
-              No writings match the current search. Try clearing tags.
+              No writings match the current search.
             </div>
           )}
         </div>

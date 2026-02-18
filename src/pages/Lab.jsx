@@ -1,5 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
-import { useGlobalSearch } from '../context/SearchContext';
+import { useEffect, useRef, useState } from 'react';
 
 const EXPERIMENTS = [
   {
@@ -7,21 +6,18 @@ const EXPERIMENTS = [
     title: 'Flow Field Atlas',
     description: 'Particle traces steered by a slow noise field.',
     mode: 'canvas',
-    tags: ['canvas', 'generative', 'systems'],
   },
   {
     id: 'prism-shader',
     title: 'Prism Shader',
     description: 'WebGL plasma gradient with time-driven distortion.',
     mode: 'webgl',
-    tags: ['webgl', 'generative', 'interfaces'],
   },
   {
     id: 'signal-scan',
     title: 'Signal Scan',
     description: 'A sweeping radar-like scan with reactive noise.',
     mode: 'canvas',
-    tags: ['canvas', 'tooling', 'interfaces'],
   },
 ];
 
@@ -29,28 +25,13 @@ const Lab = () => {
   const canvasRef = useRef(null);
   const animationRef = useRef(null);
   const [activeId, setActiveId] = useState('flow-field');
-  const { query, tags } = useGlobalSearch();
-
-  const filteredExperiments = useMemo(() => {
-    const normalizedQuery = query.trim().toLowerCase();
-    return EXPERIMENTS.filter((experiment) => {
-      const matchesQuery =
-        normalizedQuery.length === 0 ||
-        experiment.title.toLowerCase().includes(normalizedQuery) ||
-        experiment.description.toLowerCase().includes(normalizedQuery) ||
-        experiment.tags.some((tag) => tag.includes(normalizedQuery));
-      const matchesTags = tags.length === 0 || tags.some((tag) => experiment.tags.includes(tag));
-      return matchesQuery && matchesTags;
-    });
-  }, [query, tags]);
 
   useEffect(() => {
-    if (filteredExperiments.length === 0) return;
-    const activeExists = filteredExperiments.some((experiment) => experiment.id === activeId);
+    const activeExists = EXPERIMENTS.some((experiment) => experiment.id === activeId);
     if (!activeExists) {
-      setActiveId(filteredExperiments[0].id);
+      setActiveId(EXPERIMENTS[0].id);
     }
-  }, [filteredExperiments, activeId]);
+  }, [activeId]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -254,7 +235,7 @@ const Lab = () => {
             <div className="text-xs uppercase tracking-[0.25em] text-[var(--muted)]">Lab</div>
             <h1 className="font-display text-4xl">Interactive experiments.</h1>
             <p className="mt-3 max-w-2xl text-sm text-[var(--muted)]">
-              A playground for visual systems. Filter using the global search to discover subsets.
+              A playground for visual systems.
             </p>
           </div>
           <div className="rounded-full border border-[var(--line)] px-4 py-2 text-xs uppercase tracking-[0.2em] text-[var(--muted)]">
@@ -273,12 +254,7 @@ const Lab = () => {
           <div className="glass-card p-6">
             <div className="text-xs uppercase tracking-[0.25em] text-[var(--muted)]">Experiments</div>
             <div className="mt-5 grid gap-4">
-              {filteredExperiments.length === 0 && (
-                <div className="rounded-2xl border border-[var(--line)] p-4 text-sm text-[var(--muted)]">
-                  No experiments match the current search. Try clearing tags.
-                </div>
-              )}
-              {filteredExperiments.map((experiment) => (
+              {EXPERIMENTS.map((experiment) => (
                 <button
                   key={experiment.id}
                   onClick={() => setActiveId(experiment.id)}
@@ -291,13 +267,6 @@ const Lab = () => {
                   <div className="text-xs uppercase tracking-[0.25em]">{experiment.mode}</div>
                   <div className="font-display mt-2 text-lg">{experiment.title}</div>
                   <p className="mt-2 text-xs text-[var(--muted)]">{experiment.description}</p>
-                  <div className="mt-3 flex flex-wrap gap-2 text-[10px] uppercase tracking-[0.2em]">
-                    {experiment.tags.map((tag) => (
-                      <span key={tag} className="rounded-full border border-[var(--line)] px-2 py-1">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
                 </button>
               ))}
             </div>

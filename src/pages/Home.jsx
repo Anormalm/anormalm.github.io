@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { motion as Motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { FiArrowUpRight, FiMail, FiDownload } from 'react-icons/fi';
 import { useGlobalSearch } from '../context/SearchContext';
 
@@ -13,7 +13,6 @@ const HOME_PROJECTS = [
     type: 'Product',
     stack: ['React', 'Tailwind', 'Framer Motion'],
     link: '/projects',
-    tags: ['product', 'interfaces', 'systems'],
   },
   {
     title: 'GNN MARL Fraud Study',
@@ -22,7 +21,6 @@ const HOME_PROJECTS = [
     type: 'Research',
     stack: ['Python', 'PyTorch', 'Writing'],
     link: '/writings/GNNMARLFraud',
-    tags: ['research', 'ml', 'systems'],
   },
   {
     title: 'Fragments of Disenchantment',
@@ -31,7 +29,6 @@ const HOME_PROJECTS = [
     type: 'Writing',
     stack: ['React', 'Typography'],
     link: '/writings/Fragments',
-    tags: ['writing', 'interfaces'],
   },
   {
     title: 'Signal Garden',
@@ -40,7 +37,6 @@ const HOME_PROJECTS = [
     type: 'Play',
     stack: ['Canvas', 'Creative Coding'],
     link: '/projects',
-    tags: ['generative', 'canvas', 'interfaces'],
   },
 ];
 
@@ -51,7 +47,6 @@ const HOME_WRITINGS = [
     date: 'Jan 2026',
     summary: 'On designing interfaces that behave like good rooms.',
     link: '/writings/Disenchantment',
-    tags: ['writing', 'interfaces'],
   },
   {
     title: 'Notes on GNN + MARL Fraud',
@@ -59,7 +54,6 @@ const HOME_WRITINGS = [
     date: 'Nov 2025',
     summary: 'Field notes from a systems-level investigation.',
     link: '/writings/GNNMARLFraud',
-    tags: ['research', 'ml', 'systems'],
   },
   {
     title: 'Fragments',
@@ -67,7 +61,6 @@ const HOME_WRITINGS = [
     date: 'Oct 2024',
     summary: 'Micro-stories that read like a glitching diary.',
     link: '/writings/Fragments',
-    tags: ['writing', 'interfaces'],
   },
   {
     title: 'Operational Calm',
@@ -75,7 +68,6 @@ const HOME_WRITINGS = [
     date: 'Aug 2024',
     summary: 'A checklist for building calm in complex systems.',
     link: '/writings',
-    tags: ['writing', 'systems'],
   },
 ];
 
@@ -122,7 +114,7 @@ const Home = () => {
   const [activeMoodId, setActiveMoodId] = useState(moods[0].id);
   const activeMood = moods.find((mood) => mood.id === activeMoodId) || moods[0];
 
-  const { query, tags } = useGlobalSearch();
+  const { query } = useGlobalSearch();
   const projectCategories = ['All', 'Product', 'Research', 'Writing', 'Play'];
   const [projectFilter, setProjectFilter] = useState('All');
   const normalizedQuery = query.trim().toLowerCase();
@@ -131,10 +123,8 @@ const Home = () => {
     const matchesQuery =
       normalizedQuery.length === 0 ||
       project.title.toLowerCase().includes(normalizedQuery) ||
-      project.description.toLowerCase().includes(normalizedQuery) ||
-      project.tags?.some((tag) => tag.includes(normalizedQuery));
-    const matchesTags = tags.length === 0 || tags.some((tag) => project.tags?.includes(tag));
-    return matchesCategory && matchesQuery && matchesTags;
+      project.description.toLowerCase().includes(normalizedQuery);
+    return matchesCategory && matchesQuery;
   });
 
   const filteredWritings = useMemo(() => {
@@ -142,12 +132,10 @@ const Home = () => {
       const matchesQuery =
         normalizedQuery.length === 0 ||
         writing.title.toLowerCase().includes(normalizedQuery) ||
-        writing.summary.toLowerCase().includes(normalizedQuery) ||
-        writing.tags?.some((tag) => tag.includes(normalizedQuery));
-      const matchesTags = tags.length === 0 || tags.some((tag) => writing.tags?.includes(tag));
-      return matchesQuery && matchesTags;
+        writing.summary.toLowerCase().includes(normalizedQuery);
+      return matchesQuery;
     });
-  }, [normalizedQuery, tags]);
+  }, [normalizedQuery]);
 
   return (
     <Motion.div
@@ -167,14 +155,14 @@ const Home = () => {
 
           <div className="relative z-10 grid gap-10 md:grid-cols-[1.2fr_0.8fr]">
             <div className="space-y-6">
-              <div className={`chip ${activeMood.pill}`}>Aesthetic Systems</div>
+              <div className={`chip ${activeMood.pill}`}>Software and Research</div>
               <h1 className="font-display text-4xl leading-tight md:text-6xl">
-                I design poetic software and experimental interfaces
-                <span className={`block ${activeMood.accent}`}>for curious humans.</span>
+                I build software, research tools, and interfaces
+                <span className={`block ${activeMood.accent}`}>for real-world work.</span>
               </h1>
               <p className="max-w-xl text-base text-[var(--muted)] md:text-lg">
-                Anormalm is a creative technologist focused on calm, expressive software.
-                I craft product systems, write reflective essays, and prototype future tools.
+                I focus on product systems, technical research, and writing.
+                This site is a record of current projects and experiments.
               </p>
 
               <div className="flex flex-wrap gap-3">
@@ -257,7 +245,7 @@ const Home = () => {
 
                 <div className="flex flex-wrap gap-3">
                   <a
-                    href="mailto:anormalm@proton.me"
+                    href="mailto:hulifan55555@gmail.com"
                     className="flex items-center gap-2 rounded-full border border-[var(--line)] px-4 py-2 text-xs uppercase tracking-[0.2em] transition hover:border-[var(--accent)]"
                   >
                     <FiMail />
@@ -362,11 +350,11 @@ const Home = () => {
           <div>
             <h2 className="font-display text-3xl">Writing Index</h2>
             <p className="text-[var(--muted)]">
-              Essays, research notes, and fragments that map the studio's thinking.
+              Essays, research notes, and short-form writing.
             </p>
 
             <div className="mt-6 text-xs uppercase tracking-[0.25em] text-[var(--muted)]">
-              Filtered by global search and tags
+              Filtered by global search
             </div>
 
             <div className="mt-6 grid gap-4">
@@ -453,7 +441,7 @@ const Home = () => {
             <div>
               <h2 className="font-display text-3xl">Studio Timeline</h2>
               <p className="text-[var(--muted)]">
-                The past few seasons, in layered experiments.
+                Recent milestones and project updates.
               </p>
             </div>
             <Link
@@ -487,9 +475,9 @@ const Home = () => {
           <div className="relative z-10 flex flex-wrap items-center justify-between gap-6">
             <div>
               <div className="text-xs uppercase tracking-[0.3em] text-[var(--muted)]">Collaboration</div>
-              <h2 className="font-display text-3xl">Build something with a soul.</h2>
+              <h2 className="font-display text-3xl">Build something useful together.</h2>
               <p className="mt-2 max-w-xl text-sm text-[var(--muted)]">
-                I love partnering with thoughtful teams on products, research, or narrative systems.
+                I work with teams on product design, technical research, and engineering projects.
               </p>
             </div>
             <div className="flex flex-wrap gap-3">
@@ -500,7 +488,7 @@ const Home = () => {
                 Contact
               </Link>
               <a
-                href="mailto:anormalm@proton.me"
+                href="mailto:hulifan55555@gmail.com"
                 className="rounded-full border border-[var(--line)] px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] transition hover:border-[var(--accent)]"
               >
                 Send Email
@@ -523,9 +511,6 @@ const Home = () => {
               className="hover:text-[var(--accent)]"
             >
               <FaLinkedin />
-            </a>
-            <a href="https://twitter.com/YOURUSERNAME" target="_blank" rel="noreferrer" className="hover:text-[var(--accent)]">
-              <FaTwitter />
             </a>
           </div>
           <div>Designed and built by Anormalm.</div>

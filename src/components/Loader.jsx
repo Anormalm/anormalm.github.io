@@ -29,9 +29,9 @@ const Loader = () => {
               className="h-20 w-20 rounded-full border border-[var(--line)] bg-aurora"
             ></Motion.div>
             <div className="text-center">
-              <div className="font-display text-2xl tracking-tight">Preparing the studio</div>
+              <div className="font-display text-2xl tracking-tight">Loading site</div>
               <div className="text-xs uppercase tracking-[0.3em] text-[var(--muted)]">
-                01 / 04 assembling atmosphere
+                Please wait
               </div>
             </div>
           </div>

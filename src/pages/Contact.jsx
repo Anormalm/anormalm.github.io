@@ -5,7 +5,7 @@ const Contact = () => {
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
             <div className="text-xs uppercase tracking-[0.25em] text-[var(--muted)]">Contact</div>
-            <h1 className="font-display text-4xl">Let us build something deliberate.</h1>
+            <h1 className="font-display text-4xl">Let's work together.</h1>
             <p className="mt-3 max-w-2xl text-sm text-[var(--muted)]">
               Send a note about your idea, research, or collaboration. I usually reply within a few days.
             </p>
@@ -55,7 +55,7 @@ const Contact = () => {
             <h2 className="font-display mt-3 text-2xl">Availability</h2>
             <p className="mt-2 text-sm text-[var(--muted)]">
               I am currently open to a small number of collaborations in product design, research tooling,
-              or narrative systems.
+              or software systems.
             </p>
             <div className="mt-6 grid gap-3 text-sm text-[var(--muted)]">
               <div className="flex items-center justify-between border-b border-[var(--line)] pb-2">

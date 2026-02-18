@@ -1,7 +1,7 @@
 import { useGlobalSearch } from '../context/SearchContext';
 
 const GlobalSearchBar = () => {
-  const { query, setQuery, tags, toggleTag, clearAll, allTags } = useGlobalSearch();
+  const { query, setQuery, clearAll } = useGlobalSearch();
 
   return (
     <div className="border-b border-[var(--line)] bg-[var(--paper)]">
@@ -18,20 +18,7 @@ const GlobalSearchBar = () => {
           />
         </div>
 
-        <div className="flex flex-wrap items-center gap-2 md:justify-end">
-          {allTags.map((tag) => (
-            <button
-              key={tag}
-              onClick={() => toggleTag(tag)}
-              className={`rounded-full border px-3 py-2 text-[11px] uppercase tracking-[0.25em] transition ${
-                tags.includes(tag)
-                  ? 'border-[var(--accent)] text-[var(--accent)]'
-                  : 'border-[var(--line)] text-[var(--muted)] hover:border-[var(--accent)]'
-              }`}
-            >
-              {tag}
-            </button>
-          ))}
+        <div className="flex items-center md:justify-end">
           <button
             onClick={clearAll}
             className="rounded-full border border-[var(--line)] px-3 py-2 text-[11px] uppercase tracking-[0.25em] text-[var(--muted)] transition hover:border-[var(--accent)]"
