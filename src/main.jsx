@@ -5,7 +5,7 @@ import App from './App.jsx'
 
 const searchParams = new URLSearchParams(window.location.search)
 const redirectedPath = searchParams.get('redirect')
-if (redirectedPath) {
+if (redirectedPath && redirectedPath.startsWith('/')) {
   window.history.replaceState(null, '', redirectedPath)
 }
 

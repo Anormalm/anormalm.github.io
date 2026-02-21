@@ -2,6 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'; upgrade-insecure-requests" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -12,17 +14,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Portfolio of Anormalm: developer, writer, and creative technologist." />
     <title>Anormalm | Portfolio</title>
-    <script>
-      (function () {
-        const params = new URLSearchParams(window.location.search);
-        const path = params.get('p');
-        const search = params.get('q');
-        if (path) {
-          const newUrl = path + (search ? `?${search}` : '') + window.location.hash;
-          window.history.replaceState(null, '', newUrl);
-        }
-      })();
-    </script>
   </head>
   <body>
     <div id="root"></div>
