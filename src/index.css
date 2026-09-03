@@ -1544,8 +1544,9 @@
 .geo-result-meta span { padding: 0.55rem 0.7rem; border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 999px; font-family: var(--font-mono); font-size: 7px; letter-spacing: 0.11em; text-transform: uppercase; color: #8fa2bd; }
 
 .geo-privacy-note {
-  display: grid;
-  grid-template-columns: auto 1fr;
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
   gap: 0.75rem;
   margin-bottom: 1rem;
   padding: 0.9rem;
@@ -1555,9 +1556,8 @@
   background: rgba(5, 11, 19, 0.46);
 }
 
-.geo-privacy-note svg { margin-top: 0.12rem; color: #23d39b; }
-.geo-privacy-note p { font-size: 0.68rem; line-height: 1.55; }
-.geo-privacy-note a { color: #76b6ff; text-decoration: underline; text-underline-offset: 3px; }
+.geo-privacy-note svg { color: #23d39b; }
+.geo-privacy-note a { font-family: var(--font-mono); font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; color: #76b6ff; }
 
 .geo-reveal-button,
 .geo-clear-button {

@@ -176,10 +176,7 @@ const GeoSignal = () => {
 
             <div className="geo-privacy-note">
               <FiShield aria-hidden="true" />
-              <p>
-                Optional: clicking sends your public IP directly to the no-log WhatIsMyIP API for one approximate lookup.
-                This site never displays or stores the IP. <Link to="/privacy">Privacy details</Link>
-              </p>
+              <Link to="/privacy">Privacy details</Link>
             </div>
 
             {phase === 'revealed' ? (
