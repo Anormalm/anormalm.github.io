@@ -34,37 +34,26 @@ const SOCIALS = [
   ['Medium', 'https://medium.com/@hulifan55555', <FaMedium key="medium" />],
 ];
 
-const IDENTITY_TONES = [
-  {
-    label: 'Minimal signal',
-    copy: 'I build intelligent systems.',
-  },
-  {
-    label: 'The short version',
-    copy: 'I’m a Computer Engineering student at NUS building machine-learning systems.',
-  },
-  {
-    label: 'Current coordinates',
-    copy: 'I’m a Machine Learning Engineer Intern at TikTok and a Research Assistant at NUS.',
-  },
-  {
-    label: 'Research mode',
-    copy: 'I work across graph intelligence, language-model evaluation, edge AI, and distributed systems.',
-  },
-  {
-    label: 'Curiosity mode',
-    copy: 'I chase strange questions through graphs, language models, and edge devices—then build enough of an answer to test it.',
-  },
-  {
-    label: 'Unfiltered',
-    copy: 'Part engineer, part researcher, occasional digital archaeologist. I like difficult systems, honest experiments, and ideas with a little weirdness left in them.',
-  },
+const INTRO_FACTS = [
+  'I’m a Computer Engineering student at NUS in Singapore.',
+  'My academic detours include a second major in Innovation & Design and a minor in Mathematics.',
+  'Right now, I’m a Machine Learning Engineer Intern with TikTok’s BRIC team and a Research Assistant at NUS.',
+  'I spend most of my research time around graph intelligence, grounded language models, edge AI, and distributed systems.',
+  'One question I keep returning to is whether a model understands an actual graph—or merely the order in which someone wrote it down.',
+  'I’ve also benchmarked quantized vision-language models on a Jetson Orin Nano Super: tiny hardware with surprisingly big opinions.',
+  'My projects wander from DeFi detection and persistent memory systems to a natural-language programming language called Linguine.',
+  'I like turning abstract ideas into things you can poke: simulations, evaluation harnesses, strange interfaces, and occasionally a hidden route.',
+  'That last part is why this site has ghost channels, a chaos key, and more diagnostics than a portfolio strictly needs.',
+  'Outside the technical signal, I write about mathematics, AI, systems, and whatever sits uncomfortably between them.',
+  'The current soundtrack is Maurice Ravel’s Gaspard de la Nuit.',
+  'My working rule is simple: follow curiosity, test the claim, and keep a little weirdness in the result.',
+  'Or, in fewer words: I build and code whenever I want to.',
 ];
 
 const Home = () => {
   const heroRef = useRef(null);
   const [ghostMode, setGhostMode] = useState(false);
-  const [identityTone, setIdentityTone] = useState(40);
+  const [knowledgeLevel, setKnowledgeLevel] = useState(22);
   const reduceMotion = useReducedMotion();
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -73,8 +62,7 @@ const Home = () => {
   const copyY = useTransform(scrollYProgress, [0, 1], [0, 120]);
   const orbitY = useTransform(scrollYProgress, [0, 1], [0, -90]);
   const orbitRotate = useTransform(scrollYProgress, [0, 1], [0, 28]);
-  const identityIndex = Math.round((identityTone / 100) * (IDENTITY_TONES.length - 1));
-  const identity = IDENTITY_TONES[identityIndex];
+  const revealedFactCount = Math.round((knowledgeLevel / 100) * INTRO_FACTS.length);
 
   const [typedText] = useTypewriter({
     words: [
@@ -152,38 +140,38 @@ const Home = () => {
           </h1>
 
           <div className="hero-bottom-grid">
-            <div className="identity-console">
-              <div className="identity-readout">
-                <span>Identity / {String(identityIndex + 1).padStart(2, '0')}</span>
-                <strong>{identity.label}</strong>
-              </div>
-              <div className="identity-copy-wrap" aria-live="polite">
-                <AnimatePresence mode="wait">
-                  <Motion.p
-                    key={identityIndex}
-                    initial={{ opacity: 0, y: 12, filter: 'blur(5px)' }}
-                    animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                    exit={{ opacity: 0, y: -8, filter: 'blur(4px)' }}
-                    transition={{ duration: reduceMotion ? 0.01 : 0.28 }}
-                    className="identity-copy"
-                  >
-                    <strong>I’m Lifan Hu.</strong> {identity.copy}
-                  </Motion.p>
+            <div className="intro-console">
+              <p className="intro-copy" aria-live="polite">
+                <strong>I’m Lifan Hu.</strong>
+                <AnimatePresence initial={false}>
+                  {INTRO_FACTS.slice(0, revealedFactCount).map((fact, index) => (
+                    <Motion.span
+                      key={fact}
+                      initial={{ opacity: 0, filter: 'blur(5px)' }}
+                      animate={{ opacity: 1, filter: 'blur(0px)' }}
+                      exit={{ opacity: 0, filter: 'blur(4px)' }}
+                      transition={{ duration: reduceMotion ? 0.01 : 0.24, delay: reduceMotion ? 0 : index * 0.008 }}
+                      className="intro-fact"
+                    >
+                      {' '}{fact}
+                    </Motion.span>
+                  ))}
                 </AnimatePresence>
-              </div>
-              <div className="identity-range-row">
-                <span>Just facts</span>
+              </p>
+              <div className="intro-slider-row">
+                <span>Not advertising</span>
                 <input
                   type="range"
                   min="0"
                   max="100"
                   step="1"
-                  value={identityTone}
-                  onChange={(event) => setIdentityTone(Number(event.target.value))}
-                  style={{ '--tone': `${identityTone}%` }}
-                  aria-label="Change the tone of Lifan's introduction"
+                  value={knowledgeLevel}
+                  onChange={(event) => setKnowledgeLevel(Number(event.target.value))}
+                  style={{ '--tone': `${knowledgeLevel}%` }}
+                  aria-label="Reveal more facts about Lifan"
+                  aria-valuetext={`${revealedFactCount} of ${INTRO_FACTS.length} facts visible`}
                 />
-                <span>More Lifan</span>
+                <span>Know more</span>
               </div>
             </div>
 

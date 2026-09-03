@@ -833,42 +833,21 @@
   margin-top: clamp(2.6rem, 8vh, 6rem);
 }
 
-.identity-console {
+.intro-console {
   position: relative;
   padding: 1rem 0 0;
   border-top: 1px solid var(--line);
 }
 
-.identity-readout {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  font-family: var(--font-mono);
-  font-size: 8px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
-.identity-readout strong {
-  color: var(--accent-warm);
-  font-weight: 500;
-}
-
-.identity-copy-wrap {
-  display: flex;
+.intro-copy {
   min-height: 9rem;
-  align-items: center;
-}
-
-.identity-copy {
+  padding: 0.7rem 0 1.2rem;
   font-size: clamp(1rem, 1.45vw, 1.22rem);
   line-height: 1.65;
   color: var(--muted);
 }
 
-.identity-copy strong {
+.intro-copy strong {
   display: block;
   margin-bottom: 0.2rem;
   font-family: var(--font-display);
@@ -879,7 +858,11 @@
   color: var(--ink);
 }
 
-.identity-range-row {
+.intro-fact {
+  display: inline;
+}
+
+.intro-slider-row {
   display: grid;
   grid-template-columns: auto minmax(80px, 1fr) auto;
   align-items: center;
@@ -891,7 +874,7 @@
   color: var(--muted);
 }
 
-.identity-range-row input {
+.intro-slider-row input {
   width: 100%;
   height: 22px;
   appearance: none;
@@ -901,7 +884,7 @@
     center / 100% 2px no-repeat;
 }
 
-.identity-range-row input::-webkit-slider-thumb {
+.intro-slider-row input::-webkit-slider-thumb {
   width: 18px;
   height: 18px;
   appearance: none;
@@ -912,7 +895,7 @@
   transition: transform 160ms ease;
 }
 
-.identity-range-row input::-moz-range-thumb {
+.intro-slider-row input::-moz-range-thumb {
   width: 16px;
   height: 16px;
   border: 2px solid var(--paper);
@@ -921,8 +904,8 @@
   box-shadow: 0 0 0 1px var(--accent-warm), 0 0 20px color-mix(in srgb, var(--accent-warm) 52%, transparent);
 }
 
-.identity-range-row input:hover::-webkit-slider-thumb,
-.identity-range-row input:focus-visible::-webkit-slider-thumb {
+.intro-slider-row input:hover::-webkit-slider-thumb,
+.intro-slider-row input:focus-visible::-webkit-slider-thumb {
   transform: scale(1.22);
 }
 
@@ -1491,7 +1474,7 @@
   .signal-world { width: 260px; top: 17rem; right: -6rem; opacity: 0.44; }
   .signal-label { display: none; }
   .hero-bottom-grid { grid-template-columns: 1fr; gap: 1.8rem; margin-top: 12rem; }
-  .identity-copy-wrap { min-height: 10.5rem; }
+  .intro-copy { min-height: 10.5rem; }
   .scroll-cue { bottom: 1.2rem; }
   .editorial-heading { grid-template-columns: 1fr; }
   .display-heading { font-size: clamp(3.3rem, 17vw, 5.2rem); }
