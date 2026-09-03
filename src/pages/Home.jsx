@@ -25,7 +25,12 @@ const PRINCIPLES = [
 
 const Home = () => {
   const [typedText] = useTypewriter({
-    words: ['LLM evaluation', 'agentic systems', 'graph reasoning', 'human-centered AI'],
+    words: [
+      'graph-grounded language models',
+      'adaptive graph evidence',
+      'edge multimodal inference',
+      'distributed ML systems',
+    ],
     loop: 0,
     typeSpeed: 54,
     deleteSpeed: 28,
@@ -52,8 +57,9 @@ const Home = () => {
               </h1>
 
               <p className="mt-6 max-w-2xl text-base leading-7 text-[var(--muted)] md:text-lg">
-                I’m Lifan Hu, a Computer Engineering student and Research Assistant at NUS. My work spans
-                machine learning systems, agentic AI, evaluation, graph reasoning, and practical interfaces.
+                I’m Lifan Hu, a Computer Engineering student at NUS, currently a Machine Learning Engineer Intern
+                at TikTok and a Research Assistant. My work spans graph machine learning, language-model evaluation,
+                multimodal inference, and production systems.
               </p>
 
               <div className="font-mono mt-5 min-h-6 text-xs uppercase tracking-[0.18em] text-[var(--muted)]">
@@ -78,15 +84,15 @@ const Home = () => {
               <div className="mt-5 space-y-4">
                 <div className="profile-row">
                   <span>Now</span>
+                  <strong>ML Engineer Intern · TikTok BRIC</strong>
+                </div>
+                <div className="profile-row">
+                  <span>Research</span>
                   <strong>Research Assistant · NUS</strong>
                 </div>
                 <div className="profile-row">
-                  <span>Previously</span>
-                  <strong>ML Engineering Intern · TikTok</strong>
-                </div>
-                <div className="profile-row">
                   <span>Focus</span>
-                  <strong>Evaluation + AI systems</strong>
+                  <strong>Graph ML + grounded language models</strong>
                 </div>
               </div>
 

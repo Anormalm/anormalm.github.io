@@ -23,7 +23,7 @@ export const projects = [
   {
     title: 'AGEA',
     category: 'Research',
-    status: 'Active',
+    status: 'Research study',
     description:
       'Adaptive Graph Evidence Acquisition: a sequential framework that selects useful graph evidence before LLM-based fraud reasoning under token and latency constraints.',
     tags: ['Graph learning', 'LLM reasoning', 'Fraud detection'],
@@ -47,6 +47,15 @@ export const projects = [
       'A PyTorch implementation of Competitive Information Routing Transformers, replacing purely additive residual mixing with learned competitive routing.',
     tags: ['Transformers', 'PyTorch', 'Representation learning'],
     link: 'https://github.com/Anormalm/CIRT',
+  },
+  {
+    title: 'Linguine',
+    category: 'Programming Languages',
+    status: 'Published',
+    description:
+      'A natural-language programming language with formal semantics and a clean compiler pipeline, designed to make readable intent executable without giving up structure.',
+    tags: ['Compiler design', 'Formal semantics', 'Python'],
+    link: 'https://github.com/Anormalm/linguine',
   },
   {
     title: 'GAiVE',
@@ -129,8 +138,21 @@ export const publications = [
     link: 'https://arxiv.org/abs/2504.03220',
   },
   {
+    title: 'Linguine: A Natural-Language Programming Language with Formal Semantics and a Clean Compiler Pipeline',
+    venue: 'arXiv, 2025',
+    link: 'https://arxiv.org/abs/2506.08396',
+  },
+  {
     title: 'GNN-Augmented RL for Fraud Detection in Decentralized Finance',
     venue: 'CONF-SEML, 2025',
     link: 'https://doi.org/10.54254/2755-2721/2025.22856',
+  },
+  {
+    title: 'Graph Evidence Is Not Text Evidence: Serialization Faithfulness as Structural Invariance in Graph-Grounded Language Models',
+    venue: 'EMNLP 2026 GroundLM Workshop · Archival short paper · Poster',
+  },
+  {
+    title: 'Quantized Vision-Language Models on Embedded GPUs: A Comparative Benchmark for Edge Multimodal Inference',
+    venue: 'ICARCV 2026 · Oral presentation',
   },
 ];
