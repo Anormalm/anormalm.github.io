@@ -1,43 +1,68 @@
-import { useEffect, useState } from 'react';
-import { motion as Motion, AnimatePresence } from 'framer-motion';
+import { useEffect, useMemo, useState } from 'react';
+import { motion as Motion } from 'framer-motion';
 
-const Loader = () => {
-  const [showLoader, setShowLoader] = useState(true);
+const STAGES = ['Mapping graph', 'Compiling memory', 'Opening channel'];
+
+const Loader = ({ onComplete }) => {
+  const [progress, setProgress] = useState(3);
+  const reducedMotion = useMemo(
+    () => window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+    []
+  );
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowLoader(false);
-    }, 2200);
+    const duration = reducedMotion ? 420 : 2200;
+    const startedAt = performance.now();
+    const interval = window.setInterval(() => {
+      const elapsed = performance.now() - startedAt;
+      setProgress(Math.min(100, Math.round((elapsed / duration) * 100)));
+    }, 32);
+    const timer = window.setTimeout(onComplete, duration);
 
-    return () => clearTimeout(timer);
-  }, []);
+    return () => {
+      window.clearInterval(interval);
+      window.clearTimeout(timer);
+    };
+  }, [onComplete, reducedMotion]);
+
+  const stage = STAGES[Math.min(STAGES.length - 1, Math.floor(progress / 34))];
 
   return (
-    <AnimatePresence>
-      {showLoader && (
-        <Motion.div
-          initial={{ opacity: 1 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.8 }}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-[var(--paper)]"
-        >
-          <div className="flex flex-col items-center gap-6">
-            <Motion.div
-              animate={{ rotate: 360 }}
-              transition={{ repeat: Infinity, duration: 2.2, ease: 'linear' }}
-              className="h-20 w-20 rounded-full border border-[var(--line)] bg-aurora"
-            ></Motion.div>
-            <div className="text-center">
-              <div className="font-display text-2xl tracking-tight">Loading site</div>
-              <div className="text-xs uppercase tracking-[0.3em] text-[var(--muted)]">
-                Please wait
-              </div>
-            </div>
-          </div>
-        </Motion.div>
-      )}
-    </AnimatePresence>
+    <Motion.div
+      key="loader"
+      initial={{ opacity: 1 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0, scale: reducedMotion ? 1 : 1.04 }}
+      transition={{ duration: reducedMotion ? 0.05 : 0.55, ease: [0.76, 0, 0.24, 1] }}
+      className="loader-screen"
+    >
+      <div className="loader-coordinate loader-coordinate-top">01°17′N · 103°51′E</div>
+      <div className="loader-coordinate loader-coordinate-bottom">NUS / SINGAPORE / 2026</div>
+
+      <div className="loader-core" aria-hidden="true">
+        <span className="loader-orbit loader-orbit-one"><i /></span>
+        <span className="loader-orbit loader-orbit-two"><i /></span>
+        <span className="loader-monogram">LH</span>
+      </div>
+
+      <div className="loader-readout" aria-live="polite">
+        <div className="font-mono text-[10px] uppercase tracking-[0.28em] text-[var(--muted)]">
+          {stage}
+        </div>
+        <div className="loader-progress-row">
+          <span className="loader-progress-track">
+            <Motion.span animate={{ width: `${progress}%` }} transition={{ ease: 'linear', duration: 0.08 }} />
+          </span>
+          <span className="font-mono text-[10px] tabular-nums text-[var(--accent)]">
+            {String(progress).padStart(3, '0')}%
+          </span>
+        </div>
+      </div>
+
+      <button type="button" className="loader-skip" onClick={onComplete}>
+        Enter now
+      </button>
+    </Motion.div>
   );
 };
 

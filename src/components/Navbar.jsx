@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { AnimatePresence, motion as Motion } from 'framer-motion';
 import { FiMenu, FiMoon, FiSun, FiX } from 'react-icons/fi';
 
 const NAV_ITEMS = [
@@ -12,10 +13,11 @@ const NAV_ITEMS = [
 ];
 
 const Navbar = () => {
+  const location = useLocation();
   const [darkMode, setDarkMode] = useState(() => {
     const storedTheme = localStorage.getItem('theme');
     if (storedTheme) return storedTheme === 'dark';
-    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    return true;
   });
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -24,11 +26,9 @@ const Navbar = () => {
     localStorage.setItem('theme', darkMode ? 'dark' : 'light');
   }, [darkMode]);
 
-  const navClassName = ({ isActive }) => `nav-link ${isActive ? 'nav-link-active' : ''}`;
-
   return (
-    <nav className="site-nav sticky top-0 z-40 border-b border-[var(--line)]">
-      <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-5 py-3.5 md:px-10">
+    <nav className="site-nav sticky top-0 z-50 border-b border-[var(--line)]">
+      <div className="mx-auto flex w-full max-w-[1440px] items-center justify-between px-5 py-3.5 md:px-10 xl:px-14">
         <Link to="/" className="group flex items-center gap-3" aria-label="Lifan Hu home">
           <div className="brand-mark" aria-hidden="true">
             <span className="brand-mark-core" />
@@ -36,7 +36,7 @@ const Navbar = () => {
           <div>
             <div className="font-display text-base font-semibold tracking-tight md:text-lg">Lifan Hu</div>
             <div className="font-mono text-[9px] uppercase tracking-[0.24em] text-[var(--muted)] md:text-[10px]">
-              ML Systems · Research
+              Machine intelligence · SG
             </div>
           </div>
         </Link>
@@ -62,11 +62,16 @@ const Navbar = () => {
         </div>
 
         <div className="hidden items-center gap-1 md:flex">
-          {NAV_ITEMS.map(([label, path]) => (
-            <NavLink key={path} to={path} end={path === '/'} className={navClassName}>
-              {label}
-            </NavLink>
-          ))}
+          {NAV_ITEMS.map(([label, path], index) => {
+            const isActive = path === '/' ? location.pathname === '/' : location.pathname.startsWith(path);
+            return (
+              <Link key={path} to={path} className={`nav-link ${isActive ? 'nav-link-active' : ''}`}>
+                <span className="nav-index">0{index + 1}</span>
+                {label}
+                {isActive && <Motion.span layoutId="active-nav" className="nav-active-line" />}
+              </Link>
+            );
+          })}
           <button
             type="button"
             onClick={() => setDarkMode((previous) => !previous)}
@@ -78,23 +83,34 @@ const Navbar = () => {
         </div>
       </div>
 
-      {menuOpen && (
-        <div className="border-t border-[var(--line)] px-5 pb-5 pt-3 md:hidden">
-          <div className="grid grid-cols-2 gap-2">
-            {NAV_ITEMS.map(([label, path]) => (
-              <NavLink
-                key={path}
-                to={path}
-                end={path === '/'}
-                onClick={() => setMenuOpen(false)}
-                className={navClassName}
-              >
-                {label}
-              </NavLink>
-            ))}
-          </div>
-        </div>
-      )}
+      <AnimatePresence>
+        {menuOpen && (
+          <Motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            className="mobile-nav-wrap md:hidden"
+          >
+            <div className="grid grid-cols-2 gap-2 px-5 pb-6 pt-4">
+              {NAV_ITEMS.map(([label, path], index) => {
+                const isActive = path === '/' ? location.pathname === '/' : location.pathname.startsWith(path);
+                return (
+                  <Link
+                    key={path}
+                    to={path}
+                    onClick={() => setMenuOpen(false)}
+                    className={`mobile-nav-link ${isActive ? 'mobile-nav-link-active' : ''}`}
+                  >
+                    <span>0{index + 1}</span>
+                    {label}
+                  </Link>
+                );
+              })}
+            </div>
+          </Motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 };

@@ -32,7 +32,7 @@ const Contact = () => {
   return (
     <div className="min-h-screen bg-grid">
       <section className="section">
-        <div className="tech-panel rounded-3xl p-7 md:p-9">
+        <div className="page-hero-panel tech-panel rounded-3xl p-7 md:p-9" data-page="CONTACT">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div>
               <div className="eyebrow">Contact</div>

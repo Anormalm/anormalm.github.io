@@ -5,7 +5,7 @@ const Projects = () => {
   return (
     <div className="min-h-screen bg-grid">
       <section className="section">
-        <div className="tech-panel rounded-3xl p-7 md:p-9">
+        <div className="page-hero-panel tech-panel rounded-3xl p-7 md:p-9" data-page="PROJECTS">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div>
               <div className="eyebrow">Project index</div>
@@ -22,8 +22,8 @@ const Projects = () => {
         </div>
 
         <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
-          {projects.map((project) => (
-            <ProjectCard key={project.title} {...project} />
+          {projects.map((project, index) => (
+            <ProjectCard key={project.title} {...project} index={index} />
           ))}
         </div>
       </section>

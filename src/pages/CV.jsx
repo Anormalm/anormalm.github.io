@@ -1,4 +1,6 @@
-import { FiDownload, FiExternalLink } from 'react-icons/fi';
+import { useEffect, useState } from 'react';
+import { AnimatePresence, motion as Motion } from 'framer-motion';
+import { FiDownload, FiExternalLink, FiX } from 'react-icons/fi';
 import { publications } from '../data/portfolio';
 
 const EXPERIENCE = [
@@ -72,6 +74,12 @@ const SKILLS = [
   'ROS2',
 ];
 
+const GATE_CHOICES = [
+  ['Yes', 'Employer detected. Preparing the useful version.'],
+  ['Not yet', 'Future employer energy detected. Access granted.'],
+  ['Just curious', 'Curiosity is a valid credential. Access granted.'],
+];
+
 const Publication = ({ publication }) => {
   const content = (
     <>
@@ -94,10 +102,40 @@ const Publication = ({ publication }) => {
 };
 
 const CV = () => {
+  const [showGate, setShowGate] = useState(false);
+  const [gateMessage, setGateMessage] = useState('');
+
+  useEffect(() => {
+    if (!showGate) return undefined;
+    const onKeyDown = (event) => {
+      if (event.key === 'Escape') setShowGate(false);
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [showGate]);
+
+  const triggerDownload = () => {
+    const link = document.createElement('a');
+    link.href = '/CV-Lifan-Latest.pdf';
+    link.download = 'Hu-Lifan-CV.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const onGateChoice = (message) => {
+    setGateMessage(message);
+    window.setTimeout(triggerDownload, 360);
+    window.setTimeout(() => {
+      setShowGate(false);
+      setGateMessage('');
+    }, 1450);
+  };
+
   return (
     <div className="min-h-screen bg-grid">
       <section className="section">
-        <div className="tech-panel rounded-3xl p-7 md:p-9">
+        <div className="page-hero-panel tech-panel rounded-3xl p-7 md:p-9" data-page="CV">
           <div className="flex flex-wrap items-end justify-between gap-7">
             <div>
               <div className="eyebrow">Curriculum vitae</div>
@@ -117,9 +155,9 @@ const CV = () => {
               >
                 Open PDF <FiExternalLink />
               </a>
-              <a href="/CV-Lifan-Latest.pdf" download="Hu-Lifan-CV.pdf" className="button-primary">
+              <button type="button" onClick={() => setShowGate(true)} className="button-primary">
                 Download <FiDownload />
-              </a>
+              </button>
             </div>
           </div>
         </div>
@@ -221,6 +259,55 @@ const CV = () => {
           </div>
         </div>
       </section>
+
+      <AnimatePresence>
+        {showGate && (
+          <Motion.div
+            className="gate-backdrop"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onMouseDown={(event) => {
+              if (event.target === event.currentTarget) setShowGate(false);
+            }}
+          >
+            <Motion.section
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="cv-gate-title"
+              initial={{ opacity: 0, scale: 0.86, rotate: -3, y: 30 }}
+              animate={{ opacity: 1, scale: 1, rotate: 0, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, rotate: 2, y: 20 }}
+              transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
+              className="gate-card"
+            >
+              <button type="button" onClick={() => setShowGate(false)} className="gate-close" aria-label="Close">
+                <FiX />
+              </button>
+              <div className="gate-orbit" aria-hidden="true"><i /><i /><i /></div>
+              <div className="eyebrow">Human verification / totally serious</div>
+              <h2 id="cv-gate-title">Are you an employer?</h2>
+              <p>
+                The original CV easter egg lives. Reading stays friction-free; downloading requires one highly
+                scientific answer.
+              </p>
+              {gateMessage ? (
+                <Motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="gate-result">
+                  <span className="live-dot" /> {gateMessage}
+                </Motion.div>
+              ) : (
+                <div className="gate-options">
+                  {GATE_CHOICES.map(([label, message], index) => (
+                    <button key={label} type="button" onClick={() => onGateChoice(message)}>
+                      <span>0{index + 1}</span>{label}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </Motion.section>
+          </Motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Navigate, Route, Routes, useLocation } from 'react-router-dom';
-import { AnimatePresence, motion as Motion } from 'framer-motion';
+import { AnimatePresence, motion as Motion, useReducedMotion, useScroll, useSpring } from 'framer-motion';
 import Navbar from './components/Navbar';
+import Loader from './components/Loader';
+import AmbientField from './components/AmbientField';
 import DebugHud from './components/DebugHud';
 import Home from './pages/Home';
 import Projects from './pages/Projects';
@@ -10,6 +12,9 @@ import CV from './pages/CV';
 import Contact from './pages/Contact';
 import Lab from './pages/Lab';
 import Node from './pages/Node';
+import GNNMARLFraud from './pages/writings/GNNMARLFraud';
+import Disenchantment from './pages/writings/Disenchantment';
+import Fragments from './pages/writings/Fragments';
 
 const getAmbientMode = (hour) => {
   if (hour >= 5 && hour < 11) return 'morning';
@@ -35,7 +40,9 @@ function AppShell() {
   const [ambientMode, setAmbientMode] = useState(() => getAmbientMode(new Date().getHours()));
   const [overclockMode, setOverclockMode] = useState(false);
   const [glitchMode, setGlitchMode] = useState(false);
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const reduceMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll();
+  const progressScale = useSpring(scrollYProgress, { stiffness: 130, damping: 28, mass: 0.22 });
 
   useEffect(() => {
     setAmbientMode(getAmbientMode(new Date().getHours()));
@@ -97,15 +104,25 @@ function AppShell() {
 
   return (
     <>
+      <AmbientField />
+      <Motion.div className="scroll-progress" style={{ scaleX: progressScale }} aria-hidden="true" />
       <Navbar />
       <AnimatePresence mode="wait">
         <Motion.main
           key={location.pathname}
-          initial={{ opacity: 0, y: reduceMotion ? 0 : 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: reduceMotion ? 0 : -6 }}
-          transition={{ duration: reduceMotion ? 0.01 : 0.24, ease: 'easeOut' }}
+          className="route-stage"
+          initial={{ opacity: 0, y: reduceMotion ? 0 : 24, filter: reduceMotion ? 'none' : 'blur(8px)' }}
+          animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          exit={{ opacity: 0, y: reduceMotion ? 0 : -18, filter: reduceMotion ? 'none' : 'blur(6px)' }}
+          transition={{ duration: reduceMotion ? 0.01 : 0.52, ease: [0.22, 1, 0.36, 1] }}
         >
+          <Motion.div
+            className="route-curtain"
+            initial={{ scaleY: reduceMotion ? 0 : 1 }}
+            animate={{ scaleY: 0 }}
+            transition={{ duration: reduceMotion ? 0.01 : 0.62, ease: [0.76, 0, 0.24, 1] }}
+            aria-hidden="true"
+          />
           <Routes location={location}>
             <Route path="/" element={<Home />} />
             <Route path="/projects" element={<Projects />} />
@@ -114,6 +131,9 @@ function AppShell() {
             <Route path="/cv" element={<CV />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/node" element={<Node />} />
+            <Route path="/writings/GNNMARLFraud" element={<GNNMARLFraud />} />
+            <Route path="/writings/Disenchantment" element={<Disenchantment />} />
+            <Route path="/writings/Fragments" element={<Fragments />} />
             <Route path="/writings/*" element={<Navigate to="/writings" replace />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
@@ -125,11 +145,21 @@ function AppShell() {
 }
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
+
   return (
     <div className="app-shell min-h-screen bg-[var(--paper)] text-[var(--ink)] transition-colors duration-500">
-      <Router>
-        <AppShell />
-      </Router>
+      <AnimatePresence mode="wait">
+        {isLoading ? (
+          <Loader key="site-loader" onComplete={() => setIsLoading(false)} />
+        ) : (
+          <Motion.div key="site" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.2 }}>
+            <Router>
+              <AppShell />
+            </Router>
+          </Motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
