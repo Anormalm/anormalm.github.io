@@ -147,14 +147,6 @@ const CV = () => {
               </p>
             </div>
             <div className="flex flex-wrap gap-3">
-              <a
-                href="/CV-Lifan-Latest.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="button-secondary"
-              >
-                Open PDF <FiExternalLink />
-              </a>
               <button type="button" onClick={() => setShowGate(true)} className="button-primary">
                 Download <FiDownload />
               </button>
@@ -287,10 +279,6 @@ const CV = () => {
               <div className="gate-orbit" aria-hidden="true"><i /><i /><i /></div>
               <div className="eyebrow">Human verification / totally serious</div>
               <h2 id="cv-gate-title">Are you an employer?</h2>
-              <p>
-                The original CV easter egg lives. Reading stays friction-free; downloading requires one highly
-                scientific answer.
-              </p>
               {gateMessage ? (
                 <Motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="gate-result">
                   <span className="live-dot" /> {gateMessage}
