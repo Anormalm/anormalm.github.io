@@ -6,6 +6,7 @@ import { FiArrowDown, FiArrowUpRight, FiFileText, FiMail, FiMapPin } from 'react
 import { Cursor, useTypewriter } from 'react-simple-typewriter';
 import Marquee from '../components/Marquee';
 import ProjectCard from '../components/ProjectCard';
+import GeoSignal from '../components/GeoSignal';
 import { projects } from '../data/portfolio';
 
 const FEATURED_PROJECTS = projects.filter((project) => project.featured);
@@ -45,6 +46,7 @@ const INTRO_FACTS = [
   'I like turning abstract ideas into things you can poke: simulations, evaluation harnesses, strange interfaces, and occasionally a hidden route.',
   'That last part is why this site has ghost channels, a chaos key, and more diagnostics than a portfolio strictly needs.',
   'Outside the technical signal, I write about mathematics, AI, systems, and whatever sits uncomfortably between them.',
+  'I reached Master II in GeoGuessr across multiple seasons; road markings and utility poles have become a suspiciously useful hobby.',
   'The current soundtrack is Maurice Ravel’s Gaspard de la Nuit.',
   'My working rule is simple: follow curiosity, test the claim, and keep a little weirdness in the result.',
   'Or, in fewer words: I build and code whenever I want to.',
@@ -248,6 +250,8 @@ const Home = () => {
         </div>
       </section>
 
+      <GeoSignal />
+
       <section className="manifesto-section">
         <div className="section manifesto-inner">
           <div className="eyebrow">Personal operating system</div>
@@ -316,6 +320,7 @@ const Home = () => {
             ))}
           </div>
           <a href="mailto:lifan.hu@u.nus.edu">lifan.hu@u.nus.edu <FiArrowUpRight /></a>
+          <Link to="/privacy">Privacy <FiArrowUpRight /></Link>
         </div>
       </footer>
     </div>

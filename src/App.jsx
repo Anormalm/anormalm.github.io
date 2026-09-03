@@ -11,6 +11,7 @@ import Writings from './pages/Writings';
 import CV from './pages/CV';
 import Contact from './pages/Contact';
 import Lab from './pages/Lab';
+import Privacy from './pages/Privacy';
 import Node from './pages/Node';
 import GNNMARLFraud from './pages/writings/GNNMARLFraud';
 import Disenchantment from './pages/writings/Disenchantment';
@@ -30,6 +31,7 @@ const PAGE_TITLES = {
   '/lab': 'Interactive Lab | Lifan Hu',
   '/cv': 'CV | Lifan Hu',
   '/contact': 'Contact | Lifan Hu',
+  '/privacy': 'Privacy | Lifan Hu',
   '/node': 'Node | Lifan Hu',
 };
 
@@ -130,6 +132,7 @@ function AppShell() {
             <Route path="/lab" element={<Lab />} />
             <Route path="/cv" element={<CV />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/privacy" element={<Privacy />} />
             <Route path="/node" element={<Node />} />
             <Route path="/writings/GNNMARLFraud" element={<GNNMARLFraud />} />
             <Route path="/writings/Disenchantment" element={<Disenchantment />} />
