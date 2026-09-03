@@ -15,15 +15,22 @@ const NAV_ITEMS = [
 const Navbar = () => {
   const location = useLocation();
   const [darkMode, setDarkMode] = useState(() => {
-    const storedTheme = localStorage.getItem('theme');
-    if (storedTheme) return storedTheme === 'dark';
-    return true;
+    try {
+      return localStorage.getItem('theme') !== 'light';
+    } catch {
+      return true;
+    }
   });
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', darkMode);
-    localStorage.setItem('theme', darkMode ? 'dark' : 'light');
+    document.documentElement.style.colorScheme = darkMode ? 'dark' : 'light';
+    try {
+      localStorage.setItem('theme', darkMode ? 'dark' : 'light');
+    } catch {
+      // The visual theme still works when storage is unavailable.
+    }
   }, [darkMode]);
 
   return (
