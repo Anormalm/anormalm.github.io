@@ -111,8 +111,15 @@ const GeoSignal = () => {
             </div>
 
             <div className="geo-grid">
-              <span className="geo-orbit geo-orbit-one" />
-              <span className="geo-orbit geo-orbit-two" />
+              <img
+                className="geo-world-map"
+                src="/world-map-equirectangular.png"
+                alt=""
+                width="1280"
+                height="640"
+                loading="lazy"
+                decoding="async"
+              />
               <span className="geo-crosshair geo-crosshair-x" />
               <span className="geo-crosshair geo-crosshair-y" />
               <span className="geo-north">N</span>
