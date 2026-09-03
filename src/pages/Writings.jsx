@@ -1,57 +1,36 @@
-import { useMemo } from 'react';
+import { FaMedium } from 'react-icons/fa';
+import { FiArrowUpRight } from 'react-icons/fi';
 import WritingCard from '../components/WritingCard';
-
-const WRITINGS = [
-  {
-    title: 'The Disenchantment of Modern Life (GEC1052 @NUS)',
-    excerpt: 'Content removed. Card retained for future update.',
-    date: 'March 2025',
-    link: '/writings/Disenchantment',
-  },
-  {
-    title: 'Fragments of a Digital Mind',
-    excerpt: 'Content removed. Card retained for future update.',
-    date: 'February 2025',
-    link: '/writings/Fragments',
-  },
-  {
-    title: 'Graphs, Agents, and Adversaries',
-    excerpt: 'Content removed. Card retained for future update.',
-    date: 'April 2025',
-    link: '/writings/GNNMARLFraud',
-  },
-];
+import { writings } from '../data/portfolio';
 
 const Writings = () => {
-  const writings = useMemo(() => WRITINGS, []);
-
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-grid">
       <section className="section">
-        <div className="tech-panel rounded-3xl p-6 md:p-8">
+        <div className="tech-panel rounded-3xl p-7 md:p-9">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div>
-              <div className="font-mono text-xs uppercase tracking-[0.25em] text-[var(--muted)]">Writings</div>
-              <h1 className="font-display text-4xl">Technical notes and essays.</h1>
-              <p className="mt-3 max-w-2xl text-sm text-[var(--muted)]">
-              Documentation, research commentary, and engineering reflections.
+              <div className="eyebrow">Writing</div>
+              <h1 className="font-display mt-3 text-4xl md:text-5xl">Notes from the boundary of math and AI.</h1>
+              <p className="mt-4 max-w-3xl text-sm leading-6 text-[var(--muted)] md:text-base">
+                Essays on model architecture, production judgment, topology, and the ideas that connect research to
+                engineering practice.
               </p>
             </div>
-            <div className="font-mono rounded-full border border-[var(--line)] px-4 py-2 text-xs uppercase tracking-[0.2em] text-[var(--muted)]">
-              Ongoing
-            </div>
+            <a
+              href="https://medium.com/@hulifan55555"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="button-secondary"
+            >
+              <FaMedium /> Medium <FiArrowUpRight />
+            </a>
           </div>
         </div>
 
-        <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2">
+        <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
           {writings.map((writing) => (
-            <WritingCard
-              key={writing.title}
-              title={writing.title}
-              excerpt={writing.excerpt}
-              date={writing.date}
-              link={writing.link}
-            />
+            <WritingCard key={writing.title} {...writing} />
           ))}
         </div>
       </section>

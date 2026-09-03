@@ -1,79 +1,99 @@
+import { FaGithub, FaLinkedin, FaMedium } from 'react-icons/fa';
+import { FiArrowUpRight, FiMail, FiMapPin } from 'react-icons/fi';
+
+const CHANNELS = [
+  {
+    label: 'Email',
+    value: 'lifan.hu@u.nus.edu',
+    href: 'mailto:lifan.hu@u.nus.edu',
+    icon: <FiMail />,
+  },
+  {
+    label: 'GitHub',
+    value: '@Anormalm',
+    href: 'https://github.com/Anormalm',
+    icon: <FaGithub />,
+  },
+  {
+    label: 'LinkedIn',
+    value: '/in/anormalm',
+    href: 'https://www.linkedin.com/in/anormalm/',
+    icon: <FaLinkedin />,
+  },
+  {
+    label: 'Medium',
+    value: '@hulifan55555',
+    href: 'https://medium.com/@hulifan55555',
+    icon: <FaMedium />,
+  },
+];
+
 const Contact = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-grid">
       <section className="section">
-        <div className="tech-panel rounded-3xl p-6 md:p-8">
+        <div className="tech-panel rounded-3xl p-7 md:p-9">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div>
-              <div className="font-mono text-xs uppercase tracking-[0.25em] text-[var(--muted)]">Contact</div>
-              <h1 className="font-display text-4xl">Let's work together.</h1>
-              <p className="mt-3 max-w-2xl text-sm text-[var(--muted)]">
-              Send a note about your idea, research, or collaboration. I usually reply within a few days.
+              <div className="eyebrow">Contact</div>
+              <h1 className="font-display mt-3 text-4xl md:text-5xl">Let’s compare notes.</h1>
+              <p className="mt-4 max-w-2xl text-sm leading-6 text-[var(--muted)] md:text-base">
+                If you’re working on model evaluation, intelligent systems, applied ML, or a genuinely interesting
+                adjacent problem, I’d be glad to hear from you.
               </p>
             </div>
-            <div className="font-mono rounded-full border border-[var(--line)] px-4 py-2 text-xs uppercase tracking-[0.2em] text-[var(--muted)]">
-              Based in SG/CN
+            <div className="font-mono inline-flex items-center gap-2 rounded-full border border-[var(--line)] px-4 py-2 text-[11px] uppercase tracking-[0.18em] text-[var(--muted)]">
+              <FiMapPin className="text-[var(--accent)]" /> Singapore
             </div>
           </div>
         </div>
 
-        <div className="mt-10 grid gap-8 md:grid-cols-[1.1fr_0.9fr]">
-          <form
-            action="https://formspree.io/f/mkgjnbdd"
-            method="POST"
-            className="tech-panel rounded-3xl grid gap-4 p-6"
-          >
-            <input
-              type="text"
-              name="name"
-              placeholder="Your name"
-              required
-              className="surface-strong rounded-2xl border border-[var(--line)] px-4 py-3 text-sm outline-none transition focus:border-[var(--accent)]"
-            />
-            <input
-              type="email"
-              name="email"
-              placeholder="Your email"
-              required
-              className="surface-strong rounded-2xl border border-[var(--line)] px-4 py-3 text-sm outline-none transition focus:border-[var(--accent)]"
-            />
-            <textarea
-              name="message"
-              placeholder="Tell me about the project"
-              required
-              rows="6"
-              className="surface-strong rounded-2xl border border-[var(--line)] px-4 py-3 text-sm outline-none transition focus:border-[var(--accent)]"
-            />
-            <button
-              type="submit"
-              className="font-mono rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-white transition hover:opacity-90"
-            >
-              Send message
-            </button>
-          </form>
-
-          <div className="tech-panel rounded-3xl p-6">
-            <div className="font-mono text-xs uppercase tracking-[0.25em] text-[var(--muted)]">Studio Notes</div>
-            <h2 className="font-display mt-3 text-2xl">Availability</h2>
-            <p className="mt-2 text-sm text-[var(--muted)]">
-              I am currently open to a small number of collaborations in product design, research tooling,
-              or software systems.
+        <div className="mt-8 grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
+          <section className="tech-panel rounded-3xl p-7 md:p-9">
+            <div className="eyebrow">Start here</div>
+            <h2 className="font-display mt-4 text-3xl">A short email works best.</h2>
+            <p className="mt-3 text-sm leading-6 text-[var(--muted)]">
+              Tell me what you’re building or investigating, where you think our interests overlap, and what kind of
+              conversation would be useful.
             </p>
-            <div className="mt-6 grid gap-3 text-sm text-[var(--muted)]">
-              <div className="flex items-center justify-between border-b border-[var(--line)] pb-2">
-                <span>Response time</span>
-                <span>3-5 days</span>
-              </div>
-              <div className="flex items-center justify-between border-b border-[var(--line)] pb-2">
-                <span>Focus areas</span>
-                <span>Research, Interfaces</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span>Preferred contact</span>
-                <span>Email</span>
-              </div>
+            <a href="mailto:lifan.hu@u.nus.edu" className="button-primary mt-7">
+              Email Lifan <FiMail />
+            </a>
+
+            <div className="mt-8 rounded-2xl border border-[var(--line)] bg-[var(--paper)]/70 p-5">
+              <div className="font-display text-lg">Good topics to send</div>
+              <p className="mt-2 text-sm leading-6 text-[var(--muted)]">
+                Research collaboration, experimental design, engineering a credible prototype, or a thoughtful
+                conversation about where AI systems still fail.
+              </p>
             </div>
-          </div>
+          </section>
+
+          <aside className="tech-panel rounded-3xl p-7 md:p-9">
+            <div className="eyebrow">Elsewhere</div>
+            <div className="mt-5 grid gap-3 sm:grid-cols-2">
+              {CHANNELS.map(({ label, value, href, icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target={href.startsWith('http') ? '_blank' : undefined}
+                  rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  className="contact-channel"
+                >
+                  <span className="flex items-center gap-3">
+                    <span className="social-link" aria-hidden="true">{icon}</span>
+                    <span>
+                      <span className="font-mono block text-[10px] uppercase tracking-[0.18em] text-[var(--muted)]">
+                        {label}
+                      </span>
+                      <span className="mt-1 block text-sm">{value}</span>
+                    </span>
+                  </span>
+                  <FiArrowUpRight className="text-[var(--accent)]" />
+                </a>
+              ))}
+            </div>
+          </aside>
         </div>
       </section>
     </div>

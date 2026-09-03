@@ -1,84 +1,59 @@
 import { motion as Motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import { FiArrowUpRight } from 'react-icons/fi';
+import { FiArrowUpRight, FiGithub } from 'react-icons/fi';
 
-const projectTelemetry = (title) => {
-  const seed = title.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
-  return {
-    health: 70 + (seed % 25),
-    velocity: 45 + ((seed * 3) % 45),
-    complexity: 35 + ((seed * 5) % 60),
-    status: seed % 2 === 0 ? 'active' : 'stable',
-  };
-};
+const ProjectCard = ({ title, description, link, live, category, status, tags = [] }) => {
+  return (
+    <Motion.article
+      initial={{ opacity: 0, y: 14 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4 }}
+      viewport={{ once: true, amount: 0.2 }}
+      className="project-card tech-panel scanline flex h-full flex-col rounded-3xl p-6"
+    >
+      <div className="flex items-center justify-between gap-4">
+        <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--accent)]">
+          {category}
+        </div>
+        <div className="font-mono inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.18em] text-[var(--muted)]">
+          <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent-3)]" aria-hidden="true" />
+          {status}
+        </div>
+      </div>
 
-const ProjectCard = ({ title, description, link, systemView = true }) => {
-  const isExternal = link?.startsWith('http');
-  const telemetry = projectTelemetry(title);
+      <h2 className="font-display mt-4 text-2xl">{title}</h2>
+      <p className="mt-3 flex-1 text-sm leading-6 text-[var(--muted)]">{description}</p>
 
-  const content = (
-    <>
-      <div className="flex items-center justify-between">
-        <div className="font-mono text-xs uppercase tracking-[0.25em] text-[var(--muted)]">Project</div>
-        {systemView && (
-          <div className="font-mono inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-[var(--accent)]">
-            <span className="h-2 w-2 rounded-full bg-[var(--accent)]"></span>
-            {telemetry.status}
-          </div>
+      <div className="mt-5 flex flex-wrap gap-2" aria-label="Project topics">
+        {tags.map((tag) => (
+          <span key={tag} className="tag">
+            {tag}
+          </span>
+        ))}
+      </div>
+
+      <div className="mt-6 flex flex-wrap items-center gap-4 border-t border-[var(--line)] pt-4">
+        <a
+          href={link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="link-arrow"
+          aria-label={`View ${title} on GitHub`}
+        >
+          <FiGithub /> Source <FiArrowUpRight />
+        </a>
+        {live && (
+          <a
+            href={live}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="link-arrow"
+            aria-label={`Open live ${title} project`}
+          >
+            Live <FiArrowUpRight />
+          </a>
         )}
       </div>
-      <h3 className="font-display mt-3 text-2xl">{title}</h3>
-      <p className="mt-2 text-sm text-[var(--muted)]">{description}</p>
-      {systemView && (
-        <div className="mt-4 space-y-2">
-          {[
-            ['health', telemetry.health],
-            ['velocity', telemetry.velocity],
-            ['complexity', telemetry.complexity],
-          ].map(([label, value]) => (
-            <div key={label}>
-              <div className="mb-1 flex items-center justify-between text-[10px] uppercase tracking-[0.2em] text-[var(--muted)]">
-                <span className="font-mono">{label}</span>
-                <span className="font-mono">{value}%</span>
-              </div>
-              <div className="h-1.5 rounded-full bg-[var(--line)]">
-                <div
-                  className="h-1.5 rounded-full bg-[var(--accent)]"
-                  style={{ width: `${value}%` }}
-                ></div>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
-      {link && (
-        <span className="font-mono mt-5 inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-[var(--accent)]">
-          View project <FiArrowUpRight />
-        </span>
-      )}
-    </>
-  );
-
-  return (
-    <Motion.div
-      initial={{ opacity: 0, y: 16 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      viewport={{ once: true }}
-      className="tech-panel scanline rounded-3xl p-6 transition hover:translate-y-[-2px]"
-    >
-      {link ? (
-        isExternal ? (
-          <a href={link} target="_blank" rel="noopener noreferrer">
-            {content}
-          </a>
-        ) : (
-          <Link to={link}>{content}</Link>
-        )
-      ) : (
-        content
-      )}
-    </Motion.div>
+    </Motion.article>
   );
 };
 

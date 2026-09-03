@@ -1,172 +1,164 @@
-import { useState } from 'react';
+import { FiDownload, FiExternalLink } from 'react-icons/fi';
+import { publications } from '../data/portfolio';
+
+const EXPERIENCE = [
+  {
+    role: 'Research Assistant',
+    place: 'National University of Singapore',
+    detail: 'Research on LLM fusion, model behavior, evaluation, and systems that combine evidence across models.',
+  },
+  {
+    role: 'Machine Learning Engineering Intern',
+    place: 'TikTok',
+    detail: 'Former intern working at the boundary between machine learning research and production engineering.',
+  },
+  {
+    role: 'Undergraduate Researcher',
+    place: 'National University of Singapore',
+    detail: 'Built and benchmarked quantized on-device vision-language assistants on Jetson Orin Nano Super.',
+  },
+  {
+    role: 'Digital Developer Intern',
+    place: 'Shanghai MAHLE Thermal Systems',
+    detail: 'Developed OCR, multilingual transcription, predictive maintenance, and internal inference tooling.',
+  },
+];
+
+const SKILLS = [
+  'Python',
+  'C/C++',
+  'JavaScript',
+  'PyTorch',
+  'Transformers',
+  'Graph learning',
+  'Reinforcement learning',
+  'LLM evaluation',
+  'ROS2',
+  'OpenCV',
+  'React',
+  'FastAPI',
+];
 
 const CV = () => {
-  const [showGate, setShowGate] = useState(false);
-  const [gateMessage, setGateMessage] = useState('');
-
-  const triggerDownload = () => {
-    const link = document.createElement('a');
-    link.href = '/CV-Lifan-Latest.pdf';
-    link.download = 'CV-Lifan-Latest.pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
-
-  const onEmployerChoice = (isEmployer) => {
-    setGateMessage(
-      isEmployer
-        ? 'Access granted. Good to meet you.'
-        : 'Access granted anyway. Thanks for checking out the page.'
-    );
-    triggerDownload();
-    setTimeout(() => {
-      setShowGate(false);
-      setGateMessage('');
-    }, 1200);
-  };
-
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-grid">
       <section className="section">
-        <div className="tech-panel rounded-3xl p-6 md:p-8">
-          <div className="flex flex-wrap items-end justify-between gap-6">
+        <div className="tech-panel rounded-3xl p-7 md:p-9">
+          <div className="flex flex-wrap items-end justify-between gap-7">
             <div>
-              <div className="font-mono text-xs uppercase tracking-[0.25em] text-[var(--muted)]">Curriculum Vitae</div>
-            <h1 className="font-display text-4xl">Hu Lifan</h1>
-            <p className="mt-3 max-w-3xl text-sm text-[var(--muted)]">
-              Executive summary below. For full details, download the complete CV PDF.
-            </p>
+              <div className="eyebrow">Curriculum vitae</div>
+              <h1 className="font-display mt-3 text-4xl md:text-5xl">Hu Lifan</h1>
+              <p className="mt-4 max-w-3xl text-sm leading-6 text-[var(--muted)] md:text-base">
+                Computer Engineering student and Research Assistant at NUS, focused on machine learning systems,
+                agentic AI, evaluation, graph reasoning, and multimodal computing.
+              </p>
             </div>
-            <button
-              type="button"
-              onClick={() => setShowGate(true)}
-              className="font-mono rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-white transition hover:opacity-90"
-            >
-              Download Full CV (PDF)
-            </button>
+            <div className="flex flex-wrap gap-3">
+              <a
+                href="/CV-Lifan-Latest.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="button-secondary"
+              >
+                Open PDF <FiExternalLink />
+              </a>
+              <a href="/CV-Lifan-Latest.pdf" download className="button-primary">
+                Download <FiDownload />
+              </a>
+            </div>
           </div>
         </div>
 
-        <div className="mt-10 grid gap-6 md:grid-cols-2">
-          <section className="tech-panel rounded-3xl p-6 md:col-span-2">
-            <h2 className="font-display text-2xl">Profile</h2>
-            <p className="mt-3 text-sm text-[var(--muted)]">
-              Computer Engineering (IoT) student at the National University of Singapore focused on machine learning systems,
-              robotics, and technical product engineering. Work includes applied research in GNN + MARL, on-device vision-language
-              systems, and production-facing automation tooling.
-            </p>
+        <div className="mt-8 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+          <section className="tech-panel rounded-3xl p-6 md:p-7">
+            <div className="eyebrow">Experience</div>
+            <div className="mt-6 space-y-6">
+              {EXPERIENCE.map((item) => (
+                <article key={`${item.role}-${item.place}`} className="border-l border-[var(--line)] pl-5">
+                  <h2 className="font-display text-xl">{item.role}</h2>
+                  <div className="font-mono mt-1 text-[11px] uppercase tracking-[0.16em] text-[var(--accent)]">
+                    {item.place}
+                  </div>
+                  <p className="mt-2 text-sm leading-6 text-[var(--muted)]">{item.detail}</p>
+                </article>
+              ))}
+            </div>
           </section>
 
-          <section className="tech-panel rounded-3xl p-6">
-            <h2 className="font-display text-2xl">Education</h2>
-            <ul className="mt-4 list-disc pl-5 text-sm text-[var(--muted)]">
-              <li>NUS B.Eng (Computer Engineering, IoT), Aug 2024 - Present</li>
-              <li>Second Major: Innovation and Design Program</li>
-              <li>Minor: Mathematics</li>
-              <li>Summer School, Shanghai Jiao Tong University (Jun 2025 - Jul 2025)</li>
-            </ul>
-          </section>
+          <div className="grid gap-6">
+            <section className="tech-panel rounded-3xl p-6 md:p-7">
+              <div className="eyebrow">Education</div>
+              <h2 className="font-display mt-4 text-xl">National University of Singapore</h2>
+              <p className="mt-2 text-sm leading-6 text-[var(--muted)]">
+                B.Eng. in Computer Engineering, IoT specialization<br />
+                Second Major in Innovation & Design · Minor in Mathematics<br />
+                2024–present
+              </p>
+              <div className="mt-5 border-t border-[var(--line)] pt-5">
+                <h3 className="font-display text-lg">Shanghai Jiao Tong University</h3>
+                <p className="mt-2 text-sm text-[var(--muted)]">Summer School · Algebra and Statistical Inference · 2025</p>
+              </div>
+            </section>
 
-          <section className="tech-panel rounded-3xl p-6">
-            <h2 className="font-display text-2xl">Selected Publications</h2>
-            <ul className="mt-4 list-disc pl-5 text-sm text-[var(--muted)]">
-              <li>Learning Lie Group Generators From Trajectories (arXiv, Apr 2025)</li>
-              <li>GNN-Augmented RL for Fraud Detection in Decentralized Finance (CONF-SEML 2025)</li>
-              <li>DOI: 10.54254/2755-2721/2025.22856</li>
-            </ul>
-          </section>
+            <section className="tech-panel rounded-3xl p-6 md:p-7">
+              <div className="eyebrow">Selected recognition</div>
+              <ul className="mt-4 space-y-3 text-sm leading-6 text-[var(--muted)]">
+                <li>WorldQuant BRAIN Challenge · Silver Medal · 2025</li>
+                <li>Mathematical Contest in Modeling · Meritorious Winner · 2025</li>
+              </ul>
+            </section>
+          </div>
 
-          <section className="tech-panel rounded-3xl p-6">
-            <h2 className="font-display text-2xl">Research Highlights</h2>
-            <ul className="mt-4 list-disc pl-5 text-sm text-[var(--muted)]">
-              <li>GNN + MARL DeFi fraud detection with PettingZoo and PPO on 50K+ Ethereum records</li>
-              <li>Lie group trajectory encoders across SE(2), SE(3), SO(3), SL(2,R)</li>
-              <li>On-device VLM assistant research on Jetson Orin Nano Super</li>
-              <li>LLM Fusion research assistantship at NUS</li>
-            </ul>
-          </section>
-
-          <section className="tech-panel rounded-3xl p-6">
-            <h2 className="font-display text-2xl">Industry / Engineering</h2>
-            <ul className="mt-4 list-disc pl-5 text-sm text-[var(--muted)]">
-              <li>Digital Developer Intern, Shanghai MAHLE Thermal Systems (May 2025 - Jul 2025)</li>
-              <li>Built OCR and multilingual transcription pipelines for factory workflows</li>
-              <li>Developed predictive downtime models and internal API tooling</li>
-              <li>Led autonomous robotics builds at NUS (ROS2, SLAM, LiDAR, AMG8833)</li>
-            </ul>
-          </section>
-
-          <section className="tech-panel rounded-3xl p-6 md:col-span-2">
-            <h2 className="font-display text-2xl">Core Skills</h2>
-            <div className="mt-4 grid grid-cols-2 gap-3 text-sm md:grid-cols-4">
+          <section className="tech-panel rounded-3xl p-6 md:p-7 lg:col-span-2">
+            <div className="eyebrow">Research direction</div>
+            <div className="mt-5 grid gap-4 md:grid-cols-3">
               {[
-                'Python',
-                'C/C++',
-                'JavaScript',
-                'PyTorch',
-                'ROS2',
-                'PettingZoo',
-                'RLlib',
-                'OpenCV',
-                'React',
-                'Tailwind CSS',
-                'Vite',
-                'Robotics + IoT',
-              ].map((skill) => (
-                <div key={skill} className="surface-strong rounded-2xl border border-[var(--line)] px-3 py-2 text-center">
-                  {skill}
+                ['Language-model evaluation', 'Human preference, direct usability, semantic preservation, and behavior under correction.'],
+                ['Adaptive reasoning', 'Graph evidence acquisition, multi-agent systems, and cost-aware inference.'],
+                ['Embodied intelligence', 'On-device multimodal models, pose understanding, robotics, and privacy-first perception.'],
+              ].map(([title, detail]) => (
+                <div key={title} className="rounded-2xl border border-[var(--line)] bg-[var(--paper)]/70 p-5">
+                  <h2 className="font-display text-lg">{title}</h2>
+                  <p className="mt-2 text-sm leading-6 text-[var(--muted)]">{detail}</p>
                 </div>
+              ))}
+            </div>
+          </section>
+
+          <section className="tech-panel rounded-3xl p-6 md:p-7">
+            <div className="eyebrow">Publications</div>
+            <div className="mt-5 space-y-5">
+              {publications.map((publication) => (
+                <a
+                  key={publication.title}
+                  href={publication.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block"
+                >
+                  <h2 className="font-display text-lg transition group-hover:text-[var(--accent)]">
+                    {publication.title}
+                  </h2>
+                  <div className="font-mono mt-1 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.16em] text-[var(--muted)]">
+                    {publication.venue} <FiExternalLink />
+                  </div>
+                </a>
+              ))}
+            </div>
+          </section>
+
+          <section className="tech-panel rounded-3xl p-6 md:p-7">
+            <div className="eyebrow">Core toolkit</div>
+            <div className="mt-5 flex flex-wrap gap-2">
+              {SKILLS.map((skill) => (
+                <span key={skill} className="tag tag-large">
+                  {skill}
+                </span>
               ))}
             </div>
           </section>
         </div>
       </section>
-
-      {showGate && (
-        <div className="fixed inset-0 z-[95] flex items-center justify-center bg-black/45 px-6">
-          <div className="tech-panel w-full max-w-lg rounded-3xl p-6">
-            <div className="font-mono text-xs uppercase tracking-[0.25em] text-[var(--muted)]">
-              Access Check
-            </div>
-            <h3 className="font-display mt-2 text-2xl">Quick gate for fun:</h3>
-            <p className="mt-2 text-sm text-[var(--muted)]">Are you an employer?</p>
-
-            <div className="mt-5 flex flex-wrap gap-3">
-              <button
-                type="button"
-                onClick={() => onEmployerChoice(true)}
-                className="font-mono rounded-full bg-[var(--accent)] px-5 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-white transition hover:opacity-90"
-              >
-                Yes, employer
-              </button>
-              <button
-                type="button"
-                onClick={() => onEmployerChoice(false)}
-                className="font-mono rounded-full border border-[var(--line)] px-5 py-3 text-xs font-semibold uppercase tracking-[0.2em] transition hover:border-[var(--accent)]"
-              >
-                Just browsing
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setShowGate(false);
-                  setGateMessage('');
-                }}
-                className="font-mono rounded-full border border-[var(--line)] px-5 py-3 text-xs font-semibold uppercase tracking-[0.2em] transition hover:border-[var(--accent)]"
-              >
-                Cancel
-              </button>
-            </div>
-
-            {gateMessage && (
-              <div className="mt-4 rounded-xl border border-[var(--line)] bg-[var(--paper)]/70 px-4 py-3 text-sm text-[var(--muted)]">
-                {gateMessage}
-              </div>
-            )}
-          </div>
-        </div>
-      )}
     </div>
   );
 };

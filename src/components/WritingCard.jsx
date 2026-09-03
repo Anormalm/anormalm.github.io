@@ -2,24 +2,35 @@ import { motion as Motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { FiArrowUpRight } from 'react-icons/fi';
 
-const WritingCard = ({ title, excerpt, date, link }) => {
+const WritingCard = ({ title, excerpt, date, readingTime, link }) => {
+  const isExternal = link?.startsWith('http');
+  const linkClassName = 'link-arrow mt-6';
+
   return (
-    <Motion.div
-      initial={{ opacity: 0, y: 16 }}
+    <Motion.article
+      initial={{ opacity: 0, y: 14 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      viewport={{ once: true }}
-      className="tech-panel scanline rounded-3xl p-6 transition hover:translate-y-[-2px]"
+      transition={{ duration: 0.4 }}
+      viewport={{ once: true, amount: 0.2 }}
+      className="project-card tech-panel scanline flex h-full flex-col rounded-3xl p-6"
     >
-      <div className="font-mono text-xs uppercase tracking-[0.25em] text-[var(--muted)]">{date}</div>
-      <div className="font-display mt-3 text-2xl">{title}</div>
-      <p className="mt-2 text-sm text-[var(--muted)]">{excerpt}</p>
-      {link && (
-        <Link to={link} className="font-mono mt-5 inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-[var(--accent)]">
-          Read more <FiArrowUpRight />
+      <div className="font-mono flex flex-wrap items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-[var(--muted)]">
+        <span>{date}</span>
+        {readingTime && <span aria-hidden="true">·</span>}
+        {readingTime && <span>{readingTime}</span>}
+      </div>
+      <h2 className="font-display mt-4 text-2xl leading-snug">{title}</h2>
+      <p className="mt-3 flex-1 text-sm leading-6 text-[var(--muted)]">{excerpt}</p>
+      {isExternal ? (
+        <a href={link} target="_blank" rel="noopener noreferrer" className={linkClassName}>
+          Read on Medium <FiArrowUpRight />
+        </a>
+      ) : (
+        <Link to={link} className={linkClassName}>
+          Read essay <FiArrowUpRight />
         </Link>
       )}
-    </Motion.div>
+    </Motion.article>
   );
 };
 

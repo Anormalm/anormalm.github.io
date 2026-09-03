@@ -1,8 +1,7 @@
-import { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion as Motion } from 'framer-motion';
 import Navbar from './components/Navbar';
-import Loader from './components/Loader';
 import DebugHud from './components/DebugHud';
 import Home from './pages/Home';
 import Projects from './pages/Projects';
@@ -11,9 +10,6 @@ import CV from './pages/CV';
 import Contact from './pages/Contact';
 import Lab from './pages/Lab';
 import Node from './pages/Node';
-import GNNMARLFraud from './pages/writings/GNNMARLFraud';
-import Disenchantment from './pages/writings/Disenchantment';
-import Fragments from './pages/writings/Fragments';
 
 const getAmbientMode = (hour) => {
   if (hour >= 5 && hour < 11) return 'morning';
@@ -21,6 +17,17 @@ const getAmbientMode = (hour) => {
   if (hour >= 17 && hour < 21) return 'evening';
   return 'night';
 };
+
+const PAGE_TITLES = {
+  '/': 'Lifan Hu | ML Systems & Research',
+  '/projects': 'Projects | Lifan Hu',
+  '/writings': 'Writing | Lifan Hu',
+  '/lab': 'Interactive Lab | Lifan Hu',
+  '/cv': 'CV | Lifan Hu',
+  '/contact': 'Contact | Lifan Hu',
+  '/node': 'Node | Lifan Hu',
+};
+
 const KONAMI_PATTERN = ['up', 'up', 'down', 'down', 'left', 'right', 'left', 'right', 'b', 'a', 'b', 'a'];
 
 function AppShell() {
@@ -31,12 +38,10 @@ function AppShell() {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   useEffect(() => {
-    const updateAmbientMode = () => {
+    setAmbientMode(getAmbientMode(new Date().getHours()));
+    const timer = setInterval(() => {
       setAmbientMode(getAmbientMode(new Date().getHours()));
-    };
-
-    updateAmbientMode();
-    const timer = setInterval(updateAmbientMode, 60_000);
+    }, 60_000);
     return () => clearInterval(timer);
   }, []);
 
@@ -53,20 +58,25 @@ function AppShell() {
   }, [glitchMode]);
 
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+    document.title = PAGE_TITLES[location.pathname] ?? 'Lifan Hu | ML Systems & Research';
+  }, [location.pathname, reduceMotion]);
+
+  useEffect(() => {
     const buffer = [];
     const normalize = (key) => {
-      const k = key.toLowerCase();
-      if (k === 'arrowup') return 'up';
-      if (k === 'arrowdown') return 'down';
-      if (k === 'arrowleft') return 'left';
-      if (k === 'arrowright') return 'right';
-      if (k === 'a' || k === 'b') return k;
+      const normalizedKey = key.toLowerCase();
+      if (normalizedKey === 'arrowup') return 'up';
+      if (normalizedKey === 'arrowdown') return 'down';
+      if (normalizedKey === 'arrowleft') return 'left';
+      if (normalizedKey === 'arrowright') return 'right';
+      if (normalizedKey === 'a' || normalizedKey === 'b') return normalizedKey;
       return '';
     };
 
     const onKeyDown = (event) => {
       if (event.ctrlKey && event.shiftKey && event.key.toLowerCase() === 'g') {
-        setGlitchMode((prev) => !prev);
+        setGlitchMode((previous) => !previous);
         return;
       }
 
@@ -76,7 +86,7 @@ function AppShell() {
       buffer.push(token);
       if (buffer.length > KONAMI_PATTERN.length) buffer.shift();
       if (buffer.join('|') === KONAMI_PATTERN.join('|')) {
-        setOverclockMode((prev) => !prev);
+        setOverclockMode((previous) => !previous);
         buffer.length = 0;
       }
     };
@@ -91,10 +101,10 @@ function AppShell() {
       <AnimatePresence mode="wait">
         <Motion.main
           key={location.pathname}
-          initial={{ opacity: 0, y: reduceMotion ? 0 : 10 }}
+          initial={{ opacity: 0, y: reduceMotion ? 0 : 8 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: reduceMotion ? 0 : -8 }}
-          transition={{ duration: reduceMotion ? 0.01 : 0.28, ease: 'easeOut' }}
+          exit={{ opacity: 0, y: reduceMotion ? 0 : -6 }}
+          transition={{ duration: reduceMotion ? 0.01 : 0.24, ease: 'easeOut' }}
         >
           <Routes location={location}>
             <Route path="/" element={<Home />} />
@@ -104,9 +114,8 @@ function AppShell() {
             <Route path="/cv" element={<CV />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/node" element={<Node />} />
-            <Route path="/writings/GNNMARLFraud" element={<GNNMARLFraud />} />
-            <Route path="/writings/Disenchantment" element={<Disenchantment />} />
-            <Route path="/writings/Fragments" element={<Fragments />} />
+            <Route path="/writings/*" element={<Navigate to="/writings" replace />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </Motion.main>
       </AnimatePresence>
@@ -116,25 +125,11 @@ function AppShell() {
 }
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2500); // Matches loader timeout
-
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
-    <div className="app-shell min-h-screen transition-colors duration-500 bg-[var(--paper)] text-[var(--ink)]">
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <Router>
-          <AppShell />
-        </Router>
-      )}
+    <div className="app-shell min-h-screen bg-[var(--paper)] text-[var(--ink)] transition-colors duration-500">
+      <Router>
+        <AppShell />
+      </Router>
     </div>
   );
 }
