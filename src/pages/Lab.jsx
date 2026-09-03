@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { AnimatePresence, motion as Motion } from 'framer-motion';
 import { FiRefreshCw } from 'react-icons/fi';
 
@@ -69,28 +69,15 @@ const Lab = () => {
     []
   );
 
-  const applyChaosSeed = useCallback(() => {
+  const applyChaosSeed = () => {
     setParams(createChaosParams());
     setStatusMessage('Chaos seed applied.');
-  }, []);
+  };
 
   useEffect(() => {
     const test = document.createElement('canvas');
     setSupportsCanvas(Boolean(test.getContext && test.getContext('2d')));
   }, []);
-
-  useEffect(() => {
-    const onKeyDown = (event) => {
-      if (event.key.toLowerCase() !== 'c') return;
-      const targetTag = event.target?.tagName?.toLowerCase();
-      if (targetTag === 'input' || targetTag === 'textarea') return;
-
-      applyChaosSeed();
-    };
-
-    window.addEventListener('keydown', onKeyDown);
-    return () => window.removeEventListener('keydown', onKeyDown);
-  }, [applyChaosSeed]);
 
   useEffect(() => {
     if (!supportsCanvas) return undefined;
@@ -555,9 +542,6 @@ const Lab = () => {
             className="lab-masthead-side"
           >
             <p>Move it. Tune it. Break it.</p>
-            <button type="button" className="lab-chaos-trigger" onClick={applyChaosSeed}>
-              <FiRefreshCw aria-hidden="true" /> Randomize <kbd>C</kbd>
-            </button>
           </Motion.div>
         </header>
 
@@ -680,10 +664,6 @@ const Lab = () => {
                 <span>Shuffle the system</span>
                 <FiRefreshCw aria-hidden="true" />
               </button>
-
-              <div className="lab-key-hint" aria-hidden="true">
-                <kbd>C</kbd><span>reseed every module</span>
-              </div>
             </aside>
           </div>
         </Motion.div>

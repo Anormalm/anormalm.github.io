@@ -2176,37 +2176,6 @@
   letter-spacing: -0.04em;
 }
 
-.lab-chaos-trigger {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.65rem;
-  padding: 0.7rem 0.75rem 0.7rem 1rem;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  font-family: var(--font-mono);
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--muted);
-  background: color-mix(in srgb, var(--paper) 76%, transparent);
-  transition: 180ms ease;
-}
-
-.lab-chaos-trigger kbd {
-  display: grid;
-  width: 1.65rem;
-  height: 1.65rem;
-  place-items: center;
-  border-radius: 50%;
-  color: var(--paper);
-  background: var(--ink);
-}
-
-.lab-chaos-trigger:hover { border-color: var(--accent-warm); color: var(--accent-warm); transform: rotate(-1deg) translateY(-2px); }
-.lab-chaos-trigger:hover svg { transform: rotate(110deg); }
-.lab-chaos-trigger svg { transition: transform 280ms ease; }
-
 .lab-signal-strip {
   position: relative;
   z-index: 2;
@@ -2480,9 +2449,6 @@
 .lab-chaos-button:hover { color: var(--paper); background: var(--accent-warm); transform: translateY(-2px); box-shadow: 0 12px 28px color-mix(in srgb, var(--accent-warm) 22%, transparent); }
 .lab-chaos-button:hover svg { transform: rotate(130deg); }
 .lab-chaos-button svg { transition: transform 280ms ease; }
-
-.lab-key-hint { display: flex; align-items: center; gap: 0.7rem; margin-top: 0.85rem; font-family: var(--font-mono); font-size: 7px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
-.lab-key-hint kbd { display: grid; width: 1.6rem; height: 1.6rem; place-items: center; border: 1px solid var(--line); border-radius: 0.4rem; color: var(--ink); background: color-mix(in srgb, var(--paper) 70%, transparent); box-shadow: 0 2px 0 var(--line); }
 
 /* Hidden node */
 .node-page {
