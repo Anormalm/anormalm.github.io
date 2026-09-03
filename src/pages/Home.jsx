@@ -319,7 +319,7 @@ const Home = () => {
               <a key={label} href={href} target="_blank" rel="noreferrer" aria-label={label}>{icon}</a>
             ))}
           </div>
-          <a href="mailto:lifan.hu@u.nus.edu">lifan.hu@u.nus.edu <FiArrowUpRight /></a>
+          <a href="mailto:anormalm@outlook.com">anormalm@outlook.com <FiArrowUpRight /></a>
           <Link to="/privacy">Privacy <FiArrowUpRight /></Link>
         </div>
       </footer>

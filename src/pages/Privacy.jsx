@@ -47,7 +47,7 @@ const Privacy = () => (
             to remove the displayed estimate. IP geolocation is approximate and can be wrong, especially with VPNs,
             mobile networks, or shared connections.
           </p>
-          <a href="mailto:lifan.hu@u.nus.edu">Privacy question <FiArrowUpRight /></a>
+          <a href="mailto:anormalm@outlook.com">Privacy question <FiArrowUpRight /></a>
         </article>
       </div>
 

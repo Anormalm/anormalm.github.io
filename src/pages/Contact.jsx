@@ -4,8 +4,8 @@ import { FiArrowUpRight, FiMail, FiMapPin } from 'react-icons/fi';
 const CHANNELS = [
   {
     label: 'Email',
-    value: 'lifan.hu@u.nus.edu',
-    href: 'mailto:lifan.hu@u.nus.edu',
+    value: 'anormalm@outlook.com',
+    href: 'mailto:anormalm@outlook.com',
     icon: <FiMail />,
   },
   {
@@ -56,7 +56,7 @@ const Contact = () => {
               Tell me what you’re building or investigating, where you think our interests overlap, and what kind of
               conversation would be useful.
             </p>
-            <a href="mailto:lifan.hu@u.nus.edu" className="button-primary mt-7">
+            <a href="mailto:anormalm@outlook.com" className="button-primary mt-7">
               Email Lifan <FiMail />
             </a>
 
