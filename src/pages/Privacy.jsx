@@ -32,7 +32,8 @@ const Privacy = () => (
           <p>
             If you click “Reveal my geo signal,” your browser sends one request directly to WhatIsMyIP. The service uses
             your public IP to estimate a city, region, country, coordinates, and timezone. The IP is discarded and never
-            displayed or stored by this website; the result exists only in the current page memory.
+            displayed or stored by this website. The map shows the result as an approximate area rather than an exact pin,
+            and it exists only in the current page memory.
           </p>
           <a href="https://whatismyip.codes/privacy/" target="_blank" rel="noreferrer">
             Provider privacy policy <FiArrowUpRight />

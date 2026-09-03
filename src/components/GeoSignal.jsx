@@ -83,7 +83,6 @@ const GeoSignal = () => {
   const currentRound = MAP_ROUNDS[roundIndex];
   const targetPoint = toMapPoint(currentRound.latitude, currentRound.longitude);
   const signalPoint = signal ? toMapPoint(signal.latitude, signal.longitude) : null;
-  const activeCoordinates = guess || signal;
 
   const revealSignal = async () => {
     setPhase('loading');
@@ -234,15 +233,16 @@ const GeoSignal = () => {
               <AnimatePresence>
                 {signalPoint && (
                   <Motion.span
-                    className="geo-map-marker geo-visitor-marker"
+                    className="geo-visitor-range"
                     style={pointStyle(signalPoint)}
-                    initial={{ opacity: 0, scale: 1.8 }}
+                    initial={{ opacity: 0, scale: 0.45 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0 }}
                     transition={{ duration: reduceMotion ? 0.01 : 0.4 }}
                     aria-hidden="true"
                   >
                     <i />
+                    <span>Approx.</span>
                   </Motion.span>
                 )}
 
@@ -277,8 +277,8 @@ const GeoSignal = () => {
             </button>
 
             <div className="geo-radar-readout">
-              <span>{activeCoordinates ? formatCoordinate(activeCoordinates.latitude, 'N', 'S') : 'LAT —'}</span>
-              <span>{activeCoordinates ? formatCoordinate(activeCoordinates.longitude, 'E', 'W') : 'LON —'}</span>
+              <span>{guess ? formatCoordinate(guess.latitude, 'N', 'S') : signal ? 'CITY AREA' : 'LAT —'}</span>
+              <span>{guess ? formatCoordinate(guess.longitude, 'E', 'W') : signal ? 'ESTIMATE' : 'LON —'}</span>
               <strong>{guess ? `${guess.distanceKm.toLocaleString()} KM` : signal ? signal.countryCode : 'READY'}</strong>
             </div>
           </div>
@@ -360,7 +360,7 @@ const GeoSignal = () => {
                       : 'Reveal your city'}
                 </strong>
                 {phase === 'revealed' && signal && (
-                  <small>{[signal.region, signal.country].filter(Boolean).join(', ')}</small>
+                  <small>{[signal.region, signal.country].filter(Boolean).join(', ')} · approximate range</small>
                 )}
               </div>
 
