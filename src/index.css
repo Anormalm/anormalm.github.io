@@ -1747,6 +1747,77 @@
 .footer-socials a { display: grid; width: 2rem; height: 2rem; place-items: center; border: 1px solid var(--line); border-radius: 50%; transition: 180ms ease; }
 .footer-socials a:hover { color: var(--accent); border-color: var(--accent); transform: translateY(-2px); }
 
+/* CV */
+.cv-hero-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.62fr);
+  align-items: stretch;
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  overflow: hidden;
+}
+
+.cv-hero-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.cv-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+.cv-profile-photo {
+  position: relative;
+  min-width: 0;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  isolation: isolate;
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--line));
+  border-radius: 1.35rem;
+  background: color-mix(in srgb, var(--paper) 78%, black);
+  box-shadow: 0 22px 60px color-mix(in srgb, var(--ink) 13%, transparent);
+}
+
+.cv-profile-photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(to top, rgba(4, 10, 18, 0.6), transparent 34%),
+    repeating-linear-gradient(to bottom, transparent 0 5px, rgba(255, 255, 255, 0.025) 6px);
+}
+
+.cv-profile-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1), filter 300ms ease;
+}
+
+.cv-profile-photo:hover img { transform: scale(1.025); filter: saturate(1.08); }
+
+.cv-profile-photo figcaption {
+  position: absolute;
+  z-index: 2;
+  right: 1rem;
+  bottom: 0.9rem;
+  left: 1rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-family: var(--font-mono);
+  font-size: 7px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(237, 244, 255, 0.78);
+}
+
 /* CV gate */
 .gate-backdrop {
   position: fixed;
@@ -2329,6 +2400,7 @@
   .geo-brief { min-height: 450px; padding: 1.4rem; }
   .geo-prompt h3,
   .geo-result h3 { font-size: clamp(2.8rem, 15vw, 4.5rem); }
+  .cv-hero-panel { grid-template-columns: 1fr; }
 }
 
 @media (prefers-reduced-motion: reduce) {

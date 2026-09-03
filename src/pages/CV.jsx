@@ -135,8 +135,8 @@ const CV = () => {
   return (
     <div className="min-h-screen bg-grid">
       <section className="section">
-        <div className="page-hero-panel tech-panel rounded-3xl p-7 md:p-9" data-page="CV">
-          <div className="flex flex-wrap items-end justify-between gap-7">
+        <div className="page-hero-panel cv-hero-panel tech-panel rounded-3xl p-7 md:p-9" data-page="CV">
+          <div className="cv-hero-copy">
             <div>
               <div className="eyebrow">Curriculum vitae</div>
               <h1 className="font-display mt-3 text-4xl md:text-5xl">Hu Lifan</h1>
@@ -146,12 +146,26 @@ const CV = () => {
                 production-scale systems.
               </p>
             </div>
-            <div className="flex flex-wrap gap-3">
+            <div className="cv-hero-actions">
               <button type="button" onClick={() => setShowGate(true)} className="button-primary">
                 Download <FiDownload />
               </button>
             </div>
           </div>
+
+          <figure className="cv-profile-photo">
+            <img
+              src="/lifan-signal.webp"
+              alt="Lifan Hu standing in a garden"
+              width="1600"
+              height="1200"
+              decoding="async"
+            />
+            <figcaption>
+              <span>Profile / 2026</span>
+              <span>Singapore</span>
+            </figcaption>
+          </figure>
         </div>
 
         <div className="mt-8 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
