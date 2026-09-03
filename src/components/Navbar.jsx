@@ -29,15 +29,9 @@ const Navbar = () => {
   return (
     <nav className="site-nav sticky top-0 z-50 border-b border-[var(--line)]">
       <div className="mx-auto flex w-full max-w-[1440px] items-center justify-between px-5 py-3.5 md:px-10 xl:px-14">
-        <Link to="/" className="group flex items-center gap-3" aria-label="Lifan Hu home">
+        <Link to="/" className="group navbar-mark-only" aria-label="Lifan Hu home">
           <div className="brand-mark" aria-hidden="true">
             <span className="brand-mark-core" />
-          </div>
-          <div>
-            <div className="font-display text-base font-semibold tracking-tight md:text-lg">Lifan Hu</div>
-            <div className="font-mono text-[9px] uppercase tracking-[0.24em] text-[var(--muted)] md:text-[10px]">
-              Machine intelligence · SG
-            </div>
           </div>
         </Link>
 

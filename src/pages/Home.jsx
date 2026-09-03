@@ -100,19 +100,9 @@ const Home = () => {
   return (
     <div className="home-page">
       <section ref={heroRef} className={`kinetic-hero ${ghostMode ? 'ghost-mode' : ''}`}>
-        <div className="hero-coordinate hero-coordinate-left" aria-hidden="true">01 / 06</div>
         <div className="hero-coordinate hero-coordinate-right" aria-hidden="true">SCROLL TO EXPLORE</div>
 
         <Motion.div className="hero-copy" style={reduceMotion ? undefined : { y: copyY }}>
-          <Motion.div
-            initial={{ opacity: 0, x: -24 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.15, duration: 0.7 }}
-            className="hero-kicker"
-          >
-            <span className="live-dot" /> ML engineer · researcher · builder
-          </Motion.div>
-
           <h1 className="kinetic-title" aria-label="I build systems that think and move">
             <Motion.span
               initial={{ y: '115%' }}
