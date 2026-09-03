@@ -24,6 +24,27 @@ const EXPERIMENTS = [
     mode: 'canvas',
     math: 'Linear Gaussian estimation',
   },
+  {
+    id: 'gravity-well',
+    title: 'Pointer Gravity Well',
+    description: 'Particles fall into a cursor-controlled moving potential.',
+    mode: 'pointer',
+    math: 'Inverse-distance attraction',
+  },
+  {
+    id: 'spring-mesh',
+    title: 'Elastic Spring Mesh',
+    description: 'A connected lattice ripples, repels, and stretches under touch.',
+    mode: 'pointer',
+    math: 'Hooke network + damping',
+  },
+  {
+    id: 'magnetic-field',
+    title: 'Magnetic Particle Field',
+    description: 'Opposite charges curl around the pointer; press to flip polarity.',
+    mode: 'pointer',
+    math: 'Tangential force field',
+  },
 ];
 
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
@@ -32,6 +53,9 @@ const defaultParams = {
   hamiltonian: { particles: 520, speed: 1.0, intensity: 28 },
   cursor: { spacing: 28, influence: 210, arrowLength: 14 },
   kalman: { sigma: 13, processNoise: 0.4, trail: 240 },
+  gravity: { particles: 380, pull: 1050, swirl: 0.7 },
+  spring: { spacing: 42, stiffness: 0.08, damping: 0.9 },
+  magnetic: { particles: 420, field: 1.2, drag: 0.992 },
 };
 
 const randomInRange = (min, max, step = 1) => {
@@ -54,6 +78,21 @@ const createChaosParams = () => ({
     sigma: randomInRange(4, 24, 1),
     processNoise: Number(randomInRange(1, 24, 1) / 20),
     trail: randomInRange(80, 360, 10),
+  },
+  gravity: {
+    particles: randomInRange(140, 800, 20),
+    pull: randomInRange(400, 1800, 50),
+    swirl: Number(randomInRange(0, 20, 1) / 10),
+  },
+  spring: {
+    spacing: randomInRange(28, 60, 4),
+    stiffness: Number(randomInRange(3, 16, 1) / 100),
+    damping: Number(randomInRange(80, 96, 1) / 100),
+  },
+  magnetic: {
+    particles: randomInRange(160, 900, 20),
+    field: Number(randomInRange(4, 25, 1) / 10),
+    drag: Number(randomInRange(960, 998, 1) / 1000),
   },
 });
 
@@ -109,6 +148,50 @@ const Lab = () => {
       if (animationRef.current) cancelAnimationFrame(animationRef.current);
     };
     let disposeExperiment = () => {};
+
+    const createPointer = () => {
+      const pointer = {
+        x: canvas.width / dpr / 2,
+        y: canvas.height / dpr / 2,
+        active: false,
+        down: false,
+      };
+      const locate = (event) => {
+        const rect = canvas.getBoundingClientRect();
+        pointer.x = event.clientX - rect.left;
+        pointer.y = event.clientY - rect.top;
+        pointer.active = true;
+      };
+      const onMove = (event) => locate(event);
+      const onEnter = (event) => locate(event);
+      const onLeave = () => {
+        pointer.active = false;
+        pointer.down = false;
+      };
+      const onDown = (event) => {
+        locate(event);
+        pointer.down = true;
+      };
+      const onUp = () => {
+        pointer.down = false;
+      };
+
+      canvas.style.touchAction = 'none';
+      canvas.addEventListener('pointermove', onMove);
+      canvas.addEventListener('pointerenter', onEnter);
+      canvas.addEventListener('pointerleave', onLeave);
+      canvas.addEventListener('pointerdown', onDown);
+      window.addEventListener('pointerup', onUp);
+      disposeExperiment = () => {
+        canvas.style.touchAction = '';
+        canvas.removeEventListener('pointermove', onMove);
+        canvas.removeEventListener('pointerenter', onEnter);
+        canvas.removeEventListener('pointerleave', onLeave);
+        canvas.removeEventListener('pointerdown', onDown);
+        window.removeEventListener('pointerup', onUp);
+      };
+      return pointer;
+    };
 
     const drawHamiltonian = () => {
       const ctx = canvas.getContext('2d');
@@ -449,9 +532,290 @@ const Lab = () => {
       tick();
     };
 
+    const drawGravityWell = () => {
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const width = () => canvas.width / dpr;
+      const height = () => canvas.height / dpr;
+      const cfg = params.gravity;
+      const particleCount = reducedMotion ? Math.floor(cfg.particles * 0.4) : cfg.particles;
+      const pointer = createPointer();
+      const particles = Array.from({ length: particleCount }, () => ({
+        x: Math.random() * width(),
+        y: Math.random() * height(),
+        vx: (Math.random() - 0.5) * 18,
+        vy: (Math.random() - 0.5) * 18,
+        hue: Math.random(),
+      }));
+      let time = 0;
+
+      ctx.fillStyle = '#080f1b';
+      ctx.fillRect(0, 0, width(), height());
+
+      const tick = () => {
+        if (!running) return;
+        time += reducedMotion ? 0.003 : 0.012;
+        const wellX = pointer.active ? pointer.x : width() * (0.5 + Math.cos(time) * 0.12);
+        const wellY = pointer.active ? pointer.y : height() * (0.5 + Math.sin(time * 1.3) * 0.12);
+        const forceScale = reducedMotion ? 0.3 : 1;
+
+        ctx.fillStyle = 'rgba(8, 15, 27, 0.1)';
+        ctx.fillRect(0, 0, width(), height());
+
+        for (const particle of particles) {
+          const previousX = particle.x;
+          const previousY = particle.y;
+          const dx = wellX - particle.x;
+          const dy = wellY - particle.y;
+          const distance = Math.max(Math.hypot(dx, dy), 8);
+          const radial = (cfg.pull / (distance + 38)) * forceScale;
+          const tangentX = -dy / distance;
+          const tangentY = dx / distance;
+
+          particle.vx += ((dx / distance) * radial + tangentX * radial * cfg.swirl) * 0.022;
+          particle.vy += ((dy / distance) * radial + tangentY * radial * cfg.swirl) * 0.022;
+          particle.vx *= 0.997;
+          particle.vy *= 0.997;
+
+          const speed = Math.hypot(particle.vx, particle.vy);
+          if (speed > 7) {
+            particle.vx = (particle.vx / speed) * 7;
+            particle.vy = (particle.vy / speed) * 7;
+          }
+
+          particle.x += particle.vx;
+          particle.y += particle.vy;
+          if (particle.x < -25) particle.x = width() + 25;
+          if (particle.x > width() + 25) particle.x = -25;
+          if (particle.y < -25) particle.y = height() + 25;
+          if (particle.y > height() + 25) particle.y = -25;
+
+          ctx.strokeStyle = particle.hue > 0.72 ? 'rgba(255, 128, 87, 0.52)' : 'rgba(76, 144, 255, 0.4)';
+          ctx.lineWidth = particle.hue > 0.72 ? 1.2 : 0.8;
+          ctx.beginPath();
+          ctx.moveTo(previousX, previousY);
+          ctx.lineTo(particle.x, particle.y);
+          ctx.stroke();
+        }
+
+        ctx.strokeStyle = 'rgba(35, 211, 155, 0.5)';
+        ctx.lineWidth = 1;
+        for (const radius of [18, 34, 54]) {
+          ctx.beginPath();
+          ctx.arc(wellX, wellY, radius, 0, Math.PI * 2);
+          ctx.stroke();
+        }
+        ctx.fillStyle = 'rgba(35, 211, 155, 0.9)';
+        ctx.beginPath();
+        ctx.arc(wellX, wellY, 3.5, 0, Math.PI * 2);
+        ctx.fill();
+
+        animationRef.current = requestAnimationFrame(tick);
+      };
+      tick();
+    };
+
+    const drawSpringMesh = () => {
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const width = () => canvas.width / dpr;
+      const height = () => canvas.height / dpr;
+      const cfg = params.spring;
+      const spacing = reducedMotion ? cfg.spacing + 8 : cfg.spacing;
+      const pointer = createPointer();
+      const columns = Math.ceil(width() / spacing) + 1;
+      const rows = Math.ceil(height() / spacing) + 1;
+      const nodes = [];
+      const links = [];
+
+      for (let row = 0; row < rows; row += 1) {
+        for (let column = 0; column < columns; column += 1) {
+          nodes.push({
+            x: column * spacing,
+            y: row * spacing,
+            ox: column * spacing,
+            oy: row * spacing,
+            vx: 0,
+            vy: 0,
+          });
+          const index = row * columns + column;
+          if (column > 0) links.push([index - 1, index]);
+          if (row > 0) links.push([index - columns, index]);
+        }
+      }
+
+      const tick = () => {
+        if (!running) return;
+        ctx.fillStyle = '#080f1b';
+        ctx.fillRect(0, 0, width(), height());
+
+        for (const [fromIndex, toIndex] of links) {
+          const from = nodes[fromIndex];
+          const to = nodes[toIndex];
+          const dx = to.x - from.x;
+          const dy = to.y - from.y;
+          const distance = Math.max(Math.hypot(dx, dy), 0.01);
+          const force = (distance - spacing) * cfg.stiffness * 0.38;
+          const fx = (dx / distance) * force;
+          const fy = (dy / distance) * force;
+          from.vx += fx;
+          from.vy += fy;
+          to.vx -= fx;
+          to.vy -= fy;
+        }
+
+        for (const node of nodes) {
+          node.vx += (node.ox - node.x) * cfg.stiffness * 0.15;
+          node.vy += (node.oy - node.y) * cfg.stiffness * 0.15;
+
+          if (pointer.active) {
+            const dx = node.x - pointer.x;
+            const dy = node.y - pointer.y;
+            const distance = Math.max(Math.hypot(dx, dy), 1);
+            const radius = spacing * 4.4;
+            if (distance < radius) {
+              const strength = (1 - distance / radius) ** 2;
+              const direction = pointer.down ? -1 : 1;
+              node.vx += (dx / distance) * strength * 3.4 * direction;
+              node.vy += (dy / distance) * strength * 3.4 * direction;
+            }
+          }
+
+          node.vx *= cfg.damping;
+          node.vy *= cfg.damping;
+          node.x += node.vx;
+          node.y += node.vy;
+        }
+
+        for (const [fromIndex, toIndex] of links) {
+          const from = nodes[fromIndex];
+          const to = nodes[toIndex];
+          const stretch = Math.abs(Math.hypot(to.x - from.x, to.y - from.y) - spacing);
+          ctx.strokeStyle = stretch > spacing * 0.18 ? 'rgba(255, 128, 87, 0.58)' : 'rgba(76, 144, 255, 0.28)';
+          ctx.lineWidth = 0.8;
+          ctx.beginPath();
+          ctx.moveTo(from.x, from.y);
+          ctx.lineTo(to.x, to.y);
+          ctx.stroke();
+        }
+
+        ctx.fillStyle = 'rgba(170, 205, 255, 0.76)';
+        for (const node of nodes) {
+          ctx.beginPath();
+          ctx.arc(node.x, node.y, 1.25, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        if (pointer.active) {
+          ctx.setLineDash([4, 5]);
+          ctx.strokeStyle = pointer.down ? 'rgba(255, 128, 87, 0.72)' : 'rgba(35, 211, 155, 0.58)';
+          ctx.beginPath();
+          ctx.arc(pointer.x, pointer.y, spacing * 1.2, 0, Math.PI * 2);
+          ctx.stroke();
+          ctx.setLineDash([]);
+        }
+
+        animationRef.current = requestAnimationFrame(tick);
+      };
+      tick();
+    };
+
+    const drawMagneticField = () => {
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const width = () => canvas.width / dpr;
+      const height = () => canvas.height / dpr;
+      const cfg = params.magnetic;
+      const particleCount = reducedMotion ? Math.floor(cfg.particles * 0.4) : cfg.particles;
+      const pointer = createPointer();
+      const particles = Array.from({ length: particleCount }, (_, index) => ({
+        x: Math.random() * width(),
+        y: Math.random() * height(),
+        vx: (Math.random() - 0.5) * 1.5,
+        vy: (Math.random() - 0.5) * 1.5,
+        charge: index % 2 === 0 ? 1 : -1,
+      }));
+      let time = 0;
+
+      ctx.fillStyle = '#080f1b';
+      ctx.fillRect(0, 0, width(), height());
+
+      const tick = () => {
+        if (!running) return;
+        time += reducedMotion ? 0.1 : 0.35;
+        const centreX = pointer.active ? pointer.x : width() * 0.5;
+        const centreY = pointer.active ? pointer.y : height() * 0.5;
+        const polarity = pointer.down ? -1 : 1;
+        const fieldScale = reducedMotion ? 0.3 : 1;
+
+        ctx.fillStyle = 'rgba(8, 15, 27, 0.09)';
+        ctx.fillRect(0, 0, width(), height());
+
+        for (const particle of particles) {
+          const previousX = particle.x;
+          const previousY = particle.y;
+          const dx = centreX - particle.x;
+          const dy = centreY - particle.y;
+          const distance = Math.max(Math.hypot(dx, dy), 12);
+          const tangentX = -dy / distance;
+          const tangentY = dx / distance;
+          const tangentForce = cfg.field * particle.charge * polarity * fieldScale * (0.035 + 5 / (distance + 55));
+          const radialForce = (distance - 145) * 0.0018 * fieldScale;
+
+          particle.vx += tangentX * tangentForce + (dx / distance) * radialForce;
+          particle.vy += tangentY * tangentForce + (dy / distance) * radialForce;
+          particle.vx *= cfg.drag;
+          particle.vy *= cfg.drag;
+
+          const speed = Math.hypot(particle.vx, particle.vy);
+          if (speed > 5.5) {
+            particle.vx = (particle.vx / speed) * 5.5;
+            particle.vy = (particle.vy / speed) * 5.5;
+          }
+
+          particle.x += particle.vx;
+          particle.y += particle.vy;
+          if (particle.x < 0) particle.x += width();
+          if (particle.x > width()) particle.x -= width();
+          if (particle.y < 0) particle.y += height();
+          if (particle.y > height()) particle.y -= height();
+
+          ctx.strokeStyle = particle.charge > 0 ? 'rgba(76, 144, 255, 0.5)' : 'rgba(255, 128, 87, 0.5)';
+          ctx.lineWidth = 0.9;
+          ctx.beginPath();
+          ctx.moveTo(previousX, previousY);
+          ctx.lineTo(particle.x, particle.y);
+          ctx.stroke();
+        }
+
+        ctx.setLineDash([4, 9]);
+        ctx.lineDashOffset = -time;
+        ctx.strokeStyle = pointer.down ? 'rgba(255, 128, 87, 0.38)' : 'rgba(118, 182, 255, 0.34)';
+        for (const radius of [48, 92, 138]) {
+          ctx.beginPath();
+          ctx.arc(centreX, centreY, radius, 0, Math.PI * 2);
+          ctx.stroke();
+        }
+        ctx.setLineDash([]);
+        ctx.fillStyle = pointer.down ? '#ff8057' : '#76b6ff';
+        ctx.beginPath();
+        ctx.arc(centreX, centreY, 4, 0, Math.PI * 2);
+        ctx.fill();
+
+        animationRef.current = requestAnimationFrame(tick);
+      };
+      tick();
+    };
+
     if (activeId === 'hamiltonian-flow') drawHamiltonian();
     if (activeId === 'cursor-vector') drawCursorVector();
     if (activeId === 'kalman-tracker') drawKalman();
+    if (activeId === 'gravity-well') drawGravityWell();
+    if (activeId === 'spring-mesh') drawSpringMesh();
+    if (activeId === 'magnetic-field') drawMagneticField();
 
     return () => {
       stop();
@@ -477,10 +841,31 @@ const Lab = () => {
         { key: 'arrowLength', label: 'Arrow length', min: 6, max: 24, step: 1, group: 'cursor' },
       ];
     }
+    if (activeId === 'kalman-tracker') {
+      return [
+        { key: 'sigma', label: 'Measurement noise', min: 4, max: 24, step: 1, group: 'kalman' },
+        { key: 'processNoise', label: 'Process noise', min: 0.05, max: 1.2, step: 0.05, group: 'kalman' },
+        { key: 'trail', label: 'Trail length', min: 80, max: 360, step: 10, group: 'kalman' },
+      ];
+    }
+    if (activeId === 'gravity-well') {
+      return [
+        { key: 'particles', label: 'Orbiting particles', min: 140, max: 800, step: 20, group: 'gravity' },
+        { key: 'pull', label: 'Gravity strength', min: 400, max: 1800, step: 50, group: 'gravity' },
+        { key: 'swirl', label: 'Orbital swirl', min: 0, max: 2, step: 0.1, group: 'gravity' },
+      ];
+    }
+    if (activeId === 'spring-mesh') {
+      return [
+        { key: 'spacing', label: 'Mesh spacing', min: 28, max: 60, step: 4, group: 'spring' },
+        { key: 'stiffness', label: 'Spring stiffness', min: 0.03, max: 0.16, step: 0.01, group: 'spring' },
+        { key: 'damping', label: 'Damping', min: 0.8, max: 0.96, step: 0.01, group: 'spring' },
+      ];
+    }
     return [
-      { key: 'sigma', label: 'Measurement noise', min: 4, max: 24, step: 1, group: 'kalman' },
-      { key: 'processNoise', label: 'Process noise', min: 0.05, max: 1.2, step: 0.05, group: 'kalman' },
-      { key: 'trail', label: 'Trail length', min: 80, max: 360, step: 10, group: 'kalman' },
+      { key: 'particles', label: 'Charged particles', min: 160, max: 900, step: 20, group: 'magnetic' },
+      { key: 'field', label: 'Field strength', min: 0.4, max: 2.5, step: 0.1, group: 'magnetic' },
+      { key: 'drag', label: 'Particle drag', min: 0.96, max: 0.998, step: 0.002, group: 'magnetic' },
     ];
   }, [activeId]);
 
@@ -531,7 +916,7 @@ const Lab = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div className="lab-live-label"><span className="live-dot" /> Interactive playground / 03</div>
+            <div className="lab-live-label"><span className="live-dot" /> Interactive playground / 06</div>
             <h1 className="lab-display-title">LAB<span>.exe</span></h1>
           </Motion.div>
 

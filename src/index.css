@@ -2393,6 +2393,8 @@
 }
 
 .lab-experiment-tab + .lab-experiment-tab { border-left: 1px solid var(--line); }
+.lab-experiment-tab:nth-child(n + 4) { border-top: 1px solid var(--line); }
+.lab-experiment-tab:nth-child(4) { border-left: 0; }
 .lab-experiment-tab::before { content: ""; position: absolute; top: 0; left: 1.25rem; right: 1.25rem; height: 2px; background: var(--accent); transform: scaleX(0); transition: transform 220ms ease; }
 .lab-experiment-tab:hover { color: var(--ink); background: color-mix(in srgb, var(--accent) 6%, transparent); }
 .lab-experiment-tab.is-active { color: var(--ink); background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 12%, transparent), transparent 72%); }
@@ -2713,6 +2715,8 @@
   .lab-experiment-rail::-webkit-scrollbar { display: none; }
   .lab-experiment-tab { flex: 0 0 260px; min-height: 84px; }
   .lab-experiment-tab + .lab-experiment-tab { border-left: 1px solid var(--line); }
+  .lab-experiment-tab:nth-child(n + 4) { border-top: 0; }
+  .lab-experiment-tab:nth-child(4) { border-left: 1px solid var(--line); }
   .lab-canvas-viewport { min-height: 430px; }
   .lab-screen-footer { align-items: flex-start; flex-direction: column; }
   .lab-screen-footer p { max-width: 76vw; }
