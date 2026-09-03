@@ -601,9 +601,9 @@
 .loader-monogram {
   z-index: 2;
   font-family: var(--font-display);
-  font-size: clamp(2.8rem, 7vw, 5rem);
+  font-size: clamp(1.7rem, 4.2vw, 3.6rem);
   font-weight: 800;
-  letter-spacing: -0.09em;
+  letter-spacing: -0.07em;
 }
 
 .loader-readout {
@@ -826,10 +826,10 @@
 
 .hero-bottom-grid {
   display: grid;
-  grid-template-columns: minmax(240px, 0.72fr) minmax(300px, 1fr);
+  grid-template-columns: minmax(0, 1fr);
   align-items: end;
-  gap: clamp(2rem, 7vw, 7rem);
-  max-width: 1000px;
+  gap: 1.8rem;
+  max-width: 1120px;
   margin-top: clamp(2.6rem, 8vh, 6rem);
 }
 
@@ -840,21 +840,22 @@
 }
 
 .intro-copy {
-  min-height: 9rem;
-  padding: 0.7rem 0 1.2rem;
+  min-height: 4.6rem;
+  padding: 0.8rem 0 1.35rem;
   font-size: clamp(1rem, 1.45vw, 1.22rem);
   line-height: 1.65;
   color: var(--muted);
 }
 
 .intro-copy strong {
-  display: block;
-  margin-bottom: 0.2rem;
+  display: inline;
   font-family: var(--font-display);
-  font-size: clamp(1.65rem, 2.7vw, 2.5rem);
   font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: -0.055em;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+}
+
+.intro-baseline {
   color: var(--ink);
 }
 
@@ -864,7 +865,7 @@
 
 .intro-slider-row {
   display: grid;
-  grid-template-columns: auto minmax(80px, 1fr) auto;
+  grid-template-columns: max-content minmax(260px, 1fr) max-content;
   align-items: center;
   gap: 0.75rem;
   font-family: var(--font-mono);
@@ -872,6 +873,20 @@
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--muted);
+}
+
+.hero-signal-panel {
+  display: grid;
+  grid-template-columns: minmax(280px, 1fr) auto;
+  align-items: end;
+  gap: 1.5rem;
+  width: min(100%, 880px);
+  margin-left: auto;
+}
+
+.hero-signal-panel .hero-actions {
+  margin-top: 0;
+  flex-wrap: nowrap;
 }
 
 .intro-slider-row input {
@@ -1474,7 +1489,10 @@
   .signal-world { width: 260px; top: 17rem; right: -6rem; opacity: 0.44; }
   .signal-label { display: none; }
   .hero-bottom-grid { grid-template-columns: 1fr; gap: 1.8rem; margin-top: 12rem; }
-  .intro-copy { min-height: 10.5rem; }
+  .intro-copy { min-height: 6rem; }
+  .intro-slider-row { grid-template-columns: max-content minmax(70px, 1fr) max-content; gap: 0.5rem; font-size: 6px; }
+  .hero-signal-panel { grid-template-columns: 1fr; }
+  .hero-signal-panel .hero-actions { margin-top: 0; flex-wrap: wrap; }
   .scroll-cue { bottom: 1.2rem; }
   .editorial-heading { grid-template-columns: 1fr; }
   .display-heading { font-size: clamp(3.3rem, 17vw, 5.2rem); }

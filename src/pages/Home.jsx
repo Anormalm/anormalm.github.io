@@ -53,7 +53,7 @@ const INTRO_FACTS = [
 const Home = () => {
   const heroRef = useRef(null);
   const [ghostMode, setGhostMode] = useState(false);
-  const [knowledgeLevel, setKnowledgeLevel] = useState(22);
+  const [knowledgeLevel, setKnowledgeLevel] = useState(0);
   const reduceMotion = useReducedMotion();
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -143,6 +143,7 @@ const Home = () => {
             <div className="intro-console">
               <p className="intro-copy" aria-live="polite">
                 <strong>I’m Lifan Hu.</strong>
+                <span className="intro-baseline"> I build things, test ideas, and follow curiosity.</span>
                 <AnimatePresence initial={false}>
                   {INTRO_FACTS.slice(0, revealedFactCount).map((fact, index) => (
                     <Motion.span
@@ -175,7 +176,7 @@ const Home = () => {
               </div>
             </div>
 
-            <div>
+            <div className="hero-signal-panel">
               <button
                 type="button"
                 onDoubleClick={toggleGhostMode}

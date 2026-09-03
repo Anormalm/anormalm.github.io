@@ -42,7 +42,7 @@ const Loader = ({ onComplete }) => {
       <div className="loader-core" aria-hidden="true">
         <span className="loader-orbit loader-orbit-one"><i /></span>
         <span className="loader-orbit loader-orbit-two"><i /></span>
-        <span className="loader-monogram">LH</span>
+        <span className="loader-monogram">Anormalm</span>
       </div>
 
       <div className="loader-readout" aria-live="polite">
