@@ -39,23 +39,25 @@ const Loader = ({ onComplete }) => {
       <div className="loader-coordinate loader-coordinate-top">01°17′N · 103°51′E</div>
       <div className="loader-coordinate loader-coordinate-bottom">NUS / SINGAPORE / 2026</div>
 
-      <div className="loader-core" aria-hidden="true">
-        <span className="loader-orbit loader-orbit-one"><i /></span>
-        <span className="loader-orbit loader-orbit-two"><i /></span>
-        <span className="loader-monogram">Anormalm</span>
-      </div>
-
-      <div className="loader-readout" aria-live="polite">
-        <div className="font-mono text-[10px] uppercase tracking-[0.28em] text-[var(--muted)]">
-          {stage}
+      <div className="loader-center">
+        <div className="loader-core" aria-hidden="true">
+          <span className="loader-orbit loader-orbit-one"><i /></span>
+          <span className="loader-orbit loader-orbit-two"><i /></span>
+          <span className="loader-monogram">Anormalm</span>
         </div>
-        <div className="loader-progress-row">
-          <span className="loader-progress-track">
-            <Motion.span animate={{ width: `${progress}%` }} transition={{ ease: 'linear', duration: 0.08 }} />
-          </span>
-          <span className="font-mono text-[10px] tabular-nums text-[var(--accent)]">
-            {String(progress).padStart(3, '0')}%
-          </span>
+
+        <div className="loader-readout" aria-live="polite">
+          <div className="font-mono text-[10px] uppercase tracking-[0.28em] text-[var(--muted)]">
+            {stage}
+          </div>
+          <div className="loader-progress-row">
+            <span className="loader-progress-track">
+              <Motion.span animate={{ width: `${progress}%` }} transition={{ ease: 'linear', duration: 0.08 }} />
+            </span>
+            <span className="font-mono text-[10px] tabular-nums text-[var(--accent)]">
+              {String(progress).padStart(3, '0')}%
+            </span>
+          </div>
         </div>
       </div>
 
