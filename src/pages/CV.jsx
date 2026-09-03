@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion as Motion } from 'framer-motion';
-import { FiDownload, FiExternalLink, FiX } from 'react-icons/fi';
+import { FiArrowLeft, FiArrowRight, FiDownload, FiExternalLink, FiX } from 'react-icons/fi';
 import { publications } from '../data/portfolio';
 
 const EXPERIENCE = [
@@ -42,6 +42,14 @@ const GATE_CHOICES = [
   ['Just curious', 'Curiosity is a valid credential. Access granted.'],
 ];
 
+const CV_PHOTOS = [
+  {
+    src: '/lifan-signal.webp',
+    alt: 'Lifan Hu standing in a garden at Sentosa, Singapore',
+    location: 'Sentosa, Singapore',
+  },
+];
+
 const Publication = ({ publication }) => {
   const content = (
     <>
@@ -66,6 +74,13 @@ const Publication = ({ publication }) => {
 const CV = () => {
   const [showGate, setShowGate] = useState(false);
   const [gateMessage, setGateMessage] = useState('');
+  const [activePhoto, setActivePhoto] = useState(0);
+
+  const changePhoto = (direction) => {
+    setActivePhoto((current) => (current + direction + CV_PHOTOS.length) % CV_PHOTOS.length);
+  };
+
+  const photo = CV_PHOTOS[activePhoto];
 
   useEffect(() => {
     if (!showGate) return undefined;
@@ -113,17 +128,45 @@ const CV = () => {
             </div>
           </div>
 
-          <figure className="cv-profile-photo">
-            <img
-              src="/lifan-signal.webp"
-              alt="Lifan Hu standing in a garden"
-              width="1600"
-              height="1200"
-              decoding="async"
-            />
-            <figcaption>
-              <span>Profile / 2026</span>
-              <span>Singapore</span>
+          <figure className="cv-photo-album">
+            <div className="cv-profile-photo">
+              <AnimatePresence initial={false} mode="wait">
+                <Motion.img
+                  key={photo.src}
+                  src={photo.src}
+                  alt={photo.alt}
+                  width="1600"
+                  height="1200"
+                  decoding="async"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                />
+              </AnimatePresence>
+              <span className="cv-photo-label">Field notes</span>
+              <div className="cv-photo-controls" aria-label="Photo album controls">
+                <button
+                  type="button"
+                  onClick={() => changePhoto(-1)}
+                  disabled={CV_PHOTOS.length === 1}
+                  aria-label="Previous photo"
+                >
+                  <FiArrowLeft />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => changePhoto(1)}
+                  disabled={CV_PHOTOS.length === 1}
+                  aria-label="Next photo"
+                >
+                  <FiArrowRight />
+                </button>
+              </div>
+            </div>
+            <figcaption className="cv-photo-caption">
+              <span>{photo.location}</span>
+              <span>{String(activePhoto + 1).padStart(2, '0')} / {String(CV_PHOTOS.length).padStart(2, '0')}</span>
             </figcaption>
           </figure>
         </div>

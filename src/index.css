@@ -1852,8 +1852,32 @@
   margin-top: 2rem;
 }
 
+.cv-photo-album {
+  position: relative;
+  min-width: 0;
+  margin: 0;
+  isolation: isolate;
+}
+
+.cv-photo-album::before,
+.cv-photo-album::after {
+  content: "";
+  position: absolute;
+  inset: 0.55rem -0.35rem -0.4rem 0.55rem;
+  z-index: 0;
+  border: 1px solid color-mix(in srgb, var(--accent) 18%, var(--line));
+  border-radius: 1.35rem;
+  transform: rotate(1.2deg);
+}
+
+.cv-photo-album::after {
+  inset: 0.25rem 0.15rem -0.2rem 0.3rem;
+  transform: rotate(-0.6deg);
+}
+
 .cv-profile-photo {
   position: relative;
+  z-index: 1;
   min-width: 0;
   aspect-ratio: 4 / 3;
   overflow: hidden;
@@ -1884,20 +1908,66 @@
 
 .cv-profile-photo:hover img { transform: scale(1.025); filter: saturate(1.08); }
 
-.cv-profile-photo figcaption {
+.cv-photo-label {
   position: absolute;
   z-index: 2;
-  right: 1rem;
-  bottom: 0.9rem;
-  left: 1rem;
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
+  top: 0.85rem;
+  left: 0.9rem;
+  border: 1px solid rgba(237, 244, 255, 0.24);
+  border-radius: 999px;
+  background: rgba(4, 10, 18, 0.45);
+  padding: 0.36rem 0.58rem;
+  backdrop-filter: blur(8px);
   font-family: var(--font-mono);
   font-size: 7px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: rgba(237, 244, 255, 0.78);
+}
+
+.cv-photo-controls {
+  position: absolute;
+  z-index: 3;
+  right: 0.8rem;
+  bottom: 0.8rem;
+  display: flex;
+  gap: 0.35rem;
+}
+
+.cv-photo-controls button {
+  display: grid;
+  width: 2rem;
+  height: 2rem;
+  place-items: center;
+  border: 1px solid rgba(237, 244, 255, 0.3);
+  border-radius: 50%;
+  background: rgba(4, 10, 18, 0.56);
+  color: rgba(237, 244, 255, 0.92);
+  backdrop-filter: blur(8px);
+  transition: 180ms ease;
+}
+
+.cv-photo-controls button:not(:disabled):hover {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--paper);
+  transform: translateY(-2px);
+}
+
+.cv-photo-controls button:disabled { opacity: 0.42; cursor: default; }
+
+.cv-photo-caption {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 0.25rem 0;
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
 }
 
 /* CV gate */
