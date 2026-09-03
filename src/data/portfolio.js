@@ -1,6 +1,6 @@
 export const projects = [
   {
-    title: '说人话 Bench',
+    title: 'shuorenhua Bench',
     category: 'Evaluation',
     status: 'v0.2 alpha',
     description:
