@@ -6,72 +6,34 @@ import { publications } from '../data/portfolio';
 const EXPERIENCE = [
   {
     role: 'Machine Learning Engineer Intern',
-    place: 'TikTok Pte. Ltd. · BRIC · Singapore',
-    period: 'May 2026–Present',
-    detail:
-      'Developing graph-based integrity-risk discovery methods and distributed Spark pipelines for large-scale live-streaming ecosystems.',
+    place: 'TikTok · BRIC',
   },
   {
-    role: 'Research Assistant · DistDNA',
-    place: 'National University of Singapore',
-    period: 'Aug 2026–Present',
-    detail: 'Research assistantship under Dr Wu Zhaomin and Prof He Bingsheng.',
+    role: 'Research Assistant',
+    place: 'National University of Singapore · DistDNA',
   },
   {
     role: 'Digital Developer Intern',
-    place: 'Shanghai MAHLE Thermal Systems',
-    period: 'May–Jul 2025',
-    detail:
-      'Built offline multilingual transcription, document vision and OCR pipelines, factory telemetry tools, and lightweight inference APIs.',
+    place: 'MAHLE Thermal Systems',
   },
 ];
 
 const RESEARCH = [
-  {
-    title: 'Graph Evidence Is Not Text Evidence',
-    period: 'Jun 2026–Present',
-    detail:
-      'Evaluating graph-grounded language models through serialization-order sensitivity, isomorphism consistency, semantic interference, and distractor robustness.',
-  },
-  {
-    title: 'Graph Grokking and Phantom Transitions',
-    period: 'May 2026–Present',
-    detail:
-      'Studying delayed generalization, memorization basins, representation geometry, and abrupt performance transitions in graph neural networks and graph transformers.',
-  },
-  {
-    title: 'Adaptive Graph Evidence Acquisition',
-    period: 'May–Aug 2026',
-    detail:
-      'Developed a budget-constrained framework for selecting graph evidence before classification and LLM-based fraud reasoning.',
-  },
-  {
-    title: 'On-Device Vision-Language Assistant',
-    period: 'Aug 2025–Feb 2026',
-    detail:
-      'Designed and benchmarked quantized multimodal models on Jetson Orin Nano Super for offline assistive vision; recognized with a Merit Award.',
-  },
+  'Graph-grounded language models',
+  'Graph learning and generalization',
+  'Adaptive graph evidence',
+  'On-device multimodal systems',
 ];
 
 const SKILLS = [
   'Python',
   'C/C++',
-  'Java',
-  'JavaScript',
-  'SQL',
-  'PySpark',
-  'Haskell',
   'PyTorch',
-  'PyTorch Geometric',
-  'Graph Transformers',
-  'Reinforcement Learning',
-  'Vision-Language Models',
-  'OpenCV',
-  'TensorRT',
-  'FastAPI',
+  'Graph ML',
+  'Multimodal AI',
+  'Distributed Systems',
+  'Edge AI',
   'Docker',
-  'Neo4j',
-  'ROS2',
 ];
 
 const GATE_CHOICES = [
@@ -141,9 +103,7 @@ const CV = () => {
               <div className="eyebrow">Curriculum vitae</div>
               <h1 className="font-display mt-3 text-4xl md:text-5xl">Hu Lifan</h1>
               <p className="mt-4 max-w-3xl text-sm leading-6 text-[var(--muted)] md:text-base">
-                Computer Engineering student at NUS, Machine Learning Engineer Intern at TikTok BRIC, and Research
-                Assistant working on graph machine learning, graph-grounded language models, edge AI, and
-                production-scale systems.
+                Computer Engineering at NUS. Working across machine learning research and systems.
               </p>
             </div>
             <div className="cv-hero-actions">
@@ -171,19 +131,13 @@ const CV = () => {
         <div className="mt-8 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
           <section className="tech-panel rounded-3xl p-6 md:p-7">
             <div className="eyebrow">Experience</div>
-            <div className="mt-6 space-y-6">
+            <div className="mt-6 space-y-4">
               {EXPERIENCE.map((item) => (
-                <article key={`${item.role}-${item.place}`} className="border-l border-[var(--line)] pl-5">
-                  <div className="flex flex-wrap items-start justify-between gap-2">
-                    <h2 className="font-display text-xl">{item.role}</h2>
-                    <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--muted)]">
-                      {item.period}
-                    </span>
-                  </div>
+                <article key={`${item.role}-${item.place}`} className="border-l border-[var(--line)] py-1 pl-5">
+                  <h2 className="font-display text-xl">{item.role}</h2>
                   <div className="font-mono mt-1 text-[11px] uppercase tracking-[0.16em] text-[var(--accent)]">
                     {item.place}
                   </div>
-                  <p className="mt-2 text-sm leading-6 text-[var(--muted)]">{item.detail}</p>
                 </article>
               ))}
             </div>
@@ -195,13 +149,12 @@ const CV = () => {
               <h2 className="font-display mt-4 text-xl">National University of Singapore</h2>
               <p className="mt-2 text-sm leading-6 text-[var(--muted)]">
                 B.Eng. in Computer Engineering<br />
-                Second Major in Innovation & Design · Minor in Mathematics<br />
-                GPA 4.6 · 2024–Present
+                Second Major in Innovation & Design · Minor in Mathematics
               </p>
               <div className="mt-5 border-t border-[var(--line)] pt-5">
                 <h3 className="font-display text-lg">Shanghai Jiao Tong University</h3>
                 <p className="mt-2 text-sm text-[var(--muted)]">
-                  Summer School · Algebra and Statistical Inference · 2025
+                  Summer School · Algebra and Statistical Inference
                 </p>
               </div>
             </section>
@@ -209,29 +162,23 @@ const CV = () => {
             <section className="tech-panel rounded-3xl p-6 md:p-7">
               <div className="eyebrow">Selected recognition</div>
               <ul className="mt-4 space-y-3 text-sm leading-6 text-[var(--muted)]">
-                <li>CDE Innovation & Research Award · Merit Award · 2026</li>
-                <li>Mathematical Contest in Modeling · Honorable Mention · 2026</li>
-                <li>Mathematical Contest in Modeling · Meritorious Winner · 2025</li>
-                <li>WorldQuant BRAIN Challenge · Silver Medal · 2025</li>
+                <li>CDE Innovation & Research Award · Merit Award</li>
+                <li>Mathematical Contest in Modeling · Honorable Mention</li>
+                <li>Mathematical Contest in Modeling · Meritorious Winner</li>
+                <li>WorldQuant BRAIN Challenge · Silver Medal</li>
               </ul>
             </section>
           </div>
 
           <section className="tech-panel rounded-3xl p-6 md:p-7 lg:col-span-2">
             <div className="eyebrow">Selected research</div>
-            <div className="mt-5 grid gap-4 md:grid-cols-2">
-              {RESEARCH.map((item) => (
-                <article key={item.title} className="rounded-2xl border border-[var(--line)] bg-[var(--paper)]/70 p-5">
-                  <div className="flex flex-wrap items-start justify-between gap-2">
-                    <h2 className="font-display text-lg">{item.title}</h2>
-                    <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--accent)]">
-                      {item.period}
-                    </span>
-                  </div>
-                  <p className="mt-2 text-sm leading-6 text-[var(--muted)]">{item.detail}</p>
-                </article>
+            <ul className="mt-5 grid gap-3 md:grid-cols-2">
+              {RESEARCH.map((topic) => (
+                <li key={topic} className="rounded-2xl border border-[var(--line)] bg-[var(--paper)]/70 p-5 font-display text-lg">
+                  {topic}
+                </li>
               ))}
-            </div>
+            </ul>
           </section>
 
           <section className="tech-panel rounded-3xl p-6 md:p-7">
@@ -247,8 +194,8 @@ const CV = () => {
             <section className="tech-panel rounded-3xl p-6 md:p-7">
               <div className="eyebrow">Academic service</div>
               <ul className="mt-4 space-y-3 text-sm leading-6 text-[var(--muted)]">
-                <li>Invited Reviewer · GroundLM Workshop at EMNLP 2026</li>
-                <li>Invited Reviewer · VLM4RWD Workshop at NeurIPS 2026</li>
+                <li>Invited Reviewer · GroundLM Workshop</li>
+                <li>Invited Reviewer · VLM4RWD Workshop</li>
               </ul>
             </section>
 
