@@ -160,7 +160,7 @@ const Home = () => {
                 </AnimatePresence>
               </p>
               <div className="intro-slider-row">
-                <span>Not advertising</span>
+                <span>No larp</span>
                 <input
                   type="range"
                   min="0"
@@ -172,7 +172,7 @@ const Home = () => {
                   aria-label="Reveal more facts about Lifan"
                   aria-valuetext={`${revealedFactCount} of ${INTRO_FACTS.length} facts visible`}
                 />
-                <span>Know more</span>
+                <span>Max larp</span>
               </div>
             </div>
 
