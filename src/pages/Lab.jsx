@@ -1,4 +1,6 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { AnimatePresence, motion as Motion } from 'framer-motion';
+import { FiRefreshCw } from 'react-icons/fi';
 
 const EXPERIMENTS = [
   {
@@ -37,6 +39,24 @@ const randomInRange = (min, max, step = 1) => {
   return min + Math.floor(Math.random() * (span + 1)) * step;
 };
 
+const createChaosParams = () => ({
+  hamiltonian: {
+    particles: randomInRange(120, 1200, 20),
+    speed: Number(randomInRange(2, 25, 1) / 10),
+    intensity: randomInRange(10, 50, 1),
+  },
+  cursor: {
+    spacing: randomInRange(16, 44, 2),
+    influence: randomInRange(80, 360, 10),
+    arrowLength: randomInRange(6, 24, 1),
+  },
+  kalman: {
+    sigma: randomInRange(4, 24, 1),
+    processNoise: Number(randomInRange(1, 24, 1) / 20),
+    trail: randomInRange(80, 360, 10),
+  },
+});
+
 const Lab = () => {
   const canvasRef = useRef(null);
   const animationRef = useRef(null);
@@ -49,6 +69,11 @@ const Lab = () => {
     []
   );
 
+  const applyChaosSeed = useCallback(() => {
+    setParams(createChaosParams());
+    setStatusMessage('Chaos seed applied.');
+  }, []);
+
   useEffect(() => {
     const test = document.createElement('canvas');
     setSupportsCanvas(Boolean(test.getContext && test.getContext('2d')));
@@ -60,29 +85,12 @@ const Lab = () => {
       const targetTag = event.target?.tagName?.toLowerCase();
       if (targetTag === 'input' || targetTag === 'textarea') return;
 
-      setParams({
-        hamiltonian: {
-          particles: randomInRange(120, 1200, 20),
-          speed: Number(randomInRange(2, 25, 1) / 10),
-          intensity: randomInRange(10, 50, 1),
-        },
-        cursor: {
-          spacing: randomInRange(16, 44, 2),
-          influence: randomInRange(80, 360, 10),
-          arrowLength: randomInRange(6, 24, 1),
-        },
-        kalman: {
-          sigma: randomInRange(4, 24, 1),
-          processNoise: Number(randomInRange(1, 24, 1) / 20),
-          trail: randomInRange(80, 360, 10),
-        },
-      });
-      setStatusMessage('Chaos seed applied (press C again to randomize).');
+      applyChaosSeed();
     };
 
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, []);
+  }, [applyChaosSeed]);
 
   useEffect(() => {
     if (!supportsCanvas) return undefined;
@@ -91,7 +99,7 @@ const Lab = () => {
     const experiment = EXPERIMENTS.find((item) => item.id === activeId);
     if (!experiment) return undefined;
 
-    setStatusMessage(reducedMotion ? 'Reduced-motion mode active: lower simulation intensity.' : '');
+    if (reducedMotion) setStatusMessage('Reduced-motion mode active.');
     let running = true;
     const dpr = window.devicePixelRatio || 1;
     const parent = canvas.parentElement;
@@ -525,68 +533,134 @@ const Lab = () => {
   }
 
   return (
-    <div className="min-h-screen">
-      <section className="section">
-        <div className="flex flex-wrap items-end justify-between gap-6">
-          <div>
-            <div className="text-xs uppercase tracking-[0.25em] text-[var(--muted)]">Lab</div>
-            <h1 className="font-display text-4xl">Mathematical interactive systems.</h1>
-            <p className="mt-3 max-w-2xl text-sm text-[var(--muted)]">
-              Canvas-only modules with parameter controls and progressive fallback behavior.
-            </p>
-          </div>
-          <div className="rounded-full border border-[var(--line)] px-4 py-2 text-xs uppercase tracking-[0.2em] text-[var(--muted)]">
-            Canvas + Estimation
-          </div>
+    <div className="lab-page min-h-screen">
+      <section className="lab-section section">
+        <div className="lab-ambient lab-ambient-one" aria-hidden="true" />
+        <div className="lab-ambient lab-ambient-two" aria-hidden="true" />
+
+        <header className="lab-masthead">
+          <Motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <div className="lab-live-label"><span className="live-dot" /> Interactive playground / 03</div>
+            <h1 className="lab-display-title">LAB<span>.exe</span></h1>
+          </Motion.div>
+
+          <Motion.div
+            initial={{ opacity: 0, x: 24 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.15, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            className="lab-masthead-side"
+          >
+            <p>Move it. Tune it. Break it.</p>
+            <button type="button" className="lab-chaos-trigger" onClick={applyChaosSeed}>
+              <FiRefreshCw aria-hidden="true" /> Randomize <kbd>C</kbd>
+            </button>
+          </Motion.div>
+        </header>
+
+        <div className="lab-signal-strip" aria-hidden="true">
+          <span>REAL-TIME DYNAMICS</span><i /><span>POINTER REACTIVE</span><i /><span>PARAMETRIC PLAY</span>
         </div>
 
-        <div className="mt-10 grid gap-6 lg:grid-cols-[1.4fr_0.8fr]">
-          <div className="glass-card relative min-h-[460px] overflow-hidden p-0">
-            <canvas ref={canvasRef} className="h-full w-full"></canvas>
-            <div className="absolute left-6 top-6 rounded-full border border-[var(--line)] bg-[var(--paper)]/85 px-4 py-2 text-xs uppercase tracking-[0.25em] text-[var(--muted)]">
-              {current?.title}
-            </div>
-            {statusMessage && (
-              <div className="absolute bottom-4 left-4 right-4 rounded-xl border border-sky-400/40 bg-black/60 px-4 py-3 text-xs text-sky-200">
-                {statusMessage}
-              </div>
-            )}
-          </div>
-
-          <div className="glass-card p-6">
-            <div className="text-xs uppercase tracking-[0.25em] text-[var(--muted)]">Experiments</div>
-            <div className="mt-5 grid gap-4">
-              {EXPERIMENTS.map((experiment) => (
+        <Motion.div
+          initial={{ opacity: 0, y: 32 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.22, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          className="lab-console"
+        >
+          <div className="lab-experiment-rail" role="tablist" aria-label="Lab experiments">
+            {EXPERIMENTS.map((experiment, index) => {
+              const isActive = experiment.id === activeId;
+              return (
                 <button
                   key={experiment.id}
-                  onClick={() => setActiveId(experiment.id)}
-                  className={`w-full rounded-2xl border px-4 py-4 text-left transition ${
-                    experiment.id === activeId
-                      ? 'border-[var(--accent)] text-[var(--accent)]'
-                      : 'border-[var(--line)] text-[var(--muted)] hover:border-[var(--accent)]'
-                  }`}
+                  type="button"
+                  role="tab"
+                  aria-selected={isActive}
+                  onClick={() => {
+                    setActiveId(experiment.id);
+                    setStatusMessage(`${experiment.title} online.`);
+                  }}
+                  className={`lab-experiment-tab ${isActive ? 'is-active' : ''}`}
                 >
-                  <div className="text-xs uppercase tracking-[0.25em]">{experiment.mode}</div>
-                  <div className="font-display mt-2 text-lg">{experiment.title}</div>
-                  <p className="mt-2 text-xs text-[var(--muted)]">{experiment.description}</p>
-                  <div className="mt-3 text-[10px] uppercase tracking-[0.22em] text-[var(--accent)]">
-                    {experiment.math}
-                  </div>
+                  <span className="lab-experiment-index">0{index + 1}</span>
+                  <span className="lab-experiment-copy">
+                    <strong>{experiment.title}</strong>
+                    <small>{experiment.math}</small>
+                  </span>
+                  <span className="lab-experiment-state">{isActive ? 'Live' : 'Load'}</span>
                 </button>
-              ))}
+              );
+            })}
+          </div>
+
+          <div className="lab-workbench">
+            <div className="lab-visual-stage">
+              <div className="lab-screen-bar">
+                <span><i className="status-pulse" /> Signal online</span>
+                <span>Canvas / live</span>
+              </div>
+
+              <div className="lab-canvas-viewport">
+                <canvas ref={canvasRef} />
+                <span className="lab-corner lab-corner-tl" aria-hidden="true" />
+                <span className="lab-corner lab-corner-tr" aria-hidden="true" />
+                <span className="lab-corner lab-corner-bl" aria-hidden="true" />
+                <span className="lab-corner lab-corner-br" aria-hidden="true" />
+                <span className="lab-axis lab-axis-x" aria-hidden="true">X / 1.000</span>
+                <span className="lab-axis lab-axis-y" aria-hidden="true">Y / 1.000</span>
+                <span className="lab-scan-line" aria-hidden="true" />
+                <span className="lab-reticle" aria-hidden="true"><i /><i /></span>
+
+                <AnimatePresence>
+                  {statusMessage && (
+                    <Motion.div
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 8 }}
+                      className="lab-status-message"
+                      role="status"
+                    >
+                      {statusMessage}
+                    </Motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
+              <div className="lab-screen-footer">
+                <AnimatePresence mode="wait">
+                  <Motion.div
+                    key={current?.id}
+                    initial={{ opacity: 0, y: 6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -6 }}
+                  >
+                    <strong>{current?.title}</strong>
+                    <p>{current?.description}</p>
+                  </Motion.div>
+                </AnimatePresence>
+                <span>{current?.math}</span>
+              </div>
             </div>
 
-            <div className="mt-6 border-t border-[var(--line)] pt-5">
-              <div className="text-xs uppercase tracking-[0.22em] text-[var(--muted)]">Parameters</div>
-              <div className="mt-4 space-y-4">
-                {activeControls.map((control) => {
+            <aside className="lab-control-dock" aria-label={`${current?.title} controls`}>
+              <div className="lab-control-heading">
+                <span>Tune signal</span>
+                <strong>CTRL</strong>
+              </div>
+
+              <div className="lab-control-list">
+                {activeControls.map((control, index) => {
                   const value = params[control.group][control.key];
+                  const progress = ((value - control.min) / (control.max - control.min)) * 100;
                   return (
-                    <label key={control.key} className="block">
-                      <div className="mb-2 flex items-center justify-between text-xs uppercase tracking-[0.2em] text-[var(--muted)]">
-                        <span>{control.label}</span>
-                        <span>{value}</span>
-                      </div>
+                    <label key={control.key} className="lab-control">
+                      <span className="lab-control-index">0{index + 1}</span>
+                      <span className="lab-control-name">{control.label}</span>
+                      <output>{value}</output>
                       <input
                         type="range"
                         min={control.min}
@@ -594,15 +668,25 @@ const Lab = () => {
                         step={control.step}
                         value={value}
                         onChange={(event) => updateParam(control.group, control.key, event.target.value)}
-                        className="w-full accent-[var(--accent)]"
+                        style={{ '--range-progress': `${progress}%` }}
+                        aria-label={control.label}
                       />
                     </label>
                   );
                 })}
               </div>
-            </div>
+
+              <button type="button" className="lab-chaos-button" onClick={applyChaosSeed}>
+                <span>Shuffle the system</span>
+                <FiRefreshCw aria-hidden="true" />
+              </button>
+
+              <div className="lab-key-hint" aria-hidden="true">
+                <kbd>C</kbd><span>reseed every module</span>
+              </div>
+            </aside>
           </div>
-        </div>
+        </Motion.div>
       </section>
     </div>
   );
