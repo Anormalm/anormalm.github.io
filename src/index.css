@@ -864,9 +864,9 @@
   position: relative;
   left: 50%;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
-  gap: 0.35rem 1rem;
+  gap: clamp(0.75rem, 2vw, 1.5rem);
   width: 100vw;
   margin-left: -50vw;
   padding: 0 clamp(1.25rem, 4vw, 4rem);
@@ -879,6 +879,34 @@
 
 .intro-slider-row > span:last-child {
   text-align: right;
+}
+
+.intro-slider-track {
+  position: relative;
+  display: flex;
+  height: 24px;
+  align-items: center;
+}
+
+.intro-slider-track::before,
+.intro-slider-progress {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  height: 2px;
+  border-radius: 999px;
+  transform: translateY(-50%);
+}
+
+.intro-slider-track::before {
+  right: 0;
+  background: var(--line);
+}
+
+.intro-slider-progress {
+  background: var(--accent-warm);
+  box-shadow: 0 0 14px color-mix(in srgb, var(--accent-warm) 35%, transparent);
 }
 
 .hero-signal-panel {
@@ -895,20 +923,25 @@
   flex-wrap: nowrap;
 }
 
-.intro-slider-row input {
-  grid-column: 1 / -1;
+.intro-slider-track input {
+  position: relative;
+  z-index: 2;
   width: 100%;
-  height: 22px;
+  height: 24px;
   appearance: none;
   cursor: ew-resize;
-  background:
-    linear-gradient(to right, var(--accent-warm) 0 var(--tone), var(--line) var(--tone) 100%)
-    center / 100% 2px no-repeat;
+  background: transparent;
 }
 
-.intro-slider-row input::-webkit-slider-thumb {
+.intro-slider-track input::-webkit-slider-runnable-track {
+  height: 2px;
+  background: transparent;
+}
+
+.intro-slider-track input::-webkit-slider-thumb {
   width: 18px;
   height: 18px;
+  margin-top: -8px;
   appearance: none;
   border: 2px solid var(--paper);
   border-radius: 50%;
@@ -917,7 +950,14 @@
   transition: transform 160ms ease;
 }
 
-.intro-slider-row input::-moz-range-thumb {
+.intro-slider-track input::-moz-range-track,
+.intro-slider-track input::-moz-range-progress {
+  height: 2px;
+  border: 0;
+  background: transparent;
+}
+
+.intro-slider-track input::-moz-range-thumb {
   width: 16px;
   height: 16px;
   border: 2px solid var(--paper);
@@ -926,8 +966,8 @@
   box-shadow: 0 0 0 1px var(--accent-warm), 0 0 20px color-mix(in srgb, var(--accent-warm) 52%, transparent);
 }
 
-.intro-slider-row input:hover::-webkit-slider-thumb,
-.intro-slider-row input:focus-visible::-webkit-slider-thumb {
+.intro-slider-track input:hover::-webkit-slider-thumb,
+.intro-slider-track input:focus-visible::-webkit-slider-thumb {
   transform: scale(1.22);
 }
 

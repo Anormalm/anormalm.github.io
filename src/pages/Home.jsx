@@ -151,17 +151,19 @@ const Home = () => {
               </p>
               <div className="intro-slider-row">
                 <span>No larp</span>
-                <input
-                  type="range"
-                  min="0"
-                  max="100"
-                  step="1"
-                  value={knowledgeLevel}
-                  onChange={(event) => setKnowledgeLevel(Number(event.target.value))}
-                  style={{ '--tone': `${knowledgeLevel}%` }}
-                  aria-label="Reveal more facts about Lifan"
-                  aria-valuetext={`${revealedFactCount} of ${INTRO_FACTS.length} facts visible`}
-                />
+                <div className="intro-slider-track">
+                  <span className="intro-slider-progress" style={{ width: `${knowledgeLevel}%` }} aria-hidden="true" />
+                  <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    step="1"
+                    value={knowledgeLevel}
+                    onChange={(event) => setKnowledgeLevel(Number(event.target.value))}
+                    aria-label="Reveal more facts about Lifan"
+                    aria-valuetext={`${revealedFactCount} of ${INTRO_FACTS.length} facts visible`}
+                  />
+                </div>
                 <span>Max larp</span>
               </div>
             </div>
