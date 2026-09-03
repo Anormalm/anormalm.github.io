@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { AnimatePresence, motion as Motion, useReducedMotion } from 'framer-motion';
-import { FiCompass, FiMapPin, FiShield, FiX } from 'react-icons/fi';
+import { FiArrowUpRight, FiCompass, FiGithub, FiMapPin, FiShield, FiX } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 
 const GEO_ENDPOINT = 'https://whatismyip.technology/api/me';
@@ -75,10 +75,25 @@ const GeoSignal = () => {
             <h2 id="geo-title">I read the<br /><em>world.</em></h2>
           </div>
 
-          <div className="geo-rank-stamp" aria-label="GeoGuessr Master II for multiple seasons">
-            <span>GeoGuessr</span>
-            <strong>Master II</strong>
-            <small>Multiple seasons</small>
+          <div className="geo-heading-side">
+            <div className="geo-rank-stamp" aria-label="GeoGuessr Master II for multiple seasons">
+              <span>GeoGuessr</span>
+              <strong>Master II</strong>
+              <small>Multiple seasons</small>
+            </div>
+
+            <a
+              className="geo-source-chip"
+              href="https://github.com/GeoGuess/GeoGuess"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Explore GeoGuess, an open-source geography game, on GitHub"
+            >
+              <FiGithub aria-hidden="true" />
+              <span>Open-source detour</span>
+              <strong>GeoGuess</strong>
+              <FiArrowUpRight aria-hidden="true" />
+            </a>
           </div>
         </Motion.header>
 
