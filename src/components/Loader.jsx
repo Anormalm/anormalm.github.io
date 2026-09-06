@@ -1,9 +1,15 @@
 import { useEffect, useMemo, useState } from 'react';
 import { motion as Motion } from 'framer-motion';
+import { useLanguage } from '../context/LanguageContext';
 
-const STAGES = ['Mapping graph', 'Compiling memory', 'Opening channel'];
+const STAGES = [
+  ['Mapping graph', '绘制图谱'],
+  ['Compiling memory', '编译记忆'],
+  ['Opening channel', '开启频道'],
+];
 
 const Loader = ({ onComplete }) => {
+  const { isChinese } = useLanguage();
   const [progress, setProgress] = useState(3);
   const reducedMotion = useMemo(
     () => window.matchMedia('(prefers-reduced-motion: reduce)').matches,
@@ -25,7 +31,7 @@ const Loader = ({ onComplete }) => {
     };
   }, [onComplete, reducedMotion]);
 
-  const stage = STAGES[Math.min(STAGES.length - 1, Math.floor(progress / 34))];
+  const stage = STAGES[Math.min(STAGES.length - 1, Math.floor(progress / 34))][isChinese ? 1 : 0];
 
   return (
     <Motion.div
@@ -62,7 +68,7 @@ const Loader = ({ onComplete }) => {
       </div>
 
       <button type="button" className="loader-skip" onClick={onComplete}>
-        Enter now
+        {isChinese ? '立即进入' : 'Enter now'}
       </button>
     </Motion.div>
   );

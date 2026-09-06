@@ -3,8 +3,19 @@ import { AnimatePresence, motion as Motion, useReducedMotion } from 'framer-moti
 import { FiCompass, FiGlobe, FiMapPin, FiMessageCircle, FiRefreshCw, FiShield, FiX } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import { CITY_ROUNDS, LANGUAGE_ROUNDS } from '../data/worldGames';
+import { useLanguage } from '../context/LanguageContext';
 
 const GEO_ENDPOINT = 'https://whatismyip.technology/api/me';
+const ROUNDS_PER_GAME = 5;
+
+const LANGUAGE_NAMES_ZH = {
+  English: '英语', Spanish: '西班牙语', French: '法语', German: '德语', Italian: '意大利语', Portuguese: '葡萄牙语',
+  Dutch: '荷兰语', Swedish: '瑞典语', Danish: '丹麦语', Norwegian: '挪威语', Finnish: '芬兰语', Polish: '波兰语',
+  Czech: '捷克语', Hungarian: '匈牙利语', Romanian: '罗马尼亚语', Turkish: '土耳其语', Greek: '希腊语', Russian: '俄语',
+  Ukrainian: '乌克兰语', Arabic: '阿拉伯语', Hebrew: '希伯来语', Hindi: '印地语', 'Mandarin Chinese': '汉语普通话',
+  Japanese: '日语', Korean: '韩语', Thai: '泰语', Vietnamese: '越南语', Indonesian: '印度尼西亚语', Malay: '马来语',
+  Swahili: '斯瓦希里语',
+};
 
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 
@@ -17,7 +28,9 @@ const shuffle = (items) => {
   return shuffled;
 };
 
-const createLanguageDeck = () => shuffle(LANGUAGE_ROUNDS).map((round) => ({
+const createCityDeck = () => shuffle(CITY_ROUNDS).slice(0, ROUNDS_PER_GAME);
+
+const createLanguageDeck = () => shuffle(LANGUAGE_ROUNDS).slice(0, ROUNDS_PER_GAME).map((round) => ({
   ...round,
   choices: shuffle([round.answer, ...round.distractors]),
 }));
@@ -54,10 +67,11 @@ const scoreDistance = (distanceKm) => (
 const pointStyle = (point) => ({ '--geo-x': `${point.x}%`, '--geo-y': `${point.y}%` });
 
 const GeoSignal = () => {
+  const { isChinese } = useLanguage();
   const [gameMode, setGameMode] = useState('cities');
   const [phase, setPhase] = useState('idle');
   const [signal, setSignal] = useState(null);
-  const [cityRounds, setCityRounds] = useState(() => shuffle(CITY_ROUNDS));
+  const [cityRounds, setCityRounds] = useState(createCityDeck);
   const [roundIndex, setRoundIndex] = useState(0);
   const [guess, setGuess] = useState(null);
   const [totalScore, setTotalScore] = useState(0);
@@ -71,6 +85,9 @@ const GeoSignal = () => {
 
   const currentRound = cityRounds[roundIndex];
   const currentLanguage = languageRounds[languageIndex];
+  const currentCityName = isChinese ? currentRound.nameZh : currentRound.name;
+  const currentCityClue = isChinese ? currentRound.clueZh : currentRound.clue;
+  const languageName = (name) => (isChinese ? LANGUAGE_NAMES_ZH[name] || name : name);
   const targetPoint = toMapPoint(currentRound.latitude, currentRound.longitude);
   const signalPoint = signal ? toMapPoint(signal.latitude, signal.longitude) : null;
 
@@ -132,7 +149,7 @@ const GeoSignal = () => {
   };
 
   const resetGame = () => {
-    setCityRounds(shuffle(CITY_ROUNDS));
+    setCityRounds(createCityDeck());
     setRoundIndex(0);
     setGuess(null);
     setTotalScore(0);
@@ -197,18 +214,18 @@ const GeoSignal = () => {
           className="geo-heading"
         >
           <div>
-            <div className="eyebrow">Side quest / world games</div>
-            <h2 id="geo-title">I read the<br /><em>world.</em></h2>
+            <div className="eyebrow">{isChinese ? '支线任务 / 世界游戏' : 'Side quest / world games'}</div>
+            <h2 id="geo-title">{isChinese ? <>读懂这个<br /><em>世界。</em></> : <>I read the<br /><em>world.</em></>}</h2>
           </div>
 
-          <div className="geo-rank-stamp" aria-label="GeoGuessr Master II for multiple seasons">
+          <div className="geo-rank-stamp" aria-label={isChinese ? '连续多个赛季达到 GeoGuessr Master II' : 'GeoGuessr Master II for multiple seasons'}>
             <span>GeoGuessr</span>
             <strong>Master II</strong>
-            <small>Multiple seasons</small>
+            <small>{isChinese ? '连续多个赛季' : 'Multiple seasons'}</small>
           </div>
         </Motion.header>
 
-        <div className="geo-mode-switch" role="tablist" aria-label="Choose a world game">
+        <div className="geo-mode-switch" role="tablist" aria-label={isChinese ? '选择世界游戏' : 'Choose a world game'}>
           <button
             type="button"
             role="tab"
@@ -217,7 +234,7 @@ const GeoSignal = () => {
             onClick={() => setGameMode('cities')}
           >
             <FiGlobe aria-hidden="true" />
-            <span><strong>City radar</strong><small>{CITY_ROUNDS.length} locations</small></span>
+            <span><strong>{isChinese ? '城市雷达' : 'City radar'}</strong><small>{CITY_ROUNDS.length} {isChinese ? '个地点库 · 每局 5 题' : 'locations · 5 per run'}</small></span>
           </button>
           <button
             type="button"
@@ -227,7 +244,7 @@ const GeoSignal = () => {
             onClick={() => setGameMode('languages')}
           >
             <FiMessageCircle aria-hidden="true" />
-            <span><strong>Language ID</strong><small>{LANGUAGE_ROUNDS.length} languages</small></span>
+            <span><strong>{isChinese ? '识别语言' : 'Language ID'}</strong><small>{LANGUAGE_ROUNDS.length} {isChinese ? '种语言库 · 每局 5 题' : 'languages · 5 per run'}</small></span>
           </button>
         </div>
 
@@ -243,8 +260,8 @@ const GeoSignal = () => {
             >
               <div className="geo-radar">
                 <div className="geo-radar-topline">
-                  <span><i /> CITY RADAR</span>
-                  <span>ROUND {String(roundIndex + 1).padStart(2, '0')} / {cityRounds.length}</span>
+                  <span><i /> {isChinese ? '城市雷达' : 'CITY RADAR'}</span>
+                  <span>{isChinese ? '第' : 'ROUND'} {String(roundIndex + 1).padStart(2, '0')} / {cityRounds.length}</span>
                   <FiCompass aria-hidden="true" />
                 </div>
 
@@ -253,7 +270,9 @@ const GeoSignal = () => {
                   className="geo-grid"
                   onClick={placeGuess}
                   disabled={Boolean(guess) || gameComplete}
-                  aria-label={gameComplete ? 'City game complete' : `Place your guess for ${currentRound.name} on the world map`}
+                  aria-label={gameComplete
+                    ? (isChinese ? '城市游戏已完成' : 'City game complete')
+                    : (isChinese ? `在世界地图上标出你猜测的${currentCityName}位置` : `Place your guess for ${currentRound.name} on the world map`)}
                 >
                   <img
                     className="geo-world-map"
@@ -287,7 +306,7 @@ const GeoSignal = () => {
                         aria-hidden="true"
                       >
                         <i />
-                        <span>Approx.</span>
+                        <span>{isChinese ? '约' : 'Approx.'}</span>
                       </Motion.span>
                     )}
 
@@ -318,19 +337,19 @@ const GeoSignal = () => {
                     )}
                   </AnimatePresence>
 
-                  {!guess && !gameComplete && <span className="geo-map-hint">Click anywhere to drop a pin</span>}
+                  {!guess && !gameComplete && <span className="geo-map-hint">{isChinese ? '点击地图任意位置落针' : 'Click anywhere to drop a pin'}</span>}
                 </button>
 
                 <div className="geo-radar-readout">
-                  <span>{guess ? formatCoordinate(guess.latitude, 'N', 'S') : signal ? 'CITY AREA' : 'LAT —'}</span>
-                  <span>{guess ? formatCoordinate(guess.longitude, 'E', 'W') : signal ? 'ESTIMATE' : 'LON —'}</span>
-                  <strong>{guess ? `${guess.distanceKm.toLocaleString()} KM` : signal ? signal.countryCode : 'READY'}</strong>
+                  <span>{guess ? formatCoordinate(guess.latitude, 'N', 'S') : signal ? (isChinese ? '城市范围' : 'CITY AREA') : (isChinese ? '纬度 —' : 'LAT —')}</span>
+                  <span>{guess ? formatCoordinate(guess.longitude, 'E', 'W') : signal ? (isChinese ? '估算' : 'ESTIMATE') : (isChinese ? '经度 —' : 'LON —')}</span>
+                  <strong>{guess ? `${guess.distanceKm.toLocaleString()} KM` : signal ? signal.countryCode : (isChinese ? '准备' : 'READY')}</strong>
                 </div>
               </div>
 
               <div className="geo-brief">
                 <div className="geo-round-label">
-                  <span>{gameComplete ? 'Run complete' : 'Find this city'}</span>
+                  <span>{gameComplete ? (isChinese ? '本局完成' : 'Run complete') : (isChinese ? '找到这座城市' : 'Find this city')}</span>
                   <strong>{gameComplete ? `${cityRounds.length} / ${cityRounds.length}` : `${String(roundIndex + 1).padStart(2, '0')} / ${cityRounds.length}`}</strong>
                 </div>
 
@@ -343,9 +362,11 @@ const GeoSignal = () => {
                       exit={{ opacity: 0 }}
                       className="geo-result"
                     >
-                      <span>Final score</span>
+                      <span>{isChinese ? '最终得分' : 'Final score'}</span>
                       <h3>{totalScore.toLocaleString()}</h3>
-                      <p>out of {(cityRounds.length * 5000).toLocaleString()} points across {cityRounds.length} cities.</p>
+                      <p>{isChinese
+                        ? `共 ${cityRounds.length} 座城市，满分 ${(cityRounds.length * 5000).toLocaleString()} 分。`
+                        : `out of ${(cityRounds.length * 5000).toLocaleString()} points across ${cityRounds.length} cities.`}</p>
                     </Motion.div>
                   ) : guess ? (
                     <Motion.div
@@ -355,9 +376,9 @@ const GeoSignal = () => {
                       exit={{ opacity: 0, y: reduceMotion ? 0 : -8 }}
                       className="geo-result"
                     >
-                      <span>{currentRound.name} found</span>
+                      <span>{isChinese ? `找到${currentCityName}` : `${currentRound.name} found`}</span>
                       <h3>{guess.score.toLocaleString()}</h3>
-                      <p>{guess.distanceKm.toLocaleString()} km away · max 5,000</p>
+                      <p>{isChinese ? `相距 ${guess.distanceKm.toLocaleString()} 公里 · 满分 5,000` : `${guess.distanceKm.toLocaleString()} km away · max 5,000`}</p>
                     </Motion.div>
                   ) : (
                     <Motion.div
@@ -367,14 +388,14 @@ const GeoSignal = () => {
                       exit={{ opacity: 0, y: reduceMotion ? 0 : -8 }}
                       className="geo-prompt"
                     >
-                      <span>Target</span>
-                      <h3>{currentRound.name}</h3>
-                      <p>{currentRound.clue}</p>
+                      <span>{isChinese ? '目标' : 'Target'}</span>
+                      <h3>{currentCityName}</h3>
+                      <p>{currentCityClue}</p>
                     </Motion.div>
                   )}
                 </AnimatePresence>
 
-                <div className="geo-round-progress" aria-label={`Round ${roundIndex + 1} of ${cityRounds.length}`}>
+                <div className="geo-round-progress" aria-label={isChinese ? `第 ${roundIndex + 1} 题，共 ${cityRounds.length} 题` : `Round ${roundIndex + 1} of ${cityRounds.length}`}>
                   <i style={{ width: `${gameComplete ? 100 : ((roundIndex + (guess ? 1 : 0)) / cityRounds.length) * 100}%` }} />
                 </div>
 
@@ -384,32 +405,32 @@ const GeoSignal = () => {
                   onClick={advanceRound}
                   disabled={!guess && !gameComplete}
                 >
-                  {gameComplete ? <><FiRefreshCw aria-hidden="true" /> Shuffle 50 cities</> : guess ? (
-                    roundIndex === cityRounds.length - 1 ? 'Finish run' : 'Next city'
-                  ) : 'Drop a pin on the map'}
+                  {gameComplete ? <><FiRefreshCw aria-hidden="true" /> {isChinese ? '再来 5 题' : 'Shuffle 5 more'}</> : guess ? (
+                    roundIndex === cityRounds.length - 1 ? (isChinese ? '完成本局' : 'Finish run') : (isChinese ? '下一座城市' : 'Next city')
+                  ) : (isChinese ? '在地图上落针' : 'Drop a pin on the map')}
                 </button>
 
                 <div className="geo-visitor-signal">
                   <div>
-                    <span>Optional spawn check</span>
+                    <span>{isChinese ? '可选：查看出生点' : 'Optional spawn check'}</span>
                     <strong>
                       {phase === 'revealed' && signal
                         ? signal.city
                         : phase === 'error'
-                          ? 'Signal unavailable'
-                          : 'Reveal your city'}
+                          ? (isChinese ? '信号不可用' : 'Signal unavailable')
+                          : (isChinese ? '显示所在城市' : 'Reveal your city')}
                     </strong>
                     {phase === 'revealed' && signal && (
-                      <small>{[signal.region, signal.country].filter(Boolean).join(', ')} · approximate range</small>
+                      <small>{[signal.region, signal.country].filter(Boolean).join(', ')} · {isChinese ? '大致范围' : 'approximate range'}</small>
                     )}
                   </div>
 
                   {phase === 'revealed' ? (
-                    <button type="button" onClick={clearSignal} aria-label="Clear approximate location">
+                    <button type="button" onClick={clearSignal} aria-label={isChinese ? '清除大致位置' : 'Clear approximate location'}>
                       <FiX aria-hidden="true" />
                     </button>
                   ) : (
-                    <button type="button" onClick={revealSignal} disabled={phase === 'loading'} aria-label="Reveal approximate city">
+                    <button type="button" onClick={revealSignal} disabled={phase === 'loading'} aria-label={isChinese ? '显示大致城市' : 'Reveal approximate city'}>
                       {phase === 'loading' ? '…' : <FiMapPin aria-hidden="true" />}
                     </button>
                   )}
@@ -417,7 +438,7 @@ const GeoSignal = () => {
 
                 <div className="geo-privacy-note">
                   <FiShield aria-hidden="true" />
-                  <Link to="/privacy">Privacy details</Link>
+                  <Link to="/privacy">{isChinese ? '隐私详情' : 'Privacy details'}</Link>
                 </div>
               </div>
             </Motion.div>
@@ -432,8 +453,8 @@ const GeoSignal = () => {
             >
               <div className="language-stage">
                 <div className="geo-radar-topline">
-                  <span><i /> LANGUAGE SIGNAL</span>
-                  <span>ROUND {String(languageIndex + 1).padStart(2, '0')} / {languageRounds.length}</span>
+                  <span><i /> {isChinese ? '语言信号' : 'LANGUAGE SIGNAL'}</span>
+                  <span>{isChinese ? '第' : 'ROUND'} {String(languageIndex + 1).padStart(2, '0')} / {languageRounds.length}</span>
                   <FiMessageCircle aria-hidden="true" />
                 </div>
 
@@ -441,7 +462,7 @@ const GeoSignal = () => {
                   <div className="language-wave" aria-hidden="true">
                     {Array.from({ length: 18 }, (_, index) => <i key={index} />)}
                   </div>
-                  <span>Incoming phrase / train station</span>
+                  <span>{isChinese ? '收到短句 / 火车站' : 'Incoming phrase / train station'}</span>
                   <AnimatePresence mode="wait">
                     <Motion.blockquote
                       key={currentLanguage.sample}
@@ -452,46 +473,50 @@ const GeoSignal = () => {
                       {currentLanguage.sample}
                     </Motion.blockquote>
                   </AnimatePresence>
-                  <small>Same meaning. Different signal.</small>
+                  <small>{isChinese ? '同一个意思，不同的信号。' : 'Same meaning. Different signal.'}</small>
                 </div>
 
                 <div className="language-readout">
-                  <span>Unicode feed</span>
-                  <span>{languageChoice ? 'Signal resolved' : 'Awaiting match'}</span>
-                  <strong>{languageChoice ? currentLanguage.answer : 'READY'}</strong>
+                  <span>{isChinese ? 'Unicode 传输' : 'Unicode feed'}</span>
+                  <span>{languageChoice ? (isChinese ? '信号已识别' : 'Signal resolved') : (isChinese ? '等待匹配' : 'Awaiting match')}</span>
+                  <strong>{languageChoice ? languageName(currentLanguage.answer) : (isChinese ? '准备' : 'READY')}</strong>
                 </div>
               </div>
 
               <div className="geo-brief language-brief">
                 <div className="geo-round-label">
-                  <span>{languageComplete ? 'Run complete' : 'Name the language'}</span>
+                  <span>{languageComplete ? (isChinese ? '本局完成' : 'Run complete') : (isChinese ? '说出语言名称' : 'Name the language')}</span>
                   <strong>{languageComplete ? `${languageRounds.length} / ${languageRounds.length}` : `${String(languageIndex + 1).padStart(2, '0')} / ${languageRounds.length}`}</strong>
                 </div>
 
                 <AnimatePresence mode="wait">
                   {languageComplete ? (
                     <Motion.div key="language-complete" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="language-result">
-                      <span>Final score</span>
+                      <span>{isChinese ? '最终得分' : 'Final score'}</span>
                       <h3>{languageScore} / {languageRounds.length}</h3>
-                      <p>Thirty language signals decoded. Want another shuffled run?</p>
+                      <p>{isChinese ? '五个语言信号已解码。再来一局？' : 'Five language signals decoded. Want another shuffled run?'}</p>
                     </Motion.div>
                   ) : languageChoice ? (
                     <Motion.div key={`language-result-${languageIndex}`} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="language-result">
-                      <span>{languageChoice === currentLanguage.answer ? 'Signal matched' : 'Signal corrected'}</span>
-                      <h3>{currentLanguage.answer}</h3>
-                      <p>{languageChoice === currentLanguage.answer ? 'Clean read.' : `You chose ${languageChoice}.`}</p>
+                      <span>{languageChoice === currentLanguage.answer
+                        ? (isChinese ? '信号匹配' : 'Signal matched')
+                        : (isChinese ? '已校正信号' : 'Signal corrected')}</span>
+                      <h3>{languageName(currentLanguage.answer)}</h3>
+                      <p>{languageChoice === currentLanguage.answer
+                        ? (isChinese ? '识别正确。' : 'Clean read.')
+                        : (isChinese ? `你选择了${languageName(languageChoice)}。` : `You chose ${languageChoice}.`)}</p>
                     </Motion.div>
                   ) : (
                     <Motion.div key={`language-prompt-${languageIndex}`} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="language-prompt">
-                      <span>Listen with your eyes</span>
-                      <h3>Name it.</h3>
-                      <p>Choose the language used in the incoming phrase.</p>
+                      <span>{isChinese ? '用眼睛听' : 'Listen with your eyes'}</span>
+                      <h3>{isChinese ? '这是哪种语言？' : 'Name it.'}</h3>
+                      <p>{isChinese ? '选择收到的短句所使用的语言。' : 'Choose the language used in the incoming phrase.'}</p>
                     </Motion.div>
                   )}
                 </AnimatePresence>
 
                 {!languageComplete && (
-                  <div className="language-options" role="group" aria-label="Language choices">
+                  <div className="language-options" role="group" aria-label={isChinese ? '语言选项' : 'Language choices'}>
                     {currentLanguage.choices.map((choice) => {
                       const isAnswer = choice === currentLanguage.answer;
                       const isChosen = choice === languageChoice;
@@ -506,14 +531,14 @@ const GeoSignal = () => {
                           onClick={() => chooseLanguage(choice)}
                           disabled={Boolean(languageChoice)}
                         >
-                          {choice}
+                          {languageName(choice)}
                         </button>
                       );
                     })}
                   </div>
                 )}
 
-                <div className="geo-round-progress" aria-label={`Round ${languageIndex + 1} of ${languageRounds.length}`}>
+                <div className="geo-round-progress" aria-label={isChinese ? `第 ${languageIndex + 1} 题，共 ${languageRounds.length} 题` : `Round ${languageIndex + 1} of ${languageRounds.length}`}>
                   <i style={{ width: `${languageComplete ? 100 : ((languageIndex + (languageChoice ? 1 : 0)) / languageRounds.length) * 100}%` }} />
                 </div>
 
@@ -523,9 +548,9 @@ const GeoSignal = () => {
                   onClick={advanceLanguage}
                   disabled={!languageChoice && !languageComplete}
                 >
-                  {languageComplete ? <><FiRefreshCw aria-hidden="true" /> Shuffle languages</> : languageChoice ? (
-                    languageIndex === languageRounds.length - 1 ? 'Finish run' : 'Next language'
-                  ) : 'Choose an answer'}
+                  {languageComplete ? <><FiRefreshCw aria-hidden="true" /> {isChinese ? '再来 5 题' : 'Shuffle 5 more'}</> : languageChoice ? (
+                    languageIndex === languageRounds.length - 1 ? (isChinese ? '完成本局' : 'Finish run') : (isChinese ? '下一种语言' : 'Next language')
+                  ) : (isChinese ? '选择答案' : 'Choose an answer')}
                 </button>
               </div>
             </Motion.div>

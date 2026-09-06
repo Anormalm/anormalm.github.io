@@ -1,10 +1,17 @@
 import { useRef } from 'react';
 import { motion as Motion, useReducedMotion } from 'framer-motion';
 import { FiArrowUpRight, FiGithub } from 'react-icons/fi';
+import { useLanguage } from '../context/LanguageContext';
 
-const ProjectCard = ({ title, description, link, live, category, status, tags = [], index = 0 }) => {
+const ProjectCard = ({ title, titleZh, description, descriptionZh, link, live, category, categoryZh, status, statusZh, tags = [], tagsZh, index = 0 }) => {
   const cardRef = useRef(null);
   const reduceMotion = useReducedMotion();
+  const { isChinese } = useLanguage();
+  const displayTitle = isChinese && titleZh ? titleZh : title;
+  const displayDescription = isChinese && descriptionZh ? descriptionZh : description;
+  const displayCategory = isChinese && categoryZh ? categoryZh : category;
+  const displayStatus = isChinese && statusZh ? statusZh : status;
+  const displayTags = isChinese && tagsZh ? tagsZh : tags;
 
   const onPointerMove = (event) => {
     if (reduceMotion || !cardRef.current) return;
@@ -42,18 +49,18 @@ const ProjectCard = ({ title, description, link, live, category, status, tags = 
         <span className="project-spotlight" aria-hidden="true" />
         <div className="relative z-10 flex items-center justify-between gap-4">
           <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--accent)]">
-            {category}
+            {displayCategory}
           </div>
           <div className="project-index" aria-hidden="true">
             {String(index + 1).padStart(2, '0')}
           </div>
         </div>
 
-        <h2 className="font-display relative z-10 mt-10 text-3xl leading-tight md:text-[2rem]">{title}</h2>
-        <p className="relative z-10 mt-4 flex-1 text-sm leading-6 text-[var(--muted)]">{description}</p>
+        <h2 className="font-display relative z-10 mt-10 text-3xl leading-tight md:text-[2rem]">{displayTitle}</h2>
+        <p className="relative z-10 mt-4 flex-1 text-sm leading-6 text-[var(--muted)]">{displayDescription}</p>
 
         <div className="relative z-10 mt-6 flex flex-wrap gap-2" aria-label="Project topics">
-          {tags.map((tag) => (
+          {displayTags.map((tag) => (
             <span key={tag} className="tag">
               {tag}
             </span>
@@ -63,7 +70,7 @@ const ProjectCard = ({ title, description, link, live, category, status, tags = 
         <div className="relative z-10 mt-7 flex flex-wrap items-center justify-between gap-4 border-t border-[var(--line)] pt-4">
           <div className="font-mono inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.18em] text-[var(--muted)]">
             <span className="status-pulse" aria-hidden="true" />
-            {status}
+            {displayStatus}
           </div>
           <div className="flex items-center gap-4">
             <a
@@ -71,9 +78,9 @@ const ProjectCard = ({ title, description, link, live, category, status, tags = 
               target="_blank"
               rel="noopener noreferrer"
               className="link-arrow"
-              aria-label={`View ${title} on GitHub`}
+              aria-label={isChinese ? `在 GitHub 查看 ${displayTitle}` : `View ${title} on GitHub`}
             >
-              <FiGithub /> Source <FiArrowUpRight />
+              <FiGithub /> {isChinese ? '源码' : 'Source'} <FiArrowUpRight />
             </a>
             {live && (
               <a
@@ -81,9 +88,9 @@ const ProjectCard = ({ title, description, link, live, category, status, tags = 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="link-arrow"
-                aria-label={`Open live ${title} project`}
+                aria-label={isChinese ? `打开 ${displayTitle} 在线项目` : `Open live ${title} project`}
               >
-                Live <FiArrowUpRight />
+                {isChinese ? '在线' : 'Live'} <FiArrowUpRight />
               </a>
             )}
           </div>

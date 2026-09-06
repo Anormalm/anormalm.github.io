@@ -16,6 +16,7 @@ import Node from './pages/Node';
 import GNNMARLFraud from './pages/writings/GNNMARLFraud';
 import Disenchantment from './pages/writings/Disenchantment';
 import Fragments from './pages/writings/Fragments';
+import { LanguageProvider, useLanguage } from './context/LanguageContext';
 
 const getAmbientMode = (hour) => {
   if (hour >= 5 && hour < 11) return 'morning';
@@ -25,20 +26,21 @@ const getAmbientMode = (hour) => {
 };
 
 const PAGE_TITLES = {
-  '/': 'Lifan Hu | ML Systems & Research',
-  '/projects': 'Projects | Lifan Hu',
-  '/writings': 'Writing | Lifan Hu',
-  '/lab': 'Interactive Lab | Lifan Hu',
-  '/cv': 'CV | Lifan Hu',
-  '/contact': 'Contact | Lifan Hu',
-  '/privacy': 'Privacy | Lifan Hu',
-  '/node': 'Node | Lifan Hu',
+  '/': ['Lifan Hu | ML Systems & Research', '胡立凡｜机器学习系统与研究'],
+  '/projects': ['Projects | Lifan Hu', '项目｜胡立凡'],
+  '/writings': ['Writing | Lifan Hu', '文章｜胡立凡'],
+  '/lab': ['Interactive Lab | Lifan Hu', '交互实验室｜胡立凡'],
+  '/cv': ['CV | Lifan Hu', '履历｜胡立凡'],
+  '/contact': ['Contact | Lifan Hu', '联系｜胡立凡'],
+  '/privacy': ['Privacy | Lifan Hu', '隐私｜胡立凡'],
+  '/node': ['Node | Lifan Hu', '隐藏节点｜胡立凡'],
 };
 
 const KONAMI_PATTERN = ['up', 'up', 'down', 'down', 'left', 'right', 'left', 'right', 'b', 'a', 'b', 'a'];
 
 function AppShell() {
   const location = useLocation();
+  const { isChinese } = useLanguage();
   const [ambientMode, setAmbientMode] = useState(() => getAmbientMode(new Date().getHours()));
   const [overclockMode, setOverclockMode] = useState(false);
   const [glitchMode, setGlitchMode] = useState(false);
@@ -68,8 +70,9 @@ function AppShell() {
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
-    document.title = PAGE_TITLES[location.pathname] ?? 'Lifan Hu | ML Systems & Research';
-  }, [location.pathname, reduceMotion]);
+    const pageTitle = PAGE_TITLES[location.pathname];
+    document.title = pageTitle ? pageTitle[isChinese ? 1 : 0] : (isChinese ? '胡立凡' : 'Lifan Hu | ML Systems & Research');
+  }, [isChinese, location.pathname, reduceMotion]);
 
   useEffect(() => {
     const buffer = [];
@@ -152,17 +155,19 @@ function App() {
 
   return (
     <div className="app-shell min-h-screen bg-[var(--paper)] text-[var(--ink)] transition-colors duration-500">
-      <AnimatePresence mode="wait">
-        {isLoading ? (
-          <Loader key="site-loader" onComplete={() => setIsLoading(false)} />
-        ) : (
-          <Motion.div key="site" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.2 }}>
-            <Router>
-              <AppShell />
-            </Router>
-          </Motion.div>
-        )}
-      </AnimatePresence>
+      <LanguageProvider>
+        <AnimatePresence mode="wait">
+          {isLoading ? (
+            <Loader key="site-loader" onComplete={() => setIsLoading(false)} />
+          ) : (
+            <Motion.div key="site" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.2 }}>
+              <Router>
+                <AppShell />
+              </Router>
+            </Motion.div>
+          )}
+        </AnimatePresence>
+      </LanguageProvider>
     </div>
   );
 }

@@ -1,49 +1,68 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { AnimatePresence, motion as Motion } from 'framer-motion';
 import { FiRefreshCw } from 'react-icons/fi';
+import { useLanguage } from '../context/LanguageContext';
 
 const EXPERIMENTS = [
   {
     id: 'hamiltonian-flow',
     title: 'Hamiltonian Flow Field',
+    titleZh: '哈密顿流场',
     description: 'Divergence-free particle advection from a stream function.',
+    descriptionZh: '由流函数驱动的无散粒子平流。',
     mode: 'canvas',
     math: 'RK2 + incompressible field',
+    mathZh: 'RK2 + 不可压缩流场',
   },
   {
     id: 'cursor-vector',
     title: 'Cursor Vector Field',
+    titleZh: '光标向量场',
     description: 'Arrow lattice with local vector attraction toward cursor.',
+    descriptionZh: '局部向量会被光标吸引的箭头格点。',
     mode: 'canvas',
     math: 'Discrete vector dynamics',
+    mathZh: '离散向量动力学',
   },
   {
     id: 'kalman-tracker',
     title: 'Kalman Target Tracker',
+    titleZh: '卡尔曼目标追踪器',
     description: '2D constant-velocity filter under noisy observations.',
+    descriptionZh: '噪声观测下的二维恒速滤波。',
     mode: 'canvas',
     math: 'Linear Gaussian estimation',
+    mathZh: '线性高斯估计',
   },
   {
     id: 'gravity-well',
     title: 'Pointer Gravity Well',
+    titleZh: '指针引力井',
     description: 'Particles fall into a cursor-controlled moving potential.',
+    descriptionZh: '粒子落入由指针控制的移动势阱。',
     mode: 'pointer',
     math: 'Inverse-distance attraction',
+    mathZh: '反距离吸引力',
   },
   {
     id: 'spring-mesh',
     title: 'Elastic Spring Mesh',
+    titleZh: '弹性弹簧网格',
     description: 'A connected lattice ripples, repels, and stretches under touch.',
+    descriptionZh: '相连的格点会在触碰下产生波动、排斥和拉伸。',
     mode: 'pointer',
     math: 'Hooke network + damping',
+    mathZh: '胡克网络 + 阻尼',
   },
   {
     id: 'magnetic-field',
     title: 'Magnetic Particle Field',
+    titleZh: '磁性粒子场',
     description: 'Opposite charges curl around the pointer; press to flip polarity.',
+    descriptionZh: '异号粒子围绕指针旋转；按下即可反转极性。',
     mode: 'pointer',
     math: 'Tangential force field',
+    mathZh: '切向力场',
   },
 ];
 
@@ -97,6 +116,7 @@ const createChaosParams = () => ({
 });
 
 const Lab = () => {
+  const { isChinese } = useLanguage();
   const canvasRef = useRef(null);
   const animationRef = useRef(null);
   const [activeId, setActiveId] = useState(EXPERIMENTS[0].id);
@@ -110,7 +130,7 @@ const Lab = () => {
 
   const applyChaosSeed = () => {
     setParams(createChaosParams());
-    setStatusMessage('Chaos seed applied.');
+    setStatusMessage(isChinese ? '已应用混沌种子。' : 'Chaos seed applied.');
   };
 
   useEffect(() => {
@@ -125,7 +145,7 @@ const Lab = () => {
     const experiment = EXPERIMENTS.find((item) => item.id === activeId);
     if (!experiment) return undefined;
 
-    if (reducedMotion) setStatusMessage('Reduced-motion mode active.');
+    if (reducedMotion) setStatusMessage(isChinese ? '已启用减少动态效果模式。' : 'Reduced-motion mode active.');
     let running = true;
     const dpr = window.devicePixelRatio || 1;
     const parent = canvas.parentElement;
@@ -822,52 +842,52 @@ const Lab = () => {
       disposeExperiment();
       window.removeEventListener('resize', resize);
     };
-  }, [activeId, params, supportsCanvas, reducedMotion]);
+  }, [activeId, isChinese, params, supportsCanvas, reducedMotion]);
 
   const current = EXPERIMENTS.find((item) => item.id === activeId);
 
   const activeControls = useMemo(() => {
     if (activeId === 'hamiltonian-flow') {
       return [
-        { key: 'particles', label: 'Particles', min: 120, max: 1200, step: 20, group: 'hamiltonian' },
-        { key: 'speed', label: 'Speed', min: 0.2, max: 2.5, step: 0.1, group: 'hamiltonian' },
-        { key: 'intensity', label: 'Intensity', min: 10, max: 50, step: 1, group: 'hamiltonian' },
+        { key: 'particles', label: isChinese ? '粒子数量' : 'Particles', min: 120, max: 1200, step: 20, group: 'hamiltonian' },
+        { key: 'speed', label: isChinese ? '速度' : 'Speed', min: 0.2, max: 2.5, step: 0.1, group: 'hamiltonian' },
+        { key: 'intensity', label: isChinese ? '强度' : 'Intensity', min: 10, max: 50, step: 1, group: 'hamiltonian' },
       ];
     }
     if (activeId === 'cursor-vector') {
       return [
-        { key: 'spacing', label: 'Grid spacing', min: 16, max: 44, step: 2, group: 'cursor' },
-        { key: 'influence', label: 'Influence radius', min: 80, max: 360, step: 10, group: 'cursor' },
-        { key: 'arrowLength', label: 'Arrow length', min: 6, max: 24, step: 1, group: 'cursor' },
+        { key: 'spacing', label: isChinese ? '网格间距' : 'Grid spacing', min: 16, max: 44, step: 2, group: 'cursor' },
+        { key: 'influence', label: isChinese ? '影响半径' : 'Influence radius', min: 80, max: 360, step: 10, group: 'cursor' },
+        { key: 'arrowLength', label: isChinese ? '箭头长度' : 'Arrow length', min: 6, max: 24, step: 1, group: 'cursor' },
       ];
     }
     if (activeId === 'kalman-tracker') {
       return [
-        { key: 'sigma', label: 'Measurement noise', min: 4, max: 24, step: 1, group: 'kalman' },
-        { key: 'processNoise', label: 'Process noise', min: 0.05, max: 1.2, step: 0.05, group: 'kalman' },
-        { key: 'trail', label: 'Trail length', min: 80, max: 360, step: 10, group: 'kalman' },
+        { key: 'sigma', label: isChinese ? '测量噪声' : 'Measurement noise', min: 4, max: 24, step: 1, group: 'kalman' },
+        { key: 'processNoise', label: isChinese ? '过程噪声' : 'Process noise', min: 0.05, max: 1.2, step: 0.05, group: 'kalman' },
+        { key: 'trail', label: isChinese ? '轨迹长度' : 'Trail length', min: 80, max: 360, step: 10, group: 'kalman' },
       ];
     }
     if (activeId === 'gravity-well') {
       return [
-        { key: 'particles', label: 'Orbiting particles', min: 140, max: 800, step: 20, group: 'gravity' },
-        { key: 'pull', label: 'Gravity strength', min: 400, max: 1800, step: 50, group: 'gravity' },
-        { key: 'swirl', label: 'Orbital swirl', min: 0, max: 2, step: 0.1, group: 'gravity' },
+        { key: 'particles', label: isChinese ? '轨道粒子' : 'Orbiting particles', min: 140, max: 800, step: 20, group: 'gravity' },
+        { key: 'pull', label: isChinese ? '引力强度' : 'Gravity strength', min: 400, max: 1800, step: 50, group: 'gravity' },
+        { key: 'swirl', label: isChinese ? '轨道旋流' : 'Orbital swirl', min: 0, max: 2, step: 0.1, group: 'gravity' },
       ];
     }
     if (activeId === 'spring-mesh') {
       return [
-        { key: 'spacing', label: 'Mesh spacing', min: 28, max: 60, step: 4, group: 'spring' },
-        { key: 'stiffness', label: 'Spring stiffness', min: 0.03, max: 0.16, step: 0.01, group: 'spring' },
-        { key: 'damping', label: 'Damping', min: 0.8, max: 0.96, step: 0.01, group: 'spring' },
+        { key: 'spacing', label: isChinese ? '网格间距' : 'Mesh spacing', min: 28, max: 60, step: 4, group: 'spring' },
+        { key: 'stiffness', label: isChinese ? '弹簧刚度' : 'Spring stiffness', min: 0.03, max: 0.16, step: 0.01, group: 'spring' },
+        { key: 'damping', label: isChinese ? '阻尼' : 'Damping', min: 0.8, max: 0.96, step: 0.01, group: 'spring' },
       ];
     }
     return [
-      { key: 'particles', label: 'Charged particles', min: 160, max: 900, step: 20, group: 'magnetic' },
-      { key: 'field', label: 'Field strength', min: 0.4, max: 2.5, step: 0.1, group: 'magnetic' },
-      { key: 'drag', label: 'Particle drag', min: 0.96, max: 0.998, step: 0.002, group: 'magnetic' },
+      { key: 'particles', label: isChinese ? '带电粒子' : 'Charged particles', min: 160, max: 900, step: 20, group: 'magnetic' },
+      { key: 'field', label: isChinese ? '磁场强度' : 'Field strength', min: 0.4, max: 2.5, step: 0.1, group: 'magnetic' },
+      { key: 'drag', label: isChinese ? '粒子阻力' : 'Particle drag', min: 0.96, max: 0.998, step: 0.002, group: 'magnetic' },
     ];
-  }, [activeId]);
+  }, [activeId, isChinese]);
 
   const updateParam = (group, key, value) => {
     setParams((prev) => ({
@@ -884,17 +904,17 @@ const Lab = () => {
       <div className="min-h-screen">
         <section className="section">
           <div className="glass-card p-8">
-            <div className="text-xs uppercase tracking-[0.25em] text-[var(--muted)]">Lab Fallback</div>
-            <h1 className="font-display mt-3 text-4xl">Interactive rendering unavailable.</h1>
+            <div className="text-xs uppercase tracking-[0.25em] text-[var(--muted)]">{isChinese ? '实验室备用模式' : 'Lab Fallback'}</div>
+            <h1 className="font-display mt-3 text-4xl">{isChinese ? '交互渲染不可用。' : 'Interactive rendering unavailable.'}</h1>
             <p className="mt-3 max-w-2xl text-sm text-[var(--muted)]">
-              Canvas is not available in this environment. Static descriptions are shown as a progressive fallback layer.
+              {isChinese ? '当前环境不支持 Canvas，因此改为显示静态实验说明。' : 'Canvas is not available in this environment. Static descriptions are shown as a progressive fallback layer.'}
             </p>
             <div className="mt-6 grid gap-4 md:grid-cols-3">
               {EXPERIMENTS.map((item) => (
                 <div key={item.id} className="surface rounded-2xl border border-[var(--line)] p-4">
-                  <div className="text-xs uppercase tracking-[0.2em] text-[var(--accent)]">{item.mode}</div>
-                  <div className="font-display mt-2 text-xl">{item.title}</div>
-                  <p className="mt-2 text-sm text-[var(--muted)]">{item.description}</p>
+                  <div className="text-xs uppercase tracking-[0.2em] text-[var(--accent)]">{isChinese ? (item.mode === 'pointer' ? '指针' : '画布') : item.mode}</div>
+                  <div className="font-display mt-2 text-xl">{isChinese ? item.titleZh : item.title}</div>
+                  <p className="mt-2 text-sm text-[var(--muted)]">{isChinese ? item.descriptionZh : item.description}</p>
                 </div>
               ))}
             </div>
@@ -916,7 +936,7 @@ const Lab = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div className="lab-live-label"><span className="live-dot" /> Interactive playground / 06</div>
+            <div className="lab-live-label"><span className="live-dot" /> {isChinese ? '交互游乐场 / 06' : 'Interactive playground / 06'}</div>
             <h1 className="lab-display-title">LAB<span>.exe</span></h1>
           </Motion.div>
 
@@ -926,12 +946,12 @@ const Lab = () => {
             transition={{ delay: 0.15, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             className="lab-masthead-side"
           >
-            <p>Move it. Tune it. Break it.</p>
+            <p>{isChinese ? '移动它，调节它，玩坏它。' : 'Move it. Tune it. Break it.'}</p>
           </Motion.div>
         </header>
 
         <div className="lab-signal-strip" aria-hidden="true">
-          <span>REAL-TIME DYNAMICS</span><i /><span>POINTER REACTIVE</span><i /><span>PARAMETRIC PLAY</span>
+          <span>{isChinese ? '实时动力学' : 'REAL-TIME DYNAMICS'}</span><i /><span>{isChinese ? '指针响应' : 'POINTER REACTIVE'}</span><i /><span>{isChinese ? '参数实验' : 'PARAMETRIC PLAY'}</span>
         </div>
 
         <Motion.div
@@ -951,16 +971,16 @@ const Lab = () => {
                   aria-selected={isActive}
                   onClick={() => {
                     setActiveId(experiment.id);
-                    setStatusMessage(`${experiment.title} online.`);
+                    setStatusMessage(isChinese ? `${experiment.titleZh}已上线。` : `${experiment.title} online.`);
                   }}
                   className={`lab-experiment-tab ${isActive ? 'is-active' : ''}`}
                 >
                   <span className="lab-experiment-index">0{index + 1}</span>
                   <span className="lab-experiment-copy">
-                    <strong>{experiment.title}</strong>
-                    <small>{experiment.math}</small>
+                    <strong>{isChinese ? experiment.titleZh : experiment.title}</strong>
+                    <small>{isChinese ? experiment.mathZh : experiment.math}</small>
                   </span>
-                  <span className="lab-experiment-state">{isActive ? 'Live' : 'Load'}</span>
+                  <span className="lab-experiment-state">{isChinese ? (isActive ? '运行中' : '载入') : (isActive ? 'Live' : 'Load')}</span>
                 </button>
               );
             })}
@@ -969,8 +989,8 @@ const Lab = () => {
           <div className="lab-workbench">
             <div className="lab-visual-stage">
               <div className="lab-screen-bar">
-                <span><i className="status-pulse" /> Signal online</span>
-                <span>Canvas / live</span>
+                <span><i className="status-pulse" /> {isChinese ? '信号在线' : 'Signal online'}</span>
+                <span>{isChinese ? '画布 / 实时' : 'Canvas / live'}</span>
               </div>
 
               <div className="lab-canvas-viewport">
@@ -1007,18 +1027,18 @@ const Lab = () => {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -6 }}
                   >
-                    <strong>{current?.title}</strong>
-                    <p>{current?.description}</p>
+                    <strong>{isChinese ? current?.titleZh : current?.title}</strong>
+                    <p>{isChinese ? current?.descriptionZh : current?.description}</p>
                   </Motion.div>
                 </AnimatePresence>
-                <span>{current?.math}</span>
+                <span>{isChinese ? current?.mathZh : current?.math}</span>
               </div>
             </div>
 
-            <aside className="lab-control-dock" aria-label={`${current?.title} controls`}>
+            <aside className="lab-control-dock" aria-label={isChinese ? `${current?.titleZh}控制项` : `${current?.title} controls`}>
               <div className="lab-control-heading">
-                <span>Tune signal</span>
-                <strong>CTRL</strong>
+                <span>{isChinese ? '调节信号' : 'Tune signal'}</span>
+                <strong>{isChinese ? '控制' : 'CTRL'}</strong>
               </div>
 
               <div className="lab-control-list">
@@ -1046,7 +1066,7 @@ const Lab = () => {
               </div>
 
               <button type="button" className="lab-chaos-button" onClick={applyChaosSeed}>
-                <span>Shuffle the system</span>
+                <span>{isChinese ? '随机化系统' : 'Shuffle the system'}</span>
                 <FiRefreshCw aria-hidden="true" />
               </button>
             </aside>

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { motion as Motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { FiArrowLeft, FiRefreshCw } from 'react-icons/fi';
+import { useLanguage } from '../context/LanguageContext';
 
 const LOG_BANK = [
   'NODE/01 handshake accepted',
@@ -14,7 +15,19 @@ const LOG_BANK = [
   'NODE/08 curiosity threshold exceeded',
 ];
 
+const LOG_BANK_ZH = [
+  '节点/01 握手成功',
+  '节点/02 发现潜在路径',
+  '节点/03 图记忆状态一致',
+  '节点/04 正在监听噪声底',
+  '节点/05 奇异循环已稳定',
+  '节点/06 访客特征未知',
+  '节点/07 幽灵频道可用',
+  '节点/08 好奇心阈值已突破',
+];
+
 const Node = () => {
+  const { isChinese } = useLanguage();
   const [pulse, setPulse] = useState(0);
 
   useEffect(() => {
@@ -25,7 +38,8 @@ const Node = () => {
     return () => window.removeEventListener('keydown', onKeyDown);
   }, []);
 
-  const logs = Array.from({ length: 4 }, (_, index) => LOG_BANK[(index + pulse) % LOG_BANK.length]);
+  const logBank = isChinese ? LOG_BANK_ZH : LOG_BANK;
+  const logs = Array.from({ length: 4 }, (_, index) => logBank[(index + pulse) % logBank.length]);
 
   return (
     <div className="node-page">
@@ -45,11 +59,12 @@ const Node = () => {
         </Motion.div>
 
         <div className="node-console">
-          <div className="eyebrow">Hidden route / access granted</div>
-          <h1>YOU FOUND<br /><span>THE NODE.</span></h1>
+          <div className="eyebrow">{isChinese ? '隐藏路径 / 访问已授权' : 'Hidden route / access granted'}</div>
+          <h1>{isChinese ? <>你找到了<br /><span>隐藏节点。</span></> : <>YOU FOUND<br /><span>THE NODE.</span></>}</h1>
           <p>
-            A private diagnostics channel left intentionally between the obvious links. The website is behaving
-            strangely—as designed.
+            {isChinese
+              ? '这是刻意藏在明显链接之间的私有诊断频道。网站的古怪表现完全符合设计。'
+              : 'A private diagnostics channel left intentionally between the obvious links. The website is behaving strangely—as designed.'}
           </p>
 
           <div className="node-logs">
@@ -67,11 +82,11 @@ const Node = () => {
 
           <div className="node-actions">
             <button type="button" onClick={() => setPulse((previous) => previous + 1)} className="button-primary">
-              Pulse node <FiRefreshCw />
+              {isChinese ? '脉冲节点' : 'Pulse node'} <FiRefreshCw />
             </button>
-            <Link to="/" className="button-secondary"><FiArrowLeft /> Return home</Link>
+            <Link to="/" className="button-secondary"><FiArrowLeft /> {isChinese ? '返回首页' : 'Return home'}</Link>
           </div>
-          <div className="node-hint">Keyboard shortcut: press N to rotate the signal.</div>
+          <div className="node-hint">{isChinese ? '键盘快捷键：按 N 旋转信号。' : 'Keyboard shortcut: press N to rotate the signal.'}</div>
         </div>
       </section>
     </div>

@@ -1,8 +1,10 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useLanguage } from '../context/LanguageContext';
 
 const DebugHud = ({ ambientMode }) => {
   const location = useLocation();
+  const { isChinese } = useLanguage();
   const [enabled, setEnabled] = useState(false);
   const [fps, setFps] = useState(0);
   const [viewport, setViewport] = useState({
@@ -66,19 +68,19 @@ const DebugHud = ({ ambientMode }) => {
 
   return (
     <div className="fixed bottom-3 right-3 z-[90] w-[280px] rounded-2xl border border-[var(--line)] bg-[var(--paper)]/95 p-3 text-[11px] leading-relaxed shadow-xl backdrop-blur">
-      <div className="text-xs uppercase tracking-[0.22em] text-[var(--accent)]">Debug HUD</div>
+      <div className="text-xs uppercase tracking-[0.22em] text-[var(--accent)]">{isChinese ? '调试界面' : 'Debug HUD'}</div>
       <div className="mt-2 text-[var(--muted)]">
-        <div>Route: {location.pathname}</div>
+        <div>{isChinese ? '路径' : 'Route'}: {location.pathname}</div>
         <div>FPS: {fps || '--'}</div>
-        <div>Theme: {document.documentElement.classList.contains('dark') ? 'dark' : 'light'}</div>
-        <div>Ambient: {ambientMode}</div>
+        <div>{isChinese ? '主题' : 'Theme'}: {document.documentElement.classList.contains('dark') ? (isChinese ? '深色' : 'dark') : (isChinese ? '浅色' : 'light')}</div>
+        <div>{isChinese ? '环境' : 'Ambient'}: {ambientMode}</div>
         <div>
-          Viewport: {viewport.width}x{viewport.height}
+          {isChinese ? '视窗' : 'Viewport'}: {viewport.width}x{viewport.height}
         </div>
-        <div>Canvas2D: {capabilities.canvas2d ? 'yes' : 'no'}</div>
-        <div>WebGL2: {capabilities.webgl2 ? 'yes' : 'no'}</div>
-        <div>WebGL: {capabilities.webgl ? 'yes' : 'no'}</div>
-        <div>Reduced motion: {capabilities.reducedMotion ? 'yes' : 'no'}</div>
+        <div>Canvas2D: {capabilities.canvas2d ? (isChinese ? '是' : 'yes') : (isChinese ? '否' : 'no')}</div>
+        <div>WebGL2: {capabilities.webgl2 ? (isChinese ? '是' : 'yes') : (isChinese ? '否' : 'no')}</div>
+        <div>WebGL: {capabilities.webgl ? (isChinese ? '是' : 'yes') : (isChinese ? '否' : 'no')}</div>
+        <div>{isChinese ? '减少动态效果' : 'Reduced motion'}: {capabilities.reducedMotion ? (isChinese ? '是' : 'yes') : (isChinese ? '否' : 'no')}</div>
       </div>
     </div>
   );

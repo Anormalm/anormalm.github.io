@@ -206,6 +206,17 @@
     color: var(--accent);
   }
 
+  .language-toggle {
+    @apply inline-flex h-9 min-w-9 items-center justify-center rounded-full border px-2.5 font-mono text-[9px] font-semibold uppercase tracking-[0.08em] transition;
+    border-color: var(--line);
+    color: var(--muted);
+  }
+
+  .language-toggle:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
   .eyebrow {
     @apply font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-[var(--accent)];
   }
@@ -816,6 +827,7 @@
 }
 
 .kinetic-title-offset { margin-left: clamp(0rem, 7vw, 7rem); }
+.kinetic-title.is-chinese { line-height: 0.94; }
 .kinetic-title-accent {
   margin-left: clamp(0rem, 2vw, 2rem);
   color: transparent;
@@ -2678,6 +2690,7 @@
   .hero-coordinate { display: none; }
   .kinetic-hero { min-height: 880px; padding-top: 4rem; }
   .kinetic-title { font-size: clamp(2.75rem, 13vw, 5.3rem); line-height: 0.83; white-space: nowrap; }
+  .kinetic-title.is-chinese { font-size: clamp(2.6rem, 11.6vw, 4.8rem); line-height: 0.94; }
   .kinetic-title-offset { margin-left: 0.3rem; }
   .signal-world { width: 260px; top: 17rem; right: -6rem; opacity: 0.44; }
   .signal-label { display: none; }
