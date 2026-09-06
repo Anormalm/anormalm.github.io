@@ -289,8 +289,8 @@ const CV = () => {
             <section className="tech-panel rounded-3xl p-6 md:p-7">
               <div className="eyebrow">{isChinese ? '学术服务' : 'Academic service'}</div>
               <ul className="mt-4 space-y-3 text-sm leading-6 text-[var(--muted)]">
-                <li>{isChinese ? '受邀审稿人 · GroundLM Workshop' : 'Invited Reviewer · GroundLM Workshop'}</li>
-                <li>{isChinese ? '受邀审稿人 · VLM4RWD Workshop' : 'Invited Reviewer · VLM4RWD Workshop'}</li>
+                <li>{isChinese ? '受邀审稿人 · EMNLP 2026 GroundLM 工作坊' : 'Invited Reviewer · EMNLP 2026 Workshop GroundLM'}</li>
+                <li>{isChinese ? '受邀审稿人 · NeurIPS 2026 VLM4RWD 工作坊' : 'Invited Reviewer · NeurIPS 2026 Workshop VLM4RWD'}</li>
               </ul>
             </section>
 
