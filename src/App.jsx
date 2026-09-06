@@ -20,6 +20,7 @@ import GNNMARLFraud from './pages/writings/GNNMARLFraud';
 import Disenchantment from './pages/writings/Disenchantment';
 import Fragments from './pages/writings/Fragments';
 import { LanguageProvider, useLanguage } from './context/LanguageContext';
+import { recordVisitorSignal } from './lib/visitorSignals';
 
 const getAmbientMode = (hour) => {
   if (hour >= 5 && hour < 11) return 'morning';
@@ -50,6 +51,10 @@ function AppShell() {
   const reduceMotion = useReducedMotion();
   const { scrollYProgress } = useScroll();
   const progressScale = useSpring(scrollYProgress, { stiffness: 130, damping: 28, mass: 0.22 });
+
+  useEffect(() => {
+    recordVisitorSignal();
+  }, []);
 
   useEffect(() => {
     setAmbientMode(getAmbientMode(new Date().getHours()));

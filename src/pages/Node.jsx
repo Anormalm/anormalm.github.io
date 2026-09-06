@@ -3,6 +3,7 @@ import { motion as Motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { FiArrowLeft, FiRefreshCw } from 'react-icons/fi';
 import { useLanguage } from '../context/LanguageContext';
+import VisitorArchive from '../components/VisitorArchive';
 
 const LOG_BANK = [
   'NODE/01 handshake accepted',
@@ -89,6 +90,9 @@ const Node = () => {
           <div className="node-hint">{isChinese ? '键盘快捷键：按 N 旋转信号。' : 'Keyboard shortcut: press N to rotate the signal.'}</div>
         </div>
       </section>
+      <div className="section node-archive-section">
+        <VisitorArchive />
+      </div>
     </div>
   );
 };

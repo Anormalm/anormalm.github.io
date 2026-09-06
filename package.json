@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && node scripts/build-worker.mjs",
+    "db:generate": "drizzle-kit generate",
     "lint": "eslint .",
     "preview": "vite preview",
     "deploy": "gh-pages -d dist"
@@ -32,6 +33,9 @@
     "globals": "^15.15.0",
     "postcss": "^8.5.26",
     "tailwindcss": "3.4.1",
+    "@openai/sites-vite-plugin": "^0.2.0",
+    "drizzle-kit": "^0.31.4",
+    "drizzle-orm": "^0.44.5",
     "vite": "^8.2.2"
   }
 }

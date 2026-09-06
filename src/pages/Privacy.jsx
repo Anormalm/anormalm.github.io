@@ -1,17 +1,26 @@
+import { useState } from 'react';
 import { FiArrowUpRight, FiShield } from 'react-icons/fi';
 import { useLanguage } from '../context/LanguageContext';
+import { isVisitorSignalPaused, setVisitorSignalPaused } from '../lib/visitorSignals';
 
 const Privacy = () => {
   const { isChinese } = useLanguage();
+  const [signalsPaused, setSignalsPaused] = useState(isVisitorSignalPaused);
+
+  const toggleSignals = () => {
+    const nextValue = !signalsPaused;
+    setVisitorSignalPaused(nextValue);
+    setSignalsPaused(nextValue);
+  };
   return (
   <div className="min-h-screen bg-grid">
     <section className="section privacy-page">
       <header className="page-hero-panel tech-panel rounded-3xl p-7 md:p-9" data-page="PRIVACY">
         <div>
           <div className="eyebrow">{isChinese ? '简明隐私说明' : 'Plain-language privacy'}</div>
-          <h1 className="font-display mt-3 text-4xl md:text-5xl">{isChinese ? '不在背后猜测你。' : 'No invisible guessing.'}</h1>
+          <h1 className="font-display mt-3 text-4xl md:text-5xl">{isChinese ? '小信号，不是人物档案。' : 'Small signal. No dossier.'}</h1>
           <p className="mt-4 max-w-2xl text-sm leading-6 text-[var(--muted)] md:text-base">
-            {isChinese ? '可选的地理信号只会在你主动点击后运行。最后更新：2026 年 9 月 4 日。' : 'The optional Geo Signal only runs after you ask it to. Last updated 4 September 2026.'}
+            {isChinese ? '匿名访问信号保持宽泛、短期且可关闭。最后更新：2026 年 9 月 7 日。' : 'Anonymous visit signals stay broad, short-lived, and optional. Last updated 7 September 2026.'}
           </p>
         </div>
       </header>
@@ -19,11 +28,11 @@ const Privacy = () => {
       <div className="privacy-grid">
         <article className="tech-panel privacy-card">
           <span>01</span>
-          <h2>{isChinese ? '本网站' : 'This website'}</h2>
+          <h2>{isChinese ? '匿名档案' : 'Anonymous archive'}</h2>
           <p>
             {isChinese
-              ? '本站不使用自定义分析、广告追踪器或追踪 Cookie。主题和语言偏好仅保存在你的浏览器中。与其他托管页面一样，GitHub Pages 会接收提供页面所需的网络请求。'
-              : 'No custom analytics, advertising trackers, or tracking cookies are used. Theme and language preferences are stored only in your browser. Like any hosted page, GitHub Pages receives the network request needed to serve the site.'}
+              ? '除非你启用了全局隐私控制、请勿追踪或下方的暂停选项，否则每个浏览器每天最多发送一个匿名信号。只保存 UTC 日期、两位国家代码、约 30° 的宽泛地图区域和计数，保存 90 天。不会保存原始 IP、姓名、精确位置、页面历史、广告 Cookie 或设备指纹。'
+              : 'Unless Global Privacy Control, Do Not Track, or the pause option below is enabled, each browser sends at most one anonymous signal per day. Only the UTC day, two-letter country code, broad 30° map region, and count are kept for 90 days. No raw IP, name, precise location, page history, advertising cookie, or device fingerprint is stored.'}
           </p>
           <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noreferrer">
             {isChinese ? 'GitHub 隐私声明' : 'GitHub privacy statement'} <FiArrowUpRight />
@@ -48,9 +57,13 @@ const Privacy = () => {
           <h2>{isChinese ? '由你选择' : 'Your choice'}</h2>
           <p>
             {isChinese
-              ? '查询完全可选，并且绝不会自动开始。忽略按钮即可退出，也可以清除已显示的结果。IP 定位只是估算，在使用 VPN、移动网络或共享连接时尤其可能出错。'
-              : 'The lookup is optional and never starts automatically. Ignore the button to opt out, or clear the displayed result. IP geolocation is approximate and can be wrong, especially with VPNs, mobile networks, or shared connections.'}
+              ? '你可以在这个浏览器中暂停匿名访问信号。已经汇总的计数无法与你关联，也无法单独删除。实验室里的地理查询依然需要你主动点击，结果只保留在当前页面内存中。'
+              : 'You can pause anonymous visit signals in this browser. Past aggregate counts cannot be linked back to you or individually removed. The Lab’s Geo Signal still requires a click and remains only in the current page memory.'}
           </p>
+          <button type="button" className="privacy-toggle" onClick={toggleSignals} aria-pressed={signalsPaused}>
+            <span aria-hidden="true"><i /></span>
+            {signalsPaused ? (isChinese ? '匿名信号已暂停' : 'Anonymous signals paused') : (isChinese ? '暂停匿名信号' : 'Pause anonymous signals')}
+          </button>
           <a href="mailto:anormalm@outlook.com">{isChinese ? '隐私问题' : 'Privacy question'} <FiArrowUpRight /></a>
         </article>
       </div>
