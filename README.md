@@ -1,4 +1,4 @@
-# Lifan Hu — Personal Website
+# Anormalm — Personal Website
 
 The source for [anormalm.com](https://anormalm.com), a personal portfolio covering research, engineering projects, writing, interactive experiments, and CV highlights.
 
