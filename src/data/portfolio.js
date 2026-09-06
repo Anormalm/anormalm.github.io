@@ -141,6 +141,18 @@ export const projects = [
 
 export const writings = [
   {
+    title: 'We Are Too Impatient to Hack',
+    titleZh: '我们已经没有耐心去 Hack 了',
+    excerpt:
+      'Why modern hackathons often confuse rapid assembly with hacking—and why the real thing begins with obsession, uncertainty, and a willingness to stay stuck.',
+    excerptZh: '现代黑客松常把快速拼装当作 hacking；而真正的黑客精神，始于痴迷、不确定，以及愿意困在问题里。',
+    date: 'September 2026',
+    dateZh: '2026 年 9 月',
+    readingTime: '8 min read',
+    readingTimeZh: '阅读 8 分钟',
+    link: 'https://medium.com/@hulifan55555/we-are-too-impatient-to-hack-30107d6b6a96',
+  },
+  {
     title: 'Kimi K3 — Open Source Miracle?',
     titleZh: 'Kimi K3——开源奇迹？',
     excerpt:
