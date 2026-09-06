@@ -5,6 +5,9 @@ import Navbar from './components/Navbar';
 import Loader from './components/Loader';
 import AmbientField from './components/AmbientField';
 import DebugHud from './components/DebugHud';
+import SignalCursor from './components/SignalCursor';
+import RouteSignal from './components/RouteSignal';
+import CommandPalette from './components/CommandPalette';
 import Home from './pages/Home';
 import Projects from './pages/Projects';
 import Writings from './pages/Writings';
@@ -112,6 +115,7 @@ function AppShell() {
       <AmbientField />
       <Motion.div className="scroll-progress" style={{ scaleX: progressScale }} aria-hidden="true" />
       <Navbar />
+      <RouteSignal key={`route-signal-${location.pathname}`} pathname={location.pathname} />
       <AnimatePresence mode="wait">
         <Motion.main
           key={location.pathname}
@@ -145,20 +149,37 @@ function AppShell() {
           </Routes>
         </Motion.main>
       </AnimatePresence>
+      <CommandPalette onToggleGlitch={() => setGlitchMode((previous) => !previous)} />
+      <SignalCursor />
       <DebugHud ambientMode={ambientMode} />
     </>
   );
 }
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(() => {
+    try {
+      return sessionStorage.getItem('anormalm-loaded') !== '1';
+    } catch {
+      return true;
+    }
+  });
+
+  const completeLoading = () => {
+    try {
+      sessionStorage.setItem('anormalm-loaded', '1');
+    } catch {
+      // The one-time loader gracefully falls back when storage is unavailable.
+    }
+    setIsLoading(false);
+  };
 
   return (
     <div className="app-shell min-h-screen bg-[var(--paper)] text-[var(--ink)] transition-colors duration-500">
       <LanguageProvider>
         <AnimatePresence mode="wait">
           {isLoading ? (
-            <Loader key="site-loader" onComplete={() => setIsLoading(false)} />
+            <Loader key="site-loader" onComplete={completeLoading} />
           ) : (
             <Motion.div key="site" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.2 }}>
               <Router>

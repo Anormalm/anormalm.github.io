@@ -38,7 +38,12 @@ const Navbar = () => {
   return (
     <nav className="site-nav sticky top-0 z-50 border-b border-[var(--line)]">
       <div className="mx-auto flex w-full max-w-[1440px] items-center justify-between px-5 py-3.5 md:px-10 xl:px-14">
-        <Link to="/" className="group navbar-mark-only" aria-label={isChinese ? '胡立凡首页' : 'Lifan Hu home'}>
+        <Link
+          to="/"
+          className="group navbar-mark-only"
+          aria-label={isChinese ? '胡立凡首页' : 'Lifan Hu home'}
+          title={isChinese ? '按 / 打开命令面板' : 'Press / for commands'}
+        >
           <div className="brand-mark" aria-hidden="true">
             <span className="brand-mark-core" />
           </div>

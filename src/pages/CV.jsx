@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion as Motion } from 'framer-motion';
 import { FiArrowLeft, FiArrowRight, FiDownload, FiExternalLink, FiX } from 'react-icons/fi';
 import { publications } from '../data/portfolio';
@@ -56,7 +56,11 @@ const CV_PHOTOS = [
   {
     src: '/lifan-signal.webp',
     alt: 'Lifan Hu standing in a garden at Sentosa, Singapore',
+    altZh: '胡立凡站在新加坡圣淘沙的一处花园中',
     location: 'Sentosa, Singapore',
+    locationZh: '新加坡 · 圣淘沙',
+    date: 'September 2026',
+    dateZh: '2026 年 9 月',
   },
 ];
 
@@ -86,12 +90,26 @@ const CV = () => {
   const [showGate, setShowGate] = useState(false);
   const [gateMessage, setGateMessage] = useState('');
   const [activePhoto, setActivePhoto] = useState(0);
+  const photoDragStart = useRef(null);
 
   const changePhoto = (direction) => {
     setActivePhoto((current) => (current + direction + CV_PHOTOS.length) % CV_PHOTOS.length);
   };
 
   const photo = CV_PHOTOS[activePhoto];
+
+  const onPhotoPointerDown = (event) => {
+    if (CV_PHOTOS.length < 2) return;
+    photoDragStart.current = event.clientX;
+    event.currentTarget.setPointerCapture?.(event.pointerId);
+  };
+
+  const onPhotoPointerUp = (event) => {
+    if (photoDragStart.current === null) return;
+    const distance = event.clientX - photoDragStart.current;
+    photoDragStart.current = null;
+    if (Math.abs(distance) > 45) changePhoto(distance > 0 ? -1 : 1);
+  };
 
   useEffect(() => {
     if (!showGate) return undefined;
@@ -140,12 +158,24 @@ const CV = () => {
           </div>
 
           <figure className="cv-photo-album">
-            <div className="cv-profile-photo">
+            <div
+              className="cv-profile-photo"
+              role="region"
+              tabIndex="0"
+              aria-label={isChinese ? '履历照片档案' : 'CV photo archive'}
+              data-cursor="swipe"
+              onPointerDown={onPhotoPointerDown}
+              onPointerUp={onPhotoPointerUp}
+              onKeyDown={(event) => {
+                if (event.key === 'ArrowLeft') changePhoto(-1);
+                if (event.key === 'ArrowRight') changePhoto(1);
+              }}
+            >
               <AnimatePresence initial={false} mode="wait">
                 <Motion.img
                   key={photo.src}
                   src={photo.src}
-                  alt={photo.alt}
+                  alt={isChinese ? photo.altZh : photo.alt}
                   width="1600"
                   height="1200"
                   decoding="async"
@@ -156,7 +186,7 @@ const CV = () => {
                 />
               </AnimatePresence>
               <span className="cv-photo-label">{isChinese ? '现场记录' : 'Field notes'}</span>
-              <div className="cv-photo-controls" aria-label="Photo album controls">
+              <div className="cv-photo-controls" aria-label={isChinese ? '照片档案控制项' : 'Photo archive controls'}>
                 <button
                   type="button"
                   onClick={() => changePhoto(-1)}
@@ -176,8 +206,20 @@ const CV = () => {
               </div>
             </div>
             <figcaption className="cv-photo-caption">
-              <span>{isChinese ? '新加坡 · 圣淘沙' : photo.location}</span>
-              <span>{String(activePhoto + 1).padStart(2, '0')} / {String(CV_PHOTOS.length).padStart(2, '0')}</span>
+              <span>{isChinese ? photo.locationZh : photo.location}</span>
+              <span className="cv-photo-dots" aria-label={isChinese ? '照片索引' : 'Photo index'}>
+                {CV_PHOTOS.map((item, index) => (
+                  <button
+                    key={item.src}
+                    type="button"
+                    className={index === activePhoto ? 'is-active' : ''}
+                    onClick={() => setActivePhoto(index)}
+                    aria-label={isChinese ? `查看照片 ${index + 1}` : `View photo ${index + 1}`}
+                    aria-current={index === activePhoto ? 'true' : undefined}
+                  />
+                ))}
+              </span>
+              <span>{isChinese ? photo.dateZh : photo.date} · {isChinese ? '档案' : 'LOG'} {String(activePhoto + 1).padStart(2, '0')} / {String(CV_PHOTOS.length).padStart(2, '0')}</span>
             </figcaption>
           </figure>
         </div>

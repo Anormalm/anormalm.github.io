@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { AnimatePresence, motion as Motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { FaGithub, FaLinkedin, FaMedium } from 'react-icons/fa';
@@ -45,6 +45,13 @@ const SOCIALS = [
   ['Medium', 'https://medium.com/@hulifan55555', <FaMedium key="medium" />],
 ];
 
+const SIGNAL_NODES = [
+  { path: '/projects', label: 'Work', labelZh: '项目', preview: 'Models, systems, experiments', previewZh: '模型、系统与实验', x: 19, y: 24 },
+  { path: '/writings', label: 'Writing', labelZh: '文章', preview: 'Ideas worth tracing', previewZh: '值得追踪的想法', x: 81, y: 24 },
+  { path: '/lab', label: 'Lab', labelZh: '实验室', preview: 'Touch the dynamics', previewZh: '亲手扰动系统', x: 88, y: 68 },
+  { path: '/cv', label: 'CV', labelZh: '履历', preview: 'Current coordinates', previewZh: '当前坐标', x: 18, y: 72 },
+];
+
 const INTRO_FACTS = [
   'I’m a Computer Engineering student at NUS in Singapore.',
   'My academic detours include a second major in Innovation & Design and a minor in Mathematics.',
@@ -85,6 +92,7 @@ const Home = () => {
   const [ghostMode, setGhostMode] = useState(false);
   const [knowledgeLevel, setKnowledgeLevel] = useState(0);
   const reduceMotion = useReducedMotion();
+  const canDragSignal = useMemo(() => window.matchMedia('(pointer: fine)').matches && !reduceMotion, [reduceMotion]);
   const { scrollYProgress } = useScroll({
     target: heroRef,
     offset: ['start start', 'end start'],
@@ -119,6 +127,26 @@ const Home = () => {
     const timer = window.setTimeout(() => setGhostMode(false), 20_000);
     return () => window.clearTimeout(timer);
   }, [ghostMode]);
+
+  useEffect(() => {
+    const wakeGhost = () => {
+      setGhostMode(true);
+      try {
+        sessionStorage.removeItem('anormalm-ghost-on-arrival');
+      } catch {
+        // The easter egg still works without storage.
+      }
+    };
+
+    try {
+      if (sessionStorage.getItem('anormalm-ghost-on-arrival') === '1') wakeGhost();
+    } catch {
+      // The keyboard command can still trigger the event listener below.
+    }
+
+    window.addEventListener('anormalm:ghost', wakeGhost);
+    return () => window.removeEventListener('anormalm:ghost', wakeGhost);
+  }, []);
 
   const toggleGhostMode = () => setGhostMode((previous) => !previous);
 
@@ -230,17 +258,34 @@ const Home = () => {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.32, duration: 1.05, ease: [0.22, 1, 0.36, 1] }}
           aria-label={isChinese ? '交互式信号图' : 'Interactive signal map'}
+          drag={canDragSignal}
+          dragConstraints={heroRef}
+          dragElastic={0.12}
+          dragMomentum={false}
+          whileDrag={{ scale: 1.035 }}
+          data-cursor={canDragSignal ? 'drag' : undefined}
         >
           <span className="signal-ring signal-ring-a"><i /></span>
           <span className="signal-ring signal-ring-b"><i /></span>
           <span className="signal-ring signal-ring-c"><i /></span>
+          {SIGNAL_NODES.map((node, index) => (
+            <Link
+              key={node.path}
+              to={node.path}
+              className="signal-node"
+              style={{ '--signal-x': `${node.x}%`, '--signal-y': `${node.y}%` }}
+              aria-label={`${isChinese ? node.labelZh : node.label}: ${isChinese ? node.previewZh : node.preview}`}
+            >
+              <span>0{index + 1}</span>
+              <strong>{isChinese ? node.labelZh : node.label}</strong>
+              <small>{isChinese ? node.previewZh : node.preview}</small>
+            </Link>
+          ))}
           <button type="button" className="signal-core" onClick={toggleGhostMode} aria-label={isChinese ? '切换幽灵信号' : 'Toggle ghost signal'}>
             <span>LH</span>
             <small>{ghostMode ? (isChinese ? '幽灵' : 'GHOST') : (isChinese ? '在线' : 'ONLINE')}</small>
           </button>
-          <span className="signal-label signal-label-a">{isChinese ? '图' : 'GRAPH'}</span>
-          <span className="signal-label signal-label-b">{isChinese ? '语言' : 'LANGUAGE'}</span>
-          <span className="signal-label signal-label-c">{isChinese ? '系统' : 'SYSTEMS'}</span>
+          <span className="signal-drag-hint">{canDragSignal ? (isChinese ? '拖动星图' : 'DRAG THE MAP') : (isChinese ? '点击节点' : 'TAP A NODE')}</span>
         </Motion.aside>
 
         <a href="#selected-work" className="scroll-cue" aria-label={isChinese ? '滚动到精选项目' : 'Scroll to selected work'}>
@@ -308,7 +353,7 @@ const Home = () => {
             ))}
           </div>
 
-          <div className="now-playing">
+          <div className="now-playing" id="now-playing">
             <span className="playing-bars" aria-hidden="true"><i /><i /><i /><i /></span>
             <span>{isChinese ? '非技术信号' : 'Non-tech signal'}</span>
             <strong>{isChinese ? '《夜之幽灵》· 莫里斯·拉威尔' : 'Gaspard de la Nuit · Maurice Ravel'}</strong>

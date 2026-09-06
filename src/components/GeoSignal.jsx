@@ -268,6 +268,7 @@ const GeoSignal = () => {
                 <button
                   type="button"
                   className="geo-grid"
+                  data-cursor="pin"
                   onClick={placeGuess}
                   disabled={Boolean(guess) || gameComplete}
                   aria-label={gameComplete

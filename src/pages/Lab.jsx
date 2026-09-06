@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { AnimatePresence, motion as Motion } from 'framer-motion';
 import { FiRefreshCw } from 'react-icons/fi';
 import { useLanguage } from '../context/LanguageContext';
@@ -128,15 +128,35 @@ const Lab = () => {
     []
   );
 
-  const applyChaosSeed = () => {
+  const applyChaosSeed = useCallback(() => {
     setParams(createChaosParams());
     setStatusMessage(isChinese ? '已应用混沌种子。' : 'Chaos seed applied.');
-  };
+  }, [isChinese]);
 
   useEffect(() => {
     const test = document.createElement('canvas');
     setSupportsCanvas(Boolean(test.getContext && test.getContext('2d')));
   }, []);
+
+  useEffect(() => {
+    const runChaos = () => {
+      applyChaosSeed();
+      try {
+        sessionStorage.removeItem('anormalm-chaos-on-arrival');
+      } catch {
+        // The command still works without storage.
+      }
+    };
+
+    try {
+      if (sessionStorage.getItem('anormalm-chaos-on-arrival') === '1') runChaos();
+    } catch {
+      // The keyboard command can still trigger the event listener below.
+    }
+
+    window.addEventListener('anormalm:chaos', runChaos);
+    return () => window.removeEventListener('anormalm:chaos', runChaos);
+  }, [applyChaosSeed]);
 
   useEffect(() => {
     if (!supportsCanvas) return undefined;
@@ -993,7 +1013,7 @@ const Lab = () => {
                 <span>{isChinese ? '画布 / 实时' : 'Canvas / live'}</span>
               </div>
 
-              <div className="lab-canvas-viewport">
+              <div className="lab-canvas-viewport" data-cursor="pull">
                 <canvas ref={canvasRef} />
                 <span className="lab-corner lab-corner-tl" aria-hidden="true" />
                 <span className="lab-corner lab-corner-tr" aria-hidden="true" />
