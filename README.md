@@ -11,6 +11,10 @@ npm run dev
 
 ## Production build
 
+The GroundLM benchmark is available at [/groundlm/](https://anormalm.com/groundlm/).
+Visitors can run evaluations using their own model endpoint and API key.
+See [GroundLM setup and deployment](docs/GROUNDLM.md).
+
 ```bash
 npm run build
 ```

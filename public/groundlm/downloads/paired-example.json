@@ -1,0 +1,42 @@
+[
+  {
+    "id": "demo-path-1",
+    "task": "shortest_path",
+    "ground_truth": "3",
+    "original": "3",
+    "neutral": "3",
+    "semantic": "2"
+  },
+  {
+    "id": "demo-path-2",
+    "task": "shortest_path",
+    "ground_truth": "2",
+    "original": "2",
+    "neutral": "2",
+    "semantic": "2"
+  },
+  {
+    "id": "demo-connectivity",
+    "task": "connectivity",
+    "ground_truth": "yes",
+    "original": "yes",
+    "neutral": "yes",
+    "semantic": "yes"
+  },
+  {
+    "id": "demo-triangle",
+    "task": "triangle_detection",
+    "ground_truth": "no",
+    "original": "yes",
+    "neutral": "no",
+    "semantic": "no"
+  },
+  {
+    "id": "demo-neighbor",
+    "task": "common_neighbor",
+    "ground_truth": "yes",
+    "original": "yes",
+    "neutral": "yes",
+    "semantic": "unclear"
+  }
+]

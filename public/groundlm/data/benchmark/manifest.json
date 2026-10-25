@@ -1,0 +1,719 @@
+{
+  "version": "groundlm-corrected-browser-v1",
+  "seed": 42,
+  "query_identity": "graph/task/sample-slot; original keys retained as source_* to distinguish repeated sampled questions",
+  "source": "groundlm-camera-ready/code/groundlm_serialization.py",
+  "source_sha256": "4b86edffa0b7a52f3ee8580bb467f5128281b2dca2da2008e745174aa095e51c",
+  "networkx": "3.4.2",
+  "numpy": "1.26.4",
+  "diagnostics": [
+    "format_stability",
+    "order_sensitivity",
+    "isomorphism_consistency",
+    "distractor_robustness"
+  ],
+  "graphs": [
+    {
+      "id": "er_n5_g0",
+      "nodes": 5,
+      "records": 168,
+      "file": "er_n5_g0.json",
+      "sha256": "b410d7beac9ab05e504cf314d545c8a058b39c4d9f96f14b9eff79c90f814afd"
+    },
+    {
+      "id": "er_n5_g1",
+      "nodes": 5,
+      "records": 168,
+      "file": "er_n5_g1.json",
+      "sha256": "405edfab03c81831d3ff477c862748d4284b3f1c6d4f42ddb331e90715ddcdcc"
+    },
+    {
+      "id": "er_n5_g2",
+      "nodes": 5,
+      "records": 168,
+      "file": "er_n5_g2.json",
+      "sha256": "3ff98e930647ba28a1a1551e53bd0aa6b8e64e3107b78f8d734c8d796649c249"
+    },
+    {
+      "id": "er_n5_g3",
+      "nodes": 5,
+      "records": 168,
+      "file": "er_n5_g3.json",
+      "sha256": "21000e8377f1f5b1b581d9b1ef5aa4ca53e2ec70be60f67b765bc91c08dea5fd"
+    },
+    {
+      "id": "er_n5_g4",
+      "nodes": 5,
+      "records": 168,
+      "file": "er_n5_g4.json",
+      "sha256": "89eaaeda9689b89ff7086c66945c303856b0abfc30f57b6fc733343310847a67"
+    },
+    {
+      "id": "er_n5_g5",
+      "nodes": 5,
+      "records": 168,
+      "file": "er_n5_g5.json",
+      "sha256": "a31a7c21394ecfb182706cf259e882dd376beeabd3d013785742a3be83fe1f2b"
+    },
+    {
+      "id": "er_n5_g6",
+      "nodes": 5,
+      "records": 168,
+      "file": "er_n5_g6.json",
+      "sha256": "80b604165b82372a8d909e3ffbec55d4c8274d4654a492112bd3511e97ad22b0"
+    },
+    {
+      "id": "er_n5_g7",
+      "nodes": 5,
+      "records": 168,
+      "file": "er_n5_g7.json",
+      "sha256": "65d37bb0d96f67be689ba282a15892c23fc106ffb5be05ec31d349179f2bea52"
+    },
+    {
+      "id": "er_n5_g8",
+      "nodes": 5,
+      "records": 168,
+      "file": "er_n5_g8.json",
+      "sha256": "d5bc77696b3746e076cfc1d3416da216b0cb9e81dbb5e2b6019623b1db2d8150"
+    },
+    {
+      "id": "er_n5_g9",
+      "nodes": 5,
+      "records": 168,
+      "file": "er_n5_g9.json",
+      "sha256": "0aa5678f8321e046ac65b402e238905025d7f905fcf025a029b56a0ec097aa2e"
+    },
+    {
+      "id": "er_n5_g10",
+      "nodes": 5,
+      "records": 168,
+      "file": "er_n5_g10.json",
+      "sha256": "a13722d46bedc26c296e18e306efdab2eb4c4d172552bbeddec744ae64558659"
+    },
+    {
+      "id": "er_n5_g11",
+      "nodes": 5,
+      "records": 168,
+      "file": "er_n5_g11.json",
+      "sha256": "dba481a5985cf3caf5c459ba3461deeac2330286f9336b7e7fe988bb5b20f263"
+    },
+    {
+      "id": "er_n5_g12",
+      "nodes": 5,
+      "records": 168,
+      "file": "er_n5_g12.json",
+      "sha256": "b8b15fda0408289de5196a04368bd0d90c0b5bca20cee5733d634205efb71a98"
+    },
+    {
+      "id": "er_n5_g13",
+      "nodes": 5,
+      "records": 168,
+      "file": "er_n5_g13.json",
+      "sha256": "8bebe09a48bafe267d3f7407dad57cfcebc9860dc802c73d1990eff87204de79"
+    },
+    {
+      "id": "er_n5_g14",
+      "nodes": 5,
+      "records": 168,
+      "file": "er_n5_g14.json",
+      "sha256": "eccaec88bac388f2d1e366932845c8b29ba71377b988d3c1eb28d6a27a4379b8"
+    },
+    {
+      "id": "er_n5_g15",
+      "nodes": 5,
+      "records": 168,
+      "file": "er_n5_g15.json",
+      "sha256": "f5930d010b6eaf1fbeaa669d8cb3ae3c9835a7008ad22ea3c0033245060e2fa3"
+    },
+    {
+      "id": "er_n5_g16",
+      "nodes": 5,
+      "records": 168,
+      "file": "er_n5_g16.json",
+      "sha256": "5c534c410baea2ec8a25278541ea94a1f692e96351ec1ed78f9e2a14307891d6"
+    },
+    {
+      "id": "er_n5_g17",
+      "nodes": 5,
+      "records": 168,
+      "file": "er_n5_g17.json",
+      "sha256": "7c513a7f6267f6a384f4e1d8709cc153e02ab2fc12d196180d46298081e7a298"
+    },
+    {
+      "id": "er_n5_g18",
+      "nodes": 5,
+      "records": 168,
+      "file": "er_n5_g18.json",
+      "sha256": "f767f5f1bb8b1233afb22f36e81b730f71270cff84e2678c119fe2d14802d48b"
+    },
+    {
+      "id": "er_n5_g19",
+      "nodes": 5,
+      "records": 168,
+      "file": "er_n5_g19.json",
+      "sha256": "eb0ca0027bbcdfacbf877ac42183bb54442ca4f33c70ef2f2a269dc8853b4958"
+    },
+    {
+      "id": "er_n8_g0",
+      "nodes": 8,
+      "records": 168,
+      "file": "er_n8_g0.json",
+      "sha256": "25f35344bc1060093a824243995fb4f321f61f3ab4f83d531897d506b3b39775"
+    },
+    {
+      "id": "er_n8_g1",
+      "nodes": 8,
+      "records": 168,
+      "file": "er_n8_g1.json",
+      "sha256": "49165afdd02382a9e88993a3a829a06a9b54a01e76c62f05cb36415a3d870290"
+    },
+    {
+      "id": "er_n8_g2",
+      "nodes": 8,
+      "records": 168,
+      "file": "er_n8_g2.json",
+      "sha256": "006a807baea8839dfcc3f759ee709c350dc49149306c0acc0a8e9c0e00d8bd82"
+    },
+    {
+      "id": "er_n8_g3",
+      "nodes": 8,
+      "records": 168,
+      "file": "er_n8_g3.json",
+      "sha256": "ca6feed031a57220815d5cfcb2bd5dfbf82f8aff70c99e62e984b1541baae480"
+    },
+    {
+      "id": "er_n8_g4",
+      "nodes": 8,
+      "records": 168,
+      "file": "er_n8_g4.json",
+      "sha256": "bb35d3bc49535e153a14dee3b9532d3ca9bfaa3d7b1b9af8df3d2d1ac393a18a"
+    },
+    {
+      "id": "er_n8_g5",
+      "nodes": 8,
+      "records": 168,
+      "file": "er_n8_g5.json",
+      "sha256": "e18a3f14cb29ae96519f0c71c08de58cbe47fed6af29d23e1affb5d2583ffe69"
+    },
+    {
+      "id": "er_n8_g6",
+      "nodes": 8,
+      "records": 168,
+      "file": "er_n8_g6.json",
+      "sha256": "28f4554a2768b08c281db6417feacb63ff4446f35a7dfa29f7a4788b7c8a0727"
+    },
+    {
+      "id": "er_n8_g7",
+      "nodes": 8,
+      "records": 168,
+      "file": "er_n8_g7.json",
+      "sha256": "5808e88255d2f5815998026409eb9bc973aafcbdb1addf184948b3e4591fc5cc"
+    },
+    {
+      "id": "er_n8_g8",
+      "nodes": 8,
+      "records": 168,
+      "file": "er_n8_g8.json",
+      "sha256": "3fbb20a12516933bb969c85545a9a4dc367cdc92f2e4847d9c6d0827180bb614"
+    },
+    {
+      "id": "er_n8_g9",
+      "nodes": 8,
+      "records": 168,
+      "file": "er_n8_g9.json",
+      "sha256": "2a6d02ffc7368182fe6184c3f3012303be316e6e9b24fb1543aa73b50a295bc2"
+    },
+    {
+      "id": "er_n8_g10",
+      "nodes": 8,
+      "records": 168,
+      "file": "er_n8_g10.json",
+      "sha256": "301d18fb41fc3a75a41d01fdd31ab156d187a21d34d77bc29a40dfbab88f71a1"
+    },
+    {
+      "id": "er_n8_g11",
+      "nodes": 8,
+      "records": 168,
+      "file": "er_n8_g11.json",
+      "sha256": "8d544ba71cefc3f5d7bfd1191d13d8a79743373f77d3b9e28165150695bc5492"
+    },
+    {
+      "id": "er_n8_g12",
+      "nodes": 8,
+      "records": 168,
+      "file": "er_n8_g12.json",
+      "sha256": "d353d9bc6ddcaa240b0dc6b0140672e49828e69619000107bb33d68a0db72cd7"
+    },
+    {
+      "id": "er_n8_g13",
+      "nodes": 8,
+      "records": 168,
+      "file": "er_n8_g13.json",
+      "sha256": "4c8ccc8a1d464367e0aa2e880016bb2a6af1f4be26da5a1c490abcb3c7edc27f"
+    },
+    {
+      "id": "er_n8_g14",
+      "nodes": 8,
+      "records": 168,
+      "file": "er_n8_g14.json",
+      "sha256": "5c1a0aca89177e67ae359c22aea9dad44385a05e971367d674d7cb22d7e46453"
+    },
+    {
+      "id": "er_n8_g15",
+      "nodes": 8,
+      "records": 168,
+      "file": "er_n8_g15.json",
+      "sha256": "e5a915f7d855b4d3e6dcc310d3d264d9422729b0f0eaee0d2e6eb39dbf7e1a70"
+    },
+    {
+      "id": "er_n8_g16",
+      "nodes": 8,
+      "records": 168,
+      "file": "er_n8_g16.json",
+      "sha256": "7f8befad50d4e1b07a09e47db5f6638f6f37d2e79d78afa84e3c616c173d44ea"
+    },
+    {
+      "id": "er_n8_g17",
+      "nodes": 8,
+      "records": 168,
+      "file": "er_n8_g17.json",
+      "sha256": "3229a2fadda10ae1e5c55ad261e09798da1dab7c79f1c53df6c43013032a026d"
+    },
+    {
+      "id": "er_n8_g18",
+      "nodes": 8,
+      "records": 168,
+      "file": "er_n8_g18.json",
+      "sha256": "8664a4fd500a229e223a0eddcdf0961b4d25db9f7526913b3ce9d7ad415c5f35"
+    },
+    {
+      "id": "er_n8_g19",
+      "nodes": 8,
+      "records": 168,
+      "file": "er_n8_g19.json",
+      "sha256": "8cec1d6ab460ce83611a7980f3392eea5d6fa9ca7d313f8e4d86aba0f241779d"
+    },
+    {
+      "id": "er_n10_g0",
+      "nodes": 10,
+      "records": 168,
+      "file": "er_n10_g0.json",
+      "sha256": "4b8e07a79fe93b0d50af49ab75c8f8440559995563a00e89e7cbb17d108e31b3"
+    },
+    {
+      "id": "er_n10_g1",
+      "nodes": 10,
+      "records": 168,
+      "file": "er_n10_g1.json",
+      "sha256": "32174aace1818d24dd1d0570028df44c104f13487136298b0e7f33fb50099ed5"
+    },
+    {
+      "id": "er_n10_g2",
+      "nodes": 10,
+      "records": 168,
+      "file": "er_n10_g2.json",
+      "sha256": "296532158b9365cac7db7d1243890f79011fcc095a3cdee0c557b3fbb2db5f13"
+    },
+    {
+      "id": "er_n10_g3",
+      "nodes": 10,
+      "records": 168,
+      "file": "er_n10_g3.json",
+      "sha256": "fa3ae5dfa564ea9270da9235107e4a8ef9a248c1eb5279e4e1e1325ec6ceca68"
+    },
+    {
+      "id": "er_n10_g4",
+      "nodes": 10,
+      "records": 168,
+      "file": "er_n10_g4.json",
+      "sha256": "840f5f6e96a969001c4ae302e718b3933f4b772b241b1e2b681e0221c95f5a0f"
+    },
+    {
+      "id": "er_n10_g5",
+      "nodes": 10,
+      "records": 168,
+      "file": "er_n10_g5.json",
+      "sha256": "2e6bfe8cf6409fb49e439fec0158a3adfd86a62767fb95b220b50ee55ba93ada"
+    },
+    {
+      "id": "er_n10_g6",
+      "nodes": 10,
+      "records": 168,
+      "file": "er_n10_g6.json",
+      "sha256": "30249ed3bca74025ad2e7d9f8e9e3c0fd5245f8d5bbdcbc6b001b4f7dd6c63f3"
+    },
+    {
+      "id": "er_n10_g7",
+      "nodes": 10,
+      "records": 168,
+      "file": "er_n10_g7.json",
+      "sha256": "c32081cb43039a73151e5c02a665e10e9b603357cb00fb87288cb782d7d4d0da"
+    },
+    {
+      "id": "er_n10_g8",
+      "nodes": 10,
+      "records": 168,
+      "file": "er_n10_g8.json",
+      "sha256": "508b952c1cb7e360d615eb4150c2e2da41f1031af3a03af14afcff8e08826b28"
+    },
+    {
+      "id": "er_n10_g9",
+      "nodes": 10,
+      "records": 168,
+      "file": "er_n10_g9.json",
+      "sha256": "445adcc39ae97c96be9e5f7af28bea7ef91cb7473ae87914ddfa1620cabaa719"
+    },
+    {
+      "id": "er_n10_g10",
+      "nodes": 10,
+      "records": 168,
+      "file": "er_n10_g10.json",
+      "sha256": "40c28131f93593e3d14975f79ad91f66d1b631127a0041ed789aa416bca12548"
+    },
+    {
+      "id": "er_n10_g11",
+      "nodes": 10,
+      "records": 168,
+      "file": "er_n10_g11.json",
+      "sha256": "85f0e9a3c3e466105ade19b17b080a477bceee579469b2e3c5cacff992acfc61"
+    },
+    {
+      "id": "er_n10_g12",
+      "nodes": 10,
+      "records": 168,
+      "file": "er_n10_g12.json",
+      "sha256": "eb410e9b5c2ad8ff3308930c863dae49e421191716c7b1e588d07b9d93a27522"
+    },
+    {
+      "id": "er_n10_g13",
+      "nodes": 10,
+      "records": 168,
+      "file": "er_n10_g13.json",
+      "sha256": "ede54a4128883547f6a871132c4ebfc51c7c526cebfe0b7b274ab462ad66244d"
+    },
+    {
+      "id": "er_n10_g14",
+      "nodes": 10,
+      "records": 168,
+      "file": "er_n10_g14.json",
+      "sha256": "451809b1089434bf4de775a55771d145ac401e27a3a4b541a853b170edb87d56"
+    },
+    {
+      "id": "er_n10_g15",
+      "nodes": 10,
+      "records": 168,
+      "file": "er_n10_g15.json",
+      "sha256": "34e787526202b34ceda31866e659e4b7bebd73db873e34e9d0f419b726333272"
+    },
+    {
+      "id": "er_n10_g16",
+      "nodes": 10,
+      "records": 168,
+      "file": "er_n10_g16.json",
+      "sha256": "fbbf5cc136a9ec01fe2f12144ef45e8b9d24c08be4051410efce7ea4c3c098c7"
+    },
+    {
+      "id": "er_n10_g17",
+      "nodes": 10,
+      "records": 168,
+      "file": "er_n10_g17.json",
+      "sha256": "6cf6f155aad74284bb88c09fd7f923818a2932744c50b0b62c9285217c39a7a9"
+    },
+    {
+      "id": "er_n10_g18",
+      "nodes": 10,
+      "records": 168,
+      "file": "er_n10_g18.json",
+      "sha256": "a5037171281e3cb442b99883e74e7af6d3c52e9fb884fe51742884f5e9fa054e"
+    },
+    {
+      "id": "er_n10_g19",
+      "nodes": 10,
+      "records": 168,
+      "file": "er_n10_g19.json",
+      "sha256": "4a62f715bc162aacab9e832796a9edbb24313fbfd4ebeec4d0835e26710582fd"
+    },
+    {
+      "id": "er_n12_g0",
+      "nodes": 12,
+      "records": 168,
+      "file": "er_n12_g0.json",
+      "sha256": "146fc20380a505e7a0ad89088607cf95a97c72ac5311cb59265df4accd915068"
+    },
+    {
+      "id": "er_n12_g1",
+      "nodes": 12,
+      "records": 168,
+      "file": "er_n12_g1.json",
+      "sha256": "945c85891fe60e0aace85ddbda4edf76ecf84f5c6df2e44bcd574d2b33446e5e"
+    },
+    {
+      "id": "er_n12_g2",
+      "nodes": 12,
+      "records": 168,
+      "file": "er_n12_g2.json",
+      "sha256": "ca59dd77a1583a5eae20540cd0ccae04243c0d80f8dbff08c58e0300abb5a257"
+    },
+    {
+      "id": "er_n12_g3",
+      "nodes": 12,
+      "records": 168,
+      "file": "er_n12_g3.json",
+      "sha256": "82d830cb4c4c1096c4bc0a4786e708f76b0d83185534d950f503ac4092a5f2b4"
+    },
+    {
+      "id": "er_n12_g4",
+      "nodes": 12,
+      "records": 168,
+      "file": "er_n12_g4.json",
+      "sha256": "3784571d1e0faf81c10c27273744aa2f0e6058308e48e23e6500e0a456944dac"
+    },
+    {
+      "id": "er_n12_g5",
+      "nodes": 12,
+      "records": 168,
+      "file": "er_n12_g5.json",
+      "sha256": "b8c72e1cf1b78781cad8d66dc623a0ee9c2da998f36c905dc27e4a75a52a10b3"
+    },
+    {
+      "id": "er_n12_g6",
+      "nodes": 12,
+      "records": 168,
+      "file": "er_n12_g6.json",
+      "sha256": "94d9cbe7f54d0292122db5568df8edad76ffc792ade1842576b55a085a4cfab6"
+    },
+    {
+      "id": "er_n12_g7",
+      "nodes": 12,
+      "records": 168,
+      "file": "er_n12_g7.json",
+      "sha256": "e010557c70bdd5386ddb9bf85e92f55a39ff64e9f7fae0eee8e800ea135eab08"
+    },
+    {
+      "id": "er_n12_g8",
+      "nodes": 12,
+      "records": 168,
+      "file": "er_n12_g8.json",
+      "sha256": "27e2571b4b336093b5f983d0572d2c43b9a96365642e108fb2d9146077d35b7c"
+    },
+    {
+      "id": "er_n12_g9",
+      "nodes": 12,
+      "records": 168,
+      "file": "er_n12_g9.json",
+      "sha256": "109a23a86bc5d402d0f155cc237b4e4c5e2a852900d730efb3b40c3af3b9e79a"
+    },
+    {
+      "id": "er_n12_g10",
+      "nodes": 12,
+      "records": 168,
+      "file": "er_n12_g10.json",
+      "sha256": "a0ede3cf0b43afdf1980217b089f91c8fa2aa0e6a085efced99ef6163ba09cfc"
+    },
+    {
+      "id": "er_n12_g11",
+      "nodes": 12,
+      "records": 168,
+      "file": "er_n12_g11.json",
+      "sha256": "137154a15c14a3edb7faf6509af3de26f61bcd965ba3e99c0cb62e2604780442"
+    },
+    {
+      "id": "er_n12_g12",
+      "nodes": 12,
+      "records": 168,
+      "file": "er_n12_g12.json",
+      "sha256": "e7e76041c96e5407011af56a079cce80411d01cd39709d9cf6d9f1d38d30a228"
+    },
+    {
+      "id": "er_n12_g13",
+      "nodes": 12,
+      "records": 168,
+      "file": "er_n12_g13.json",
+      "sha256": "c5bef5c40726896f4305154743947273157e64d26d6f0a5e2d6b0fe981cb9a0a"
+    },
+    {
+      "id": "er_n12_g14",
+      "nodes": 12,
+      "records": 168,
+      "file": "er_n12_g14.json",
+      "sha256": "2e5fce9753e1e857999540ee04c6fce589620dc8eaba8920854e5b4ffcdf1166"
+    },
+    {
+      "id": "er_n12_g15",
+      "nodes": 12,
+      "records": 168,
+      "file": "er_n12_g15.json",
+      "sha256": "34df3760ea3af9201e8324ffa004a51e5eb83c648e5f67e56fc24703cd9ffa44"
+    },
+    {
+      "id": "er_n12_g16",
+      "nodes": 12,
+      "records": 168,
+      "file": "er_n12_g16.json",
+      "sha256": "730058aea048518a74736c6b6c77a744fdcbba0b8541d73963db37effd336720"
+    },
+    {
+      "id": "er_n12_g17",
+      "nodes": 12,
+      "records": 168,
+      "file": "er_n12_g17.json",
+      "sha256": "4eea43c4a150189c20f46da5b452ef002741fae1b99fc4439511ee3df5dbca6d"
+    },
+    {
+      "id": "er_n12_g18",
+      "nodes": 12,
+      "records": 168,
+      "file": "er_n12_g18.json",
+      "sha256": "791d9daed0ec4041ba3e4356c093781b233b45351d8f3d89548e7158f46d6318"
+    },
+    {
+      "id": "er_n12_g19",
+      "nodes": 12,
+      "records": 168,
+      "file": "er_n12_g19.json",
+      "sha256": "20bac7d24b160e21d4ad3491f3ee64b8e6f8de18dd4a87a95b43ef73a91d6f66"
+    },
+    {
+      "id": "er_n15_g0",
+      "nodes": 15,
+      "records": 168,
+      "file": "er_n15_g0.json",
+      "sha256": "00c6fad493c16e87b1b80b0e782cf7bd76b1ac3135539bb36cbd92141cdf8686"
+    },
+    {
+      "id": "er_n15_g1",
+      "nodes": 15,
+      "records": 168,
+      "file": "er_n15_g1.json",
+      "sha256": "af204b64a93b51d66a6e7cadf62a491db0553321697b9a4d26507314c8a7f44b"
+    },
+    {
+      "id": "er_n15_g2",
+      "nodes": 15,
+      "records": 168,
+      "file": "er_n15_g2.json",
+      "sha256": "6e6052288f8f25755f7ba87f911272720672a5292419d690c44069b71525ed59"
+    },
+    {
+      "id": "er_n15_g3",
+      "nodes": 15,
+      "records": 168,
+      "file": "er_n15_g3.json",
+      "sha256": "d1fe356464dae18d2898adf89a36f5ba789ba5c56cbe95a8744353d3d3fad1ef"
+    },
+    {
+      "id": "er_n15_g4",
+      "nodes": 15,
+      "records": 168,
+      "file": "er_n15_g4.json",
+      "sha256": "d23d0f9339ef91df978a54a980c78b2e601fc8718903ba0421427506b6a6ce90"
+    },
+    {
+      "id": "er_n15_g5",
+      "nodes": 15,
+      "records": 168,
+      "file": "er_n15_g5.json",
+      "sha256": "df6f075f8b47bcd100fadaa1c9b9752b5c20bace75b77f275714003a8c8840cf"
+    },
+    {
+      "id": "er_n15_g6",
+      "nodes": 15,
+      "records": 168,
+      "file": "er_n15_g6.json",
+      "sha256": "d8162ee0a060bd0d316a4305580589c7e7a44e66a8220ff50e60c52fe58999d9"
+    },
+    {
+      "id": "er_n15_g7",
+      "nodes": 15,
+      "records": 168,
+      "file": "er_n15_g7.json",
+      "sha256": "470a7acf4e75dbeed0e23d5b64b70d7b71dd1182de7424d63d944d68eabf91bd"
+    },
+    {
+      "id": "er_n15_g8",
+      "nodes": 15,
+      "records": 168,
+      "file": "er_n15_g8.json",
+      "sha256": "d8711e03bdc8390f2d32eef7cf22cd4fc8b81e8de5749ce485a84c794c96dccf"
+    },
+    {
+      "id": "er_n15_g9",
+      "nodes": 15,
+      "records": 168,
+      "file": "er_n15_g9.json",
+      "sha256": "4f9ae53d34f9ae6af7273a1d3a380e1689b93eb44270750ea966450e4e60dea0"
+    },
+    {
+      "id": "er_n15_g10",
+      "nodes": 15,
+      "records": 168,
+      "file": "er_n15_g10.json",
+      "sha256": "a883c994ee494105fb8092517bcf2c8f2c1e2cefe28bc6e8e871e52a5d654589"
+    },
+    {
+      "id": "er_n15_g11",
+      "nodes": 15,
+      "records": 168,
+      "file": "er_n15_g11.json",
+      "sha256": "2c0bcb1fc7c1854f4e8097806191fc26cd569636cc400735730eccd7f58e0b96"
+    },
+    {
+      "id": "er_n15_g12",
+      "nodes": 15,
+      "records": 168,
+      "file": "er_n15_g12.json",
+      "sha256": "89edc5fd17674be55226c294b8e32aec27be25a18a1d22b9c353af408b531008"
+    },
+    {
+      "id": "er_n15_g13",
+      "nodes": 15,
+      "records": 168,
+      "file": "er_n15_g13.json",
+      "sha256": "480f97aa52e93c7a0572d2881255af4bd912ea0d0b37ed5720fdc091c9c5aeab"
+    },
+    {
+      "id": "er_n15_g14",
+      "nodes": 15,
+      "records": 168,
+      "file": "er_n15_g14.json",
+      "sha256": "675d528a6b0e7e4e558d8770cf33b2859f66822bdb5861b5b685fea84836299a"
+    },
+    {
+      "id": "er_n15_g15",
+      "nodes": 15,
+      "records": 168,
+      "file": "er_n15_g15.json",
+      "sha256": "5d8ad42dcd05e8f1bba4ef3663c30aff55283bf5cbbca06e7537170796e92a9a"
+    },
+    {
+      "id": "er_n15_g16",
+      "nodes": 15,
+      "records": 168,
+      "file": "er_n15_g16.json",
+      "sha256": "ada292893dafa6fd309a567f8c53ba56d2483d66e2572f9c56b1a25d78674923"
+    },
+    {
+      "id": "er_n15_g17",
+      "nodes": 15,
+      "records": 168,
+      "file": "er_n15_g17.json",
+      "sha256": "c190d4d2be2a44f8253fad8498b067dd92398ae529a908238263967c49d61f2e"
+    },
+    {
+      "id": "er_n15_g18",
+      "nodes": 15,
+      "records": 168,
+      "file": "er_n15_g18.json",
+      "sha256": "8ee5bab1e06b0fae51561bc6b1e2ddb457161f5eaf7c3a1384776ef701b9260d"
+    },
+    {
+      "id": "er_n15_g19",
+      "nodes": 15,
+      "records": 168,
+      "file": "er_n15_g19.json",
+      "sha256": "bf5afab696231112473dee4f3c3fce6261028cc599998c14ebb1cc99507b9c5a"
+    }
+  ],
+  "total_records": 16800,
+  "query_instances": 1200
+}
