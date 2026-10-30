@@ -42,7 +42,7 @@ const Visitors = () => {
   }, [refresh]);
 
   const number = new Intl.NumberFormat(locale);
-  const decimal = new Intl.NumberFormat(locale, { maximumFractionDigits: 1 });
+  const decimal = new Intl.NumberFormat(locale, { maximumFractionDigits: 2 });
   const date = new Intl.DateTimeFormat(locale, { month: 'short', day: 'numeric', timeZone: 'UTC' });
   const fullDate = new Intl.DateTimeFormat(locale, { dateStyle: 'medium', timeZone: 'UTC' });
   const days = report?.daily.slice(-range) || [];
