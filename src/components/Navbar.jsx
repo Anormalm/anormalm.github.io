@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion as Motion } from 'framer-motion';
-import { FiMenu, FiMoon, FiSun, FiX } from 'react-icons/fi';
+import { FiGlobe, FiMenu, FiMoon, FiSun, FiX } from 'react-icons/fi';
+import LanguagePicker from './LanguagePicker';
 import { useLanguage } from '../context/LanguageContext';
 
 const NAV_ITEMS = [
@@ -15,7 +16,8 @@ const NAV_ITEMS = [
 
 const Navbar = () => {
   const location = useLocation();
-  const { isChinese, toggleLanguage } = useLanguage();
+  const { isChinese } = useLanguage();
+  const openLanguages = () => window.dispatchEvent(new Event('anormalm:languages'));
   const [darkMode, setDarkMode] = useState(() => {
     try {
       return localStorage.getItem('theme') !== 'light';
@@ -50,8 +52,8 @@ const Navbar = () => {
         </Link>
 
         <div className="flex items-center gap-2 md:hidden">
-          <button type="button" onClick={toggleLanguage} className="language-toggle" aria-label={isChinese ? 'Switch to English' : '切换至中文'}>
-            {isChinese ? 'EN' : '中文'}
+          <button type="button" onClick={openLanguages} className="language-toggle" aria-haspopup="dialog" aria-label={isChinese ? '选择语言' : 'Choose a language'}>
+            <FiGlobe aria-hidden="true" /> {isChinese ? '中文' : 'EN'}
           </button>
           <button
             type="button"
@@ -83,8 +85,8 @@ const Navbar = () => {
               </Link>
             );
           })}
-          <button type="button" onClick={toggleLanguage} className="language-toggle ml-2" aria-label={isChinese ? 'Switch to English' : '切换至中文'}>
-            {isChinese ? 'EN' : '中文'}
+          <button type="button" onClick={openLanguages} className="language-toggle ml-2" aria-haspopup="dialog" aria-label={isChinese ? '选择语言' : 'Choose a language'}>
+            <FiGlobe aria-hidden="true" /> {isChinese ? '中文' : 'EN'}
           </button>
           <button
             type="button"
@@ -125,6 +127,7 @@ const Navbar = () => {
           </Motion.div>
         )}
       </AnimatePresence>
+      <LanguagePicker />
     </nav>
   );
 };

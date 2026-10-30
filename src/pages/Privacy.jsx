@@ -20,7 +20,7 @@ const Privacy = () => {
           <div className="eyebrow">{isChinese ? '简明隐私说明' : 'Plain-language privacy'}</div>
           <h1 className="font-display mt-3 text-4xl md:text-5xl">{isChinese ? '小信号，不是人物档案。' : 'Small signal. No dossier.'}</h1>
           <p className="mt-4 max-w-2xl text-sm leading-6 text-[var(--muted)] md:text-base">
-            {isChinese ? '匿名访问信号保持宽泛、短期且可关闭。最后更新：2026 年 9 月 7 日。' : 'Anonymous visit signals stay broad, short-lived, and optional. Last updated 7 September 2026.'}
+            {isChinese ? '匿名访问信号保持宽泛、短期且可关闭。最后更新：2026 年 10 月 30 日。' : 'Anonymous visit signals stay broad, short-lived, and optional. Last updated 30 October 2026.'}
           </p>
         </div>
       </header>
@@ -67,6 +67,12 @@ const Privacy = () => {
           <a href="mailto:anormalm@outlook.com">{isChinese ? '隐私问题' : 'Privacy question'} <FiArrowUpRight /></a>
         </article>
       </div>
+
+      <section className="tech-panel rounded-3xl p-6 mt-6">
+        <h2 className="font-display text-xl">{isChinese ? '语言翻译' : 'Language translation'}</h2>
+        <p className="mt-3 text-base leading-7 text-[var(--muted)]">{isChinese ? '英文和简体中文直接在本站显示。选择其他语言会在新标签页打开 Google 翻译，并向 Google 提供当前公开页面的网址。只有点击后才会连接 Google 翻译；本网站不嵌入翻译跟踪脚本。自动翻译可能有误。' : 'English and Simplified Chinese are served directly by this website. Selecting another language opens Google Translate in a new tab and shares the current public page URL with Google. The translation service is contacted only when you click; no translation tracking script is embedded here. Automatic translations can contain errors.'}</p>
+        <a className="link-arrow mt-4" href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">{isChinese ? 'Google 隐私政策' : 'Google privacy policy'} <FiArrowUpRight /></a>
+      </section>
 
       <div className="privacy-footnote"><FiShield /> {isChinese ? '遵循数据最小化原则。本说明不构成法律意见。' : 'Designed for data minimisation. This notice is not legal advice.'}</div>
     </section>

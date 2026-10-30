@@ -16,7 +16,7 @@ const NAV_COMMANDS = [
 
 const CommandPalette = ({ onToggleGlitch }) => {
   const navigate = useNavigate();
-  const { isChinese, toggleLanguage } = useLanguage();
+  const { isChinese } = useLanguage();
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState('');
   const [activeIndex, setActiveIndex] = useState(0);
@@ -71,12 +71,12 @@ const CommandPalette = ({ onToggleGlitch }) => {
     },
     {
       id: 'language',
-      label: isChinese ? 'Switch to English' : '切换至中文',
-      meta: isChinese ? '语言' : 'Language',
-      keywords: 'language english chinese 中文',
-      run: toggleLanguage,
+      label: isChinese ? '选择语言' : 'Choose a language',
+      meta: isChinese ? '32 种语言' : '32 languages',
+      keywords: 'language translate english chinese 中文',
+      run: () => window.dispatchEvent(new Event('anormalm:languages')),
     },
-  ], [isChinese, navigate, onToggleGlitch, toggleLanguage]);
+  ], [isChinese, navigate, onToggleGlitch]);
 
   const visibleCommands = useMemo(() => {
     const normalized = query.trim().toLowerCase();
