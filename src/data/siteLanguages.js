@@ -1,5 +1,5 @@
 // Language names are written in their own scripts. en/zh are authored on this site;
-// other entries deliberately link to Google's website translator after selection.
+// other entries use Google's website translator, including IP-based selection.
 export const SITE_LANGUAGES = [
   { code: 'en', name: 'English', nativeName: 'English', local: true },
   { code: 'zh', name: 'Chinese (Simplified)', nativeName: '简体中文', local: true },
@@ -39,10 +39,14 @@ export const translationUrl = (code, pathname = '/') => {
   const language = SITE_LANGUAGES.find((item) => item.code === code && !item.local);
   if (!language) return null;
   const path = pathname.startsWith('/') && !pathname.startsWith('//') ? pathname : '/';
-  const source = new URL('https://anormalm.com/');
-  // Enter through the real index page so GitHub Pages' deep-link 404 doesn't
-  // prevent a translation service from fetching the requested page.
-  source.searchParams.set('redirect', `${path}?lang=en`);
+  const source = new URL('https://anormalm.com/translate/');
+  const page = new URL(path, source);
+  if (page.origin !== source.origin) return null;
+  // Share only the public route and anchor, never arbitrary query parameters.
+  page.search = '?lang=en';
+  // The translation entry supports Google's proxy while the original pages
+  // retain their stricter policy. A real index also avoids deep-link 404s.
+  source.searchParams.set('redirect', `${page.pathname}${page.search}${page.hash}`);
   const target = new URL('https://translate.google.com/translate');
   target.searchParams.set('sl', 'en');
   target.searchParams.set('tl', code);

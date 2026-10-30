@@ -1,7 +1,7 @@
 import { SITE_LANGUAGES } from '../data/siteLanguages.js';
 
-// Suggestions, not a claim about the visitor's identity or preferred language.
-// Multilingual countries offer choices rather than treating one as certain.
+// The first entry is the country default, not a claim about an individual.
+// Browser language does not participate in IP-based selection.
 const COUNTRY_LANGUAGES = {
   US: ['en'], GB: ['en'], AU: ['en'], NZ: ['en'], IE: ['en'], CA: ['en', 'fr'],
   CN: ['zh'], TW: ['zh-TW'], HK: ['zh-TW', 'en'], MO: ['zh-TW', 'pt'],
@@ -14,40 +14,11 @@ const COUNTRY_LANGUAGES = {
   RO: ['ro'], GR: ['el'], TR: ['tr'], UA: ['uk'], RU: ['ru'],
   SA: ['ar'], AE: ['ar', 'en'], EG: ['ar'], MA: ['ar', 'fr'],
   IL: ['he', 'ar'], IR: ['fa'], IN: ['hi', 'en', 'ta', 'bn'],
-  BD: ['bn'], LK: ['ta', 'en'], TH: ['th'], VN: ['vi'], ID: ['id'],
+  BD: ['bn'], LK: ['en', 'ta'], TH: ['th'], VN: ['vi'], ID: ['id'],
 };
 
-export const supportedBrowserLanguage = (tag) => {
-  if (typeof tag !== 'string' || !tag.trim()) return null;
-  try {
-    const locale = new Intl.Locale(tag.trim());
-    let code = locale.language;
-    if (code === 'zh') {
-      // An explicit script wins over the region: zh-Hans-TW is Simplified.
-      const traditional = locale.script
-        ? locale.script === 'Hant'
-        : ['TW', 'HK', 'MO'].includes(locale.region);
-      code = traditional ? 'zh-TW' : 'zh';
-    }
-    if (code === 'nb' || code === 'nn') code = 'no';
-    return SITE_LANGUAGES.find((item) => item.code === code) || null;
-  } catch {
-    return null;
-  }
-};
-
-export const suggestSiteLanguages = (browserLanguages = [], countryCode = '') => {
-  // The ordered browser preference list is more useful than an IP-derived city,
-  // especially for travellers, VPN users, and multilingual regions.
-  for (const tag of Array.isArray(browserLanguages) ? browserLanguages : []) {
-    const match = supportedBrowserLanguage(tag);
-    if (match) return { source: 'browser', languages: [match] };
-  }
-
+export const languageForCountry = (countryCode) => {
   const country = typeof countryCode === 'string' ? countryCode.trim().toUpperCase() : '';
-  const codes = Object.hasOwn(COUNTRY_LANGUAGES, country) ? COUNTRY_LANGUAGES[country] : [];
-  return {
-    source: codes.length ? 'country' : null,
-    languages: codes.map((code) => SITE_LANGUAGES.find((item) => item.code === code)),
-  };
+  const code = Object.hasOwn(COUNTRY_LANGUAGES, country) ? COUNTRY_LANGUAGES[country][0] : 'en';
+  return SITE_LANGUAGES.find((item) => item.code === code) || SITE_LANGUAGES[0];
 };

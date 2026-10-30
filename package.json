@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && node scripts/build-worker.mjs",
+    "build": "vite build && node scripts/build-translation.mjs && node scripts/build-worker.mjs",
     "db:generate": "drizzle-kit generate",
     "lint": "eslint .",
     "preview": "vite preview",

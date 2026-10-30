@@ -61,7 +61,7 @@ const LanguagePicker = () => {
                   return local ? (
                     <button type="button" key={item.code} onClick={() => selectLanguage(item.code)} aria-pressed={language === item.code}>{label}</button>
                   ) : (
-                    <a key={item.code} href={translationUrl(item.code, pathname)} target="_blank" rel="noopener noreferrer" aria-label={`${item.name} — ${isChinese ? '在新标签页打开 Google 翻译' : 'open Google Translate in a new tab'}`}>{label}</a>
+                    <a key={item.code} href={translationUrl(item.code, pathname)} onClick={() => setLanguage(item.code)} target="_blank" rel="noopener noreferrer" aria-label={`${item.name} — ${isChinese ? '在新标签页打开 Google 翻译' : 'open Google Translate in a new tab'}`}>{label}</a>
                   );
                 })}
               </div>
@@ -70,7 +70,7 @@ const LanguagePicker = () => {
         })}
         {!options.length && <p className="language-picker-empty">{isChinese ? '未找到匹配的语言。' : 'No matching language.'}</p>}
       </div>
-      <p id="language-picker-note" className="language-picker-note">{isChinese ? '其他语言在 Google 翻译中打开。机器翻译可能有误，研究术语请以英文原文为准。PDF 保留原文。' : 'Other languages open in Google Translate. Automatic wording may be imperfect; use the English original for research terms. PDFs stay in their original language.'}</p>
+      <p id="language-picker-note" className="language-picker-note">{isChinese ? '首次访问时根据 IP 所在国家自动选择语言；你的手动选择优先。其他语言在 Google 翻译中打开，机器翻译可能有误。PDF 保留原文。' : 'Your IP country sets the initial language; your choice takes priority. Other languages open in Google Translate and may contain translation errors. PDFs stay in their original language.'}</p>
     </dialog>,
     document.body,
   );
