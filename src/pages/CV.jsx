@@ -31,7 +31,7 @@ const RESEARCH = [
   'On-device multimodal systems',
 ];
 
-const RESEARCH_ZH = ['图基础语言模型', '图学习与泛化', '自适应图证据', '端侧多模态系统'];
+const RESEARCH_ZH = ['基于图证据的语言模型', '图学习与泛化', '自适应图证据', '端侧多模态系统'];
 
 const SKILLS = [
   'Python',
@@ -122,7 +122,7 @@ const CV = () => {
 
   const triggerDownload = () => {
     const link = document.createElement('a');
-    link.href = '/CV-Lifan-Latest.pdf';
+    link.href = '/CV-Lifan-Latest.pdf?v=20261030';
     link.download = 'Hu-Lifan-CV.pdf';
     document.body.appendChild(link);
     link.click();
@@ -152,7 +152,7 @@ const CV = () => {
             </div>
             <div className="cv-hero-actions">
               <button type="button" onClick={() => setShowGate(true)} className="button-primary">
-                {isChinese ? '下载完整履历' : 'Download'} <FiDownload />
+                {isChinese ? '下载履历' : 'Download'} <FiDownload />
               </button>
             </div>
           </div>
@@ -259,7 +259,7 @@ const CV = () => {
               <ul className="mt-4 space-y-3 text-sm leading-6 text-[var(--muted)]">
                 <li>{isChinese ? 'CDE 创新与研究奖 · 优异奖' : 'CDE Innovation & Research Award · Merit Award'}</li>
                 <li>{isChinese ? '美国大学生数学建模竞赛 · 荣誉奖' : 'Mathematical Contest in Modeling · Honorable Mention'}</li>
-                <li>{isChinese ? '美国大学生数学建模竞赛 · 特等奖提名' : 'Mathematical Contest in Modeling · Meritorious Winner'}</li>
+                <li>{isChinese ? '美国大学生数学建模竞赛 · 优异奖（Meritorious Winner）' : 'Mathematical Contest in Modeling · Meritorious Winner'}</li>
                 <li>{isChinese ? 'WorldQuant BRAIN 挑战赛 · 银牌' : 'WorldQuant BRAIN Challenge · Silver Medal'}</li>
               </ul>
             </section>
@@ -329,7 +329,7 @@ const CV = () => {
               transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
               className="gate-card"
             >
-              <button type="button" onClick={() => setShowGate(false)} className="gate-close" aria-label="Close">
+              <button type="button" onClick={() => setShowGate(false)} className="gate-close" aria-label={isChinese ? '关闭' : 'Close'}>
                 <FiX />
               </button>
               <div className="gate-orbit" aria-hidden="true"><i /><i /><i /></div>

@@ -46,7 +46,7 @@ const Contact = () => {
               </p>
             </div>
             <div className="font-mono inline-flex items-center gap-2 rounded-full border border-[var(--line)] px-4 py-2 text-[11px] uppercase tracking-[0.18em] text-[var(--muted)]">
-              <FiMapPin className="text-[var(--accent)]" /> Singapore
+              <FiMapPin className="text-[var(--accent)]" /> {isChinese ? '新加坡' : 'Singapore'}
             </div>
           </div>
         </div>
@@ -89,7 +89,7 @@ const Contact = () => {
                     <span className="social-link" aria-hidden="true">{icon}</span>
                     <span>
                       <span className="font-mono block text-[10px] uppercase tracking-[0.18em] text-[var(--muted)]">
-                        {label}
+                        {isChinese && label === 'Email' ? '邮箱' : label}
                       </span>
                       <span className="mt-1 block text-sm">{value}</span>
                     </span>
