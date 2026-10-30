@@ -1,6 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { SITE_LANGUAGES } from '../data/siteLanguages';
-import { createIpLanguageResolver, LANGUAGE_CHOICE_KEY, readLanguageChoice, TRANSLATION_VISITED_KEY, translationDestination } from '../lib/automaticLanguage';
+import { createIpLanguageResolver, LANGUAGE_CHOICE_KEY, readLanguageChoice, TRANSLATION_VISITED_KEY } from '../lib/automaticLanguage';
 
 const LanguageContext = createContext(null);
 const storage = (name) => {
@@ -45,13 +45,8 @@ export const LanguageProvider = ({ children }) => {
           setCurrentLanguage(code);
           return;
         }
-        const target = translationDestination(code, window.location.pathname + window.location.hash, storage('sessionStorage'));
-        if (!target) return;
-        // Back must work even in browsers that block session storage.
-        const fallback = new URL(window.location.href);
-        fallback.searchParams.set('lang', 'en');
-        window.history.replaceState(window.history.state, '', fallback);
-        window.location.assign(target);
+        // Remain on the original website while local locale packs are prepared.
+        setCurrentLanguage('en');
       });
     }
 
