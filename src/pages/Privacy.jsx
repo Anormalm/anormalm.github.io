@@ -70,6 +70,7 @@ const Privacy = () => {
 
       <section className="tech-panel rounded-3xl p-6 mt-6">
         <h2 className="font-display text-xl">{isChinese ? '语言翻译' : 'Language translation'}</h2>
+        <p className="mt-3 text-base leading-7 text-[var(--muted)]">{isChinese ? '点击“显示所在城市”后，本站优先根据浏览器的语言偏好推荐可用语言；没有匹配项时，再参考已返回的国家信息。推荐在浏览器内生成，不会额外查询位置或保存浏览器的语言列表，也不会自动切换语言。位置无法确定你偏好的语言，你可以随时自行选择。' : 'After you choose “Reveal your city,” a language suggestion uses your browser’s language preferences first, then the returned country if none match. Suggestions are computed in your browser without another location lookup or saving your browser’s language list. Nothing switches automatically: location cannot determine your preferred language, and you can always choose for yourself.'}</p>
         <p className="mt-3 text-base leading-7 text-[var(--muted)]">{isChinese ? '英文和简体中文直接在本站显示。选择其他语言会在新标签页打开 Google 翻译，并向 Google 提供当前公开页面的网址。只有点击后才会连接 Google 翻译；本网站不嵌入翻译跟踪脚本。自动翻译可能有误。' : 'English and Simplified Chinese are served directly by this website. Selecting another language opens Google Translate in a new tab and shares the current public page URL with Google. The translation service is contacted only when you click; no translation tracking script is embedded here. Automatic translations can contain errors.'}</p>
         <a className="link-arrow mt-4" href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">{isChinese ? 'Google 隐私政策' : 'Google privacy policy'} <FiArrowUpRight /></a>
       </section>

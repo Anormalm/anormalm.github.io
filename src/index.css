@@ -2037,6 +2037,21 @@
 .geo-visitor-signal button:hover:not(:disabled) { border-color: #76b6ff; color: #edf4ff; transform: rotate(-6deg); }
 .geo-visitor-signal button:disabled { cursor: wait; opacity: 0.6; }
 
+.geo-language-suggestion { min-width: 0; padding: 0.9rem 0.15rem 0; }
+.geo-language-suggestion > p { display: flex; align-items: center; gap: 0.4rem; font-size: 0.72rem; line-height: 1.5; color: #9faec2; }
+.geo-language-options { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 0.6rem; }
+.geo-language-options > button,
+.geo-language-options > a { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 0.45rem; max-width: 100%; min-height: 44px; padding: 0.55rem 0.75rem; border: 1px solid rgba(118, 182, 255, 0.28); border-radius: 0.7rem; color: #edf4ff; background: rgba(5, 11, 19, 0.46); transition: border-color 180ms ease; }
+.geo-language-options strong { min-width: 0; overflow-wrap: anywhere; font-size: 0.85rem; font-weight: 500; }
+.geo-language-options small { font-size: 0.65rem; color: #9faec2; }
+.geo-language-options svg { flex-shrink: 0; color: #76b6ff; }
+.geo-language-options [aria-pressed="true"] { border-color: rgba(35, 211, 155, 0.45); }
+.geo-language-options [aria-pressed="true"] svg { color: #23d39b; }
+.geo-language-options > :hover { border-color: #76b6ff; }
+.geo-language-more { display: inline-flex; align-items: center; gap: 0.4rem; min-height: 44px; max-width: 100%; font-size: 0.72rem; text-align: start; color: #76b6ff; }
+.geo-language-options > :focus-visible,
+.geo-language-more:focus-visible { outline: 2px solid #76b6ff; outline-offset: 3px; }
+
 .language-stage {
   display: grid;
   grid-template-rows: auto minmax(0, 1fr) auto;

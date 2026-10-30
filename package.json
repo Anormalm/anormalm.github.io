@@ -11,7 +11,8 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "deploy": "gh-pages -d dist",
-    "test:groundlm": "node --test tests/groundlm/*.test.mjs"
+    "test:groundlm": "node --test tests/groundlm/*.test.mjs",
+    "test:languages": "node --test tests/language-suggestion.test.mjs"
   },
   "dependencies": {
     "framer-motion": "^12.4.11",

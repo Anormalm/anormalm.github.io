@@ -4,6 +4,7 @@ import { FiCompass, FiGlobe, FiMapPin, FiMessageCircle, FiRefreshCw, FiShield, F
 import { Link } from 'react-router-dom';
 import { CITY_ROUNDS, LANGUAGE_ROUNDS } from '../data/worldGames';
 import { useLanguage } from '../context/LanguageContext';
+import GeoLanguageSuggestion from './GeoLanguageSuggestion';
 
 const GEO_ENDPOINT = 'https://whatismyip.technology/api/me';
 const ROUNDS_PER_GAME = 5;
@@ -436,6 +437,8 @@ const GeoSignal = () => {
                     </button>
                   )}
                 </div>
+
+                {phase === 'revealed' && signal && <GeoLanguageSuggestion countryCode={signal.countryCode} />}
 
                 <div className="geo-privacy-note">
                   <FiShield aria-hidden="true" />
