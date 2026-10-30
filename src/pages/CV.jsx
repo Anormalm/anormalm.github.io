@@ -54,13 +54,42 @@ const GATE_CHOICES = [
 
 const CV_PHOTOS = [
   {
+    src: '/photos/danube-parliament.jpg',
+    alt: 'Lifan Hu by the Danube, with the Hungarian Parliament lit up at night',
+    caption: 'Across the Danube · Hungarian Parliament',
+    context: 'Budapest, Hungary',
+    width: 1707,
+    height: 1280,
+  },
+  {
+    src: '/photos/emnlp-2026-first-poster.jpg',
+    alt: 'Lifan Hu beside his first conference poster at EMNLP 2026',
+    caption: 'My first conference and poster session',
+    context: 'EMNLP 2026',
+    width: 1280,
+    height: 1707,
+  },
+  {
+    src: '/photos/tiktok-team-building.jpg',
+    alt: 'Lifan Hu with colleagues from his TikTok sub-department at a team-building outing',
+    caption: 'Team building with my TikTok sub-department',
+    width: 1707,
+    height: 1280,
+  },
+  {
+    src: '/photos/high-school-visit.jpg',
+    alt: 'Lifan Hu giving a talk during a visit to his former high school',
+    caption: 'Back at my high school for a visit and talk',
+    width: 1276,
+    height: 1276,
+  },
+  {
     src: '/lifan-signal.webp',
     alt: 'Lifan Hu standing in a garden at Sentosa, Singapore',
-    altZh: '胡立凡站在新加坡圣淘沙的一处花园中',
-    location: 'Sentosa, Singapore',
-    locationZh: '新加坡 · 圣淘沙',
-    date: 'September 2026',
-    dateZh: '2026 年 9 月',
+    caption: 'Sentosa, Singapore',
+    context: 'September 2026',
+    width: 1600,
+    height: 1200,
   },
 ];
 
@@ -86,7 +115,7 @@ const Publication = ({ publication }) => {
 };
 
 const CV = () => {
-  const { isChinese, language } = useLanguage();
+  const { isChinese, language, t } = useLanguage();
   const [showGate, setShowGate] = useState(false);
   const [gateMessage, setGateMessage] = useState('');
   const [activePhoto, setActivePhoto] = useState(0);
@@ -99,7 +128,7 @@ const CV = () => {
   const photo = CV_PHOTOS[activePhoto];
 
   const onPhotoPointerDown = (event) => {
-    if (CV_PHOTOS.length < 2) return;
+    if (CV_PHOTOS.length < 2 || event.button !== 0 || event.target.closest('button')) return;
     photoDragStart.current = event.clientX;
     event.currentTarget.setPointerCapture?.(event.pointerId);
   };
@@ -166,18 +195,22 @@ const CV = () => {
               data-cursor="swipe"
               onPointerDown={onPhotoPointerDown}
               onPointerUp={onPhotoPointerUp}
+              onPointerCancel={() => { photoDragStart.current = null; }}
               onKeyDown={(event) => {
-                if (event.key === 'ArrowLeft') changePhoto(-1);
-                if (event.key === 'ArrowRight') changePhoto(1);
+                if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+                  event.preventDefault();
+                  changePhoto(event.key === 'ArrowLeft' ? -1 : 1);
+                }
               }}
             >
               <AnimatePresence initial={false} mode="wait">
                 <Motion.img
                   key={photo.src}
                   src={photo.src}
-                  alt={isChinese ? photo.altZh : photo.alt}
-                  width="1600"
-                  height="1200"
+                  alt={t(photo.alt)}
+                  width={photo.width}
+                  height={photo.height}
+                  draggable={false}
                   decoding="async"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
@@ -206,20 +239,22 @@ const CV = () => {
               </div>
             </div>
             <figcaption className="cv-photo-caption">
-              <span>{isChinese ? photo.locationZh : photo.location}</span>
-              <span className="cv-photo-dots" aria-label={isChinese ? '照片索引' : 'Photo index'}>
-                {CV_PHOTOS.map((item, index) => (
-                  <button
-                    key={item.src}
-                    type="button"
-                    className={index === activePhoto ? 'is-active' : ''}
-                    onClick={() => setActivePhoto(index)}
-                    aria-label={isChinese ? `查看照片 ${index + 1}` : `View photo ${index + 1}`}
-                    aria-current={index === activePhoto ? 'true' : undefined}
-                  />
-                ))}
-              </span>
-              <span>{isChinese ? photo.dateZh : photo.date} · {isChinese ? '档案' : 'LOG'} {String(activePhoto + 1).padStart(2, '0')} / {String(CV_PHOTOS.length).padStart(2, '0')}</span>
+              <strong className="cv-photo-title" aria-live="polite">{t(photo.caption)}</strong>
+              <div className="cv-photo-meta">
+                <span>{photo.context && <>{t(photo.context)} · </>}{isChinese ? '档案' : 'LOG'} {String(activePhoto + 1).padStart(2, '0')} / {String(CV_PHOTOS.length).padStart(2, '0')}</span>
+                <span className="cv-photo-dots" aria-label={isChinese ? '照片索引' : 'Photo index'}>
+                  {CV_PHOTOS.map((item, index) => (
+                    <button
+                      key={item.src}
+                      type="button"
+                      className={index === activePhoto ? 'is-active' : ''}
+                      onClick={() => setActivePhoto(index)}
+                      aria-label={isChinese ? `查看照片 ${index + 1}` : `View photo ${index + 1}`}
+                      aria-current={index === activePhoto ? 'true' : undefined}
+                    />
+                  ))}
+                </span>
+              </div>
             </figcaption>
           </figure>
         </div>
