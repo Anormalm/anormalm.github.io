@@ -86,8 +86,31 @@ const INTRO_FACTS_ZH = [
   '再短一点：想做就做，想写就写。',
 ];
 
+const SignalText = ({ ghostMode }) => {
+  const { isChinese, t } = useLanguage();
+  const [typedText] = useTypewriter({
+    words: (isChinese
+      ? ['基于图证据的语言模型', '自适应图证据', '边缘多模态推理', '分布式机器学习系统']
+      : ['graph-grounded language models', 'adaptive graph evidence', 'edge multimodal inference', 'distributed ML systems']).map(t),
+    loop: 0,
+    typeSpeed: 52,
+    deleteSpeed: 28,
+    delaySpeed: 1450,
+  });
+  const [ghostTypedText] = useTypewriter({
+    words: (isChinese
+      ? ['追踪分布式记忆中的隐藏路线', '从数字废墟中恢复信号', '把运行时碎片拼成完整系统', '在噪声底里监听状态变化']
+      : ['tracing hidden routes in distributed memory', 'recovering signals from digital ruins', 'stitching runtime fragments into coherent systems', 'listening for state changes in the noise floor']).map(t),
+    loop: 0,
+    typeSpeed: 40,
+    deleteSpeed: 25,
+    delaySpeed: 1250,
+  });
+  return <strong>{ghostMode ? ghostTypedText : typedText}</strong>;
+};
+
 const Home = () => {
-  const { isChinese } = useLanguage();
+  const { isChinese, isMultilingual, language, t } = useLanguage();
   const heroRef = useRef(null);
   const [ghostMode, setGhostMode] = useState(false);
   const [knowledgeLevel, setKnowledgeLevel] = useState(0);
@@ -102,25 +125,6 @@ const Home = () => {
   const orbitRotate = useTransform(scrollYProgress, [0, 1], [0, 28]);
   const revealedFactCount = Math.round((knowledgeLevel / 100) * INTRO_FACTS.length);
   const introFacts = isChinese ? INTRO_FACTS_ZH : INTRO_FACTS;
-
-  const [typedText] = useTypewriter({
-    words: isChinese
-      ? ['基于图证据的语言模型', '自适应图证据', '边缘多模态推理', '分布式机器学习系统']
-      : ['graph-grounded language models', 'adaptive graph evidence', 'edge multimodal inference', 'distributed ML systems'],
-    loop: 0,
-    typeSpeed: 52,
-    deleteSpeed: 28,
-    delaySpeed: 1450,
-  });
-  const [ghostTypedText] = useTypewriter({
-    words: isChinese
-      ? ['追踪分布式记忆中的隐藏路线', '从数字废墟中恢复信号', '把运行时碎片拼成完整系统', '在噪声底里监听状态变化']
-      : ['tracing hidden routes in distributed memory', 'recovering signals from digital ruins', 'stitching runtime fragments into coherent systems', 'listening for state changes in the noise floor'],
-    loop: 0,
-    typeSpeed: 40,
-    deleteSpeed: 25,
-    delaySpeed: 1250,
-  });
 
   useEffect(() => {
     if (!ghostMode) return undefined;
@@ -156,7 +160,8 @@ const Home = () => {
         <div className="hero-coordinate hero-coordinate-right" aria-hidden="true">{isChinese ? '向下滚动探索' : 'SCROLL TO EXPLORE'}</div>
 
         <Motion.div className="hero-copy" style={reduceMotion ? undefined : { y: copyY }}>
-          <h1 className={`kinetic-title ${isChinese ? 'is-chinese' : ''}`} aria-label={isChinese ? '我构建会思考、会行动的系统' : 'I build systems that think and move'}>
+          <h1 className={`kinetic-title ${isChinese ? 'is-chinese' : ''} ${isMultilingual ? 'is-multilingual' : ''}`} aria-label={isChinese ? '我构建会思考、会行动的系统' : 'I build systems that think and move'}>
+            {isMultilingual ? <Motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }}>I build systems that think and move.</Motion.span> : <>
             <Motion.span
               initial={{ y: '115%' }}
               animate={{ y: 0 }}
@@ -180,6 +185,7 @@ const Home = () => {
             >
               {isChinese ? '会行动的系统。' : <>think <i>&amp;</i> move.</>}
             </Motion.span>
+            </>}
           </h1>
 
           <div className="hero-bottom-grid">
@@ -233,7 +239,7 @@ const Home = () => {
                 title={isChinese ? '双击解锁幽灵输入' : 'Double-click to unlock ghost typing'}
               >
                 <span>{ghostMode ? (isChinese ? '幽灵频道' : 'Ghost channel') : (isChinese ? '当前信号' : 'Current signal')}</span>
-                <strong>{ghostMode ? ghostTypedText : typedText}</strong>
+                <SignalText key={language} ghostMode={ghostMode} />
                 <Cursor cursorStyle="_" cursorColor="var(--accent-warm)" />
               </button>
               <div className="hero-actions">
@@ -274,7 +280,7 @@ const Home = () => {
               to={node.path}
               className="signal-node"
               style={{ '--signal-x': `${node.x}%`, '--signal-y': `${node.y}%` }}
-              aria-label={`${isChinese ? node.labelZh : node.label}: ${isChinese ? node.previewZh : node.preview}`}
+              aria-label={`${isChinese ? node.labelZh : t(node.label)}: ${isChinese ? node.previewZh : t(node.preview)}`}
             >
               <span>0{index + 1}</span>
               <strong>{isChinese ? node.labelZh : node.label}</strong>
@@ -304,7 +310,7 @@ const Home = () => {
           className="editorial-heading"
         >
           <div className="eyebrow">{isChinese ? '精选信号 / 2026' : 'Selected signals / 2026'}</div>
-          <h2 className="display-heading">{isChinese ? <>让想法<br /><em>可以验证。</em></> : <>Ideas made<br /><em>testable.</em></>}</h2>
+          <h2 className="display-heading">{isMultilingual ? 'Ideas made testable.' : isChinese ? <>让想法<br /><em>可以验证。</em></> : <>Ideas made<br /><em>testable.</em></>}</h2>
           <div className="editorial-aside">
             <p>{isChinese ? '研究、实验与真正运行的系统——把它们做到足以暴露事实。' : 'Research, experiments, and working systems—built far enough to expose what is actually true.'}</p>
             <Link to="/projects" className="link-arrow">{isChinese ? '查看完整索引' : 'See the full index'} <FiArrowUpRight /></Link>
@@ -364,7 +370,7 @@ const Home = () => {
       <section className="section contact-stage">
         <div className="contact-stage-copy">
           <div className="eyebrow">{isChinese ? '开放频道' : 'Open channel'}</div>
-          <h2>{isChinese ? <>一起做点<br /><span>奇怪的东西。</span></> : <>Let’s make<br /><span>something strange.</span></>}</h2>
+          <h2>{isMultilingual ? 'Let’s make something strange.' : isChinese ? <>一起做点<br /><span>奇怪的东西。</span></> : <>Let’s make<br /><span>something strange.</span></>}</h2>
           <p>{isChinese ? '研究想法、智能系统、有野心的原型——或一个怎么也放不进现成框架的问题。' : 'Research ideas, intelligent systems, ambitious prototypes—or a problem that refuses to fit neatly.'}</p>
           <div className="mt-7 flex flex-wrap gap-3">
             <Link to="/contact" className="button-primary">{isChinese ? '开始交流' : 'Start a conversation'} <FiMail /></Link>

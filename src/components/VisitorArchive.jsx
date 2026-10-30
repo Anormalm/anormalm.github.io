@@ -12,17 +12,17 @@ const toMapPoint = (latitude, longitude) => ({
   y: Math.max(2, Math.min(98, ((90 - Number(latitude)) / 180) * 100)),
 });
 
-const countryName = (code, isChinese) => {
-  if (code === 'XX') return isChinese ? '未知区域' : 'Unknown region';
+const countryName = (code, locale, t) => {
+  if (code === 'XX') return t('Unknown region');
   try {
-    return new Intl.DisplayNames([isChinese ? 'zh' : 'en'], { type: 'region' }).of(code) || code;
+    return new Intl.DisplayNames([locale], { type: 'region' }).of(code) || code;
   } catch {
     return code;
   }
 };
 
 const VisitorArchive = () => {
-  const { isChinese } = useLanguage();
+  const { isChinese, locale, t } = useLanguage();
   const [archive, setArchive] = useState(null);
   const [status, setStatus] = useState('loading');
 
@@ -93,7 +93,7 @@ const VisitorArchive = () => {
           {archive?.points?.map((point, index) => {
             const position = toMapPoint(point.latitude, point.longitude);
             const size = Math.min(22, 7 + Math.log2(point.count + 1) * 3);
-            const label = `${countryName(point.countryCode, isChinese)}: ${point.count} ${isChinese ? '个信号' : point.count === 1 ? 'signal' : 'signals'}`;
+            const label = `${countryName(point.countryCode, locale, t)}: ${point.count} ${isChinese ? '个信号' : t(point.count === 1 ? 'signal' : 'signals')}`;
             return (
               <Motion.span
                 key={`${point.countryCode}-${point.latitude}-${point.longitude}`}
@@ -127,7 +127,7 @@ const VisitorArchive = () => {
             {regions.length > 0 ? regions.map((region, index) => (
               <div key={region.countryCode}>
                 <span>{String(index + 1).padStart(2, '0')}</span>
-                <strong>{countryName(region.countryCode, isChinese)}</strong>
+                <strong>{countryName(region.countryCode, locale, t)}</strong>
                 <small>{region.count}</small>
               </div>
             )) : (

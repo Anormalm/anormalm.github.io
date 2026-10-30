@@ -116,7 +116,7 @@ const createChaosParams = () => ({
 });
 
 const Lab = () => {
-  const { isChinese } = useLanguage();
+  const { isChinese, t } = useLanguage();
   const canvasRef = useRef(null);
   const animationRef = useRef(null);
   const [activeId, setActiveId] = useState(EXPERIMENTS[0].id);
@@ -1055,7 +1055,7 @@ const Lab = () => {
               </div>
             </div>
 
-            <aside className="lab-control-dock" aria-label={isChinese ? `${current?.titleZh}控制项` : `${current?.title} controls`}>
+            <aside className="lab-control-dock" aria-label={isChinese ? `${current?.titleZh}控制项` : `${t(current?.title)} controls`}>
               <div className="lab-control-heading">
                 <span>{isChinese ? '调节信号' : 'Tune signal'}</span>
                 <strong>{isChinese ? '控制' : 'CTRL'}</strong>

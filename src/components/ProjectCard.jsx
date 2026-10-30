@@ -56,7 +56,7 @@ const ProjectCard = ({ title, titleZh, description, descriptionZh, link, live, c
           </div>
         </div>
 
-        <h2 className="font-display relative z-10 mt-10 text-3xl leading-tight md:text-[2rem]">{displayTitle}</h2>
+        <h2 translate="no" className="font-display relative z-10 mt-10 text-3xl leading-tight md:text-[2rem]">{displayTitle}</h2>
         <p className="relative z-10 mt-4 flex-1 text-sm leading-6 text-[var(--muted)]">{displayDescription}</p>
 
         <div className="relative z-10 mt-6 flex flex-wrap gap-2" aria-label="Project topics">

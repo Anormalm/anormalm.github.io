@@ -1,5 +1,5 @@
-// Language names are written in their own scripts. en/zh are authored on this site;
-// other entries use Google's website translator, including IP-based selection.
+// All locales are stored with the website. Names retain their native scripts.
+const LOCALES = { en: 'en-US', zh: 'zh-CN', 'zh-TW': 'zh-TW', ja: 'ja-JP', ko: 'ko-KR', fr: 'fr-FR', de: 'de-DE', es: 'es-ES', pt: 'pt-PT', it: 'it-IT', nl: 'nl-NL', sv: 'sv-SE', no: 'nb-NO', fi: 'fi-FI', pl: 'pl-PL', cs: 'cs-CZ', hu: 'hu-HU', ro: 'ro-RO', el: 'el-GR', tr: 'tr-TR', uk: 'uk-UA', ru: 'ru-RU', ar: 'ar-SA', he: 'he-IL', fa: 'fa-IR', hi: 'hi-IN', bn: 'bn-BD', ta: 'ta-IN', th: 'th-TH', vi: 'vi-VN', id: 'id-ID', ms: 'ms-MY' };
 export const SITE_LANGUAGES = [
   { code: 'en', name: 'English', nativeName: 'English', local: true },
   { code: 'zh', name: 'Chinese (Simplified)', nativeName: '简体中文', local: true },
@@ -33,23 +33,16 @@ export const SITE_LANGUAGES = [
   { code: 'vi', name: 'Vietnamese', nativeName: 'Tiếng Việt' },
   { code: 'id', name: 'Indonesian', nativeName: 'Bahasa Indonesia' },
   { code: 'ms', name: 'Malay', nativeName: 'Bahasa Melayu' },
-];
+].map((item) => ({ ...item, local: true, locale: LOCALES[item.code] }));
 
-export const translationUrl = (code, pathname = '/') => {
-  const language = SITE_LANGUAGES.find((item) => item.code === code && !item.local);
-  if (!language) return null;
-  const path = pathname.startsWith('/') && !pathname.startsWith('//') ? pathname : '/';
-  const source = new URL('https://anormalm.com/translate/');
-  const page = new URL(path, source);
-  if (page.origin !== source.origin) return null;
-  // Share only the public route and anchor, never arbitrary query parameters.
-  page.search = '?lang=en';
-  // The translation entry supports Google's proxy while the original pages
-  // retain their stricter policy. A real index also avoids deep-link 404s.
-  source.searchParams.set('redirect', `${page.pathname}${page.search}${page.hash}`);
-  const target = new URL('https://translate.google.com/translate');
-  target.searchParams.set('sl', 'en');
-  target.searchParams.set('tl', code);
-  target.searchParams.set('u', source.href);
-  return target.href;
+export const normalizeLanguageCode = (value) => {
+  if (typeof value !== 'string') return null;
+  const normalized = value.trim().replaceAll('_', '-').toLowerCase();
+  const exact = SITE_LANGUAGES.find((item) => item.code.toLowerCase() === normalized || item.locale.toLowerCase() === normalized);
+  if (exact) return exact.code;
+  if (/^zh-(?:hant|tw|hk|mo)(?:-|$)/.test(normalized)) return 'zh-TW';
+  if (/^zh-(?:hans|cn|sg)(?:-|$)/.test(normalized)) return 'zh';
+  const base = normalized.split('-')[0];
+  if (base === 'nb' || base === 'nn') return 'no';
+  return SITE_LANGUAGES.find((item) => item.code === base)?.code || null;
 };

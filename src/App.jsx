@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { AnimatePresence, motion as Motion, useReducedMotion, useScroll, useSpring } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Loader from './components/Loader';
@@ -44,7 +44,8 @@ const KONAMI_PATTERN = ['up', 'up', 'down', 'down', 'left', 'right', 'left', 'ri
 
 function AppShell() {
   const location = useLocation();
-  const { isChinese } = useLanguage();
+  const { isChinese, language, locale, languageReady, t } = useLanguage();
+  const navigate = useNavigate();
   const [ambientMode, setAmbientMode] = useState(() => getAmbientMode(new Date().getHours()));
   const [overclockMode, setOverclockMode] = useState(false);
   const [glitchMode, setGlitchMode] = useState(false);
@@ -55,6 +56,14 @@ function AppShell() {
   useEffect(() => {
     recordVisitorSignal();
   }, []);
+
+  useEffect(() => {
+    if (!languageReady) return;
+    const parameters = new URLSearchParams(location.search);
+    if (parameters.get('lang') === locale) return;
+    parameters.set('lang', locale);
+    navigate({ pathname: location.pathname, search: parameters.toString(), hash: location.hash }, { replace: true });
+  }, [locale, languageReady, location.pathname, location.search, location.hash, navigate]);
 
   useEffect(() => {
     setAmbientMode(getAmbientMode(new Date().getHours()));
@@ -79,8 +88,8 @@ function AppShell() {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
     const pageTitle = PAGE_TITLES[location.pathname];
-    document.title = pageTitle ? pageTitle[isChinese ? 1 : 0] : (isChinese ? '胡立凡' : 'Lifan Hu | ML Systems & Research');
-  }, [isChinese, location.pathname, reduceMotion]);
+    document.title = t(pageTitle ? pageTitle[isChinese ? 1 : 0] : (isChinese ? '胡立凡' : 'Lifan Hu | ML Systems & Research'));
+  }, [isChinese, language, location.pathname, reduceMotion, t]);
 
   useEffect(() => {
     const buffer = [];

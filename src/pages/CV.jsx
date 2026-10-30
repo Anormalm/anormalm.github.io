@@ -67,7 +67,7 @@ const CV_PHOTOS = [
 const Publication = ({ publication }) => {
   const content = (
     <>
-      <h2 className="font-display text-lg transition group-hover:text-[var(--accent)]">
+      <h2 translate="no" className="font-display text-lg transition group-hover:text-[var(--accent)]">
         {publication.title}
       </h2>
       <div className="font-mono mt-1 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.16em] text-[var(--muted)]">
@@ -86,7 +86,7 @@ const Publication = ({ publication }) => {
 };
 
 const CV = () => {
-  const { isChinese } = useLanguage();
+  const { isChinese, language } = useLanguage();
   const [showGate, setShowGate] = useState(false);
   const [gateMessage, setGateMessage] = useState('');
   const [activePhoto, setActivePhoto] = useState(0);
@@ -145,7 +145,7 @@ const CV = () => {
           <div className="cv-hero-copy">
             <div>
               <div className="eyebrow">{isChinese ? '个人履历' : 'Curriculum vitae'}</div>
-              <h1 className="font-display mt-3 text-4xl md:text-5xl">{isChinese ? '胡立凡' : 'Hu Lifan'}</h1>
+              <h1 translate="no" className="font-display mt-3 text-4xl md:text-5xl">{isChinese || language === 'zh-TW' ? '胡立凡' : 'Hu Lifan'}</h1>
               <p className="mt-4 max-w-3xl text-sm leading-6 text-[var(--muted)] md:text-base">
                 {isChinese ? '新加坡国立大学计算机工程专业，专注机器学习研究与系统。' : 'Computer Engineering at NUS. Working across machine learning research and systems.'}
               </p>

@@ -67,7 +67,7 @@ const scoreDistance = (distanceKm) => (
 const pointStyle = (point) => ({ '--geo-x': `${point.x}%`, '--geo-y': `${point.y}%` });
 
 const GeoSignal = () => {
-  const { isChinese } = useLanguage();
+  const { isChinese, isMultilingual } = useLanguage();
   const [gameMode, setGameMode] = useState('cities');
   const [phase, setPhase] = useState('idle');
   const [signal, setSignal] = useState(null);
@@ -215,13 +215,13 @@ const GeoSignal = () => {
         >
           <div>
             <div className="eyebrow">{isChinese ? '支线任务 / 世界游戏' : 'Side quest / world games'}</div>
-            <h2 id="geo-title">{isChinese ? <>读懂这个<br /><em>世界。</em></> : <>I read the<br /><em>world.</em></>}</h2>
+            <h2 id="geo-title">{isMultilingual ? 'I read the world.' : isChinese ? <>读懂这个<br /><em>世界。</em></> : <>I read the<br /><em>world.</em></>}</h2>
           </div>
 
-          <div className="geo-rank-stamp" aria-label={isChinese ? '连续多个赛季达到 GeoGuessr Master II' : 'GeoGuessr Master II for multiple seasons'}>
+          <div className="geo-rank-stamp" aria-label={isChinese ? '多个赛季达到 GeoGuessr Master II' : 'GeoGuessr Master II for multiple seasons'}>
             <span>GeoGuessr</span>
             <strong>Master II</strong>
-            <small>{isChinese ? '连续多个赛季' : 'Multiple seasons'}</small>
+            <small>{isChinese ? '多个赛季' : 'Multiple seasons'}</small>
           </div>
         </Motion.header>
 
@@ -466,6 +466,7 @@ const GeoSignal = () => {
                   <span>{isChinese ? '收到短句 / 火车站' : 'Incoming phrase / train station'}</span>
                   <AnimatePresence mode="wait">
                     <Motion.blockquote
+                      translate="no"
                       key={currentLanguage.sample}
                       initial={{ opacity: 0, filter: reduceMotion ? 'none' : 'blur(8px)', y: reduceMotion ? 0 : 10 }}
                       animate={{ opacity: 1, filter: 'blur(0px)', y: 0 }}

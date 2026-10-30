@@ -16,7 +16,8 @@ const NAV_ITEMS = [
 
 const Navbar = () => {
   const location = useLocation();
-  const { isChinese } = useLanguage();
+  const { isChinese, language, t } = useLanguage();
+  const languageLabel = isChinese ? '中文' : language === 'zh-TW' ? '繁中' : language.toUpperCase();
   const openLanguages = () => window.dispatchEvent(new Event('anormalm:languages'));
   const [darkMode, setDarkMode] = useState(() => {
     try {
@@ -44,7 +45,7 @@ const Navbar = () => {
           to="/"
           className="group navbar-mark-only"
           aria-label={isChinese ? '胡立凡首页' : 'Lifan Hu home'}
-          title={isChinese ? '按 / 打开命令面板' : 'Press / for commands'}
+          title={isChinese ? '按 / 打开命令面板' : t('Press / for commands')}
         >
           <div className="brand-mark" aria-hidden="true">
             <span className="brand-mark-core" />
@@ -53,7 +54,7 @@ const Navbar = () => {
 
         <div className="flex items-center gap-2 md:hidden">
           <button type="button" onClick={openLanguages} className="language-toggle" aria-haspopup="dialog" aria-label={isChinese ? '选择语言' : 'Choose a language'}>
-            <FiGlobe aria-hidden="true" /> {isChinese ? '中文' : 'EN'}
+            <FiGlobe aria-hidden="true" /> <span translate="no">{languageLabel}</span>
           </button>
           <button
             type="button"
@@ -86,7 +87,7 @@ const Navbar = () => {
             );
           })}
           <button type="button" onClick={openLanguages} className="language-toggle ml-2" aria-haspopup="dialog" aria-label={isChinese ? '选择语言' : 'Choose a language'}>
-            <FiGlobe aria-hidden="true" /> {isChinese ? '中文' : 'EN'}
+            <FiGlobe aria-hidden="true" /> <span translate="no">{languageLabel}</span>
           </button>
           <button
             type="button"

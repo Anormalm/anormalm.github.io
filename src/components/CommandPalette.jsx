@@ -16,7 +16,7 @@ const NAV_COMMANDS = [
 
 const CommandPalette = ({ onToggleGlitch }) => {
   const navigate = useNavigate();
-  const { isChinese } = useLanguage();
+  const { isChinese, t } = useLanguage();
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState('');
   const [activeIndex, setActiveIndex] = useState(0);
@@ -78,11 +78,10 @@ const CommandPalette = ({ onToggleGlitch }) => {
     },
   ], [isChinese, navigate, onToggleGlitch]);
 
-  const visibleCommands = useMemo(() => {
-    const normalized = query.trim().toLowerCase();
-    if (!normalized) return commands;
-    return commands.filter((command) => `${command.label} ${command.meta} ${command.keywords}`.toLowerCase().includes(normalized));
-  }, [commands, query]);
+  const normalizedQuery = query.trim().toLowerCase();
+  const visibleCommands = normalizedQuery
+    ? commands.filter((command) => `${t(command.label)} ${t(command.meta)} ${command.label} ${command.keywords}`.toLowerCase().includes(normalizedQuery))
+    : commands;
 
   useEffect(() => {
     const onKeyDown = (event) => {

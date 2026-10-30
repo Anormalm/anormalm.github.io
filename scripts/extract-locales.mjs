@@ -50,13 +50,5 @@ for (const value of ['I build systems that think and move.', 'Ideas made testabl
 const list = [...messages].sort((a, b) => a.localeCompare(b, 'en'));
 await mkdir(new URL('src/locales/', root), { recursive: true });
 await writeFile(new URL('src/locales/en.json', root), JSON.stringify(Object.fromEntries(list.map((text) => [text, text])), null, 2) + '\n');
-await writeFile(new URL('src/locales/zh-reviewed.json', root), JSON.stringify(Object.fromEntries(Object.entries(reviewedChinese).filter(([key]) => messages.has(key))), null, 2) + '\n');
-
-// Temporary, unlinked authoring page. Export translated text into stored JSON;
-// visitors will never need this service once the locale packs are checked in.
-const escape = (text) => text.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;');
-const protect = (text) => escape(text).replace(/Lifan Hu|Hu Lifan|Anormalm|TikTok|NUS|BRIC|DistDNA|MAHLE|Linguine|GeoGuessr|Master II|Jetson Orin Nano Super|DeepSeek-V3|Kimi K3|Pink Elephant|shuorenhua|PyTorch|WorldQuant|Gaspard de la Nuit|Maurice Ravel|\{\d+\}/g, '<span translate="no">$&</span>');
-const content = list.map((text) => `<p data-source="${escape(encodeURIComponent(text))}">${protect(text)}</p>`).join('\n');
-await mkdir(new URL('public/locale-authoring/', root), { recursive: true });
-await writeFile(new URL('public/locale-authoring/index.html', root), `<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="robots" content="noindex,nofollow"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Website translation catalog</title><style>body{font:2px/1 system-ui;margin:0;padding:50px 4px 4px}h1{font-size:14px}main{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:1px}p{margin:0;padding:0;height:5px;overflow:hidden}button{position:fixed;top:8px;right:8px;padding:12px;font:14px system-ui}</style><script src="https://anormalm.com/locale-authoring/export.js" defer></script></head><body><button id="export-locale" translate="no">Export language JSON</button><h1>Website translation catalog</h1><main>${content}</main></body></html>`);
+await writeFile(new URL('scripts/zh-reviewed.json', root), JSON.stringify(Object.fromEntries(Object.entries(reviewedChinese).filter(([key]) => messages.has(key))), null, 2) + '\n');
 console.log(`Extracted ${list.length} English messages; ${Object.keys(reviewedChinese).length} authored Chinese pairs.`);

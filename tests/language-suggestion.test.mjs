@@ -1,8 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { languageForCountry } from '../src/lib/languageSuggestion.js';
-import { translationUrl } from '../src/data/siteLanguages.js';
-import { AUTO_LANGUAGE_KEY, createIpLanguageResolver, LANGUAGE_CHOICE_KEY, readLanguageChoice, translationDestination } from '../src/lib/automaticLanguage.js';
+import { SITE_LANGUAGES, normalizeLanguageCode } from '../src/data/siteLanguages.js';
+import { AUTO_LANGUAGE_KEY, createIpLanguageResolver, LANGUAGE_CHOICE_KEY, readLanguageChoice } from '../src/lib/automaticLanguage.js';
+import { activateLocale, translate, translateProps } from '../src/i18n/translator.js';
 
 const memoryStorage = (initial = []) => {
   const values = new Map(initial);
@@ -88,22 +89,38 @@ test('blocked browser storage does not break a lookup or explicit URL choice', a
   assert.equal(await createIpLanguageResolver({ fetcher: async () => countryResponse('CN'), storage })(), 'zh');
 });
 
-test('native languages stay on the website and translated ones allow Back without redirect loops', () => {
-  const storage = memoryStorage();
-  assert.equal(translationDestination('en', '/cv', storage), null);
-  assert.equal(translationDestination('zh', '/cv', storage), null);
-  assert.ok(translationDestination('hu', '/cv', storage).startsWith('https://translate.google.com/translate?'));
-  assert.equal(translationDestination('hu', '/cv', storage), null);
+test('32 native locales accept regional and underscore URL language codes', () => {
+  assert.equal(SITE_LANGUAGES.length, 32);
+  assert.ok(SITE_LANGUAGES.every((item) => item.local && item.locale));
+  for (const [input, code] of [['en_US', 'en'], ['fr-FR', 'fr'], ['pt_BR', 'pt'], ['zh-Hant', 'zh-TW'], ['zh_Hans', 'zh'], ['nb-NO', 'no'], ['xx-XX', null]]) assert.equal(normalizeLanguageCode(input), code);
+  assert.equal(readLanguageChoice('?lang=ja_JP', memoryStorage()), 'ja');
+  assert.equal(SITE_LANGUAGES.find((item) => item.code === 'ar').direction, 'rtl');
 });
 
-test('translated deep links retain the route and anchor, use English source, and do not share arbitrary queries', () => {
-  const target = new URL(translationUrl('ja', '/cv?private=value#album'));
-  assert.equal(target.searchParams.get('tl'), 'ja');
-  const source = new URL(target.searchParams.get('u'));
-  assert.equal(source.origin, 'https://anormalm.com');
-  assert.equal(source.pathname, '/translate/');
-  assert.equal(source.searchParams.get('redirect'), '/cv?lang=en#album');
-  assert.equal(source.href.includes('private'), false);
-  assert.equal(translationUrl('bogus', '/'), null);
-  assert.equal(translationUrl('ja', '/\\evil.example/'), null);
+test('stored messages translate dynamic counts while keeping variable values intact', () => {
+  activateLocale('fr', { Home: 'Accueil', 'Round {0} of {1}': 'Manche {0} sur {1}', 'View {0} on GitHub': 'Voir {0} sur GitHub' });
+  assert.equal(translate(' Home '), ' Accueil ');
+  assert.equal(translate('Round 3 of 5'), 'Manche 3 sur 5');
+  assert.equal(translate('View C-OS on GitHub'), 'Voir C-OS sur GitHub');
+  assert.equal(translate('constructor'), 'constructor');
+  assert.equal(translate('Untranslated proper name'), 'Untranslated proper name');
+  activateLocale('en', {});
+});
+
+test('localization preserves the element structure, event handlers, refs, and animation values', () => {
+  activateLocale('fr', { Home: 'Accueil' });
+  const handler = () => {};
+  const ref = {};
+  const icon = { type: 'svg', props: {} };
+  const props = { children: ['Home', icon], onClick: handler, ref, animate: { x: 10 }, href: '/cv', 'aria-label': 'Home' };
+  const result = translateProps('button', props);
+  assert.deepEqual(result.children, ['Accueil', icon]);
+  assert.equal(result.onClick, handler);
+  assert.equal(result.ref, ref);
+  assert.equal(result.animate, props.animate);
+  assert.equal(result.href, '/cv');
+  assert.equal(result['aria-label'], 'Accueil');
+  assert.equal(translateProps('code', props), props);
+  assert.equal(translateProps('span', { ...props, translate: 'no' }).children[0], 'Home');
+  activateLocale('en', {});
 });
