@@ -12,7 +12,8 @@
     "preview": "vite preview",
     "deploy": "gh-pages -d dist",
     "test:groundlm": "node --test tests/groundlm/*.test.mjs",
-    "test:languages": "node --test tests/language-suggestion.test.mjs tests/locale-assets.test.mjs"
+    "test:languages": "node --test tests/language-suggestion.test.mjs tests/locale-assets.test.mjs",
+    "test:visitors": "node --test tests/visitor-counts.test.mjs"
   },
   "dependencies": {
     "framer-motion": "^12.4.11",

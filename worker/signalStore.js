@@ -41,7 +41,7 @@ export const recordSignal = async (db, request) => {
 };
 
 export const readArchive = async (db) => {
-  const result = await db.prepare(`
+  const [result, dailyResult] = await db.batch([db.prepare(`
     SELECT
       country_code AS countryCode,
       latitude_cell AS latitude,
@@ -49,10 +49,16 @@ export const readArchive = async (db) => {
       SUM(signal_count) AS count,
       MAX(day) AS lastSeen
     FROM visitor_signals
-    WHERE day >= date('now', ?)
+    WHERE day >= date('now', ?) AND day <= date('now')
     GROUP BY country_code, latitude_cell, longitude_cell
     ORDER BY count DESC, lastSeen DESC
-  `).bind(`-${ARCHIVE_DAYS - 1} days`).all();
+  `).bind(`-${ARCHIVE_DAYS - 1} days`), db.prepare(`
+    SELECT day, SUM(signal_count) AS count
+    FROM visitor_signals
+    WHERE day >= date('now', ?) AND day <= date('now')
+    GROUP BY day
+    ORDER BY day ASC
+  `).bind(`-${ARCHIVE_DAYS - 1} days`)]);
 
   const points = (result.results || []).map((row) => ({
     countryCode: row.countryCode,
@@ -63,9 +69,11 @@ export const readArchive = async (db) => {
   }));
 
   return {
+    generatedAt: new Date().toISOString(),
     windowDays: ARCHIVE_DAYS,
     totalSignals: points.reduce((total, point) => total + point.count, 0),
     countryCount: new Set(points.map((point) => point.countryCode).filter((code) => code !== 'XX')).size,
     points,
+    daily: (dailyResult.results || []).map((row) => ({ day: row.day, count: Number(row.count) })),
   };
 };

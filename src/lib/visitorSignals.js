@@ -1,7 +1,8 @@
+import { createVisitorRecorder } from './visitorRecorder';
+
 const SIGNAL_ENDPOINT = 'https://anormalm-signal-archive.hulifan55555.chatgpt.site/api/signals';
 const PAUSE_KEY = 'anormalm-signal-paused';
-
-const getDailyKey = () => `anormalm-signal-${new Date().toISOString().slice(0, 10)}`;
+let memoryPaused = false;
 
 const privacyPreferenceEnabled = () => (
   navigator.globalPrivacyControl === true || navigator.doNotTrack === '1'
@@ -9,13 +10,14 @@ const privacyPreferenceEnabled = () => (
 
 export const isVisitorSignalPaused = () => {
   try {
-    return localStorage.getItem(PAUSE_KEY) === '1';
+    return memoryPaused || localStorage.getItem(PAUSE_KEY) === '1';
   } catch {
-    return false;
+    return memoryPaused;
   }
 };
 
 export const setVisitorSignalPaused = (paused) => {
+  memoryPaused = paused;
   try {
     localStorage.setItem(PAUSE_KEY, paused ? '1' : '0');
   } catch {
@@ -23,25 +25,25 @@ export const setVisitorSignalPaused = (paused) => {
   }
 };
 
-export const recordVisitorSignal = async () => {
-  if (import.meta.env.DEV || privacyPreferenceEnabled() || isVisitorSignalPaused()) return;
-
-  const dailyKey = getDailyKey();
-  try {
-    if (localStorage.getItem(dailyKey) === '1') return;
-    const response = await fetch(SIGNAL_ENDPOINT, {
-      method: 'POST',
-      referrerPolicy: 'no-referrer',
+let recorder;
+export const recordVisitorSignal = () => {
+  if (!recorder) {
+    let storage;
+    try { storage = window.localStorage; } catch { /* Cannot enforce a daily limit. */ }
+    recorder = createVisitorRecorder({
+      endpoint: SIGNAL_ENDPOINT, fetcher: window.fetch.bind(window), storage, locks: navigator.locks,
+      allowed: () => !import.meta.env.DEV && ['anormalm.com', 'www.anormalm.com', 'anormalm.github.io'].includes(window.location.hostname)
+        && !['/visitors', '/node'].includes(window.location.pathname.replace(/\/$/, '')),
+      paused: () => privacyPreferenceEnabled() || isVisitorSignalPaused(),
     });
-    if (response.ok) localStorage.setItem(dailyKey, '1');
-  } catch {
-    // Analytics must never interrupt the site experience.
   }
+  return recorder();
 };
 
 export const fetchVisitorArchive = async (signal) => {
   const response = await fetch(SIGNAL_ENDPOINT, {
     method: 'GET',
+    credentials: 'omit',
     cache: 'no-store',
     referrerPolicy: 'no-referrer',
     signal,

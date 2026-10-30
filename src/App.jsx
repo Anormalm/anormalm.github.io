@@ -16,6 +16,7 @@ import Contact from './pages/Contact';
 import Lab from './pages/Lab';
 import Privacy from './pages/Privacy';
 import Node from './pages/Node';
+import Visitors from './pages/Visitors';
 import GNNMARLFraud from './pages/writings/GNNMARLFraud';
 import Disenchantment from './pages/writings/Disenchantment';
 import Fragments from './pages/writings/Fragments';
@@ -38,6 +39,7 @@ const PAGE_TITLES = {
   '/contact': ['Contact | Lifan Hu', '联系｜胡立凡'],
   '/privacy': ['Privacy | Lifan Hu', '隐私｜胡立凡'],
   '/node': ['Node | Lifan Hu', '隐藏节点｜胡立凡'],
+  '/visitors': ['Visitors | Lifan Hu', 'Visitors | Lifan Hu'],
 };
 
 const KONAMI_PATTERN = ['up', 'up', 'down', 'down', 'left', 'right', 'left', 'right', 'b', 'a', 'b', 'a'];
@@ -55,7 +57,7 @@ function AppShell() {
 
   useEffect(() => {
     recordVisitorSignal();
-  }, []);
+  }, [location.pathname]);
 
   useEffect(() => {
     if (!languageReady) return;
@@ -155,6 +157,7 @@ function AppShell() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/node" element={<Node />} />
+            <Route path="/visitors" element={<Visitors />} />
             <Route path="/writings/GNNMARLFraud" element={<GNNMARLFraud />} />
             <Route path="/writings/Disenchantment" element={<Disenchantment />} />
             <Route path="/writings/Fragments" element={<Fragments />} />

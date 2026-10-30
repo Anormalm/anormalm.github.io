@@ -12,6 +12,7 @@ const NAV_COMMANDS = [
   ['CV', '履历', '/cv', 'resume cv experience'],
   ['Contact', '联系', '/contact', 'email contact'],
   ['Hidden node', '隐藏节点', '/node', 'secret node ghost'],
+  ['Visitor counts', '访客统计', '/visitors', 'visitors analytics traffic stats counts'],
 ];
 
 const CommandPalette = ({ onToggleGlitch }) => {

@@ -61,6 +61,7 @@ const VisitorArchive = () => {
         <div>
           <div className="eyebrow">{isChinese ? '匿名信号 / 近 90 天' : 'Anonymous signals / 90 days'}</div>
           <h2 id="visitor-archive-title">{isChinese ? '访客信号档案' : 'Visitor signal archive'}</h2>
+          <Link className="link-arrow" to="/visitors">Open visitor dashboard</Link>
         </div>
         <button type="button" onClick={() => loadArchive()} aria-label={isChinese ? '刷新访客信号' : 'Refresh visitor signals'} disabled={status === 'loading'}>
           <FiRefreshCw />
