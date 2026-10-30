@@ -10,7 +10,7 @@ const normalize = (value) => value.replace(/\s+/g, ' ').trim();
 const add = (value) => {
   const text = normalize(value);
   if (!/[a-zA-Z]{2}/.test(text) || /[\u3400-\u9fff]/.test(text) || protectedText.has(text)) return;
-  if (/https?:|mailto:|@|^[./#_\[(]|--|var\(|rgba?\(|[{}][^0-9]|=>|^\d+(?:deg|px)|\b(?:bg|text|font|border|rounded|gap|p|px|py|md|lg|sm|xl|hover|dark)-|^anormalm-|^site-|^geo-|^language-/.test(text)) return;
+  if (/https?:|mailto:|@|^[./#_\[(]|--|var\(|rgba?\(|=>|^\d+(?:deg|px)|^\{\d+\}(?:px|deg|rem|vh|vw|%)$|\b(?:bg|text|font|border|rounded|gap|p|px|py|md|lg|sm|xl|hover|dark)-|^anormalm-|^site-|^geo-|^language-/.test(text)) return;
   if (/^[a-z][a-z-]+$/.test(text) && text.length > 14) return;
   messages.add(text);
 };
