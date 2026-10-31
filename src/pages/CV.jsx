@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { AnimatePresence, motion as Motion } from 'framer-motion';
 import { FiArrowLeft, FiArrowRight, FiDownload, FiExternalLink, FiX } from 'react-icons/fi';
 import { publications } from '../data/portfolio';
@@ -343,7 +344,7 @@ const CV = () => {
         </div>
       </section>
 
-      <AnimatePresence>
+      {createPortal(<AnimatePresence>
         {showGate && (
           <Motion.div
             className="gate-backdrop"
@@ -386,7 +387,7 @@ const CV = () => {
             </Motion.section>
           </Motion.div>
         )}
-      </AnimatePresence>
+      </AnimatePresence>, document.body)}
     </div>
   );
 };

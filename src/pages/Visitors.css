@@ -1,8 +1,9 @@
 .traffic-page { max-width: 1280px; padding-block: 3.5rem 5rem; }
 .traffic-header, .traffic-actions, .traffic-chart-header, .traffic-chart-footer, .traffic-countries header { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
-.traffic-header { margin-bottom: 2rem; }
+.traffic-header { margin-bottom: 2rem; flex-wrap: wrap; }
+.traffic-header > *, .traffic-actions > *, .traffic-chart-header > *, .traffic-countries header > * { min-inline-size: 0; }
 .traffic-header h1 { margin-top: .5rem; font: 600 clamp(2rem, 5vw, 4rem)/1.1 var(--font-display); letter-spacing: -.055em; }
-.traffic-actions { justify-content: flex-end; }
+.traffic-actions { justify-content: flex-end; flex-wrap: wrap; }
 .traffic-metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; margin-bottom: 1.25rem; }
 .traffic-metric { display: grid; gap: .75rem; padding: 1.4rem; border-radius: 1.25rem; min-width: 0; }
 .traffic-metric > span { font-size: .85rem; color: var(--muted); }
@@ -14,7 +15,7 @@
 .traffic-chart-header h2, .traffic-countries h2 { font: 500 1.15rem/1.4 var(--font-display); }
 .traffic-chart-header p { display: flex; align-items: center; gap: .75rem; color: var(--muted); font-size: .75rem; margin-top: .4rem; }
 .traffic-chart-header p strong { color: var(--ink); font-variant-numeric: tabular-nums; }
-.traffic-range { display: flex; padding: .2rem; gap: .2rem; border: 1px solid var(--line); border-radius: .8rem; }
+.traffic-range { display: flex; flex-wrap: wrap; max-width: 100%; padding: .2rem; gap: .2rem; border: 1px solid var(--line); border-radius: .8rem; }
 .traffic-range button { min-height: 40px; padding: .5rem .8rem; color: var(--muted); border-radius: .6rem; font-size: .75rem; }
 .traffic-range button[aria-pressed='true'] { background: var(--accent); color: var(--paper); }
 .traffic-chart { position: relative; height: 220px; margin-top: 2.5rem; }
@@ -35,6 +36,8 @@
 .traffic-countries ol { list-style: none; padding: 0; margin-top: 1.5rem; max-height: 320px; overflow-y: auto; }
 .traffic-countries li { margin-bottom: 1.2rem; }
 .traffic-countries li > div { display: flex; justify-content: space-between; gap: 1rem; font-size: .85rem; }
+.traffic-countries li > div > span { min-inline-size: 0; }
+.traffic-countries li > div > strong { flex-shrink: 0; }
 .traffic-country-track { display: block; height: 3px; background: var(--line); margin-top: .65rem; overflow: hidden; border-radius: 999px; }
 .traffic-country-track > i { display: block; height: 100%; background: var(--accent); }
 .traffic-method { display: flex; flex-direction: column; align-items: flex-start; gap: 1rem; color: var(--muted); font-size: .8rem; line-height: 1.7; }
