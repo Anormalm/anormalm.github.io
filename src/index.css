@@ -3197,6 +3197,7 @@ main :is(h1, h2, h3, h4) { min-inline-size: 0; max-inline-size: 100%; }
 .language-picker-header svg,
 .command-header button { flex-shrink: 0; }
 .gate-card { max-block-size: calc(100dvh - 2.5rem); overflow-y: auto; }
+.gate-card > .eyebrow { padding-right: 2.5rem; }
 
 html:not([lang^="en"]) :is(.display-heading, .geo-heading h2, .manifesto-quote, .contact-stage h2, .node-console h1, .gate-card h2) { line-height: 1.12; }
 html:not([lang^="en"]) .lab-display-title { font-size: clamp(2.2rem, 7vw, 6rem); line-height: 1.12; }
@@ -3208,6 +3209,7 @@ html:not([lang^="en"]) .lab-display-title { font-size: clamp(2.2rem, 7vw, 6rem);
 @media (max-width: 767px) {
   .kinetic-title { white-space: normal; font-size: clamp(2.4rem, 11.5vw, 5.3rem); }
   .kinetic-title-offset { --title-inset: 0.3rem; }
+  .gate-card h2 { font-size: clamp(2rem, 10.5vw, 2.8rem); }
 }
 
 @media (prefers-reduced-motion: reduce) {
