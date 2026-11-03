@@ -73,3 +73,13 @@ the verified release ZIP, reference summary, CSV, report and final audit.
 The new tests verify all public reference metrics against that summary,
 fixture hashes, parsing, inference request settings, local HTTP, cancellation,
 no-retry behavior and credential redaction. No paid APIs are used by tests.
+
+
+The 21-model family pilot is published separately at `pilot.html`, linked prominently
+from the homepage study tabs. It includes matched historical Claude Opus 5.5 and
+Sonnet 5.5 responses (24 each), 19 newly queried model configurations, 504 slots,
+502 returned model responses, six graphs, three tasks and four naming conditions.
+Search/sort, task and size filters, model details, CSV and full pilot downloads
+are available. Claude cost cells say Reused; their earlier inference is not claimed
+to have been free. Grok compute differences and two Step API failures remain visible.
+The pilot is never pooled with Hard v1. All 36 benchmark-site tests pass.

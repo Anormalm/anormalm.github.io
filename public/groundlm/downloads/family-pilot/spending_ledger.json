@@ -1,0 +1,43 @@
+{
+  "completed_utc": "2026-11-02T16:52:32.720182+00:00",
+  "additional_authorized_usd": 20,
+  "prior_recorded_spend_usd": 16.743486000000008,
+  "new_cost_usd": 12.4353724113,
+  "remaining_additional_budget_usd": 7.5646275887000005,
+  "cumulative_recorded_cost_usd": 29.178858411300006,
+  "unique_new_slots": 456,
+  "base_attempts": 456,
+  "provider_recovery_attempts": 3,
+  "reused_claude_slots": 48,
+  "new_model_slot_counts": {
+    "amazon/nova-2-lite-v1": 24,
+    "cohere/command-a-plus": 24,
+    "deepseek/deepseek-v4.1-flash-1017": 24,
+    "google/gemini-4-argon": 24,
+    "google/gemma-4-31b-it": 24,
+    "ibm-granite/granite-4.2-8b": 24,
+    "inclusionai/ling-3.1-flash": 24,
+    "meta-llama/llama-4-maverick": 24,
+    "meta/muse-wonder": 24,
+    "minimax/minimax-m3.1-flash": 24,
+    "mistralai/mistral-large-4-0": 24,
+    "moonshotai/kimi-k3.1-pro": 24,
+    "nvidia/nemotron-3.5-super-vl": 24,
+    "openai/gpt-6.1-sol": 24,
+    "qwen/qwen3.8-max-0902": 24,
+    "stepfun/step-5-preview": 24,
+    "x-ai/grok-4.7": 24,
+    "xiaomi/mimo-v2.6-pro": 24,
+    "z-ai/glm-5.3": 24
+  },
+  "cost_sources": {
+    "provider": 458,
+    "reserved_uncertain_request": 1
+  },
+  "uncertain_cost_upper_bound_usd": 0.0316014,
+  "raw_sha256": {
+    "results.jsonl": "80fba2f95e3d7f13c360e7084e4ec3f79a0e40b5021e84138e77b383e81ee7e2",
+    "recovery_results.jsonl": "902eb4a9b385999c0bb8d0c56f4e69ae7f1da11db1da5d3ab9fdf901f504b329"
+  },
+  "audit": "All coverage, frozen prompt, graph equivalence, retry policy, accounting and score partition checks passed."
+}
