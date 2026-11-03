@@ -134,3 +134,17 @@ launched for this website change. A read-only 15,360-slot extension plan is
 retained locally for budget review and is not authorized for execution.
 
 Design references: Artificial Analysis methodology, HELM and Inspect log viewer.
+
+
+## Visual refresh
+
+A shared research workspace replaces the space-consuming sidebar with a resource
+menu, expands the comparison table, and improves type sizes and visual hierarchy.
+The local graph illustration changes identifiers while preserving all eight
+edges. It sends no model requests and does not display a model prediction.
+
+Archivo and Source Sans 3 are self-hosted with their SIL licenses and source
+metadata. Resources supports keyboard Escape and outside-click dismissal;
+visible focus and reduced-motion rules are provided. The paper pages share the
+same type and palette. Benchmark fixtures, raw archives, metrics, request settings
+and active calibration collectors are outside the scope of this visual change.

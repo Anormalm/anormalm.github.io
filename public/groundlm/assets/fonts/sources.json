@@ -1,0 +1,18 @@
+[
+  {
+    "family": "Archivo",
+    "file": "archivo-latin.woff2",
+    "bytes": 34928,
+    "sha256": "8f704806dbedeaaeca334b11ec348bc3ac3a439d6431544b3afb54f534ee4967",
+    "source": "https://fonts.gstatic.com/s/archivo/v25/k3kPo8UDI-1M0wlSV9XAw6lQkqWY8Q82sLydOxI.woff2",
+    "license": "https://raw.githubusercontent.com/google/fonts/main/ofl/archivo/OFL.txt"
+  },
+  {
+    "family": "Source Sans 3",
+    "file": "source-sans-3-latin.woff2",
+    "bytes": 28872,
+    "sha256": "19143dca075972bc84e3fd9eab7416dd40cc565dccb2435a044bdfabe060c7d5",
+    "source": "https://fonts.gstatic.com/s/sourcesans3/v20/nwpStKy2OAdR1K-IwhWudF-R3w8aZQ.woff2",
+    "license": "https://raw.githubusercontent.com/google/fonts/main/ofl/sourcesans3/OFL.txt"
+  }
+]
