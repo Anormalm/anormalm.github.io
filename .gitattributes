@@ -3,3 +3,5 @@ public/groundlm/data/hard-v1/** -text
 public/groundlm/downloads/hard-v1/** -text
 public/groundlm/data/family-pilot/** -text
 public/groundlm/downloads/family-pilot/** -text
+public/groundlm/data/history/** -text
+public/groundlm/downloads/history/** -text

@@ -1,0 +1,1310 @@
+{
+  "version": "groundlm-complete-results-v1",
+  "totals": {
+    "run_groups": 8,
+    "displayed_slots": 5664,
+    "new_slots": 5616,
+    "reused_slots": 48,
+    "new_provider_attempts": 5690,
+    "returned_new_slots": 5614,
+    "unresolved_api_slots": 2,
+    "provider_failure_attempts": 76,
+    "additional_attempts": 74
+  },
+  "groups": [
+    {
+      "id": "pilot01",
+      "label": "Development calibration",
+      "stage": "Development",
+      "note": "Exploratory calibration: 12 graph questions per model; low reasoning, 2,048 tokens. Follow-up task selection used these outcomes.",
+      "created_utc": "2026-11-02T13:49:46Z",
+      "slots": 96,
+      "new_slots": 96,
+      "reused_slots": 0,
+      "graphs": 12,
+      "models": 2,
+      "sizes": [
+        32,
+        96
+      ],
+      "tasks": [
+        "constrained_reachability",
+        "exact_walk_count",
+        "minimum_cut",
+        "shortest_path_count",
+        "triangle_count",
+        "weighted_shortest_path"
+      ],
+      "conditions": [
+        "degree_aligned",
+        "degree_reversed",
+        "neutral",
+        "original"
+      ],
+      "max_tokens": 2048,
+      "reasoning": "low",
+      "sampling": "omitted (service default)",
+      "settings": {
+        "version": "hard-graph-v1",
+        "models": [
+          "anthropic/claude-sonnet-5.5",
+          "anthropic/claude-opus-5.5"
+        ],
+        "sizes": [
+          32,
+          96
+        ],
+        "split": "development",
+        "max_tokens": 2048,
+        "reasoning": {
+          "effort": "low"
+        },
+        "temperature": "omitted (service default)",
+        "fixture_sha256": "7152e7c58db581eba0e99aeeaa710f8545d5617f387e5ec541a3ef05e4b10a70"
+      },
+      "records_file": "pilot01.json",
+      "prompts_file": "pilot01-prompts.json",
+      "cost_usd": 2.804900000000001,
+      "archive": "downloads/history/claude-experiments.zip"
+    },
+    {
+      "id": "holdout01",
+      "label": "Higher-budget holdout \u00b7 96 nodes",
+      "stage": "Holdout",
+      "note": "Three held-out graph questions per model. Tasks were chosen after development; this is targeted validation.",
+      "created_utc": "2026-11-02T13:58:19Z",
+      "slots": 24,
+      "new_slots": 24,
+      "reused_slots": 0,
+      "graphs": 3,
+      "models": 2,
+      "sizes": [
+        96
+      ],
+      "tasks": [
+        "minimum_cut",
+        "triangle_count",
+        "weighted_shortest_path"
+      ],
+      "conditions": [
+        "degree_aligned",
+        "degree_reversed",
+        "neutral",
+        "original"
+      ],
+      "max_tokens": 4096,
+      "reasoning": "high",
+      "sampling": "omitted (service default)",
+      "settings": {
+        "version": "hard-graph-v1",
+        "models": [
+          "anthropic/claude-sonnet-5.5",
+          "anthropic/claude-opus-5.5"
+        ],
+        "sizes": [
+          96
+        ],
+        "split": "holdout",
+        "max_tokens": 4096,
+        "tasks": [
+          "weighted_shortest_path",
+          "triangle_count",
+          "minimum_cut"
+        ],
+        "conditions": null,
+        "reasoning": {
+          "effort": "high"
+        },
+        "temperature": "omitted (service default)",
+        "fixture_sha256": "ff3ad4847935fdb34e109f3bb2208f0170ee6fe2dba00e0f0f32333659402ee7"
+      },
+      "records_file": "holdout01.json",
+      "prompts_file": "holdout01-prompts.json",
+      "cost_usd": 1.13239,
+      "archive": "downloads/history/claude-experiments.zip"
+    },
+    {
+      "id": "holdout32",
+      "label": "Higher-budget holdout \u00b7 32 nodes",
+      "stage": "Holdout",
+      "note": "Two held-out graph questions per model. Tasks were chosen after development; this is targeted validation.",
+      "created_utc": "2026-11-02T14:01:53Z",
+      "slots": 16,
+      "new_slots": 16,
+      "reused_slots": 0,
+      "graphs": 2,
+      "models": 2,
+      "sizes": [
+        32
+      ],
+      "tasks": [
+        "minimum_cut",
+        "triangle_count"
+      ],
+      "conditions": [
+        "degree_aligned",
+        "degree_reversed",
+        "neutral",
+        "original"
+      ],
+      "max_tokens": 4096,
+      "reasoning": "high",
+      "sampling": "omitted (service default)",
+      "settings": {
+        "version": "hard-graph-v1",
+        "models": [
+          "anthropic/claude-sonnet-5.5",
+          "anthropic/claude-opus-5.5"
+        ],
+        "sizes": [
+          32
+        ],
+        "split": "holdout",
+        "max_tokens": 4096,
+        "tasks": [
+          "triangle_count",
+          "minimum_cut"
+        ],
+        "conditions": null,
+        "reasoning": {
+          "effort": "high"
+        },
+        "temperature": "omitted (service default)",
+        "fixture_sha256": "ff3ad4847935fdb34e109f3bb2208f0170ee6fe2dba00e0f0f32333659402ee7"
+      },
+      "records_file": "holdout32.json",
+      "prompts_file": "holdout32-prompts.json",
+      "cost_usd": 0.6339419999999999,
+      "archive": "downloads/history/claude-experiments.zip"
+    },
+    {
+      "id": "replication01",
+      "label": "Independent graph replication",
+      "stage": "Replication",
+      "note": "24 graph questions per model: four seeds per task/size cell, three tasks, 32/64 nodes, four naming conditions.",
+      "created_utc": "2026-11-02T14:10:26Z",
+      "slots": 192,
+      "new_slots": 192,
+      "reused_slots": 0,
+      "graphs": 24,
+      "models": 2,
+      "sizes": [
+        32,
+        64
+      ],
+      "tasks": [
+        "minimum_cut",
+        "triangle_count",
+        "weighted_shortest_path"
+      ],
+      "conditions": [
+        "degree_aligned",
+        "degree_reversed",
+        "neutral",
+        "original"
+      ],
+      "max_tokens": 8192,
+      "reasoning": "high",
+      "sampling": "omitted (service default)",
+      "settings": {
+        "version": "hard-graph-v1",
+        "models": [
+          "anthropic/claude-sonnet-5.5",
+          "anthropic/claude-opus-5.5"
+        ],
+        "sizes": [
+          32,
+          64
+        ],
+        "split": "replication",
+        "max_tokens": 8192,
+        "tasks": null,
+        "conditions": null,
+        "reasoning": {
+          "effort": "high"
+        },
+        "temperature": "omitted (service default)",
+        "fixture_sha256": "0e3134b8444c4615278a06687c4f0029e8e953eafdab3b668cbcb22298f61933"
+      },
+      "records_file": "replication01.json",
+      "prompts_file": "replication01-prompts.json",
+      "cost_usd": 9.112944000000004,
+      "archive": "downloads/history/claude-experiments.zip"
+    },
+    {
+      "id": "repeat_control01",
+      "label": "Unchanged-input repeat control",
+      "stage": "Control",
+      "note": "Eight triangle questions repeated without changing their original prompts. These reuse replication graphs and measure response variation.",
+      "created_utc": "2026-11-02T14:27:22Z",
+      "slots": 16,
+      "new_slots": 16,
+      "reused_slots": 0,
+      "graphs": 8,
+      "models": 2,
+      "sizes": [
+        32,
+        64
+      ],
+      "tasks": [
+        "triangle_count"
+      ],
+      "conditions": [
+        "repeat"
+      ],
+      "max_tokens": 8192,
+      "reasoning": "high",
+      "sampling": "omitted (service default)",
+      "settings": {
+        "version": "hard-graph-v1",
+        "models": [
+          "anthropic/claude-sonnet-5.5",
+          "anthropic/claude-opus-5.5"
+        ],
+        "sizes": [
+          32,
+          64
+        ],
+        "split": "replication",
+        "max_tokens": 8192,
+        "tasks": null,
+        "conditions": null,
+        "reasoning": {
+          "effort": "high"
+        },
+        "temperature": "omitted (service default)",
+        "fixture_sha256": "3886aeafd75048b1237c3ff15f292103b4f5a59e1a028dd6034141fbcb999545"
+      },
+      "records_file": "repeat_control01.json",
+      "prompts_file": "repeat_control01-prompts.json",
+      "cost_usd": 0.8960700000000001,
+      "archive": "downloads/history/claude-experiments.zip"
+    },
+    {
+      "id": "optimization01",
+      "label": "Exact optimization extension",
+      "stage": "Optimization",
+      "note": "Four fresh minimum-vertex-cover questions, 24/32 nodes. Exploratory task extension selected after observing earlier outcomes; Opus only.",
+      "created_utc": "2026-11-02T14:29:44Z",
+      "slots": 16,
+      "new_slots": 16,
+      "reused_slots": 0,
+      "graphs": 4,
+      "models": 1,
+      "sizes": [
+        24,
+        32
+      ],
+      "tasks": [
+        "minimum_vertex_cover"
+      ],
+      "conditions": [
+        "degree_aligned",
+        "degree_reversed",
+        "neutral",
+        "original"
+      ],
+      "max_tokens": 8192,
+      "reasoning": "high",
+      "sampling": "omitted (service default)",
+      "settings": {
+        "version": "hard-graph-v1",
+        "models": [
+          "anthropic/claude-opus-5.5"
+        ],
+        "sizes": [
+          24,
+          32
+        ],
+        "split": "replication",
+        "max_tokens": 8192,
+        "tasks": null,
+        "conditions": null,
+        "reasoning": {
+          "effort": "high"
+        },
+        "temperature": "omitted (service default)",
+        "fixture_sha256": "e4c82265d024fff23a931058cd646284e6f72f9be71a949e4dcaa8a5b6c158d7"
+      },
+      "records_file": "optimization01.json",
+      "prompts_file": "optimization01-prompts.json",
+      "cost_usd": 2.16324,
+      "archive": "downloads/history/claude-experiments.zip"
+    },
+    {
+      "id": "family-pilot",
+      "label": "21-model family pilot",
+      "stage": "Family comparison",
+      "note": "Six shared questions, four naming conditions. 48 Claude responses are reused from replication01, not new inference. Grok hidden reasoning exceeded the requested allowance; two Step responses remain unavailable.",
+      "slots": 504,
+      "new_slots": 456,
+      "reused_slots": 48,
+      "graphs": 6,
+      "models": 21,
+      "sizes": [
+        32,
+        64
+      ],
+      "tasks": [
+        "weighted_shortest_path",
+        "triangle_count",
+        "minimum_cut"
+      ],
+      "conditions": [
+        "original",
+        "neutral",
+        "degree_aligned",
+        "degree_reversed"
+      ],
+      "max_tokens": 8192,
+      "reasoning": "high when advertised; enabled/default otherwise",
+      "sampling": "service default",
+      "records_file": "family-pilot.json",
+      "prompts_file": "family-pilot-prompts.json",
+      "cost_usd": 12.435372411299996,
+      "archive": "downloads/family-pilot/family_comparison.zip"
+    },
+    {
+      "id": "hard-v1",
+      "label": "GroundLM Hard v1",
+      "stage": "Full benchmark",
+      "note": "120 fresh graphs, six tasks, eight conditions; all 4,800 slots returned. Provider and precision are part of each configuration. Eligible infrastructure recoveries are included in charges.",
+      "slots": 4800,
+      "new_slots": 4800,
+      "reused_slots": 0,
+      "graphs": 120,
+      "models": 5,
+      "sizes": [
+        32,
+        64
+      ],
+      "tasks": [
+        "weighted_shortest_path",
+        "shortest_path_count",
+        "exact_walk_count",
+        "triangle_count",
+        "minimum_cut",
+        "constrained_reachability"
+      ],
+      "conditions": [
+        "original",
+        "repeat",
+        "neutral",
+        "degree_aligned",
+        "degree_reversed",
+        "format_json",
+        "order_shuffled",
+        "distractor"
+      ],
+      "max_tokens": 16384,
+      "reasoning": "high when advertised; enabled otherwise",
+      "sampling": "service default",
+      "records_file": "hard-v1.json",
+      "cost_usd": 17.44514990461,
+      "archive": "downloads/hard-v1/groundlm_hard_v1.zip"
+    }
+  ],
+  "model_runs": [
+    {
+      "run_id": "pilot01",
+      "model": "anthropic/claude-sonnet-5.5",
+      "name": "Claude Sonnet 5.5",
+      "slots": 48,
+      "returned": 48,
+      "graphs": 12,
+      "counts": {
+        "correct": 26,
+        "wrong": 11,
+        "invalid": 0,
+        "cutoff": 11,
+        "error": 0
+      },
+      "original_correct": 6,
+      "original_n": 12,
+      "cost_usd": 0.8684399999999999,
+      "reused": false,
+      "max_tokens": 2048,
+      "reasoning": "low",
+      "provider_attempts": 48,
+      "provider_failure_attempts": 0
+    },
+    {
+      "run_id": "pilot01",
+      "model": "anthropic/claude-opus-5.5",
+      "name": "Claude Opus 5.5",
+      "slots": 48,
+      "returned": 48,
+      "graphs": 12,
+      "counts": {
+        "correct": 28,
+        "wrong": 3,
+        "invalid": 0,
+        "cutoff": 17,
+        "error": 0
+      },
+      "original_correct": 8,
+      "original_n": 12,
+      "cost_usd": 1.93646,
+      "reused": false,
+      "max_tokens": 2048,
+      "reasoning": "low",
+      "provider_attempts": 48,
+      "provider_failure_attempts": 0
+    },
+    {
+      "run_id": "holdout01",
+      "model": "anthropic/claude-sonnet-5.5",
+      "name": "Claude Sonnet 5.5",
+      "slots": 12,
+      "returned": 12,
+      "graphs": 3,
+      "counts": {
+        "correct": 8,
+        "wrong": 0,
+        "invalid": 0,
+        "cutoff": 4,
+        "error": 0
+      },
+      "original_correct": 2,
+      "original_n": 3,
+      "cost_usd": 0.37411,
+      "reused": false,
+      "max_tokens": 4096,
+      "reasoning": "high",
+      "provider_attempts": 12,
+      "provider_failure_attempts": 0
+    },
+    {
+      "run_id": "holdout01",
+      "model": "anthropic/claude-opus-5.5",
+      "name": "Claude Opus 5.5",
+      "slots": 12,
+      "returned": 12,
+      "graphs": 3,
+      "counts": {
+        "correct": 8,
+        "wrong": 0,
+        "invalid": 0,
+        "cutoff": 4,
+        "error": 0
+      },
+      "original_correct": 2,
+      "original_n": 3,
+      "cost_usd": 0.75828,
+      "reused": false,
+      "max_tokens": 4096,
+      "reasoning": "high",
+      "provider_attempts": 12,
+      "provider_failure_attempts": 0
+    },
+    {
+      "run_id": "holdout32",
+      "model": "anthropic/claude-sonnet-5.5",
+      "name": "Claude Sonnet 5.5",
+      "slots": 8,
+      "returned": 8,
+      "graphs": 2,
+      "counts": {
+        "correct": 7,
+        "wrong": 1,
+        "invalid": 0,
+        "cutoff": 0,
+        "error": 0
+      },
+      "original_correct": 2,
+      "original_n": 2,
+      "cost_usd": 0.179334,
+      "reused": false,
+      "max_tokens": 4096,
+      "reasoning": "high",
+      "provider_attempts": 8,
+      "provider_failure_attempts": 0
+    },
+    {
+      "run_id": "holdout32",
+      "model": "anthropic/claude-opus-5.5",
+      "name": "Claude Opus 5.5",
+      "slots": 8,
+      "returned": 8,
+      "graphs": 2,
+      "counts": {
+        "correct": 5,
+        "wrong": 0,
+        "invalid": 0,
+        "cutoff": 3,
+        "error": 0
+      },
+      "original_correct": 2,
+      "original_n": 2,
+      "cost_usd": 0.454608,
+      "reused": false,
+      "max_tokens": 4096,
+      "reasoning": "high",
+      "provider_attempts": 8,
+      "provider_failure_attempts": 0
+    },
+    {
+      "run_id": "replication01",
+      "model": "anthropic/claude-sonnet-5.5",
+      "name": "Claude Sonnet 5.5",
+      "slots": 96,
+      "returned": 96,
+      "graphs": 24,
+      "counts": {
+        "correct": 87,
+        "wrong": 7,
+        "invalid": 0,
+        "cutoff": 2,
+        "error": 0
+      },
+      "original_correct": 24,
+      "original_n": 24,
+      "cost_usd": 2.7776280000000004,
+      "reused": false,
+      "max_tokens": 8192,
+      "reasoning": "high",
+      "provider_attempts": 96,
+      "provider_failure_attempts": 0
+    },
+    {
+      "run_id": "replication01",
+      "model": "anthropic/claude-opus-5.5",
+      "name": "Claude Opus 5.5",
+      "slots": 96,
+      "returned": 96,
+      "graphs": 24,
+      "counts": {
+        "correct": 91,
+        "wrong": 0,
+        "invalid": 0,
+        "cutoff": 5,
+        "error": 0
+      },
+      "original_correct": 24,
+      "original_n": 24,
+      "cost_usd": 6.335315999999998,
+      "reused": false,
+      "max_tokens": 8192,
+      "reasoning": "high",
+      "provider_attempts": 96,
+      "provider_failure_attempts": 0
+    },
+    {
+      "run_id": "repeat_control01",
+      "model": "anthropic/claude-sonnet-5.5",
+      "name": "Claude Sonnet 5.5",
+      "slots": 8,
+      "returned": 8,
+      "graphs": 8,
+      "counts": {
+        "correct": 8,
+        "wrong": 0,
+        "invalid": 0,
+        "cutoff": 0,
+        "error": 0
+      },
+      "original_correct": 0,
+      "original_n": 0,
+      "cost_usd": 0.24421000000000004,
+      "reused": false,
+      "max_tokens": 8192,
+      "reasoning": "high",
+      "provider_attempts": 8,
+      "provider_failure_attempts": 0
+    },
+    {
+      "run_id": "repeat_control01",
+      "model": "anthropic/claude-opus-5.5",
+      "name": "Claude Opus 5.5",
+      "slots": 8,
+      "returned": 8,
+      "graphs": 8,
+      "counts": {
+        "correct": 8,
+        "wrong": 0,
+        "invalid": 0,
+        "cutoff": 0,
+        "error": 0
+      },
+      "original_correct": 0,
+      "original_n": 0,
+      "cost_usd": 0.6518600000000001,
+      "reused": false,
+      "max_tokens": 8192,
+      "reasoning": "high",
+      "provider_attempts": 8,
+      "provider_failure_attempts": 0
+    },
+    {
+      "run_id": "optimization01",
+      "model": "anthropic/claude-opus-5.5",
+      "name": "Claude Opus 5.5",
+      "slots": 16,
+      "returned": 16,
+      "graphs": 4,
+      "counts": {
+        "correct": 10,
+        "wrong": 0,
+        "invalid": 0,
+        "cutoff": 6,
+        "error": 0
+      },
+      "original_correct": 4,
+      "original_n": 4,
+      "cost_usd": 2.16324,
+      "reused": false,
+      "max_tokens": 8192,
+      "reasoning": "high",
+      "provider_attempts": 16,
+      "provider_failure_attempts": 0
+    },
+    {
+      "run_id": "family-pilot",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "name": "Kimi K3.1 Pro",
+      "slots": 24,
+      "returned": 24,
+      "graphs": 6,
+      "counts": {
+        "correct": 20,
+        "wrong": 2,
+        "invalid": 0,
+        "cutoff": 2,
+        "error": 0
+      },
+      "original_correct": 6,
+      "original_n": 6,
+      "cost_usd": 0.90553,
+      "reused": false,
+      "max_tokens": 8192,
+      "reasoning": "high",
+      "provider_attempts": 24,
+      "provider_failure_attempts": 0
+    },
+    {
+      "run_id": "family-pilot",
+      "model": "openai/gpt-6.1-sol",
+      "name": "GPT-6.1 Sol",
+      "slots": 24,
+      "returned": 24,
+      "graphs": 6,
+      "counts": {
+        "correct": 23,
+        "wrong": 1,
+        "invalid": 0,
+        "cutoff": 0,
+        "error": 0
+      },
+      "original_correct": 5,
+      "original_n": 6,
+      "cost_usd": 0.414421,
+      "reused": false,
+      "max_tokens": 8192,
+      "reasoning": "high",
+      "provider_attempts": 24,
+      "provider_failure_attempts": 0
+    },
+    {
+      "run_id": "family-pilot",
+      "model": "z-ai/glm-5.3",
+      "name": "GLM-5.3",
+      "slots": 24,
+      "returned": 24,
+      "graphs": 6,
+      "counts": {
+        "correct": 8,
+        "wrong": 7,
+        "invalid": 1,
+        "cutoff": 8,
+        "error": 0
+      },
+      "original_correct": 3,
+      "original_n": 6,
+      "cost_usd": 0.2243731582,
+      "reused": false,
+      "max_tokens": 8192,
+      "reasoning": "high",
+      "provider_attempts": 24,
+      "provider_failure_attempts": 0
+    },
+    {
+      "run_id": "family-pilot",
+      "model": "meta/muse-wonder",
+      "name": "Muse Wonder",
+      "slots": 24,
+      "returned": 24,
+      "graphs": 6,
+      "counts": {
+        "correct": 18,
+        "wrong": 0,
+        "invalid": 0,
+        "cutoff": 6,
+        "error": 0
+      },
+      "original_correct": 4,
+      "original_n": 6,
+      "cost_usd": 3.197276,
+      "reused": false,
+      "max_tokens": 8192,
+      "reasoning": "high",
+      "provider_attempts": 24,
+      "provider_failure_attempts": 0
+    },
+    {
+      "run_id": "family-pilot",
+      "model": "minimax/minimax-m3.1-flash",
+      "name": "MiniMax M3.1 Flash",
+      "slots": 24,
+      "returned": 24,
+      "graphs": 6,
+      "counts": {
+        "correct": 10,
+        "wrong": 0,
+        "invalid": 1,
+        "cutoff": 13,
+        "error": 0
+      },
+      "original_correct": 3,
+      "original_n": 6,
+      "cost_usd": 0.031472450000000006,
+      "reused": false,
+      "max_tokens": 8192,
+      "reasoning": "high",
+      "provider_attempts": 24,
+      "provider_failure_attempts": 0
+    },
+    {
+      "run_id": "family-pilot",
+      "model": "google/gemini-4-argon",
+      "name": "Gemini 4 Argon",
+      "slots": 24,
+      "returned": 24,
+      "graphs": 6,
+      "counts": {
+        "correct": 16,
+        "wrong": 0,
+        "invalid": 0,
+        "cutoff": 8,
+        "error": 0
+      },
+      "original_correct": 5,
+      "original_n": 6,
+      "cost_usd": 1.5574140000000003,
+      "reused": false,
+      "max_tokens": 8192,
+      "reasoning": "high",
+      "provider_attempts": 24,
+      "provider_failure_attempts": 0
+    },
+    {
+      "run_id": "family-pilot",
+      "model": "stepfun/step-5-preview",
+      "name": "Step 5 Preview",
+      "slots": 24,
+      "returned": 22,
+      "graphs": 6,
+      "counts": {
+        "correct": 5,
+        "wrong": 0,
+        "invalid": 0,
+        "cutoff": 17,
+        "error": 2
+      },
+      "original_correct": 1,
+      "original_n": 6,
+      "cost_usd": 0.47703990000000007,
+      "reused": false,
+      "max_tokens": 8192,
+      "reasoning": "high",
+      "provider_attempts": 26,
+      "provider_failure_attempts": 4
+    },
+    {
+      "run_id": "family-pilot",
+      "model": "inclusionai/ling-3.1-flash",
+      "name": "Ling 3.1 Flash",
+      "slots": 24,
+      "returned": 24,
+      "graphs": 6,
+      "counts": {
+        "correct": 4,
+        "wrong": 0,
+        "invalid": 0,
+        "cutoff": 20,
+        "error": 0
+      },
+      "original_correct": 1,
+      "original_n": 6,
+      "cost_usd": 0.043911075,
+      "reused": false,
+      "max_tokens": 8192,
+      "reasoning": "enabled / service default",
+      "provider_attempts": 24,
+      "provider_failure_attempts": 0
+    },
+    {
+      "run_id": "family-pilot",
+      "model": "qwen/qwen3.8-max-0902",
+      "name": "Qwen3.8 Max 0902",
+      "slots": 24,
+      "returned": 24,
+      "graphs": 6,
+      "counts": {
+        "correct": 4,
+        "wrong": 0,
+        "invalid": 0,
+        "cutoff": 20,
+        "error": 0
+      },
+      "original_correct": 1,
+      "original_n": 6,
+      "cost_usd": 1.1515900000000001,
+      "reused": false,
+      "max_tokens": 8192,
+      "reasoning": "high",
+      "provider_attempts": 24,
+      "provider_failure_attempts": 0
+    },
+    {
+      "run_id": "family-pilot",
+      "model": "xiaomi/mimo-v2.6-pro",
+      "name": "MiMo V2.6 Pro",
+      "slots": 24,
+      "returned": 24,
+      "graphs": 6,
+      "counts": {
+        "correct": 6,
+        "wrong": 16,
+        "invalid": 0,
+        "cutoff": 2,
+        "error": 0
+      },
+      "original_correct": 1,
+      "original_n": 6,
+      "cost_usd": 0.1149439356,
+      "reused": false,
+      "max_tokens": 8192,
+      "reasoning": "enabled / service default",
+      "provider_attempts": 24,
+      "provider_failure_attempts": 0
+    },
+    {
+      "run_id": "family-pilot",
+      "model": "cohere/command-a-plus",
+      "name": "Command A+",
+      "slots": 24,
+      "returned": 24,
+      "graphs": 6,
+      "counts": {
+        "correct": 1,
+        "wrong": 0,
+        "invalid": 0,
+        "cutoff": 23,
+        "error": 0
+      },
+      "original_correct": 0,
+      "original_n": 6,
+      "cost_usd": 0.3046962,
+      "reused": false,
+      "max_tokens": 8192,
+      "reasoning": "enabled / service default",
+      "provider_attempts": 25,
+      "provider_failure_attempts": 1
+    },
+    {
+      "run_id": "family-pilot",
+      "model": "deepseek/deepseek-v4.1-flash-1017",
+      "name": "DeepSeek V4.1 Flash",
+      "slots": 24,
+      "returned": 24,
+      "graphs": 6,
+      "counts": {
+        "correct": 4,
+        "wrong": 0,
+        "invalid": 0,
+        "cutoff": 20,
+        "error": 0
+      },
+      "original_correct": 1,
+      "original_n": 6,
+      "cost_usd": 0.087750275,
+      "reused": false,
+      "max_tokens": 8192,
+      "reasoning": "high",
+      "provider_attempts": 24,
+      "provider_failure_attempts": 0
+    },
+    {
+      "run_id": "family-pilot",
+      "model": "amazon/nova-2-lite-v1",
+      "name": "Nova 2 Lite",
+      "slots": 24,
+      "returned": 24,
+      "graphs": 6,
+      "counts": {
+        "correct": 3,
+        "wrong": 1,
+        "invalid": 0,
+        "cutoff": 20,
+        "error": 0
+      },
+      "original_correct": 1,
+      "original_n": 6,
+      "cost_usd": 0.4916573,
+      "reused": false,
+      "max_tokens": 8192,
+      "reasoning": "enabled / service default",
+      "provider_attempts": 24,
+      "provider_failure_attempts": 0
+    },
+    {
+      "run_id": "family-pilot",
+      "model": "mistralai/mistral-large-4-0",
+      "name": "Mistral Large 4",
+      "slots": 24,
+      "returned": 24,
+      "graphs": 6,
+      "counts": {
+        "correct": 6,
+        "wrong": 0,
+        "invalid": 0,
+        "cutoff": 18,
+        "error": 0
+      },
+      "original_correct": 1,
+      "original_n": 6,
+      "cost_usd": 0.37934623999999995,
+      "reused": false,
+      "max_tokens": 8192,
+      "reasoning": "high",
+      "provider_attempts": 24,
+      "provider_failure_attempts": 0
+    },
+    {
+      "run_id": "family-pilot",
+      "model": "ibm-granite/granite-4.2-8b",
+      "name": "Granite 4.2 8B",
+      "slots": 24,
+      "returned": 24,
+      "graphs": 6,
+      "counts": {
+        "correct": 1,
+        "wrong": 0,
+        "invalid": 0,
+        "cutoff": 23,
+        "error": 0
+      },
+      "original_correct": 0,
+      "original_n": 6,
+      "cost_usd": 0.03150984,
+      "reused": false,
+      "max_tokens": 8192,
+      "reasoning": "high",
+      "provider_attempts": 24,
+      "provider_failure_attempts": 0
+    },
+    {
+      "run_id": "family-pilot",
+      "model": "google/gemma-4-31b-it",
+      "name": "Gemma 4 31B",
+      "slots": 24,
+      "returned": 24,
+      "graphs": 6,
+      "counts": {
+        "correct": 1,
+        "wrong": 0,
+        "invalid": 0,
+        "cutoff": 23,
+        "error": 0
+      },
+      "original_correct": 1,
+      "original_n": 6,
+      "cost_usd": 0.07256280000000001,
+      "reused": false,
+      "max_tokens": 8192,
+      "reasoning": "enabled / service default",
+      "provider_attempts": 24,
+      "provider_failure_attempts": 0
+    },
+    {
+      "run_id": "family-pilot",
+      "model": "meta-llama/llama-4-maverick",
+      "name": "Llama 4 Maverick",
+      "slots": 24,
+      "returned": 24,
+      "graphs": 6,
+      "counts": {
+        "correct": 4,
+        "wrong": 19,
+        "invalid": 1,
+        "cutoff": 0,
+        "error": 0
+      },
+      "original_correct": 1,
+      "original_n": 6,
+      "cost_usd": 0.018297897499999997,
+      "reused": false,
+      "max_tokens": 8192,
+      "reasoning": "omitted",
+      "provider_attempts": 24,
+      "provider_failure_attempts": 0
+    },
+    {
+      "run_id": "family-pilot",
+      "model": "nvidia/nemotron-3.5-super-vl",
+      "name": "Nemotron 3.5 Super VL",
+      "slots": 24,
+      "returned": 24,
+      "graphs": 6,
+      "counts": {
+        "correct": 4,
+        "wrong": 0,
+        "invalid": 0,
+        "cutoff": 20,
+        "error": 0
+      },
+      "original_correct": 1,
+      "original_n": 6,
+      "cost_usd": 0.07333634,
+      "reused": false,
+      "max_tokens": 8192,
+      "reasoning": "enabled / service default",
+      "provider_attempts": 24,
+      "provider_failure_attempts": 0
+    },
+    {
+      "run_id": "family-pilot",
+      "model": "x-ai/grok-4.7",
+      "name": "Grok 4.7",
+      "slots": 24,
+      "returned": 24,
+      "graphs": 6,
+      "counts": {
+        "correct": 24,
+        "wrong": 0,
+        "invalid": 0,
+        "cutoff": 0,
+        "error": 0
+      },
+      "original_correct": 6,
+      "original_n": 6,
+      "cost_usd": 2.858244,
+      "reused": false,
+      "max_tokens": 8192,
+      "reasoning": "high",
+      "provider_attempts": 24,
+      "provider_failure_attempts": 0
+    },
+    {
+      "run_id": "family-pilot",
+      "model": "anthropic/claude-sonnet-5.5",
+      "name": "Claude Sonnet 5.5",
+      "slots": 24,
+      "returned": 24,
+      "graphs": 6,
+      "counts": {
+        "correct": 23,
+        "wrong": 1,
+        "invalid": 0,
+        "cutoff": 0,
+        "error": 0
+      },
+      "original_correct": 6,
+      "original_n": 6,
+      "cost_usd": 0,
+      "reused": true,
+      "max_tokens": 8192,
+      "reasoning": "high",
+      "provider_attempts": 0,
+      "provider_failure_attempts": 0
+    },
+    {
+      "run_id": "family-pilot",
+      "model": "anthropic/claude-opus-5.5",
+      "name": "Claude Opus 5.5",
+      "slots": 24,
+      "returned": 24,
+      "graphs": 6,
+      "counts": {
+        "correct": 24,
+        "wrong": 0,
+        "invalid": 0,
+        "cutoff": 0,
+        "error": 0
+      },
+      "original_correct": 6,
+      "original_n": 6,
+      "cost_usd": 0,
+      "reused": true,
+      "max_tokens": 8192,
+      "reasoning": "high",
+      "provider_attempts": 0,
+      "provider_failure_attempts": 0
+    },
+    {
+      "run_id": "hard-v1",
+      "model": "inclusionai/ling-3.1-flash",
+      "name": "Ling 3.1 Flash",
+      "slots": 960,
+      "returned": 960,
+      "graphs": 120,
+      "counts": {
+        "correct": 356,
+        "wrong": 7,
+        "invalid": 0,
+        "cutoff": 597,
+        "error": 0
+      },
+      "original_correct": 47,
+      "original_n": 120,
+      "cost_usd": 2.95084098,
+      "reused": false,
+      "max_tokens": 16384,
+      "reasoning": "enabled / service default",
+      "provider": "novita",
+      "precision": "unknown",
+      "provider_attempts": 989,
+      "provider_failure_attempts": 29
+    },
+    {
+      "run_id": "hard-v1",
+      "model": "minimax/minimax-m3.1-flash",
+      "name": "MiniMax M3.1 Flash",
+      "slots": 960,
+      "returned": 960,
+      "graphs": 120,
+      "counts": {
+        "correct": 630,
+        "wrong": 121,
+        "invalid": 3,
+        "cutoff": 206,
+        "error": 0
+      },
+      "original_correct": 81,
+      "original_n": 120,
+      "cost_usd": 1.51740294,
+      "reused": false,
+      "max_tokens": 16384,
+      "reasoning": "high",
+      "provider": "tenstorrent/fp8",
+      "precision": "fp8",
+      "provider_attempts": 971,
+      "provider_failure_attempts": 11
+    },
+    {
+      "run_id": "hard-v1",
+      "model": "z-ai/glm-5.3",
+      "name": "GLM-5.3",
+      "slots": 960,
+      "returned": 960,
+      "graphs": 120,
+      "counts": {
+        "correct": 568,
+        "wrong": 20,
+        "invalid": 0,
+        "cutoff": 372,
+        "error": 0
+      },
+      "original_correct": 76,
+      "original_n": 120,
+      "cost_usd": 9.038421079999999,
+      "reused": false,
+      "max_tokens": 16384,
+      "reasoning": "high",
+      "provider": "baidu/fp8",
+      "precision": "fp8",
+      "provider_attempts": 969,
+      "provider_failure_attempts": 9
+    },
+    {
+      "run_id": "hard-v1",
+      "model": "deepseek/deepseek-v4.1-flash-1017",
+      "name": "DeepSeek V4.1 Flash",
+      "slots": 960,
+      "returned": 960,
+      "graphs": 120,
+      "counts": {
+        "correct": 633,
+        "wrong": 19,
+        "invalid": 0,
+        "cutoff": 308,
+        "error": 0
+      },
+      "original_correct": 88,
+      "original_n": 120,
+      "cost_usd": 1.54677297461,
+      "reused": false,
+      "max_tokens": 16384,
+      "reasoning": "high",
+      "provider": "sail-research/fp4",
+      "precision": "fp4",
+      "provider_attempts": 971,
+      "provider_failure_attempts": 11
+    },
+    {
+      "run_id": "hard-v1",
+      "model": "ibm-granite/granite-4.2-8b",
+      "name": "Granite 4.2 8B",
+      "slots": 960,
+      "returned": 960,
+      "graphs": 120,
+      "counts": {
+        "correct": 98,
+        "wrong": 0,
+        "invalid": 0,
+        "cutoff": 862,
+        "error": 0
+      },
+      "original_correct": 15,
+      "original_n": 120,
+      "cost_usd": 2.39171193,
+      "reused": false,
+      "max_tokens": 16384,
+      "reasoning": "high",
+      "provider": "coreweave/bf16",
+      "precision": "bf16",
+      "provider_attempts": 971,
+      "provider_failure_attempts": 11
+    }
+  ],
+  "legacy_source_hashes": [
+    {
+      "run_id": "pilot01",
+      "raw_sha256": "c33fe12185430dbaa9a0a158c4e02b176c461c558812b2044f94f8e836f1dd89",
+      "scored_sha256": "55447b9de7742e1959f044d7f23f765b6735a3b85c0a7e27d1e3e46e8df9e895",
+      "fixture_sha256": "7152e7c58db581eba0e99aeeaa710f8545d5617f387e5ec541a3ef05e4b10a70"
+    },
+    {
+      "run_id": "holdout01",
+      "raw_sha256": "0593b29b4e49c5a71e5fc603314fdc249de1b08235caebd0c4427ea3bd598783",
+      "scored_sha256": "cac9ae07343249501df555c4acb75573ac4060b0d922335acad1e29fca4d9fd9",
+      "fixture_sha256": "ff3ad4847935fdb34e109f3bb2208f0170ee6fe2dba00e0f0f32333659402ee7"
+    },
+    {
+      "run_id": "holdout32",
+      "raw_sha256": "ae8762c60898b71d0f67dee83c34b61aaf30e95287fd8e9def9729033279a265",
+      "scored_sha256": "105e482348275a53a8ac1048fca2e6564149db26067b92fbe1beac6dd0781705",
+      "fixture_sha256": "ff3ad4847935fdb34e109f3bb2208f0170ee6fe2dba00e0f0f32333659402ee7"
+    },
+    {
+      "run_id": "replication01",
+      "raw_sha256": "2447c0dd87c706b8c25e133ebc78dfd6c85c4b6cf5945a0e1b5d332d8724c583",
+      "scored_sha256": "ddff64c40e384b87c2572dcecc5c5d741f15a216b70e1e20cc72ce6b2dc820ba",
+      "fixture_sha256": "0e3134b8444c4615278a06687c4f0029e8e953eafdab3b668cbcb22298f61933"
+    },
+    {
+      "run_id": "repeat_control01",
+      "raw_sha256": "b1618571a9dfaa1e79e88ec3cdd6ddef97b6ed6b5fec967def32866fcb9cf087",
+      "scored_sha256": "deb57cfff7210fdaabb2f601d66ce30fb3ddcb77df9b1d26e0a6648955b9b892",
+      "fixture_sha256": "3886aeafd75048b1237c3ff15f292103b4f5a59e1a028dd6034141fbcb999545"
+    },
+    {
+      "run_id": "optimization01",
+      "raw_sha256": "02838902eb2847f9b390ca9efe1af0e83dd19a82fc1924eb3bc76951ab04b224",
+      "scored_sha256": "1c9a8062288e261a57da1ca70b965ce98445a1b26b6882ab106b173354ffd383",
+      "fixture_sha256": "e4c82265d024fff23a931058cd646284e6f72f9be71a949e4dcaa8a5b6c158d7"
+    }
+  ],
+  "paper_results": "paper-results.html",
+  "scope_note": "Rows are reported within their own run and settings. No pooled model ranking. The 48 Claude reference responses are displayed twice but counted once as collected inference slots."
+}

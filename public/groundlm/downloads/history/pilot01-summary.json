@@ -1,0 +1,250 @@
+{
+  "scoring": "Final explicit JSON answer; original strict-format fields preserved in results.jsonl.",
+  "requests": 96,
+  "cost_usd": 2.804900000000001,
+  "models": {
+    "anthropic/claude-sonnet-5.5": {
+      "requests": 48,
+      "errors": 0,
+      "invalid": 11,
+      "truncated": 11,
+      "correct": 26,
+      "cost_usd": 0.8684399999999999,
+      "conditions": {
+        "original": {
+          "correct": 6,
+          "n": 12
+        },
+        "neutral_relabel": {
+          "correct": 7,
+          "n": 12
+        },
+        "semantic_congruent": {
+          "correct": 6,
+          "n": 12
+        },
+        "semantic_incongruent": {
+          "correct": 7,
+          "n": 12
+        }
+      },
+      "tasks": {
+        "weighted_shortest_path": {
+          "correct": 7,
+          "n": 8
+        },
+        "shortest_path_count": {
+          "correct": 4,
+          "n": 8
+        },
+        "exact_walk_count": {
+          "correct": 0,
+          "n": 8
+        },
+        "triangle_count": {
+          "correct": 3,
+          "n": 8
+        },
+        "minimum_cut": {
+          "correct": 4,
+          "n": 8
+        },
+        "constrained_reachability": {
+          "correct": 8,
+          "n": 8
+        }
+      },
+      "consistency": {
+        "neutral": {
+          "value": 0.5555555555555556,
+          "n": 9
+        },
+        "semantic_congruent": {
+          "value": 0.6666666666666666,
+          "n": 9
+        },
+        "semantic_incongruent": {
+          "value": 0.6666666666666666,
+          "n": 9
+        }
+      },
+      "conditional_survival": {
+        "value": 1.0,
+        "n": 6
+      },
+      "correct_to_wrong_cases": [],
+      "format_compliant": 0,
+      "completed_accuracy": {
+        "correct": 26,
+        "n": 37
+      },
+      "completed_wrong_cases": [
+        {
+          "case_id": "development-n32-triangle_count",
+          "condition": "original",
+          "expected": 25,
+          "answer": 26
+        },
+        {
+          "case_id": "development-n32-triangle_count",
+          "condition": "semantic_congruent",
+          "expected": 25,
+          "answer": 52
+        },
+        {
+          "case_id": "development-n32-minimum_cut",
+          "condition": "original",
+          "expected": 32,
+          "answer": 29
+        },
+        {
+          "case_id": "development-n32-minimum_cut",
+          "condition": "neutral_relabel",
+          "expected": 32,
+          "answer": 28
+        },
+        {
+          "case_id": "development-n32-minimum_cut",
+          "condition": "semantic_congruent",
+          "expected": 32,
+          "answer": 24
+        },
+        {
+          "case_id": "development-n32-minimum_cut",
+          "condition": "semantic_incongruent",
+          "expected": 32,
+          "answer": 23
+        },
+        {
+          "case_id": "development-n96-weighted_shortest_path",
+          "condition": "neutral_relabel",
+          "expected": 12,
+          "answer": 13
+        },
+        {
+          "case_id": "development-n96-exact_walk_count",
+          "condition": "semantic_incongruent",
+          "expected": 1796345,
+          "answer": 12480
+        },
+        {
+          "case_id": "development-n96-triangle_count",
+          "condition": "original",
+          "expected": 40,
+          "answer": 75
+        },
+        {
+          "case_id": "development-n96-triangle_count",
+          "condition": "semantic_congruent",
+          "expected": 40,
+          "answer": 120
+        },
+        {
+          "case_id": "development-n96-triangle_count",
+          "condition": "semantic_incongruent",
+          "expected": 40,
+          "answer": 120
+        }
+      ]
+    },
+    "anthropic/claude-opus-5.5": {
+      "requests": 48,
+      "errors": 0,
+      "invalid": 17,
+      "truncated": 17,
+      "correct": 28,
+      "cost_usd": 1.93646,
+      "conditions": {
+        "neutral_relabel": {
+          "correct": 7,
+          "n": 12
+        },
+        "original": {
+          "correct": 8,
+          "n": 12
+        },
+        "semantic_congruent": {
+          "correct": 7,
+          "n": 12
+        },
+        "semantic_incongruent": {
+          "correct": 6,
+          "n": 12
+        }
+      },
+      "tasks": {
+        "weighted_shortest_path": {
+          "correct": 7,
+          "n": 8
+        },
+        "shortest_path_count": {
+          "correct": 3,
+          "n": 8
+        },
+        "exact_walk_count": {
+          "correct": 0,
+          "n": 8
+        },
+        "triangle_count": {
+          "correct": 2,
+          "n": 8
+        },
+        "minimum_cut": {
+          "correct": 8,
+          "n": 8
+        },
+        "constrained_reachability": {
+          "correct": 8,
+          "n": 8
+        }
+      },
+      "consistency": {
+        "neutral": {
+          "value": 1.0,
+          "n": 7
+        },
+        "semantic_congruent": {
+          "value": 0.875,
+          "n": 8
+        },
+        "semantic_incongruent": {
+          "value": 1.0,
+          "n": 6
+        }
+      },
+      "conditional_survival": {
+        "value": 0.75,
+        "n": 8
+      },
+      "correct_to_wrong_cases": [
+        "development-n32-shortest_path_count",
+        "development-n32-triangle_count"
+      ],
+      "format_compliant": 6,
+      "completed_accuracy": {
+        "correct": 28,
+        "n": 31
+      },
+      "completed_wrong_cases": [
+        {
+          "case_id": "development-n96-weighted_shortest_path",
+          "condition": "semantic_congruent",
+          "expected": 12,
+          "answer": 13
+        },
+        {
+          "case_id": "development-n96-exact_walk_count",
+          "condition": "semantic_congruent",
+          "expected": 1796345,
+          "answer": 6000000
+        },
+        {
+          "case_id": "development-n96-exact_walk_count",
+          "condition": "semantic_incongruent",
+          "expected": 1796345,
+          "answer": 11000000
+        }
+      ]
+    }
+  }
+}

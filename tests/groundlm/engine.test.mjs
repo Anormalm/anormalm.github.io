@@ -53,7 +53,7 @@ test('all local HTML links, assets and fragment targets resolve',()=>{
  for(const f of files){const html=fs.readFileSync('public/groundlm/'+f,'utf8');assert.ok(html.includes('id="main"'));
   for(const [,url] of html.matchAll(/(?:href|src)="([^"]+)"/g)){
    if(/^(?:https?:|mailto:|data:)/.test(url))continue;
-   const [target,hash]=url.split('#'),dest=path.join('public/groundlm',target||f);assert.ok(fs.existsSync(dest),`${f}: ${url}`);
+   const [targetWithQuery,hash]=url.split('#'),target=targetWithQuery.split('?')[0],dest=path.join('public/groundlm',target||f);assert.ok(fs.existsSync(dest),`${f}: ${url}`);
    if(hash){const content=fs.readFileSync(dest,'utf8');assert.ok(content.includes(`id="${hash}"`),`${f}: missing ${hash}`);}
   }
  }
