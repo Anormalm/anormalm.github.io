@@ -1,0 +1,69 @@
+{
+  "scoring": "Final explicit JSON answer; original strict-format fields preserved in results.jsonl.",
+  "requests": 16,
+  "cost_usd": 2.16324,
+  "models": {
+    "anthropic/claude-opus-5.5": {
+      "requests": 16,
+      "errors": 0,
+      "invalid": 6,
+      "truncated": 6,
+      "correct": 10,
+      "cost_usd": 2.16324,
+      "conditions": {
+        "neutral_relabel": {
+          "correct": 2,
+          "n": 4
+        },
+        "original": {
+          "correct": 4,
+          "n": 4
+        },
+        "semantic_congruent": {
+          "correct": 4,
+          "n": 4
+        },
+        "semantic_incongruent": {
+          "correct": 0,
+          "n": 4
+        }
+      },
+      "tasks": {
+        "minimum_vertex_cover": {
+          "correct": 10,
+          "n": 16
+        }
+      },
+      "consistency": {
+        "neutral": {
+          "value": 1.0,
+          "n": 2
+        },
+        "semantic_congruent": {
+          "value": 1.0,
+          "n": 4
+        },
+        "semantic_incongruent": {
+          "value": null,
+          "n": 0
+        }
+      },
+      "conditional_survival": {
+        "value": 0.0,
+        "n": 4
+      },
+      "correct_to_wrong_cases": [
+        "optimization-n24-vertex_cover-r0",
+        "optimization-n24-vertex_cover-r1",
+        "optimization-n32-vertex_cover-r0",
+        "optimization-n32-vertex_cover-r1"
+      ],
+      "format_compliant": 0,
+      "completed_accuracy": {
+        "correct": 10,
+        "n": 10
+      },
+      "completed_wrong_cases": []
+    }
+  }
+}

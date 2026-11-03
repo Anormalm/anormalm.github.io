@@ -83,3 +83,32 @@ Search/sort, task and size filters, model details, CSV and full pilot downloads
 are available. Claude cost cells say Reused; their earlier inference is not claimed
 to have been free. Grok compute differences and two Step API failures remain visible.
 The pilot is never pooled with Hard v1. All 36 benchmark-site tests pass.
+
+
+## Complete results archive
+
+`history.html` indexes all eight saved run groups: Claude development, the two
+higher-budget holdouts, full replication, unchanged-input repeat control,
+optimization, family comparison, and Hard v1. The original paper remains a
+separate reported study linked from the archive. There are 37 model-run rows,
+5616 collected slots, and 48 reused Claude references (5664 displayed slots).
+The 5690 provider attempts include 76 failure attempts and 74 additional attempts;
+two Step slots remain unresolved. The model-run table retains requested settings,
+provider/precision where recorded, completed numeric errors, invalid completed
+answers, token cutoffs and infrastructure failures separately.
+
+Select a row to inspect every selected saved slot, filter by task, size and
+outcome, page through responses, view exact saved user prompts and visible
+answers, and export filtered results. Data loads on demand by run group.
+Opus's development errors, seven combined holdout cutoffs and five replication
+cutoffs are visible alongside the matched 24/24 subset. Pilot model details
+link to the full model history; the study switch and navigation link all views.
+
+`downloads/history/all-results.zip` contains all three source study archives,
+the original paper and reported metrics, the complete index and model-run CSV.
+The Claude archive preserves raw/scored results, reports, source, settings,
+paired analyses and evidence. Configs include inference identity and creation
+time; account credit snapshots are excluded. The 48 reused records are checked
+against the original replication answers and are not added to inference totals.
+Legacy raw hashes still match their frozen spending ledger. No inference was
+executed to prepare these pages.

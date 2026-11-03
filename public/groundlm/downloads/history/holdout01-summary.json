@@ -1,0 +1,137 @@
+{
+  "scoring": "Final explicit JSON answer; original strict-format fields preserved in results.jsonl.",
+  "requests": 24,
+  "cost_usd": 1.13239,
+  "models": {
+    "anthropic/claude-sonnet-5.5": {
+      "requests": 12,
+      "errors": 0,
+      "invalid": 4,
+      "truncated": 4,
+      "correct": 8,
+      "cost_usd": 0.37411,
+      "conditions": {
+        "original": {
+          "correct": 2,
+          "n": 3
+        },
+        "neutral_relabel": {
+          "correct": 2,
+          "n": 3
+        },
+        "semantic_congruent": {
+          "correct": 2,
+          "n": 3
+        },
+        "semantic_incongruent": {
+          "correct": 2,
+          "n": 3
+        }
+      },
+      "tasks": {
+        "weighted_shortest_path": {
+          "correct": 4,
+          "n": 4
+        },
+        "triangle_count": {
+          "correct": 0,
+          "n": 4
+        },
+        "minimum_cut": {
+          "correct": 4,
+          "n": 4
+        }
+      },
+      "consistency": {
+        "neutral": {
+          "value": 1.0,
+          "n": 2
+        },
+        "semantic_congruent": {
+          "value": 1.0,
+          "n": 2
+        },
+        "semantic_incongruent": {
+          "value": 1.0,
+          "n": 2
+        }
+      },
+      "conditional_survival": {
+        "value": 1.0,
+        "n": 2
+      },
+      "correct_to_wrong_cases": [],
+      "format_compliant": 4,
+      "completed_accuracy": {
+        "correct": 8,
+        "n": 8
+      },
+      "completed_wrong_cases": []
+    },
+    "anthropic/claude-opus-5.5": {
+      "requests": 12,
+      "errors": 0,
+      "invalid": 4,
+      "truncated": 4,
+      "correct": 8,
+      "cost_usd": 0.75828,
+      "conditions": {
+        "original": {
+          "correct": 2,
+          "n": 3
+        },
+        "neutral_relabel": {
+          "correct": 2,
+          "n": 3
+        },
+        "semantic_congruent": {
+          "correct": 2,
+          "n": 3
+        },
+        "semantic_incongruent": {
+          "correct": 2,
+          "n": 3
+        }
+      },
+      "tasks": {
+        "weighted_shortest_path": {
+          "correct": 4,
+          "n": 4
+        },
+        "triangle_count": {
+          "correct": 0,
+          "n": 4
+        },
+        "minimum_cut": {
+          "correct": 4,
+          "n": 4
+        }
+      },
+      "consistency": {
+        "neutral": {
+          "value": 1.0,
+          "n": 2
+        },
+        "semantic_congruent": {
+          "value": 1.0,
+          "n": 2
+        },
+        "semantic_incongruent": {
+          "value": 1.0,
+          "n": 2
+        }
+      },
+      "conditional_survival": {
+        "value": 1.0,
+        "n": 2
+      },
+      "correct_to_wrong_cases": [],
+      "format_compliant": 0,
+      "completed_accuracy": {
+        "correct": 8,
+        "n": 8
+      },
+      "completed_wrong_cases": []
+    }
+  }
+}

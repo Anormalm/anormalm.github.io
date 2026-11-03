@@ -1,0 +1,187 @@
+{
+  "scoring": "Final explicit JSON answer; original strict-format fields preserved in results.jsonl.",
+  "requests": 192,
+  "cost_usd": 9.112944000000004,
+  "models": {
+    "anthropic/claude-sonnet-5.5": {
+      "requests": 96,
+      "errors": 0,
+      "invalid": 2,
+      "truncated": 2,
+      "correct": 87,
+      "cost_usd": 2.7776280000000004,
+      "conditions": {
+        "original": {
+          "correct": 24,
+          "n": 24
+        },
+        "neutral_relabel": {
+          "correct": 23,
+          "n": 24
+        },
+        "semantic_congruent": {
+          "correct": 19,
+          "n": 24
+        },
+        "semantic_incongruent": {
+          "correct": 21,
+          "n": 24
+        }
+      },
+      "tasks": {
+        "weighted_shortest_path": {
+          "correct": 32,
+          "n": 32
+        },
+        "triangle_count": {
+          "correct": 23,
+          "n": 32
+        },
+        "minimum_cut": {
+          "correct": 32,
+          "n": 32
+        }
+      },
+      "consistency": {
+        "neutral": {
+          "value": 0.9583333333333334,
+          "n": 24
+        },
+        "semantic_congruent": {
+          "value": 0.8636363636363636,
+          "n": 22
+        },
+        "semantic_incongruent": {
+          "value": 0.875,
+          "n": 24
+        }
+      },
+      "conditional_survival": {
+        "value": 0.875,
+        "n": 24
+      },
+      "correct_to_wrong_cases": [
+        "replication-n64-triangle_count-r0",
+        "replication-n64-triangle_count-r1",
+        "replication-n64-triangle_count-r3"
+      ],
+      "format_compliant": 68,
+      "completed_accuracy": {
+        "correct": 87,
+        "n": 94
+      },
+      "completed_wrong_cases": [
+        {
+          "case_id": "replication-n32-triangle_count-r2",
+          "condition": "semantic_congruent",
+          "expected": 27,
+          "answer": 26
+        },
+        {
+          "case_id": "replication-n32-triangle_count-r3",
+          "condition": "semantic_congruent",
+          "expected": 26,
+          "answer": 25
+        },
+        {
+          "case_id": "replication-n64-triangle_count-r0",
+          "condition": "semantic_incongruent",
+          "expected": 33,
+          "answer": 32
+        },
+        {
+          "case_id": "replication-n64-triangle_count-r1",
+          "condition": "semantic_incongruent",
+          "expected": 31,
+          "answer": 30
+        },
+        {
+          "case_id": "replication-n64-triangle_count-r3",
+          "condition": "semantic_congruent",
+          "expected": 48,
+          "answer": 51
+        },
+        {
+          "case_id": "replication-n64-triangle_count-r3",
+          "condition": "neutral_relabel",
+          "expected": 48,
+          "answer": 47
+        },
+        {
+          "case_id": "replication-n64-triangle_count-r3",
+          "condition": "semantic_incongruent",
+          "expected": 48,
+          "answer": 49
+        }
+      ]
+    },
+    "anthropic/claude-opus-5.5": {
+      "requests": 96,
+      "errors": 0,
+      "invalid": 5,
+      "truncated": 5,
+      "correct": 91,
+      "cost_usd": 6.335315999999998,
+      "conditions": {
+        "neutral_relabel": {
+          "correct": 24,
+          "n": 24
+        },
+        "original": {
+          "correct": 24,
+          "n": 24
+        },
+        "semantic_congruent": {
+          "correct": 21,
+          "n": 24
+        },
+        "semantic_incongruent": {
+          "correct": 22,
+          "n": 24
+        }
+      },
+      "tasks": {
+        "weighted_shortest_path": {
+          "correct": 32,
+          "n": 32
+        },
+        "triangle_count": {
+          "correct": 27,
+          "n": 32
+        },
+        "minimum_cut": {
+          "correct": 32,
+          "n": 32
+        }
+      },
+      "consistency": {
+        "neutral": {
+          "value": 1.0,
+          "n": 24
+        },
+        "semantic_congruent": {
+          "value": 1.0,
+          "n": 21
+        },
+        "semantic_incongruent": {
+          "value": 1.0,
+          "n": 22
+        }
+      },
+      "conditional_survival": {
+        "value": 0.9166666666666666,
+        "n": 24
+      },
+      "correct_to_wrong_cases": [
+        "replication-n64-triangle_count-r1",
+        "replication-n64-triangle_count-r3"
+      ],
+      "format_compliant": 9,
+      "completed_accuracy": {
+        "correct": 91,
+        "n": 91
+      },
+      "completed_wrong_cases": []
+    }
+  }
+}

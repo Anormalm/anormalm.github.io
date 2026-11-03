@@ -1,0 +1,97 @@
+{
+  "scoring": "Final explicit JSON answer; original strict-format fields preserved in results.jsonl.",
+  "requests": 16,
+  "cost_usd": 0.8960700000000001,
+  "models": {
+    "anthropic/claude-sonnet-5.5": {
+      "requests": 8,
+      "errors": 0,
+      "invalid": 0,
+      "truncated": 0,
+      "correct": 8,
+      "cost_usd": 0.24421000000000004,
+      "conditions": {
+        "original_repeat": {
+          "correct": 8,
+          "n": 8
+        }
+      },
+      "tasks": {
+        "triangle_count": {
+          "correct": 8,
+          "n": 8
+        }
+      },
+      "consistency": {
+        "neutral": {
+          "value": null,
+          "n": 0
+        },
+        "semantic_congruent": {
+          "value": null,
+          "n": 0
+        },
+        "semantic_incongruent": {
+          "value": null,
+          "n": 0
+        }
+      },
+      "conditional_survival": {
+        "value": null,
+        "n": 0
+      },
+      "correct_to_wrong_cases": [],
+      "format_compliant": 7,
+      "completed_accuracy": {
+        "correct": 8,
+        "n": 8
+      },
+      "completed_wrong_cases": []
+    },
+    "anthropic/claude-opus-5.5": {
+      "requests": 8,
+      "errors": 0,
+      "invalid": 0,
+      "truncated": 0,
+      "correct": 8,
+      "cost_usd": 0.6518600000000001,
+      "conditions": {
+        "original_repeat": {
+          "correct": 8,
+          "n": 8
+        }
+      },
+      "tasks": {
+        "triangle_count": {
+          "correct": 8,
+          "n": 8
+        }
+      },
+      "consistency": {
+        "neutral": {
+          "value": null,
+          "n": 0
+        },
+        "semantic_congruent": {
+          "value": null,
+          "n": 0
+        },
+        "semantic_incongruent": {
+          "value": null,
+          "n": 0
+        }
+      },
+      "conditional_survival": {
+        "value": null,
+        "n": 0
+      },
+      "correct_to_wrong_cases": [],
+      "format_compliant": 4,
+      "completed_accuracy": {
+        "correct": 8,
+        "n": 8
+      },
+      "completed_wrong_cases": []
+    }
+  }
+}
