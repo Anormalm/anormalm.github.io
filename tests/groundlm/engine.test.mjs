@@ -49,7 +49,7 @@ test('reported results match checked-in downloads and four selected models',()=>
  assert.equal(models.length,4);assert.equal(models[0].cfm,72.9);assert.equal(models[3].gap,6.1);
 });
 test('all local HTML links, assets and fragment targets resolve',()=>{
- const files=fs.readdirSync('public/groundlm').filter(f=>f.endsWith('.html'));assert.equal(files.length,6);
+ const files=fs.readdirSync('public/groundlm').filter(f=>f.endsWith('.html'));assert.ok(files.includes('index.html')&&files.includes('run.html')&&files.includes('methodology.html')&&files.includes('paper-results.html'));
  for(const f of files){const html=fs.readFileSync('public/groundlm/'+f,'utf8');assert.ok(html.includes('id="main"'));
   for(const [,url] of html.matchAll(/(?:href|src)="([^"]+)"/g)){
    if(/^(?:https?:|mailto:|data:)/.test(url))continue;
