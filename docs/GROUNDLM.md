@@ -50,3 +50,26 @@ quotas, concurrency, credential redaction, fixture identity and scoring. The mai
 portfolio's document-level CSP remains unchanged; it does not apply to these
 separate HTML documents. The benchmark needs direct connections to visitors'
 chosen model services.
+
+## Hard v1 index (3 November 2026)
+
+The homepage is the completed Hard v1 leaderboard: five pinned endpoint
+configurations, 120 graphs, six tasks and 4800 returned responses. Search,
+filter by task/node size/precision, sort metrics, compare configurations,
+and open model details with graph-level intervals and pair denominators.
+Accuracy, original accuracy, renaming survival, cutoff rate and recorded
+cost/upper bounds are separate metrics. Task heatmaps cover the full release.
+
+The Hard v1 visitor-owned runner is `run.html` (96-request workflow check or
+960-request full benchmark before task/size filtering). It verifies fixture
+hashes and sends exact prompts directly to the visitor's selected service.
+No automatic retries, storage of keys, upload or leaderboard submission occurs.
+`evaluate.html` still runs the original paper protocol; `paper-results.html`
+retains that study's table. The studies are not combined.
+
+`data/hard-v1/leaderboard.json` is a compact scored snapshot, and the split
+fixtures/manifest are under the same directory. `downloads/hard-v1/` includes
+the verified release ZIP, reference summary, CSV, report and final audit.
+The new tests verify all public reference metrics against that summary,
+fixture hashes, parsing, inference request settings, local HTTP, cancellation,
+no-retry behavior and credential redaction. No paid APIs are used by tests.

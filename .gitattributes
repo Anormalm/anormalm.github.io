@@ -1,0 +1,3 @@
+# Frozen benchmark fixtures and release artifacts are verified byte-for-byte.
+public/groundlm/data/hard-v1/** -text
+public/groundlm/downloads/hard-v1/** -text

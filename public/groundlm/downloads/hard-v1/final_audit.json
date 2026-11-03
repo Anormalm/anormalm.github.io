@@ -1,0 +1,31 @@
+{
+  "dataset_validation_passed": true,
+  "accounting_and_retry_audit_passed": true,
+  "reference_collection_complete": true,
+  "complete_reference_configurations": [
+    "deepseek/deepseek-v4.1-flash-1017",
+    "z-ai/glm-5.3",
+    "minimax/minimax-m3.1-flash",
+    "inclusionai/ling-3.1-flash",
+    "ibm-granite/granite-4.2-8b"
+  ],
+  "selected_configurations": [
+    "deepseek/deepseek-v4.1-flash-1017",
+    "z-ai/glm-5.3",
+    "minimax/minimax-m3.1-flash",
+    "inclusionai/ling-3.1-flash",
+    "ibm-granite/granite-4.2-8b"
+  ],
+  "planned_slots": 4800,
+  "collected_slots": 4800,
+  "attempts": 4871,
+  "cost_usd": 17.44514990461,
+  "cap_usd": 27,
+  "verified_answer_certificates": 120,
+  "provider_recovery_audit": {
+    "approved_exception_slots": 8,
+    "approved_extra_attempts": 8,
+    "approved_extra_cost_usd": 0.046137865
+  },
+  "raw_sha256": "bd9bbbeebace59f7c076efc4504e2f1f9eab75aa4e12f309c47cc2c1d993e4ba"
+}

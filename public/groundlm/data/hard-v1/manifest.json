@@ -1,0 +1,986 @@
+{
+  "version": "groundlm-hard-v1",
+  "system_prompt": "You solve graph problems using only the explicitly supplied edges and rules. All node names are arbitrary identifiers; their meanings give no evidence about edges or roles. Return only a JSON object with one nonnegative integer field: {\"answer\": INTEGER}.",
+  "max_tokens": 16384,
+  "variants": [
+    "original",
+    "repeat",
+    "neutral",
+    "degree_aligned",
+    "degree_reversed",
+    "format_json",
+    "order_shuffled",
+    "distractor"
+  ],
+  "tasks": [
+    "weighted_shortest_path",
+    "shortest_path_count",
+    "exact_walk_count",
+    "triangle_count",
+    "minimum_cut",
+    "constrained_reachability"
+  ],
+  "cases": [
+    {
+      "id": "groundlm-hard-v1-weighted_shortest_path-n32-r00",
+      "task": "weighted_shortest_path",
+      "n": 32,
+      "replicate": 0,
+      "file": "groundlm-hard-v1-weighted_shortest_path-n32-r00.json",
+      "sha256": "7c1b5ac45892cc98b5d3bdae558d87fe378d4b3bde331eff111073fcabd8d79b"
+    },
+    {
+      "id": "groundlm-hard-v1-weighted_shortest_path-n32-r01",
+      "task": "weighted_shortest_path",
+      "n": 32,
+      "replicate": 1,
+      "file": "groundlm-hard-v1-weighted_shortest_path-n32-r01.json",
+      "sha256": "0947aa3909135b0fa76dd1f285bd7a9f15fca555a95ff13db928df76e3b6f6b8"
+    },
+    {
+      "id": "groundlm-hard-v1-weighted_shortest_path-n32-r02",
+      "task": "weighted_shortest_path",
+      "n": 32,
+      "replicate": 2,
+      "file": "groundlm-hard-v1-weighted_shortest_path-n32-r02.json",
+      "sha256": "8a104f9506fd26f79d5f527a65f777f66424f055485faccd0374e37bafab30df"
+    },
+    {
+      "id": "groundlm-hard-v1-weighted_shortest_path-n32-r03",
+      "task": "weighted_shortest_path",
+      "n": 32,
+      "replicate": 3,
+      "file": "groundlm-hard-v1-weighted_shortest_path-n32-r03.json",
+      "sha256": "375bbdd292bdc15450fd485e3b7383a20bbe7bdbb48962f493c18ab96610d501"
+    },
+    {
+      "id": "groundlm-hard-v1-weighted_shortest_path-n32-r04",
+      "task": "weighted_shortest_path",
+      "n": 32,
+      "replicate": 4,
+      "file": "groundlm-hard-v1-weighted_shortest_path-n32-r04.json",
+      "sha256": "a6d25be0f5910fcc5fc17a11c0ef50a8869bd14c3acf075ce034732f30b3baa7"
+    },
+    {
+      "id": "groundlm-hard-v1-weighted_shortest_path-n32-r05",
+      "task": "weighted_shortest_path",
+      "n": 32,
+      "replicate": 5,
+      "file": "groundlm-hard-v1-weighted_shortest_path-n32-r05.json",
+      "sha256": "8d8c4acb5615d208a58748bcf4255c436843978430f734e3b86c52775c1505bf"
+    },
+    {
+      "id": "groundlm-hard-v1-weighted_shortest_path-n32-r06",
+      "task": "weighted_shortest_path",
+      "n": 32,
+      "replicate": 6,
+      "file": "groundlm-hard-v1-weighted_shortest_path-n32-r06.json",
+      "sha256": "33c5e36e3a52d2a272d990ebf60b85e59805f9391f6b26fa9adcd0b07f94263e"
+    },
+    {
+      "id": "groundlm-hard-v1-weighted_shortest_path-n32-r07",
+      "task": "weighted_shortest_path",
+      "n": 32,
+      "replicate": 7,
+      "file": "groundlm-hard-v1-weighted_shortest_path-n32-r07.json",
+      "sha256": "a958d9d6e1f150b828a9ad95ab25cb0f7e8bfde48a8275c10dde0e2ea0e835f8"
+    },
+    {
+      "id": "groundlm-hard-v1-weighted_shortest_path-n32-r08",
+      "task": "weighted_shortest_path",
+      "n": 32,
+      "replicate": 8,
+      "file": "groundlm-hard-v1-weighted_shortest_path-n32-r08.json",
+      "sha256": "f027860eab0114ce958e49569194d0098225bf603601d242b3a84036e6d10f30"
+    },
+    {
+      "id": "groundlm-hard-v1-weighted_shortest_path-n32-r09",
+      "task": "weighted_shortest_path",
+      "n": 32,
+      "replicate": 9,
+      "file": "groundlm-hard-v1-weighted_shortest_path-n32-r09.json",
+      "sha256": "a891f18de10069d43c2213733bae0b85df4d9e3c40791bcc945411d87ca4d948"
+    },
+    {
+      "id": "groundlm-hard-v1-weighted_shortest_path-n64-r00",
+      "task": "weighted_shortest_path",
+      "n": 64,
+      "replicate": 0,
+      "file": "groundlm-hard-v1-weighted_shortest_path-n64-r00.json",
+      "sha256": "2b99e7cbf538b2ede3a944c21d71cdb33c2d5a38e8bf5d093f3e6bf2a3415746"
+    },
+    {
+      "id": "groundlm-hard-v1-weighted_shortest_path-n64-r01",
+      "task": "weighted_shortest_path",
+      "n": 64,
+      "replicate": 1,
+      "file": "groundlm-hard-v1-weighted_shortest_path-n64-r01.json",
+      "sha256": "b09515ab6803b1836d80beb1db3179d12f7ea0eab8f1d4963cdc068843eb7133"
+    },
+    {
+      "id": "groundlm-hard-v1-weighted_shortest_path-n64-r02",
+      "task": "weighted_shortest_path",
+      "n": 64,
+      "replicate": 2,
+      "file": "groundlm-hard-v1-weighted_shortest_path-n64-r02.json",
+      "sha256": "db8547db182a72ff908816bb8998d8da0940cbb0d86cb1b5b3bf981a1f3db183"
+    },
+    {
+      "id": "groundlm-hard-v1-weighted_shortest_path-n64-r03",
+      "task": "weighted_shortest_path",
+      "n": 64,
+      "replicate": 3,
+      "file": "groundlm-hard-v1-weighted_shortest_path-n64-r03.json",
+      "sha256": "95c92c2f321b9ac7023301ddbb37c37fbf529992e741b2fa26123c32e7f987a5"
+    },
+    {
+      "id": "groundlm-hard-v1-weighted_shortest_path-n64-r04",
+      "task": "weighted_shortest_path",
+      "n": 64,
+      "replicate": 4,
+      "file": "groundlm-hard-v1-weighted_shortest_path-n64-r04.json",
+      "sha256": "8d6735264804e663d02f5282a7e949d68b879684831695f3f8e7c32849cbb746"
+    },
+    {
+      "id": "groundlm-hard-v1-weighted_shortest_path-n64-r05",
+      "task": "weighted_shortest_path",
+      "n": 64,
+      "replicate": 5,
+      "file": "groundlm-hard-v1-weighted_shortest_path-n64-r05.json",
+      "sha256": "81c9b78d33503a6b0c344dd5a33ee788b47e10d2f92ced3ddc5375c1309089f9"
+    },
+    {
+      "id": "groundlm-hard-v1-weighted_shortest_path-n64-r06",
+      "task": "weighted_shortest_path",
+      "n": 64,
+      "replicate": 6,
+      "file": "groundlm-hard-v1-weighted_shortest_path-n64-r06.json",
+      "sha256": "5edafb940534ddce5c3d2b6d8d3a13c205c4fb1a1ea7a68a8e24321ba045f737"
+    },
+    {
+      "id": "groundlm-hard-v1-weighted_shortest_path-n64-r07",
+      "task": "weighted_shortest_path",
+      "n": 64,
+      "replicate": 7,
+      "file": "groundlm-hard-v1-weighted_shortest_path-n64-r07.json",
+      "sha256": "579c5d1b72c71a891bcf6ad940fef6d8ea6995b1ec46e40efa4fa461188c1854"
+    },
+    {
+      "id": "groundlm-hard-v1-weighted_shortest_path-n64-r08",
+      "task": "weighted_shortest_path",
+      "n": 64,
+      "replicate": 8,
+      "file": "groundlm-hard-v1-weighted_shortest_path-n64-r08.json",
+      "sha256": "145c8f19b626c1c1b66ba1166e24ccdfacedaec68e40aa820ddb40a4fd58f2c0"
+    },
+    {
+      "id": "groundlm-hard-v1-weighted_shortest_path-n64-r09",
+      "task": "weighted_shortest_path",
+      "n": 64,
+      "replicate": 9,
+      "file": "groundlm-hard-v1-weighted_shortest_path-n64-r09.json",
+      "sha256": "79d447fdddc1a1aa6e3307226aeb3ce6be5d2266b6c0f4dfcd337a07694a0570"
+    },
+    {
+      "id": "groundlm-hard-v1-shortest_path_count-n32-r00",
+      "task": "shortest_path_count",
+      "n": 32,
+      "replicate": 0,
+      "file": "groundlm-hard-v1-shortest_path_count-n32-r00.json",
+      "sha256": "f04bc97af6a866bcc4add5fafb86eab60de11eb83e8192fd626540836675fbf7"
+    },
+    {
+      "id": "groundlm-hard-v1-shortest_path_count-n32-r01",
+      "task": "shortest_path_count",
+      "n": 32,
+      "replicate": 1,
+      "file": "groundlm-hard-v1-shortest_path_count-n32-r01.json",
+      "sha256": "c264b45b403767c55e8344e3091e63087900dd78b038784b9ef6b06e79691865"
+    },
+    {
+      "id": "groundlm-hard-v1-shortest_path_count-n32-r02",
+      "task": "shortest_path_count",
+      "n": 32,
+      "replicate": 2,
+      "file": "groundlm-hard-v1-shortest_path_count-n32-r02.json",
+      "sha256": "ab789a7bf4a274e8161784291979682d6454edf429df4a41a6b63d42a53a5a17"
+    },
+    {
+      "id": "groundlm-hard-v1-shortest_path_count-n32-r03",
+      "task": "shortest_path_count",
+      "n": 32,
+      "replicate": 3,
+      "file": "groundlm-hard-v1-shortest_path_count-n32-r03.json",
+      "sha256": "e88d90b257abb086d5317b4b44e9602c565afa6ebbe96089db69c9806b6f66ed"
+    },
+    {
+      "id": "groundlm-hard-v1-shortest_path_count-n32-r04",
+      "task": "shortest_path_count",
+      "n": 32,
+      "replicate": 4,
+      "file": "groundlm-hard-v1-shortest_path_count-n32-r04.json",
+      "sha256": "2d155a96068c696a94740075439e22668dae1cd7fc3d74df7a7be17f0de8f9f8"
+    },
+    {
+      "id": "groundlm-hard-v1-shortest_path_count-n32-r05",
+      "task": "shortest_path_count",
+      "n": 32,
+      "replicate": 5,
+      "file": "groundlm-hard-v1-shortest_path_count-n32-r05.json",
+      "sha256": "ca82f746dae60e17a9b3275bdb63bfa9dff110d26c0808f240681c0056ec82e8"
+    },
+    {
+      "id": "groundlm-hard-v1-shortest_path_count-n32-r06",
+      "task": "shortest_path_count",
+      "n": 32,
+      "replicate": 6,
+      "file": "groundlm-hard-v1-shortest_path_count-n32-r06.json",
+      "sha256": "03124dc9947ae8ac18c318108db8c7ec52058310a9c12f59196f1655fffb860f"
+    },
+    {
+      "id": "groundlm-hard-v1-shortest_path_count-n32-r07",
+      "task": "shortest_path_count",
+      "n": 32,
+      "replicate": 7,
+      "file": "groundlm-hard-v1-shortest_path_count-n32-r07.json",
+      "sha256": "4099ff5ba1a3c33d713be89841f5af5da0771ceb45dbb6da88d8704a71d0f645"
+    },
+    {
+      "id": "groundlm-hard-v1-shortest_path_count-n32-r08",
+      "task": "shortest_path_count",
+      "n": 32,
+      "replicate": 8,
+      "file": "groundlm-hard-v1-shortest_path_count-n32-r08.json",
+      "sha256": "2f495f261e75b151d6ac9f06ab5b3a723a9523096528d3b2a3e6326e5ade6c4b"
+    },
+    {
+      "id": "groundlm-hard-v1-shortest_path_count-n32-r09",
+      "task": "shortest_path_count",
+      "n": 32,
+      "replicate": 9,
+      "file": "groundlm-hard-v1-shortest_path_count-n32-r09.json",
+      "sha256": "def67f98cd5a015e5754d92a72f11a05547de69bf50dc17f0deb26f7c006e862"
+    },
+    {
+      "id": "groundlm-hard-v1-shortest_path_count-n64-r00",
+      "task": "shortest_path_count",
+      "n": 64,
+      "replicate": 0,
+      "file": "groundlm-hard-v1-shortest_path_count-n64-r00.json",
+      "sha256": "7e7355cda93619edb1f9e7c31254f1497fa8afc2acaefb5b54df792a100bf045"
+    },
+    {
+      "id": "groundlm-hard-v1-shortest_path_count-n64-r01",
+      "task": "shortest_path_count",
+      "n": 64,
+      "replicate": 1,
+      "file": "groundlm-hard-v1-shortest_path_count-n64-r01.json",
+      "sha256": "e7dd2339f4966e48e587d4f72b3c1f997206fbc3cf5360dd445c55b2d73e6f95"
+    },
+    {
+      "id": "groundlm-hard-v1-shortest_path_count-n64-r02",
+      "task": "shortest_path_count",
+      "n": 64,
+      "replicate": 2,
+      "file": "groundlm-hard-v1-shortest_path_count-n64-r02.json",
+      "sha256": "7e48046ce1b594de4b7fe49c84e0c074a55abf53429e0ba51c2937bf0f507960"
+    },
+    {
+      "id": "groundlm-hard-v1-shortest_path_count-n64-r03",
+      "task": "shortest_path_count",
+      "n": 64,
+      "replicate": 3,
+      "file": "groundlm-hard-v1-shortest_path_count-n64-r03.json",
+      "sha256": "c8c9c588df3715dfc3dc6fed8bcea77527fc5ee4ce8ea6a0ef447e2c193bd802"
+    },
+    {
+      "id": "groundlm-hard-v1-shortest_path_count-n64-r04",
+      "task": "shortest_path_count",
+      "n": 64,
+      "replicate": 4,
+      "file": "groundlm-hard-v1-shortest_path_count-n64-r04.json",
+      "sha256": "e9037b6d1f65af1a420c823a9766559d64b79ba4e191dc4f8617ec9384f8428a"
+    },
+    {
+      "id": "groundlm-hard-v1-shortest_path_count-n64-r05",
+      "task": "shortest_path_count",
+      "n": 64,
+      "replicate": 5,
+      "file": "groundlm-hard-v1-shortest_path_count-n64-r05.json",
+      "sha256": "bfce3fbc99e5631b21b916898e69e58589d16b74d6f320390d1bb4a21b903974"
+    },
+    {
+      "id": "groundlm-hard-v1-shortest_path_count-n64-r06",
+      "task": "shortest_path_count",
+      "n": 64,
+      "replicate": 6,
+      "file": "groundlm-hard-v1-shortest_path_count-n64-r06.json",
+      "sha256": "4c497b649fcaa791e702ef9dc2f98932b62e9cab06d7e4843ea25f89b4b377f6"
+    },
+    {
+      "id": "groundlm-hard-v1-shortest_path_count-n64-r07",
+      "task": "shortest_path_count",
+      "n": 64,
+      "replicate": 7,
+      "file": "groundlm-hard-v1-shortest_path_count-n64-r07.json",
+      "sha256": "d25970de28d3e4efbea1ea1c936e6163d1fd9dcba5e4eb78593558f84da09d94"
+    },
+    {
+      "id": "groundlm-hard-v1-shortest_path_count-n64-r08",
+      "task": "shortest_path_count",
+      "n": 64,
+      "replicate": 8,
+      "file": "groundlm-hard-v1-shortest_path_count-n64-r08.json",
+      "sha256": "8e02be3a74f45ff4533d7ad15fedb4226280aa3bddbcf7c5c24d8d9e6f0d0904"
+    },
+    {
+      "id": "groundlm-hard-v1-shortest_path_count-n64-r09",
+      "task": "shortest_path_count",
+      "n": 64,
+      "replicate": 9,
+      "file": "groundlm-hard-v1-shortest_path_count-n64-r09.json",
+      "sha256": "e5c32256a7763aca74ec958de65345a00c884e9904b3e0e43d2d32bf2c7f26f0"
+    },
+    {
+      "id": "groundlm-hard-v1-exact_walk_count-n32-r00",
+      "task": "exact_walk_count",
+      "n": 32,
+      "replicate": 0,
+      "file": "groundlm-hard-v1-exact_walk_count-n32-r00.json",
+      "sha256": "7b94257497a8b0d7706cab0c67f2337429b1e3119e2aebdc3193ca809dacb209"
+    },
+    {
+      "id": "groundlm-hard-v1-exact_walk_count-n32-r01",
+      "task": "exact_walk_count",
+      "n": 32,
+      "replicate": 1,
+      "file": "groundlm-hard-v1-exact_walk_count-n32-r01.json",
+      "sha256": "943d68634c5f29a58c424e56d2923f8a4763d8d41eaee7dc9569453417464a52"
+    },
+    {
+      "id": "groundlm-hard-v1-exact_walk_count-n32-r02",
+      "task": "exact_walk_count",
+      "n": 32,
+      "replicate": 2,
+      "file": "groundlm-hard-v1-exact_walk_count-n32-r02.json",
+      "sha256": "d5b522b355c601e10e17a6860c717dd0d6c0acbfb58f7e5c34f519f03818bc07"
+    },
+    {
+      "id": "groundlm-hard-v1-exact_walk_count-n32-r03",
+      "task": "exact_walk_count",
+      "n": 32,
+      "replicate": 3,
+      "file": "groundlm-hard-v1-exact_walk_count-n32-r03.json",
+      "sha256": "f329815c690b46477f92222a56f59131588573daea9e01fc17bb561b71b97aac"
+    },
+    {
+      "id": "groundlm-hard-v1-exact_walk_count-n32-r04",
+      "task": "exact_walk_count",
+      "n": 32,
+      "replicate": 4,
+      "file": "groundlm-hard-v1-exact_walk_count-n32-r04.json",
+      "sha256": "fc49d3670bad64743675e7fabb2330ff1d0c9ec652e8eda5ef4e3e92da3ba4a0"
+    },
+    {
+      "id": "groundlm-hard-v1-exact_walk_count-n32-r05",
+      "task": "exact_walk_count",
+      "n": 32,
+      "replicate": 5,
+      "file": "groundlm-hard-v1-exact_walk_count-n32-r05.json",
+      "sha256": "dd2f894d46f3eb65e0d4df1b4dae0f99c11d68b77befb1117cdf4a10ce8cf150"
+    },
+    {
+      "id": "groundlm-hard-v1-exact_walk_count-n32-r06",
+      "task": "exact_walk_count",
+      "n": 32,
+      "replicate": 6,
+      "file": "groundlm-hard-v1-exact_walk_count-n32-r06.json",
+      "sha256": "9a4d8a2ab6b5cf4f018bb29869b1695d0aaef2e39d81ec96f99d46b407fdc9f4"
+    },
+    {
+      "id": "groundlm-hard-v1-exact_walk_count-n32-r07",
+      "task": "exact_walk_count",
+      "n": 32,
+      "replicate": 7,
+      "file": "groundlm-hard-v1-exact_walk_count-n32-r07.json",
+      "sha256": "182e450410fe201f88473cb1dd2c11714215bd97cdae02e44b96a5823244cdc7"
+    },
+    {
+      "id": "groundlm-hard-v1-exact_walk_count-n32-r08",
+      "task": "exact_walk_count",
+      "n": 32,
+      "replicate": 8,
+      "file": "groundlm-hard-v1-exact_walk_count-n32-r08.json",
+      "sha256": "b17369c421b2f04cde731aa7896664153fd1d4d8d73cb24d20a5dc9863edd40a"
+    },
+    {
+      "id": "groundlm-hard-v1-exact_walk_count-n32-r09",
+      "task": "exact_walk_count",
+      "n": 32,
+      "replicate": 9,
+      "file": "groundlm-hard-v1-exact_walk_count-n32-r09.json",
+      "sha256": "d3e513f71e91ad6bfa7422b7755c96db663c378c9336f1ce444af0e4b78c1f47"
+    },
+    {
+      "id": "groundlm-hard-v1-exact_walk_count-n64-r00",
+      "task": "exact_walk_count",
+      "n": 64,
+      "replicate": 0,
+      "file": "groundlm-hard-v1-exact_walk_count-n64-r00.json",
+      "sha256": "679b83733065352b58ac36de269abb418b724a67dfcd07755f52e7b579dd5eb5"
+    },
+    {
+      "id": "groundlm-hard-v1-exact_walk_count-n64-r01",
+      "task": "exact_walk_count",
+      "n": 64,
+      "replicate": 1,
+      "file": "groundlm-hard-v1-exact_walk_count-n64-r01.json",
+      "sha256": "e54414625a6024f4f972001fc54b91835ed47e6e61517513b240da0e475d4843"
+    },
+    {
+      "id": "groundlm-hard-v1-exact_walk_count-n64-r02",
+      "task": "exact_walk_count",
+      "n": 64,
+      "replicate": 2,
+      "file": "groundlm-hard-v1-exact_walk_count-n64-r02.json",
+      "sha256": "2974b0bbc013339b0247425b6c2412e693d0de8454802703c1aff44526a2e45d"
+    },
+    {
+      "id": "groundlm-hard-v1-exact_walk_count-n64-r03",
+      "task": "exact_walk_count",
+      "n": 64,
+      "replicate": 3,
+      "file": "groundlm-hard-v1-exact_walk_count-n64-r03.json",
+      "sha256": "927b52c3e3bfa90dc25c6745b37b7d13daea2c6843be88a2850a20e62889da5a"
+    },
+    {
+      "id": "groundlm-hard-v1-exact_walk_count-n64-r04",
+      "task": "exact_walk_count",
+      "n": 64,
+      "replicate": 4,
+      "file": "groundlm-hard-v1-exact_walk_count-n64-r04.json",
+      "sha256": "33f3859f59b6c37779a9d01178aa3bd8cf853d99b7345bbbf5f714d94c88e824"
+    },
+    {
+      "id": "groundlm-hard-v1-exact_walk_count-n64-r05",
+      "task": "exact_walk_count",
+      "n": 64,
+      "replicate": 5,
+      "file": "groundlm-hard-v1-exact_walk_count-n64-r05.json",
+      "sha256": "18bb47b484689c9e473114f145841bd9759034c0aa1f8963b9be5ca331cdb2ba"
+    },
+    {
+      "id": "groundlm-hard-v1-exact_walk_count-n64-r06",
+      "task": "exact_walk_count",
+      "n": 64,
+      "replicate": 6,
+      "file": "groundlm-hard-v1-exact_walk_count-n64-r06.json",
+      "sha256": "1c9ee56148bf33b36605d1e99059c1332857db12b24070580b3f6aed76a411ff"
+    },
+    {
+      "id": "groundlm-hard-v1-exact_walk_count-n64-r07",
+      "task": "exact_walk_count",
+      "n": 64,
+      "replicate": 7,
+      "file": "groundlm-hard-v1-exact_walk_count-n64-r07.json",
+      "sha256": "63c90912262aad0076d4580015a7e1f9650e873f1bb7f5564628712782756b70"
+    },
+    {
+      "id": "groundlm-hard-v1-exact_walk_count-n64-r08",
+      "task": "exact_walk_count",
+      "n": 64,
+      "replicate": 8,
+      "file": "groundlm-hard-v1-exact_walk_count-n64-r08.json",
+      "sha256": "0bf3d0867d8a11381ab9e443c52b133cc0e1a905496d759e2a4a2c80784d458b"
+    },
+    {
+      "id": "groundlm-hard-v1-exact_walk_count-n64-r09",
+      "task": "exact_walk_count",
+      "n": 64,
+      "replicate": 9,
+      "file": "groundlm-hard-v1-exact_walk_count-n64-r09.json",
+      "sha256": "68464e3fe6ee219d32d223d475b01da6090554f6ed88178d40eec92b714e2e2f"
+    },
+    {
+      "id": "groundlm-hard-v1-triangle_count-n32-r00",
+      "task": "triangle_count",
+      "n": 32,
+      "replicate": 0,
+      "file": "groundlm-hard-v1-triangle_count-n32-r00.json",
+      "sha256": "c5a288d31adade74dda4f5da8a6b32d56de6b19203d3a188ac72245ec8c7e6b0"
+    },
+    {
+      "id": "groundlm-hard-v1-triangle_count-n32-r01",
+      "task": "triangle_count",
+      "n": 32,
+      "replicate": 1,
+      "file": "groundlm-hard-v1-triangle_count-n32-r01.json",
+      "sha256": "ca3d93f2104a7952491e1abdfc32ec580c30b7c3b7adc97d8f9d1d84da54108a"
+    },
+    {
+      "id": "groundlm-hard-v1-triangle_count-n32-r02",
+      "task": "triangle_count",
+      "n": 32,
+      "replicate": 2,
+      "file": "groundlm-hard-v1-triangle_count-n32-r02.json",
+      "sha256": "ad5de7eb2e0591d091b19f877f6bae66fa43cbfa625e89bf112828e5410577ad"
+    },
+    {
+      "id": "groundlm-hard-v1-triangle_count-n32-r03",
+      "task": "triangle_count",
+      "n": 32,
+      "replicate": 3,
+      "file": "groundlm-hard-v1-triangle_count-n32-r03.json",
+      "sha256": "029fec525a68695e5910b2eb8733b6e50ea2e70e448c4c74041a7e2eec8afe8f"
+    },
+    {
+      "id": "groundlm-hard-v1-triangle_count-n32-r04",
+      "task": "triangle_count",
+      "n": 32,
+      "replicate": 4,
+      "file": "groundlm-hard-v1-triangle_count-n32-r04.json",
+      "sha256": "1f7d24771afcff53db1c9f2039619853dce96897bd5aad2291e8fef807c51f84"
+    },
+    {
+      "id": "groundlm-hard-v1-triangle_count-n32-r05",
+      "task": "triangle_count",
+      "n": 32,
+      "replicate": 5,
+      "file": "groundlm-hard-v1-triangle_count-n32-r05.json",
+      "sha256": "cad9eb97b2bc82c3f28aebfda2ca2f8b7ddae772dcf58982648657cac29ff124"
+    },
+    {
+      "id": "groundlm-hard-v1-triangle_count-n32-r06",
+      "task": "triangle_count",
+      "n": 32,
+      "replicate": 6,
+      "file": "groundlm-hard-v1-triangle_count-n32-r06.json",
+      "sha256": "1b981e7dbb9f95e20c74c3d62b5c590cc7c4991652057d7107602b2896533c12"
+    },
+    {
+      "id": "groundlm-hard-v1-triangle_count-n32-r07",
+      "task": "triangle_count",
+      "n": 32,
+      "replicate": 7,
+      "file": "groundlm-hard-v1-triangle_count-n32-r07.json",
+      "sha256": "a038c5ef70bffcfcb1cf9e01ef53bbad6047a51e1a5067b18affb74bfb7900b4"
+    },
+    {
+      "id": "groundlm-hard-v1-triangle_count-n32-r08",
+      "task": "triangle_count",
+      "n": 32,
+      "replicate": 8,
+      "file": "groundlm-hard-v1-triangle_count-n32-r08.json",
+      "sha256": "9f95ae7d7e9df3a50da59049dd9ecc05f785923b4e6c9d7881daad8433129137"
+    },
+    {
+      "id": "groundlm-hard-v1-triangle_count-n32-r09",
+      "task": "triangle_count",
+      "n": 32,
+      "replicate": 9,
+      "file": "groundlm-hard-v1-triangle_count-n32-r09.json",
+      "sha256": "b2a46e22fe4d0a9610f94c6b76d8e1c8464576838a2b080c10ba810d485d3090"
+    },
+    {
+      "id": "groundlm-hard-v1-triangle_count-n64-r00",
+      "task": "triangle_count",
+      "n": 64,
+      "replicate": 0,
+      "file": "groundlm-hard-v1-triangle_count-n64-r00.json",
+      "sha256": "bb4e09e9fc77fe6140183050e8907831e33650270594ebdff78278a71ade95b4"
+    },
+    {
+      "id": "groundlm-hard-v1-triangle_count-n64-r01",
+      "task": "triangle_count",
+      "n": 64,
+      "replicate": 1,
+      "file": "groundlm-hard-v1-triangle_count-n64-r01.json",
+      "sha256": "14a61712544e09aeed79397dc508bd487d38537bdd56e0eb02c9e27191718973"
+    },
+    {
+      "id": "groundlm-hard-v1-triangle_count-n64-r02",
+      "task": "triangle_count",
+      "n": 64,
+      "replicate": 2,
+      "file": "groundlm-hard-v1-triangle_count-n64-r02.json",
+      "sha256": "2e62572248566bd8cca3016b9325c820391de2b331ae809d690e9a570863cbf5"
+    },
+    {
+      "id": "groundlm-hard-v1-triangle_count-n64-r03",
+      "task": "triangle_count",
+      "n": 64,
+      "replicate": 3,
+      "file": "groundlm-hard-v1-triangle_count-n64-r03.json",
+      "sha256": "edc966e4c13b336d7ac889ab87749a29490ec992f96a911c867cf84179dd3c2e"
+    },
+    {
+      "id": "groundlm-hard-v1-triangle_count-n64-r04",
+      "task": "triangle_count",
+      "n": 64,
+      "replicate": 4,
+      "file": "groundlm-hard-v1-triangle_count-n64-r04.json",
+      "sha256": "0e7147ca04491be2827682eba2ebf904d40762f68c8e19f5ad5efb84efa940ba"
+    },
+    {
+      "id": "groundlm-hard-v1-triangle_count-n64-r05",
+      "task": "triangle_count",
+      "n": 64,
+      "replicate": 5,
+      "file": "groundlm-hard-v1-triangle_count-n64-r05.json",
+      "sha256": "255877e13d2bfded9645217e94e6cbe929276126d98edb33bbd8d0e4504471d5"
+    },
+    {
+      "id": "groundlm-hard-v1-triangle_count-n64-r06",
+      "task": "triangle_count",
+      "n": 64,
+      "replicate": 6,
+      "file": "groundlm-hard-v1-triangle_count-n64-r06.json",
+      "sha256": "081c463b3af1f103b1c2dc01e552e187acee41782f05abf72e4497f936cc8fac"
+    },
+    {
+      "id": "groundlm-hard-v1-triangle_count-n64-r07",
+      "task": "triangle_count",
+      "n": 64,
+      "replicate": 7,
+      "file": "groundlm-hard-v1-triangle_count-n64-r07.json",
+      "sha256": "851cddb3698c2d8c4f4a3f3288bc743b0615a063858de5f86127fd6fe326c675"
+    },
+    {
+      "id": "groundlm-hard-v1-triangle_count-n64-r08",
+      "task": "triangle_count",
+      "n": 64,
+      "replicate": 8,
+      "file": "groundlm-hard-v1-triangle_count-n64-r08.json",
+      "sha256": "0478ee2125d4073cb5e5f0b796ce40c18f01760baa1956b37fb63a3c9d98d5dc"
+    },
+    {
+      "id": "groundlm-hard-v1-triangle_count-n64-r09",
+      "task": "triangle_count",
+      "n": 64,
+      "replicate": 9,
+      "file": "groundlm-hard-v1-triangle_count-n64-r09.json",
+      "sha256": "93095f9caaf34a2cca07e096c62f6908cd1992da816d6ae072e673b41edca824"
+    },
+    {
+      "id": "groundlm-hard-v1-minimum_cut-n32-r00",
+      "task": "minimum_cut",
+      "n": 32,
+      "replicate": 0,
+      "file": "groundlm-hard-v1-minimum_cut-n32-r00.json",
+      "sha256": "df5f099ed32f9317784d8d141f40586e5c1074855b05551fdacf2241d7fd5154"
+    },
+    {
+      "id": "groundlm-hard-v1-minimum_cut-n32-r01",
+      "task": "minimum_cut",
+      "n": 32,
+      "replicate": 1,
+      "file": "groundlm-hard-v1-minimum_cut-n32-r01.json",
+      "sha256": "c0cf5619ce3efef039b05f03ad6b5db869195d24551fca9d1af88a3764904bea"
+    },
+    {
+      "id": "groundlm-hard-v1-minimum_cut-n32-r02",
+      "task": "minimum_cut",
+      "n": 32,
+      "replicate": 2,
+      "file": "groundlm-hard-v1-minimum_cut-n32-r02.json",
+      "sha256": "3b157d4e0f033e2106f5fafb8871bfba2466aab1fe787b2897e1b4209cf7875b"
+    },
+    {
+      "id": "groundlm-hard-v1-minimum_cut-n32-r03",
+      "task": "minimum_cut",
+      "n": 32,
+      "replicate": 3,
+      "file": "groundlm-hard-v1-minimum_cut-n32-r03.json",
+      "sha256": "7c59fc2971f6f829905b53f9525fa189cd1c6e5ae8275a8ceea219b2b0bba7ad"
+    },
+    {
+      "id": "groundlm-hard-v1-minimum_cut-n32-r04",
+      "task": "minimum_cut",
+      "n": 32,
+      "replicate": 4,
+      "file": "groundlm-hard-v1-minimum_cut-n32-r04.json",
+      "sha256": "5ca94421894415a03cb59bb70e53cc818d40e73b1650dd8f242d582b8bc69f44"
+    },
+    {
+      "id": "groundlm-hard-v1-minimum_cut-n32-r05",
+      "task": "minimum_cut",
+      "n": 32,
+      "replicate": 5,
+      "file": "groundlm-hard-v1-minimum_cut-n32-r05.json",
+      "sha256": "0e4cd86efe0746dc5d074cb221701fc530ae8c71aca4474104d8bbbd76650cc9"
+    },
+    {
+      "id": "groundlm-hard-v1-minimum_cut-n32-r06",
+      "task": "minimum_cut",
+      "n": 32,
+      "replicate": 6,
+      "file": "groundlm-hard-v1-minimum_cut-n32-r06.json",
+      "sha256": "17c6905a1cbf4f496d7683dc97a993337f7e686cd133394618370da5c6690b73"
+    },
+    {
+      "id": "groundlm-hard-v1-minimum_cut-n32-r07",
+      "task": "minimum_cut",
+      "n": 32,
+      "replicate": 7,
+      "file": "groundlm-hard-v1-minimum_cut-n32-r07.json",
+      "sha256": "ac0e0780c5eb65e31e5eb9a7677971df3638135c0e2b2a9087022cf65db413f8"
+    },
+    {
+      "id": "groundlm-hard-v1-minimum_cut-n32-r08",
+      "task": "minimum_cut",
+      "n": 32,
+      "replicate": 8,
+      "file": "groundlm-hard-v1-minimum_cut-n32-r08.json",
+      "sha256": "b345daa8825c4a54592a3ce0ffc7332ff5e9e916ccd8fe082a2313c642cc68ff"
+    },
+    {
+      "id": "groundlm-hard-v1-minimum_cut-n32-r09",
+      "task": "minimum_cut",
+      "n": 32,
+      "replicate": 9,
+      "file": "groundlm-hard-v1-minimum_cut-n32-r09.json",
+      "sha256": "95ad351c2f464c1d6d99614c0314aaa5d8cb07af9592eea269fb88bea5df46c1"
+    },
+    {
+      "id": "groundlm-hard-v1-minimum_cut-n64-r00",
+      "task": "minimum_cut",
+      "n": 64,
+      "replicate": 0,
+      "file": "groundlm-hard-v1-minimum_cut-n64-r00.json",
+      "sha256": "23ea6215387274e38721ac26f120042e4e245de4e4f91802e92e88d9b00340f9"
+    },
+    {
+      "id": "groundlm-hard-v1-minimum_cut-n64-r01",
+      "task": "minimum_cut",
+      "n": 64,
+      "replicate": 1,
+      "file": "groundlm-hard-v1-minimum_cut-n64-r01.json",
+      "sha256": "fc159d81142a1c78219f75047901b8af56093970b9e393de20410a7bc55514da"
+    },
+    {
+      "id": "groundlm-hard-v1-minimum_cut-n64-r02",
+      "task": "minimum_cut",
+      "n": 64,
+      "replicate": 2,
+      "file": "groundlm-hard-v1-minimum_cut-n64-r02.json",
+      "sha256": "51b2a87e554b4791c753a6719025181ce39150b9169b65c2edd9996b96d9ae5a"
+    },
+    {
+      "id": "groundlm-hard-v1-minimum_cut-n64-r03",
+      "task": "minimum_cut",
+      "n": 64,
+      "replicate": 3,
+      "file": "groundlm-hard-v1-minimum_cut-n64-r03.json",
+      "sha256": "0c3ba62a3f5004278029e28b2061ad151c46309ed0bffa31eecc9e81364fbdc5"
+    },
+    {
+      "id": "groundlm-hard-v1-minimum_cut-n64-r04",
+      "task": "minimum_cut",
+      "n": 64,
+      "replicate": 4,
+      "file": "groundlm-hard-v1-minimum_cut-n64-r04.json",
+      "sha256": "65653573675659dce0ddc377b855946bd17ec24454ddf5d014306c078b085c4b"
+    },
+    {
+      "id": "groundlm-hard-v1-minimum_cut-n64-r05",
+      "task": "minimum_cut",
+      "n": 64,
+      "replicate": 5,
+      "file": "groundlm-hard-v1-minimum_cut-n64-r05.json",
+      "sha256": "d90e275d5cd6ece419611abaeb356734bb0548edab60bebb0839d4c0b1a828a1"
+    },
+    {
+      "id": "groundlm-hard-v1-minimum_cut-n64-r06",
+      "task": "minimum_cut",
+      "n": 64,
+      "replicate": 6,
+      "file": "groundlm-hard-v1-minimum_cut-n64-r06.json",
+      "sha256": "5d9675d3720230cecd302fd3f948561963b4519276d5d3df4c813cdb595d713b"
+    },
+    {
+      "id": "groundlm-hard-v1-minimum_cut-n64-r07",
+      "task": "minimum_cut",
+      "n": 64,
+      "replicate": 7,
+      "file": "groundlm-hard-v1-minimum_cut-n64-r07.json",
+      "sha256": "6ed5b4e9d8ba194893f2c12c30d325fb24258ea9ffb29818c16bbc5eaf1a3083"
+    },
+    {
+      "id": "groundlm-hard-v1-minimum_cut-n64-r08",
+      "task": "minimum_cut",
+      "n": 64,
+      "replicate": 8,
+      "file": "groundlm-hard-v1-minimum_cut-n64-r08.json",
+      "sha256": "0666a9d4436c4df980f0eff114e46d58ddeecd7eea20da798005b0eaba8b0286"
+    },
+    {
+      "id": "groundlm-hard-v1-minimum_cut-n64-r09",
+      "task": "minimum_cut",
+      "n": 64,
+      "replicate": 9,
+      "file": "groundlm-hard-v1-minimum_cut-n64-r09.json",
+      "sha256": "727f856e0ff2c296cd067e1bffdabfa7ea808f34e5535333136e27be486aea6c"
+    },
+    {
+      "id": "groundlm-hard-v1-constrained_reachability-n32-r00",
+      "task": "constrained_reachability",
+      "n": 32,
+      "replicate": 0,
+      "file": "groundlm-hard-v1-constrained_reachability-n32-r00.json",
+      "sha256": "38dc140fac265c71522c17d450ff6e797480897bb43c945d25ce556d9e9acb04"
+    },
+    {
+      "id": "groundlm-hard-v1-constrained_reachability-n32-r01",
+      "task": "constrained_reachability",
+      "n": 32,
+      "replicate": 1,
+      "file": "groundlm-hard-v1-constrained_reachability-n32-r01.json",
+      "sha256": "119688f88191243f9cf4a15355e52df1d77e95318f3c30c97e0abc02c3f523f5"
+    },
+    {
+      "id": "groundlm-hard-v1-constrained_reachability-n32-r02",
+      "task": "constrained_reachability",
+      "n": 32,
+      "replicate": 2,
+      "file": "groundlm-hard-v1-constrained_reachability-n32-r02.json",
+      "sha256": "fa1eee6c525159df809cdec2379c97889e92b2692b68e408023f075109a53d7b"
+    },
+    {
+      "id": "groundlm-hard-v1-constrained_reachability-n32-r03",
+      "task": "constrained_reachability",
+      "n": 32,
+      "replicate": 3,
+      "file": "groundlm-hard-v1-constrained_reachability-n32-r03.json",
+      "sha256": "744d688789a7b6e683e37fba2262d14b8e57de34b63c414f4b4c39f2e284c4c5"
+    },
+    {
+      "id": "groundlm-hard-v1-constrained_reachability-n32-r04",
+      "task": "constrained_reachability",
+      "n": 32,
+      "replicate": 4,
+      "file": "groundlm-hard-v1-constrained_reachability-n32-r04.json",
+      "sha256": "04d507352f2b7096185dba8dab42a085e2a42741e9e846602d74eed431d2524d"
+    },
+    {
+      "id": "groundlm-hard-v1-constrained_reachability-n32-r05",
+      "task": "constrained_reachability",
+      "n": 32,
+      "replicate": 5,
+      "file": "groundlm-hard-v1-constrained_reachability-n32-r05.json",
+      "sha256": "931754b9be1d71bd85f66e3c54a65479837ab7cb9020469051d9a36255dfc50a"
+    },
+    {
+      "id": "groundlm-hard-v1-constrained_reachability-n32-r06",
+      "task": "constrained_reachability",
+      "n": 32,
+      "replicate": 6,
+      "file": "groundlm-hard-v1-constrained_reachability-n32-r06.json",
+      "sha256": "4ed11cc596bdc528530ffab2ea1bcf9796064ba52b0a1f5bd3502a5fd9e2d2b7"
+    },
+    {
+      "id": "groundlm-hard-v1-constrained_reachability-n32-r07",
+      "task": "constrained_reachability",
+      "n": 32,
+      "replicate": 7,
+      "file": "groundlm-hard-v1-constrained_reachability-n32-r07.json",
+      "sha256": "c74dfd8ce67894d776ae3aaf926bb0aaf35bb1c50f51d9759cd44071103b43c5"
+    },
+    {
+      "id": "groundlm-hard-v1-constrained_reachability-n32-r08",
+      "task": "constrained_reachability",
+      "n": 32,
+      "replicate": 8,
+      "file": "groundlm-hard-v1-constrained_reachability-n32-r08.json",
+      "sha256": "0115ad4930de75c12f3ed2fbe69a0216d4af554d7ce55057a72c4d0b6e4b7dab"
+    },
+    {
+      "id": "groundlm-hard-v1-constrained_reachability-n32-r09",
+      "task": "constrained_reachability",
+      "n": 32,
+      "replicate": 9,
+      "file": "groundlm-hard-v1-constrained_reachability-n32-r09.json",
+      "sha256": "9a19ed6fe52868efe384b2eacf64db7feffdd574421dfbad785a9e453286dfc3"
+    },
+    {
+      "id": "groundlm-hard-v1-constrained_reachability-n64-r00",
+      "task": "constrained_reachability",
+      "n": 64,
+      "replicate": 0,
+      "file": "groundlm-hard-v1-constrained_reachability-n64-r00.json",
+      "sha256": "132e0243aef99f7b68f729f9516382348ae71ed84ad038f15f8d9ac3f9107e47"
+    },
+    {
+      "id": "groundlm-hard-v1-constrained_reachability-n64-r01",
+      "task": "constrained_reachability",
+      "n": 64,
+      "replicate": 1,
+      "file": "groundlm-hard-v1-constrained_reachability-n64-r01.json",
+      "sha256": "dc3abdfd38112bfa2c48b61e868a37cff4ea6a58879d5ec889ed90980034caef"
+    },
+    {
+      "id": "groundlm-hard-v1-constrained_reachability-n64-r02",
+      "task": "constrained_reachability",
+      "n": 64,
+      "replicate": 2,
+      "file": "groundlm-hard-v1-constrained_reachability-n64-r02.json",
+      "sha256": "89ef8d1a82b0297b1871077c3a14324b72bf80d3d05166ec1d414f823dcab754"
+    },
+    {
+      "id": "groundlm-hard-v1-constrained_reachability-n64-r03",
+      "task": "constrained_reachability",
+      "n": 64,
+      "replicate": 3,
+      "file": "groundlm-hard-v1-constrained_reachability-n64-r03.json",
+      "sha256": "4620cd8e25565e77a0d2e8e2fca6261ec355c09a6beee3a301d1ea436abfbcaa"
+    },
+    {
+      "id": "groundlm-hard-v1-constrained_reachability-n64-r04",
+      "task": "constrained_reachability",
+      "n": 64,
+      "replicate": 4,
+      "file": "groundlm-hard-v1-constrained_reachability-n64-r04.json",
+      "sha256": "36754089ac9400e50189006ec8ac46157ed6461a1a36a51a6c4c76004b457d3b"
+    },
+    {
+      "id": "groundlm-hard-v1-constrained_reachability-n64-r05",
+      "task": "constrained_reachability",
+      "n": 64,
+      "replicate": 5,
+      "file": "groundlm-hard-v1-constrained_reachability-n64-r05.json",
+      "sha256": "8a6473457da1249b3bbcbc1e1eb7f23dee5cabba267fdfc7d0771641ed5f932a"
+    },
+    {
+      "id": "groundlm-hard-v1-constrained_reachability-n64-r06",
+      "task": "constrained_reachability",
+      "n": 64,
+      "replicate": 6,
+      "file": "groundlm-hard-v1-constrained_reachability-n64-r06.json",
+      "sha256": "4be990dcc53992630448794f94b9c2e5f471e50dab5aadc9f06e5ab15b4da2a0"
+    },
+    {
+      "id": "groundlm-hard-v1-constrained_reachability-n64-r07",
+      "task": "constrained_reachability",
+      "n": 64,
+      "replicate": 7,
+      "file": "groundlm-hard-v1-constrained_reachability-n64-r07.json",
+      "sha256": "2e0ed24e6aead0b68ce2c896dc35cf877224f348a1f688dc3320fff0a549f321"
+    },
+    {
+      "id": "groundlm-hard-v1-constrained_reachability-n64-r08",
+      "task": "constrained_reachability",
+      "n": 64,
+      "replicate": 8,
+      "file": "groundlm-hard-v1-constrained_reachability-n64-r08.json",
+      "sha256": "bb6c849899cae39ba3ec88ade6f928b183706c51008d7d29db95b636f2b8ef7a"
+    },
+    {
+      "id": "groundlm-hard-v1-constrained_reachability-n64-r09",
+      "task": "constrained_reachability",
+      "n": 64,
+      "replicate": 9,
+      "file": "groundlm-hard-v1-constrained_reachability-n64-r09.json",
+      "sha256": "6e7fcd91535c9fd96e752b4c0c5b1b8ab1e456dddfa5989deaa88e715670e09c"
+    }
+  ],
+  "source_prompt_sha256": "8ad24be6c8448f261934ab23bc83d20edc8f544814fcb7fec5f47f7c519225f6"
+}
