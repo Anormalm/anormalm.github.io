@@ -112,3 +112,25 @@ time; account credit snapshots are excluded. The 48 reused records are checked
 against the original replication answers and are not added to inference totals.
 Legacy raw hashes still match their frozen spending ledger. No inference was
 executed to prepare these pages.
+
+
+## Shared-protocol main dashboard
+
+The default dashboard lists all 21 tested models in a versioned Hard v1 / 16K
+registry. Five complete configurations are eligible; sixteen await matched
+collection. Earlier scores remain in the model history. Eligibility audits
+coverage, model/provider identity, exact native settings and completion usage.
+`data/protocol/standard.json` fingerprints the dataset, prompts, system,
+scorer and request policy, with per-configuration identities. Sampling uses
+provider defaults; high reasoning is requested where supported. This is a
+common request policy, not a claim of equal native compute.
+
+Search, coverage, precision, task and size filters apply to the comparison
+table, graph-level accuracy intervals, cost scatterplot and task heatmap.
+The CSV retains missing scores as blank; comparisons accept only eligible rows.
+Historical Claude errors and cutoffs remain linked from the registry. All raw
+releases, fixtures and historical scores are unchanged. No paid inference was
+launched for this website change. A read-only 15,360-slot extension plan is
+retained locally for budget review and is not authorized for execution.
+
+Design references: Artificial Analysis methodology, HELM and Inspect log viewer.

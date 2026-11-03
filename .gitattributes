@@ -5,3 +5,5 @@ public/groundlm/data/family-pilot/** -text
 public/groundlm/downloads/family-pilot/** -text
 public/groundlm/data/history/** -text
 public/groundlm/downloads/history/** -text
+
+public/groundlm/data/protocol/** -text
