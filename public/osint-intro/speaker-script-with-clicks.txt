@@ -29,60 +29,100 @@ CLICK 4: press RIGHT once.
 
 We could describe the courtyard scene or try a reverse-image search to find a candidate. Blue marks a search action; the candidate starts in amber and turns green when the museum record supports it. That record identifies A Dutch Courtyard by Pieter de Hooch, at the National Gallery of Art in Washington, with the accession number shown in the chip. This is an illustrative route.
 
-SLIDE 6: Where was this taken?
+SLIDE 6: Whose name is on this building?
 CLICK 5: press RIGHT once.
 
-This is a different kind of task: geolocating a photo. It’s a Bellingcat challenge image reproduced by Tristan Jenkinson, and the original question asks for the name on the building. First we need to locate the scene. What would you use as a clue here?
+This is the original photo challenge: whose name is on the building? We have a plate, a bridge visible in the mirror, and a building across the road. What would you check first?
 
 Hold for the response before advancing.
 
-SLIDE 7: From the photo to the exact spot
+SLIDE 7: First, narrow the country
 CLICK 6: press RIGHT once.
 
-This follows Dam Coffee’s published walkthrough: unclear plate markings suggest Nigeria, then city searches using OpenStreetMap lead to Abuja, the city named in the write-up. A map hit gives a candidate location, and comparing the bridge and building against the photo establishes the match; that’s what the little diagram represents. The place’s photos and video then reveal Julie Useni Hall in Abuja. I didn’t solve this challenge myself.
+I’m following Dam Coffee’s published walkthrough here. Landscape and image-search leads suggest Africa as an initial hypothesis; that still leaves a large search area.
 
-SLIDE 8: Those were two kinds of task
+SLIDE 8: Driving side and plate shape
 CLICK 7: press RIGHT once.
+
+The driving side and the white rectangular plate help narrow the possibilities. Many countries still fit, so neither observation establishes the location.
+
+SLIDE 9: Inspect the plate markings
+CLICK 8: press RIGHT once.
+
+The author used Pixlr to inspect the green plate markings, which suggested Nigeria. The photograph on this slide stays unchanged, and Nigeria is still a hypothesis to check.
+
+SLIDE 10: Turn the scene into a map query
+CLICK 9: press RIGHT once.
+
+Now the scene becomes a map query: a four-lane road, a bridge and nearby buildings. The author used Bellingcat’s OpenStreetMap Search tool to look for that combination. This drawing is a schematic of the features.
+
+SLIDE 11: How did Abuja enter the search?
+CLICK 10: press RIGHT once.
+
+The next decision is where to search. The author tried city-sized areas in Nigeria and reached Abuja. The write-up doesn’t list the earlier cities or their exact order.
+
+SLIDE 12: Two nearby results
+CLICK 11: press RIGHT once.
+
+The Abuja search returned two nearby candidates along Shehu Yar’Adua Way. Neither was the exact site, but they gave the author an area to inspect. Their positions in this diagram are schematic.
+
+SLIDE 13: Check the area around the results
+CLICK 12: press RIGHT once.
+
+From those candidates, the author moved west to a matching bridge, then looked south for the building. Comparing against Street View established the bridge-and-building match. A retrieval hit alone didn’t establish it; the local comparison did.
+
+SLIDE 14: Find the name on the wall
+CLICK 13: press RIGHT once.
+
+The place record was Daughters of Abraham Foundation. Its Google Maps photos and video offered clearer views of the building. That gave the author another way to read the name on the wall.
+
+SLIDE 15: Julie Useni Hall
+CLICK 14: press RIGHT once.
+
+Those views revealed Julie Useni Hall, giving the challenge answer Julie Useni. That completes the published route from the roadside photo to the name. I’m explaining the author’s solution, rather than reporting an agent result.
+
+SLIDE 16: Those were two kinds of task
+CLICK 15: press RIGHT once.
 
 Those were two kinds of task, and there are many more. Alongside identifying objects and locating photos or videos, investigators work out when footage was filmed and check whether it supports its claimed context. They also follow accounts, domains or companies across sites, and reconstruct movements or events. The toolkit and framework links collect resources, while the Berkeley Protocol describes the broader investigation process.
 
-SLIDE 9: Where it is used
-CLICK 8: press RIGHT once.
+SLIDE 17: Where it is used
+CLICK 16: press RIGHT once.
 
 Storyful verifies footage against maps and street-level views. Amnesty’s Evidence Lab supports human rights investigations through digital verification and remote sensing. Bellingcat reconstructed movements in the MH17 investigation from public photos and video. These are practitioner applications, and they’re why I think it’s worth exploring where an agent could contribute.
 
-SLIDE 10: Geolocation is already being tested
-CLICK 9: press RIGHT once.
+SLIDE 18: Geolocation is already being tested
+CLICK 17: press RIGHT once.
 
 The top screenshot is Bellingcat’s June 2025 article asking whether LLMs have mastered geolocation: they tested twenty models on twenty-five unpublished photos, and every model made some wrong guesses. Below is Anthropic’s September 2026 article on intelligence-targeting and conventional-weapons capabilities. The part relevant here tests photo geolocation without search tools. These are different evaluations, so I wouldn’t compare their scores directly.
 
-SLIDE 11: Where entity matching fits
-CLICK 10: press RIGHT once.
+SLIDE 19: Where entity matching fits
+CLICK 18: press RIGHT once.
 
 The outer box is an investigation: collecting material, preserving it, verifying sources and analysing the evidence. Inside that, identifying a painting or ship can involve searching a clue, finding a candidate entity and then searching that name. That’s one place your iterative search could contribute. We could start with this part and learn what else the task needs.
 
-SLIDE 12: The entity-matching agent
-CLICK 11: press RIGHT once.
+SLIDE 20: The entity-matching agent
+CLICK 19: press RIGHT once.
 
 Your released agent already follows this pattern: make an initial retrieval call, read the result and let the model choose another query. The return arrow means another retrieval, until it stops or reaches the search cap. A later stage extracts an English Wikipedia title. I pinned the implementation to commit 9a63c316 and adapted the search loop for the pilot.
 
-SLIDE 13: What I ran
-CLICK 12: press RIGHT once.
+SLIDE 21: What I ran
+CLICK 20: press RIGHT once.
 
 I used the upstream function shown here, layer one agentic once, with Qwen3-VL-8B-Instruct and search caps of one, four and twelve. Retrieval was SQLite FTS5, a local text-search index over twenty-two prepared source digests. I kept the iterative tool-response loop, adapted the prompt, retrieval and structured output, and left out the original Wikipedia scoring. The setup and results are linked below.
 
-SLIDE 14: One run: OI-003
-CLICK 13: press RIGHT once.
+SLIDE 22: One run: OI-003
+CLICK 21: press RIGHT once.
 
 Here’s OI-zero-zero-three at cap four: it searched for A Dutch Courtyard through the museum digest, followed the Duveen records through the dealer digest, then found the 1924 inventory in the archive digest. That returned about 250 items and notes mentioning London, and all six answer fields matched the supplied digests. I haven’t checked the original archive. The painting is context here; the execution log doesn’t establish that the model received an image.
 
-SLIDE 15: More searching helped, in a small pilot
-CLICK 14: press RIGHT once.
+SLIDE 23: More searching helped, in a small pilot
+CLICK 22: press RIGHT once.
 
 Across five tasks and twenty-two digests, I ran fifteen executions. At cap one, four out of five outputs were valid, and twenty-three of thirty-one fields matched. At cap four, that became five out of five and thirty-one of thirty-one, and cap twelve gave the same results. More searching helped in this small setup, but these numbers measure digest agreement; we haven’t evaluated live-web performance or compared against a baseline agent.
 
-SLIDE 16: How we could run the study
-CLICK 15: press RIGHT once.
+SLIDE 24: How we could run the study
+CLICK 23: press RIGHT once.
 
 I’d start by choosing a small subset of tasks and curating difficult cases that need several steps across sources, with checked answers and some cases held back from development. Then we’d give agents web access and record their evidence, dead ends and cost. Finally, we’d compare your loop with other agents, including a single-pass baseline, under the same tools, models and budgets. That’s the first study I’d like to work through together.
 
