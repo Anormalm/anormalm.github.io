@@ -21,7 +21,7 @@ $('#hard-run-form').addEventListener('submit',async e=>{e.preventDefault();if(ru
  finally{running=false;$('#run-stop').disabled=true;document.querySelectorAll('form fieldset').forEach(el=>el.disabled=false);$('#cost-consent').disabled=false;$('#cost-consent').checked=false;plan();}
 });
 $('#run-stop').addEventListener('click',()=>{controller?.abort();$('#run-stop').disabled=true;$('#run-status').textContent='Stopping. Accepted requests may still be billed by the service.';});
-$('#run-export').addEventListener('click',()=>{if(report)download('groundlm-hard-v1-my-run.json',JSON.stringify(report,null,2));});
+$('#run-export').addEventListener('click',()=>{if(report)download('misgraph-hard-v1-my-run.json',JSON.stringify(report,null,2));});
 for(const id of ['profile','run-task','run-size','cost-consent'])$('#'+id).addEventListener('change',plan);
 window.addEventListener('pagehide',()=>{controller?.abort();$('#key').value='';});
 $('#run-task').innerHTML='<option value="all">All six tasks</option>'+Object.entries(TASKS).map(([k,v])=>`<option value="${k}">${esc(v)}</option>`).join('');

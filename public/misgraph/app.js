@@ -11,7 +11,7 @@ if($('#result-rows')){
  const render=()=>{const key=$('#sort').value;const sorted=[...models].sort((a,b)=>(a[key]-b[key])*(key==='accuracy'||key==='cfm'?-1:1));
  $('#result-rows').innerHTML=sorted.map(m=>'<tr><th scope="row"><span class="model-name">'+m.name+'</span><span class="model-family">'+m.family+'</span></th>'+keys.map(k=>{const vals=models.map(x=>x[k]),high=['accuracy','cfm'].includes(k),best=high?Math.max(...vals):Math.min(...vals),bad=high?100-m[k]:m[k],maxBad=Math.max(...vals.map(x=>high?100-x:x)),alpha=.045+.26*bad/maxBad;return '<td><span class="result-value" style="background:rgba('+(['gap','cfm'].includes(k)?'179,78,38':'9,46,70')+','+alpha+')">'+(m[k]===best?'<b>':'')+m[k].toFixed(1)+(m[k]===best?'</b>':'')+'</span></td>';}).join('')+'</tr>').join('');};
  $('#sort').addEventListener('change',render);render();
- $('#download-results').addEventListener('click',()=>download('groundlm-reported-results.csv',['model,accuracy_percent,format_instability_percent,order_sensitivity_percent,semantic_gap_points,distractor_susceptibility_percent,conditional_faithfulness_percent',...models.map(m=>[m.name,...keys.map(k=>m[k])].join(','))].join('\n'),'text/csv'));
+ $('#download-results').addEventListener('click',()=>download('misgraph-reported-results.csv',['model,accuracy_percent,format_instability_percent,order_sensitivity_percent,semantic_gap_points,distractor_susceptibility_percent,conditional_faithfulness_percent',...models.map(m=>[m.name,...keys.map(k=>m[k])].join(','))].join('\n'),'text/csv'));
 }
 if($('#live-graph')){
  let semantic=false;let a=0,b=4;
@@ -37,5 +37,5 @@ if($('#evaluate')){
  $('#evaluation-output').innerHTML=(illustrative?'<p class="note">Illustrative example (not model benchmark results)</p>':'')+'<div class="evaluation-stats">'+stats.map(([l,v,c])=>`<div class="${c}"><span>${l}</span><strong>${v}</strong></div>`).join('')+'</div>'+`<p class="eval-counts">${report.retained} / ${report.correct} initially correct answers retained.<br>Consistency uses ${report.neutral_pairs} neutral pairs and ${report.semantic_pairs} semantic pairs.<br>${report.queries_with_unclear} queries contain at least one unclear prediction.</p>`+'<div class="table-scroll"><table class="task-results"><caption>Per-task results from uploaded parsed predictions.</caption><thead><tr><th>Task</th><th>Queries</th><th>Accuracy</th><th>CF<sub>M</sub></th></tr></thead><tbody>'+Object.entries(report.per_task).map(([t,s])=>`<tr><th scope="row">${t.replaceAll('_',' ')}</th><td>${s.queries}</td><td>${percent(s.accuracy)}</td><td>${percent(s.cfm)}</td></tr>`).join('')+'</tbody></table></div>';
  $('#export-evaluation').disabled=false;
  }catch(e){error(e instanceof SyntaxError?'Invalid JSON. Check quotes, commas and brackets.':e.message);}});
- $('#export-evaluation').addEventListener('click',()=>{if(report)download('groundlm-paired-audit.json',JSON.stringify(report,null,2));});
+ $('#export-evaluation').addEventListener('click',()=>{if(report)download('misgraph-paired-audit.json',JSON.stringify(report,null,2));});
 }

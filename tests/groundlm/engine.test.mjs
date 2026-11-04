@@ -4,7 +4,7 @@ process.chdir(fileURLToPath(new URL('../..',import.meta.url)));
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
-import {evaluate,sample,answer,labels,serialize,shortestPath,models} from '../../public/groundlm/engine.js';
+import {evaluate,sample,answer,labels,serialize,shortestPath,models} from '../../public/misgraph/engine.js';
 
 test('paired metrics use correct denominators and count unclear survival as failure',()=>{
  const r=evaluate(sample);
@@ -45,15 +45,15 @@ test('degree-ranked semantic labels remap both endpoints, structure stays intact
  assert.ok(serialize({format:'adjacency'}).includes('X3: X2, X1, X4'));
 });
 test('reported results match checked-in downloads and four selected models',()=>{
- assert.deepEqual(JSON.parse(fs.readFileSync('public/groundlm/downloads/reported-results.json')).models,models);
+ assert.deepEqual(JSON.parse(fs.readFileSync('public/misgraph/downloads/reported-results.json')).models,models);
  assert.equal(models.length,4);assert.equal(models[0].cfm,72.9);assert.equal(models[3].gap,6.1);
 });
 test('all local HTML links, assets and fragment targets resolve',()=>{
- const files=fs.readdirSync('public/groundlm').filter(f=>f.endsWith('.html'));assert.ok(files.includes('index.html')&&files.includes('run.html')&&files.includes('methodology.html')&&files.includes('paper-results.html'));
- for(const f of files){const html=fs.readFileSync('public/groundlm/'+f,'utf8');assert.ok(html.includes('id="main"'));
+ const files=fs.readdirSync('public/misgraph').filter(f=>f.endsWith('.html'));assert.ok(files.includes('index.html')&&files.includes('run.html')&&files.includes('methodology.html')&&files.includes('paper-results.html'));
+ for(const f of files){const html=fs.readFileSync('public/misgraph/'+f,'utf8');assert.ok(html.includes('id="main"'));
   for(const [,url] of html.matchAll(/(?:href|src)="([^"]+)"/g)){
    if(/^(?:https?:|mailto:|data:)/.test(url))continue;
-   const [targetWithQuery,hash]=url.split('#'),target=targetWithQuery.split('?')[0],dest=path.join('public/groundlm',target||f);assert.ok(fs.existsSync(dest),`${f}: ${url}`);
+   const [targetWithQuery,hash]=url.split('#'),target=targetWithQuery.split('?')[0],dest=path.join('public/misgraph',target||f);assert.ok(fs.existsSync(dest),`${f}: ${url}`);
    if(hash){const content=fs.readFileSync(dest,'utf8');assert.ok(content.includes(`id="${hash}"`),`${f}: missing ${hash}`);}
   }
  }

@@ -2,10 +2,10 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {fileURLToPath} from 'node:url';
-import {summarize,selectRecords} from '../../public/groundlm/leaderboard-core.js';
+import {summarize,selectRecords} from '../../public/misgraph/leaderboard-core.js';
 process.chdir(fileURLToPath(new URL('../..',import.meta.url)));
-const data=JSON.parse(fs.readFileSync('public/groundlm/data/family-pilot/leaderboard.json'));
-const reference=JSON.parse(fs.readFileSync('public/groundlm/downloads/family-pilot/summary.json'));
+const data=JSON.parse(fs.readFileSync('public/misgraph/data/family-pilot/leaderboard.json'));
+const reference=JSON.parse(fs.readFileSync('public/misgraph/downloads/family-pilot/summary.json'));
 
 test('all 21 tested families are visible with correct source counts and preserved failures',()=>{
  assert.equal(data.models.length,21);assert.equal(data.records.length,504);assert.equal(new Set(data.records.map(r=>r.case_id)).size,6);
@@ -20,7 +20,7 @@ test('pilot renaming denominators and scores match the original analyzer for eve
  for(const m of data.models){const s=summarize(selectRecords(data.records,{model:m.id}));for(const [v,c] of Object.entries(conditions)){const r=m.renaming[c];assert.equal(s.agreement[v].value,r.consistency);assert.equal(s.agreement[v].n,r.pairs);assert.equal(s.survival[v].value,r.conditional_survival);assert.equal(s.survival[v].n,r.initially_correct_pairs);}}
 });
 test('pilot task and size filters preserve their own scope and never include Hard v1 observations',()=>{
- const hard=JSON.parse(fs.readFileSync('public/groundlm/data/hard-v1/leaderboard.json')),hardCases=new Set(hard.records.map(r=>r.case_id));
+ const hard=JSON.parse(fs.readFileSync('public/misgraph/data/hard-v1/leaderboard.json')),hardCases=new Set(hard.records.map(r=>r.case_id));
  assert.ok(data.records.every(r=>!hardCases.has(r.case_id)));assert.equal(new Set(data.records.map(r=>r.variant)).size,4);
  for(const m of data.models)for(const task of data.tasks)for(const n of [32,64]){const s=summarize(selectRecords(data.records,{model:m.id,task,size:String(n)}));assert.equal(s.total,4);assert.equal(s.graphs,1);}
 });

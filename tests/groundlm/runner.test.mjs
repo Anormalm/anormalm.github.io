@@ -5,9 +5,9 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
 import http from 'node:http';
-import {selectGraphs,makePlan,queryKey,parseAnswer,validateEndpoint,requestOptions,complete,runPlan,scoreRun,DIAGNOSTICS} from '../../public/groundlm/runner-core.js';
-const manifest=JSON.parse(fs.readFileSync('public/groundlm/data/benchmark/manifest.json'));
-const all=manifest.graphs.flatMap(g=>JSON.parse(fs.readFileSync('public/groundlm/data/benchmark/'+g.file)));
+import {selectGraphs,makePlan,queryKey,parseAnswer,validateEndpoint,requestOptions,complete,runPlan,scoreRun,DIAGNOSTICS} from '../../public/misgraph/runner-core.js';
+const manifest=JSON.parse(fs.readFileSync('public/misgraph/data/benchmark/manifest.json'));
+const all=manifest.graphs.flatMap(g=>JSON.parse(fs.readFileSync('public/misgraph/data/benchmark/'+g.file)));
 const tasks=['connectivity','shortest_path','triangle_detection','common_neighbor'];
 const fixtures=profile=>{const ids=new Set(selectGraphs(manifest,profile).map(g=>g.id));return all.filter(r=>ids.has(r.graph_id));};
 const plan=(profile='smoke',diagnostics=['isomorphism_consistency'])=>makePlan(fixtures(profile),{profile,tasks,diagnostics});
@@ -17,7 +17,7 @@ const response=text=>new Response(JSON.stringify({choices:[{message:{content:tex
 
 test('all 100 fixtures match hashes and all scope counts are exact',()=>{
  assert.equal(manifest.graphs.length,100);assert.equal(all.length,16800);
- for(const g of manifest.graphs)assert.equal(crypto.createHash('sha256').update(fs.readFileSync('public/groundlm/data/benchmark/'+g.file)).digest('hex'),g.sha256);
+ for(const g of manifest.graphs)assert.equal(crypto.createHash('sha256').update(fs.readFileSync('public/misgraph/data/benchmark/'+g.file)).digest('hex'),g.sha256);
  for(const [profile,ic,total] of [['smoke',60,280],['pilot',180,840],['full',3600,16800]]){assert.equal(plan(profile).length,ic);assert.equal(plan(profile,DIAGNOSTICS).length,total);}
  assert.equal(new Set(plan('full').map(queryKey)).size,1200);
  assert.equal(makePlan(fixtures('smoke'),{profile:'smoke',tasks:['shortest_path'],diagnostics:['isomorphism_consistency']}).length,15);

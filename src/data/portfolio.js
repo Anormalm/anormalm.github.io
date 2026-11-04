@@ -220,7 +220,7 @@ export const publications = [
   },
   {
     title: 'Graph Evidence Is Not Text Evidence: Serialization Faithfulness as Structural Invariance in Graph-Grounded Language Models',
-    link: '/groundlm/',
+    link: '/misgraph/',
     venue: 'EMNLP 2026 GroundLM Workshop · Archival short paper · Poster',
   },
   {

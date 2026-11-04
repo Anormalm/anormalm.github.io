@@ -1,12 +1,12 @@
-# GroundLM benchmark
+# MisGraph benchmark
 
-Public URL: https://anormalm.com/groundlm/
-Runner: https://anormalm.com/groundlm/evaluate.html
+Public URL: https://anormalm.com/misgraph/
+Runner: https://anormalm.com/misgraph/evaluate.html
 
 ## Hosting
 
-The complete static website lives in `public/groundlm/`. Vite copies this folder
-unchanged into `dist/groundlm/`, alongside the existing portfolio. Relative links
+The complete static website lives in `public/misgraph/`. Vite copies this folder
+unchanged into `dist/misgraph/`, alongside the existing portfolio. Relative links
 and data fetches work under this subdirectory. The CV publication links to it.
 
 The existing GitHub Pages workflow runs the benchmark tests, builds the portfolio,
@@ -21,7 +21,7 @@ npm run build
 npm run preview
 ```
 
-Visit `/groundlm/` on the preview server. Source provenance and the paper are
+Visit `/misgraph/` on the preview server. Source provenance and the paper are
 available through the benchmark's Reproduce page.
 
 ## Visitor-owned inference
@@ -40,7 +40,7 @@ runs send 16,800 requests. No requests occur before the visitor clicks Test or R
 
 ## Updating and checking
 
-Copy the benchmark's static distribution into `public/groundlm/`; keep tests in
+Copy the benchmark's static distribution into `public/misgraph/`; keep tests in
 `tests/groundlm/` in sync. The fixture manifest records hashes and generator
 versions. Never put API keys, `.env` files, local hosting credentials or private
 run outputs in `public/`.
@@ -148,3 +148,13 @@ metadata. Resources supports keyboard Escape and outside-click dismissal;
 visible focus and reduced-motion rules are provided. The paper pages share the
 same type and palette. Benchmark fixtures, raw archives, metrics, request settings
 and active calibration collectors are outside the scope of this visual change.
+
+## MisGraph public name
+
+MisGraph is the benchmark name; GroundLM remains the workshop citation.
+The canonical site is `/misgraph/`. `scripts/build-benchmark-alias.mjs` copies
+its assets into `/groundlm/` at build time and replaces the old HTML pages
+with redirects, preserving query strings, fragments and direct download links.
+Frozen data, protocol identifiers, archived filenames and hashes are unchanged.
+
+Run `npm run build` before previewing the legacy redirects.
