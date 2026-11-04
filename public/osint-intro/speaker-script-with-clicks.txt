@@ -86,48 +86,53 @@ CLICK 15: press RIGHT once.
 
 Those views revealed Julie Useni Hall, giving the challenge answer Julie Useni. That completes the published route from the roadside photo to the name. I’m explaining the author’s solution, rather than reporting an agent result.
 
-SLIDE 17: Those were two kinds of task
+SLIDE 17: The location in Street View
 CLICK 16: press RIGHT once.
+
+Here is the Street View reference at 9.078037, 7.431982. The supplied screenshot shows Shehu Yar’Adua Way in Abuja and is dated June 2022. This gives us a street-level view to compare with the challenge photo. The coordinates and screenshot were supplied for this presentation.
+
+SLIDE 18: Those were two kinds of task
+CLICK 17: press RIGHT once.
 
 Those were two kinds of task, and there are many more. Alongside identifying objects and locating photos or videos, investigators work out when footage was filmed and check whether it supports its claimed context. They also follow accounts, domains or companies across sites, and reconstruct movements or events. The toolkit and framework links collect resources, while the Berkeley Protocol describes the broader investigation process.
 
-SLIDE 18: Where it is used
-CLICK 17: press RIGHT once.
+SLIDE 19: Where it is used
+CLICK 18: press RIGHT once.
 
 Storyful verifies footage against maps and street-level views. Amnesty’s Evidence Lab supports human rights investigations through digital verification and remote sensing. Bellingcat reconstructed movements in the MH17 investigation from public photos and video. These are practitioner applications, and they’re why I think it’s worth exploring where an agent could contribute.
 
-SLIDE 19: Geolocation is already being tested
-CLICK 18: press RIGHT once.
+SLIDE 20: Geolocation is already being tested
+CLICK 19: press RIGHT once.
 
 The top screenshot is Bellingcat’s June 2025 article asking whether LLMs have mastered geolocation: they tested twenty models on twenty-five unpublished photos, and every model made some wrong guesses. Below is Anthropic’s September 2026 article on intelligence-targeting and conventional-weapons capabilities. The part relevant here tests photo geolocation without search tools. These are different evaluations, so I wouldn’t compare their scores directly.
 
-SLIDE 20: Where entity matching fits
-CLICK 19: press RIGHT once.
+SLIDE 21: Where entity matching fits
+CLICK 20: press RIGHT once.
 
 The outer box is an investigation: collecting material, preserving it, verifying sources and analysing the evidence. Inside that, identifying a painting or ship can involve searching a clue, finding a candidate entity and then searching that name. That’s one place your iterative search could contribute. We could start with this part and learn what else the task needs.
 
-SLIDE 21: The entity-matching agent
-CLICK 20: press RIGHT once.
+SLIDE 22: The entity-matching agent
+CLICK 21: press RIGHT once.
 
 Your released agent already follows this pattern: make an initial retrieval call, read the result and let the model choose another query. The return arrow means another retrieval, until it stops or reaches the search cap. A later stage extracts an English Wikipedia title. I pinned the implementation to commit 9a63c316 and adapted the search loop for the pilot.
 
-SLIDE 22: What I ran
-CLICK 21: press RIGHT once.
+SLIDE 23: What I ran
+CLICK 22: press RIGHT once.
 
 I used the upstream function shown here, layer one agentic once, with Qwen3-VL-8B-Instruct and search caps of one, four and twelve. Retrieval was SQLite FTS5, a local text-search index over twenty-two prepared source digests. I kept the iterative tool-response loop, adapted the prompt, retrieval and structured output, and left out the original Wikipedia scoring. The setup and results are linked below.
 
-SLIDE 23: One run: OI-003
-CLICK 22: press RIGHT once.
+SLIDE 24: One run: OI-003
+CLICK 23: press RIGHT once.
 
 Here’s OI-zero-zero-three at cap four: it searched for A Dutch Courtyard through the museum digest, followed the Duveen records through the dealer digest, then found the 1924 inventory in the archive digest. That returned about 250 items and notes mentioning London, and all six answer fields matched the supplied digests. I haven’t checked the original archive. The painting is context here; the execution log doesn’t establish that the model received an image.
 
-SLIDE 24: More searching helped, in a small pilot
-CLICK 23: press RIGHT once.
+SLIDE 25: More searching helped, in a small pilot
+CLICK 24: press RIGHT once.
 
 Across five tasks and twenty-two digests, I ran fifteen executions. At cap one, four out of five outputs were valid, and twenty-three of thirty-one fields matched. At cap four, that became five out of five and thirty-one of thirty-one, and cap twelve gave the same results. More searching helped in this small setup, but these numbers measure digest agreement; we haven’t evaluated live-web performance or compared against a baseline agent.
 
-SLIDE 25: How we could run the study
-CLICK 24: press RIGHT once.
+SLIDE 26: How we could run the study
+CLICK 25: press RIGHT once.
 
 I’d start by choosing a small subset of tasks and curating difficult cases that need several steps across sources, with checked answers and some cases held back from development. Then we’d give agents web access and record their evidence, dead ends and cost. Finally, we’d compare your loop with other agents, including a single-pass baseline, under the same tools, models and budgets. That’s the first study I’d like to work through together.
 
