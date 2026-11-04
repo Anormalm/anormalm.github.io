@@ -16,9 +16,9 @@ Sources: anormalm.com — https://anormalm.com/
 
 ## 3. What is OSINT?
 
-OSINT means finding things out from public sources instead of secret ones. The question in the middle could lead us to photos, maps, news, public records or archives; the difficulty is deciding which sources help and whether they support the answer. It includes offline public material too, though I’m focusing on the web. The Bellingcat toolkit linked below collects tools practitioners use.
+OSINT stands for Open Source Intelligence: O for Open, S for Source, and INT for Intelligence. The report linked below describes intelligence produced from publicly available information to address a specific intelligence need; in plain terms, we collect and analyse public information to answer a question. That can involve photos, maps, news, public records or archives, including offline material, though this talk focuses on the web. OSINT Framework, linked alongside the report, is a directory of tools and resources we can use.
 
-Sources: Bellingcat Online Investigation Toolkit — https://bellingcat.gitbook.io/toolkit
+Sources: Definition: Ethical Frameworks in Open-Source Intelligence · p. 5 — https://www.dhs.gov/sites/default/files/2022-09/Ethical%20Frameworks%20in%20OSINT%20Final.pdf#page=5; Tools: OSINT Framework — https://osintframework.com/
 
 ## 4. A painting without a caption
 
