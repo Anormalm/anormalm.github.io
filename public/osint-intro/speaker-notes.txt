@@ -2,98 +2,98 @@
 
 16 slides. Right/Left: navigate. Space: pause or replay. F: fullscreen. S: speaker view.
 
-## 1. Following clues on the open web
+## 1. Lifan Hu
 
-Thanks for making time to chat. I wanted to show you a small experiment I ran with your search loop, and discuss something we could try together.
+Hi Parin! I’m Lifan Hu, from the Department of Computer Science at NUS. It was great meeting you at EMNLP. Thanks for making time to chat; I wanted to show you something I tried with your search loop.
 
 Sources: Research proposal / introduction.
 
 ## 2. Lifan Hu
 
-Hi Parin! I’m Lifan, a Computer Engineering student at NUS, and it was great meeting you at EMNLP. I’m currently doing research on graph-based reasoning, agentic systems and trustworthy AI, with experience in graph ML and evidence acquisition. I’ve also been exploring OSINT, particularly entity resolution and autonomous investigation. I’d love to explore research directions together around more general-purpose OSINT agents, starting with how we could carry out a focused study.
+I’m currently working on graph-based reasoning, agentic systems and trustworthy AI, with experience in graph ML and evidence acquisition. I’ve also been exploring OSINT, particularly entity resolution and autonomous investigation. I think it would be fun to explore this together and see how your work could contribute to an active community of investigators. Today, I’d like to focus on how we could carry out a first study.
 
 Sources: anormalm.com — https://anormalm.com/
 
 ## 3. What is OSINT?
 
-OSINT means finding things out from sources anyone can access, such as photos, maps, news, records and archives. Public doesn’t mean easy to find or easy to interpret; you still have to work out which sources answer your question. It also includes offline public material, though I’m focusing on the web today.
+OSINT means finding things out from public sources instead of secret ones. The question in the middle could lead us to photos, maps, news, public records or archives; the difficulty is deciding which sources help and whether they support the answer. It includes offline public material too, though I’m focusing on the web. The Bellingcat toolkit linked below collects tools practitioners use.
 
 Sources: Bellingcat Online Investigation Toolkit — https://bellingcat.gitbook.io/toolkit
 
 ## 4. A painting without a caption
 
-Suppose I find this image without a useful caption and want to identify the artist and the museum that owns it. What would you search first? I could describe what I see, or try a reverse-image search.
+Here’s the first kind of task: identifying an artwork from an image. Suppose this picture turns up without a useful caption, and I want to know who painted it and where it is now. What would you search first?
 
 Sources: Image: National Gallery of Art — https://www.nga.gov/artworks/63-dutch-courtyard
 
 ## 5. Check the museum’s own record
 
-I can search a description of the scene or use the image to find a candidate. A repost that looks right isn’t proof, so I’d go to the museum’s own page. That record identifies A Dutch Courtyard by Pieter de Hooch at the National Gallery of Art in Washington.
+We could describe the courtyard scene or try a reverse-image search to find a candidate. Blue marks a search action; the candidate starts in amber and turns green when the museum record supports it. That record identifies A Dutch Courtyard by Pieter de Hooch, at the National Gallery of Art in Washington, with the accession number shown in the chip. This is an illustrative route.
 
 Sources: National Gallery of Art · 1937.1.56 — https://www.nga.gov/artworks/63-dutch-courtyard
 
 ## 6. Where was this taken?
 
-This is the original Bellingcat challenge photo reproduced by Tristan Jenkinson. The challenge asks for the name on the building, which first means working out where the photo was taken. I’ll use Dam Coffee’s published solution to show the route.
+This is a different kind of task: geolocating a photo. It’s a Bellingcat challenge image reproduced by Tristan Jenkinson, and the original question asks for the name on the building. First we need to locate the scene. What would you use as a clue here?
 
 Sources: Photo: Lucy / Bellingcat, reproduced by Tristan Jenkinson — https://ediscoverychannel.com/2024/12/24/bellingcat-challenge-week-3-writeup/
 
 ## 7. From the photo to the exact spot
 
-Dam Coffee used the unclear plate markings to form a Nigeria hypothesis, then searched cities with OpenStreetMap; the write-up names Abuja but doesn’t list the earlier cities. The returned locations were nearby, and the bridge and building comparison established the match. The place’s photos and video then revealed Julie Useni Hall. I’m explaining that published route here; I didn’t solve the challenge myself.
+This follows Dam Coffee’s published walkthrough: unclear plate markings suggest Nigeria, then city searches using OpenStreetMap lead to Abuja, the city named in the write-up. A map hit gives a candidate location, and comparing the bridge and building against the photo establishes the match; that’s what the little diagram represents. The place’s photos and video then reveal Julie Useni Hall in Abuja. I didn’t solve this challenge myself.
 
 Sources: Dam Coffee · Highway to the Unknown · 29 March 2025 — https://medium.com/@dam_coffee/bellingcat-challenge-highway-to-the-unknown-f9d2d1447593
 
 ## 8. Those were two kinds of task
 
-Those examples cover identifying an artwork and geolocating a photo. Other tasks include timing footage, checking its claimed context, tracing entities across sites and reconstructing events. OSINT also involves collecting and preserving material, checking reliability and analysing what it means; the Berkeley Protocol describes those parts of an investigation.
+Those were two kinds of task, and there are many more. Alongside identifying objects and locating photos or videos, investigators work out when footage was filmed and check whether it supports its claimed context. They also follow accounts, domains or companies across sites, and reconstruct movements or events. The toolkit and framework links collect resources, while the Berkeley Protocol describes the broader investigation process.
 
 Sources: Bellingcat Toolkit — https://bellingcat.gitbook.io/toolkit; OSINT Framework — https://osintframework.com/; Berkeley Protocol · investigation process — https://humanrights.berkeley.edu/wp-content/uploads/2024/02/Berkeley-Protocol.pdf
 
 ## 9. Where it is used
 
-Storyful verifies footage by checking it against maps and street-level views. Amnesty’s digital verification and remote sensing work supports human rights investigations. Bellingcat reconstructed movements in the MH17 investigation from public photos and video. These are applications by practitioners, rather than results from an agent experiment.
+Storyful verifies footage against maps and street-level views. Amnesty’s Evidence Lab supports human rights investigations through digital verification and remote sensing. Bellingcat reconstructed movements in the MH17 investigation from public photos and video. These are practitioner applications, and they’re why I think it’s worth exploring where an agent could contribute.
 
 Sources: Storyful geolocation — https://storyful.com/news/verified-by-storyful/inside-storyful-verification-workflow-geolocation/; Amnesty Evidence Lab — https://citizenevidence.org/; Bellingcat MH17 report — https://www.bellingcat.com/news/europe/2015/10/08/mh17-the-open-source-evidence/
 
 ## 10. Geolocation is already being tested
 
-Bellingcat tested 20 models on 25 unpublished photos in 2025; every model made some wrong guesses. Anthropic’s 2026 evaluation also tests photo geolocation, using images without search tools, while its text-geolocation test allows constrained search. I see these as reasons to evaluate particular capabilities carefully. Our pilot covers a much smaller piece: matching and extracting information from prepared digests.
+The top screenshot is Bellingcat’s June 2025 article asking whether LLMs have mastered geolocation: they tested twenty models on twenty-five unpublished photos, and every model made some wrong guesses. Below is Anthropic’s September 2026 article on intelligence-targeting and conventional-weapons capabilities. The part relevant here tests photo geolocation without search tools. These are different evaluations, so I wouldn’t compare their scores directly.
 
 Sources: Bellingcat · Have LLMs Finally Mastered Geolocation? — https://www.bellingcat.com/resources/how-tos/2025/06/06/have-llms-finally-mastered-geolocation/; Anthropic · capability evaluations — https://www.anthropic.com/research/intelligence-targeting-conventional-weapons-capabilities
 
 ## 11. Where entity matching fits
 
-Matching a painting or ship to a record is one operation inside some OSINT tasks. The broader investigation still involves collecting and preserving material, checking sources and analysing the evidence. I’m borrowing the iterative search pattern for that narrow part, and the pilot tests an even more restricted version using prepared digests.
+The outer box is an investigation: collecting material, preserving it, verifying sources and analysing the evidence. Inside that, identifying a painting or ship can involve searching a clue, finding a candidate entity and then searching that name. That’s one place your iterative search could contribute. We could start with this part and learn what else the task needs.
 
 Sources: Berkeley Protocol · investigation process — https://humanrights.berkeley.edu/wp-content/uploads/2024/02/Berkeley-Protocol.pdf
 
 ## 12. The entity-matching agent
 
-Your released agent addresses entity matching: it uses retrieval to connect an entity to an English Wikipedia title. The model can read a result and choose follow-up queries until it stops or reaches the cap, and a later stage extracts the title. That search loop is the part I adapted, rather than a complete investigation system. I used the release pinned at commit 9a63c316.
+Your released agent already follows this pattern: make an initial retrieval call, read the result and let the model choose another query. The return arrow means another retrieval, until it stops or reaches the search cap. A later stage extracts an English Wikipedia title. I pinned the implementation to commit 9a63c316 and adapted the search loop for the pilot.
 
 Sources: Released implementation · 9a63c316 — https://github.com/neulab/think-before-you-link/tree/9a63c31673d404f5107307539970bdebbea595ca
 
 ## 13. What I ran
 
-I kept the upstream _layer1_agentic_once tool-response loop and ran Qwen3-VL-8B-Instruct with search caps of 1, 4 and 12. Retrieval used SQLite FTS5 over 22 prepared source digests. I adapted the prompt, retrieval and structured output, and omitted the original Wikipedia scoring.
+I used the upstream function shown here, layer one agentic once, with Qwen3-VL-8B-Instruct and search caps of one, four and twelve. Retrieval was SQLite FTS5, a local text-search index over twenty-two prepared source digests. I kept the iterative tool-response loop, adapted the prompt, retrieval and structured output, and left out the original Wikipedia scoring. The setup and results are linked below.
 
 Sources: Pinned upstream implementation — https://github.com/neulab/think-before-you-link/tree/9a63c31673d404f5107307539970bdebbea595ca; Pilot setup and results — pilot-results.txt
 
 ## 14. One run: OI-003
 
-This run made three searches: identify the painting, follow the Duveen records, then find the 1924 inventory digest. The digest returned about 250 items and notes mentioning London, and all six answer fields match the supplied digests. I haven’t checked the original archive. The painting is shown for context; the log doesn’t establish that the model received an image.
+Here’s OI-zero-zero-three at cap four: it searched for A Dutch Courtyard through the museum digest, followed the Duveen records through the dealer digest, then found the 1924 inventory in the archive digest. That returned about 250 items and notes mentioning London, and all six answer fields matched the supplied digests. I haven’t checked the original archive. The painting is context here; the execution log doesn’t establish that the model received an image.
 
 Sources: OI-003 · cap 4 · execution record — oi-003.json
 
 ## 15. More searching helped, in a small pilot
 
-At cap 1, four of the five outputs were valid and 23 of 31 fields matched the digests. At caps 4 and 12, all five outputs were valid and all 31 fields matched; those two settings returned the same answers. This is a small pilot measuring digest agreement, with no live-web evaluation or baseline agent.
+Across five tasks and twenty-two digests, I ran fifteen executions. At cap one, four out of five outputs were valid, and twenty-three of thirty-one fields matched. At cap four, that became five out of five and thirty-one of thirty-one, and cap twelve gave the same results. More searching helped in this small setup, but these numbers measure digest agreement; we haven’t evaluated live-web performance or compared against a baseline agent.
 
 Sources: Pilot results — pilot-results.txt
 
 ## 16. How we could run the study
 
-I’d like to choose specific task families and curate hard cases with adjudicated answers and held-out cases. We’d give agents web access and log evidence, dead ends and cost. We could compare your loop with other agents and a single-pass baseline under the same tools, models and budgets, reporting each task family separately.
+I’d start by choosing a small subset of tasks and curating difficult cases that need several steps across sources, with checked answers and some cases held back from development. Then we’d give agents web access and record their evidence, dead ends and cost. Finally, we’d compare your loop with other agents, including a single-pass baseline, under the same tools, models and budgets. That’s the first study I’d like to work through together.
 
 Sources: Research proposal / introduction.
