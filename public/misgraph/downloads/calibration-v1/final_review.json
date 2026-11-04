@@ -1,0 +1,52 @@
+{
+  "reviewed_utc": "2026-11-04T19:00:04.193767+00:00",
+  "eligible_work_remaining": 0,
+  "model_responses": 769,
+  "planned_slots": 960,
+  "missing_glm_slots": 191,
+  "attempts": 803,
+  "additional_attempts": 33,
+  "attempt_count_distribution": {
+    "4": 2,
+    "3": 1,
+    "1": 742,
+    "2": 25
+  },
+  "four_attempt_exceptions": [
+    {
+      "model": "z-ai/glm-5.3",
+      "id": "groundlm-calibration-v1-exact_walk_count-n32-r100-original__tokens16384",
+      "attempts": 4
+    },
+    {
+      "model": "z-ai/glm-5.3",
+      "id": "groundlm-calibration-v1-exact_walk_count-n32-r100-original__tokens32768",
+      "attempts": 4
+    }
+  ],
+  "cost_by_source_usd": {
+    "provider": 2.061980766945,
+    "uncertain_upper_bound": 0.12875653,
+    "pre_generation_rejection": 0.0
+  },
+  "accounted_total_usd": 2.190737296945,
+  "outstanding_reservations_usd": 0,
+  "exact_certificates_recomputed": 24,
+  "frozen_hashes_verified": true,
+  "summary_and_transitions_verified": true,
+  "archive_crc_and_required_sources_verified": true,
+  "usage_totals": {
+    "prompt_tokens": 1229415,
+    "completion_tokens": 11150619,
+    "total_tokens": 12380034
+  },
+  "chart_scope": "Four configurations with 192/192 responses; GLM omitted, not assigned zero",
+  "limitations": [
+    "24 development graphs; four correlated conditions per graph. Do not rank models using this calibration.",
+    "Original accuracy intervals use 24 graph questions; agreement and survival intervals show their eligible graph counts.",
+    "All-condition rates and budget transitions are descriptive; their 96 prompt slots are not independent graphs.",
+    "A correct final answer counts as success even if the provider also reports a length finish reason.",
+    "Completed-pair diagnostics exclude unavailable pairs and are secondary to full-coverage outcomes.",
+    "The shared token request policy does not establish equal native compute. No future scored budget is selected automatically."
+  ]
+}
