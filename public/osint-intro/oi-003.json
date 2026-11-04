@@ -1,0 +1,357 @@
+{
+  "raw_answer": "{\n  \"answers\": {\n    \"artwork_accession\": \"1937.1.56\",\n    \"archive_accession\": \"960015\",\n    \"box\": \"437\",\n    \"reel\": \"292\",\n    \"approximate_items\": \"250\",\n    \"notes_city\": \"London\"\n  },\n  \"evidence\": [\n    {\n      \"field\": \"artwork_accession\",\n      \"doc_id\": \"d138a265fa9f6\",\n      \"quote\": \"Pieter de Hooch’s A Dutch Courtyard dates to 1658/1660 and has accession 1937.1.56.\",\n      \"claim\": \"The NGA artwork matching the description has accession number 1937.1.56.\"\n    },\n    {\n      \"field\": \"archive_accession\",\n      \"doc_id\": \"d3f1f5d853827\",\n      \"quote\": \"The provenance note cites Getty’s Duveen Brothers Records, accession 960015: reel 292, box 437, folders 4–5, and reel 293, box 438, folders 1–2.\",\n      \"claim\": \"The dealers’ archive cited for the 1924 sale is Getty’s Duveen Brothers Records, accession 960015.\"\n    },\n    {\n      \"field\": \"box\",\n      \"doc_id\": \"dafa46f178a2b\",\n      \"quote\": \"The finding aid identifies collection 960015. Its container table puts Burchard through Carnarvon Inventory in box 437, reel 292 (INHA shelfmark MFilm 466 (292)).\",\n      \"claim\": \"The 1924 inventory for the countess is in box 437.\"\n    },\n    {\n      \"field\": \"reel\",\n      \"doc_id\": \"dafa46f178a2b\",\n      \"quote\": \"The finding aid identifies collection 960015. Its container table puts Burchard through Carnarvon Inventory in box 437, reel 292 (INHA shelfmark MFilm 466 (292)).\",\n      \"claim\": \"The 1924 inventory for the countess is on reel 292.\"\n    },\n    {\n      \"field\": \"approximate_items\",\n      \"doc_id\": \"dafa46f178a2b\",\n      \"quote\": \"The detailed 1924 Carnarvon inventory entry lists approximately 250 items and inserted notes concerning cables from London.\",\n      \"claim\": \"The 1924 inventory entry for the countess contains approximately 250 items.\"\n    },\n    {\n      \"field\": \"notes_city\",\n      \"doc_id\": \"dafa46f178a2b\",\n      \"quote\": \"The detailed 1924 Carnarvon inventory entry lists approximately 250 items and inserted notes concerning cables from London.\",\n      \"claim\": \"The inventory entry’s inserted note mentions cables from London.\"\n    }\n  ],\n  \"unresolved\": []\n}",
+  "conversation_log": [
+    {
+      "role": "assistant",
+      "content": "",
+      "tool_calls": [
+        {
+          "id": "call_c117ce028a1b465a9943b7d5",
+          "type": "function",
+          "function": {
+            "name": "search_wikipedia",
+            "arguments": "{\"query\": \"NGA painting woman drinking beside two men one wearing breastplate girl brings hot coals church tower\"}"
+          }
+        }
+      ],
+      "reasoning_content": null,
+      "finish_reason": "tool_calls",
+      "usage": {
+        "prompt_tokens": 667,
+        "completion_tokens": 39,
+        "total_tokens": 706
+      }
+    },
+    {
+      "role": "tool",
+      "content": "1. **[d138a265fa9f6] A Dutch Courtyard — artwork record**\n   Description: Source: https://www.nga.gov/artworks/63-dutch-courtyard\nLocator: Artwork overview and visual description\nContent kind: curated_evidence_digest\nEvidence:\nPieter de Hooch’s A Dutch Courtyard dates to 1658/1660 and has accession 1937.1.56. A woman drinks beside two seated men, one wearing a breastplate. A girl carries hot coals for their pipes. A church tower appears behind the enclosed yard.\n   Relevance Score: 27.417\n\n2. **[d17ffdfd6bd24] A Woman and Child in a Courtyard**\n   Description: Source: https://www.nga.gov/artworks/1173-woman-and-child-courtyard\nLocator: Visual description\nContent kind: curated_evidence_digest\nEvidence:\nThe scene features a woman with a jar and basket, a child holding a birdcage and men drinking under an arbor.\n   Relevance Score: 7.747\n\n3. **[da6a5c640afed] The Bedroom**\n   Description: Source: https://www.nga.gov/artworks/1172-bedroom\nLocator: Visual description\nContent kind: curated_evidence_digest\nEvidence:\nThe domestic interior includes a woman and a child standing at an open door. It is a different composition from the courtyard drinking scene.\n   Relevance Score: 4.505\n\n4. **[d959954269787] Lightship No. 112 — propulsion**\n   Description: Source: https://npgallery.nps.gov/NRHP/GetAsset/f1fbc2d7-4ab7-41b8-9d1d-362dafee201e\nLocator: PDF page 6; section 7 continuation page 3\nContent kind: curated_evidence_digest\nEvidence:\nThe nomination describes the original plant as a 600-horsepower steam engine. In 1960 it was replaced by two Cooper-Bessemer diesel engines. Each was rated 450 HP at 720 RPM. The document also describes a radio beacon operating at 302 kHz and two 3.5-ton mushroom anchors.\n   Relevance Score: 2.188\n\n5. **[dfb2a481a74f6] Reconstructing the old Implacable**\n   Description: Source: https://www.rmg.co.uk/collections/objects/rmgc-object-14888\nLocator: Painting description and object details\nContent kind: curated_evidence_digest\nEvidence:\nRobert Borlase Smart made this painting in 1926; its museum ID is BHC3415. It concerns the former Duguay-Trouin. Its catalogue narrative gives 1949 as the ceremonial scuttling year. The suggested identification with Royal Academy exhibit 405 of 1926 is qualified, not certain.\n   Relevance Score: 1.992\n",
+      "tool_call_id": "call_c117ce028a1b465a9943b7d5",
+      "function": "search_wikipedia"
+    },
+    {
+      "role": "assistant",
+      "content": "",
+      "tool_calls": [
+        {
+          "id": "call_81c7b64224034094bdbd3ef7",
+          "type": "function",
+          "function": {
+            "name": "search_wikipedia",
+            "arguments": "{\"query\": \"Provenance of NGA 1937.1.56 Pieter de Hooch A Dutch Courtyard\"}"
+          }
+        }
+      ],
+      "reasoning_content": null,
+      "finish_reason": "tool_calls",
+      "usage": {
+        "prompt_tokens": 1411,
+        "completion_tokens": 46,
+        "total_tokens": 1457
+      }
+    },
+    {
+      "role": "tool",
+      "content": "1. **[d138a265fa9f6] A Dutch Courtyard — artwork record**\n   Description: Source: https://www.nga.gov/artworks/63-dutch-courtyard\nLocator: Artwork overview and visual description\nContent kind: curated_evidence_digest\nEvidence:\nPieter de Hooch’s A Dutch Courtyard dates to 1658/1660 and has accession 1937.1.56. A woman drinks beside two seated men, one wearing a breastplate. A girl carries hot coals for their pipes. A church tower appears behind the enclosed yard.\n   Relevance Score: 18.804\n\n2. **[d3f1f5d853827] A Dutch Courtyard — provenance**\n   Description: Source: https://www.nga.gov/artworks/63-dutch-courtyard\nLocator: Artwork history, provenance note 3\nContent kind: curated_evidence_digest\nEvidence:\nThe painting passed from Almina Victoria, Countess of Carnarvon, to Duveen Brothers in 1924, then to Andrew W. Mellon that November. The provenance note cites Getty’s Duveen Brothers Records, accession 960015: reel 292, box 437, folders 4–5, and reel 293, box 438, folders 1–2.\n   Relevance Score: 10.524\n\n3. **[db80908896c81] Implacable (formerly Duguay-Trouin) — stern carvings**\n   Description: Source: https://www.rmg.co.uk/collections/objects/rmgc-object-201426\nLocator: Description of stern assemblage\nContent kind: curated_evidence_digest\nEvidence:\nThe stern assemblage is catalogued as 56 parts, beginning ZBA0552.1. The ship was built at Rochefort as Duguay-Trouin and later renamed Implacable. This catalogue entry gives 1947 as the scuttling year. It describes reassembly of the decorations for Neptune Court during 1996–1999.\n   Relevance Score: 3.697\n\n4. **[d17ffdfd6bd24] A Woman and Child in a Courtyard**\n   Description: Source: https://www.nga.gov/artworks/1173-woman-and-child-courtyard\nLocator: Visual description\nContent kind: curated_evidence_digest\nEvidence:\nThe scene features a woman with a jar and basket, a child holding a birdcage and men drinking under an arbor.\n   Relevance Score: 2.482\n\n5. **[da6a5c640afed] The Bedroom**\n   Description: Source: https://www.nga.gov/artworks/1172-bedroom\nLocator: Visual description\nContent kind: curated_evidence_digest\nEvidence:\nThe domestic interior includes a woman and a child standing at an open door. It is a different composition from the courtyard drinking scene.\n   Relevance Score: 1.964\n",
+      "tool_call_id": "call_81c7b64224034094bdbd3ef7",
+      "function": "search_wikipedia"
+    },
+    {
+      "role": "assistant",
+      "content": "",
+      "tool_calls": [
+        {
+          "id": "call_414ddee8a8654a5ab60636a9",
+          "type": "function",
+          "function": {
+            "name": "search_wikipedia",
+            "arguments": "{\"query\": \"Duveen Brothers Records Getty accession 960015 reel 292 box 437 folders 4-5 reel 293 box 438 folders 1-2 1924 inventory entry for Almina Victoria Countess of Carnarvon\"}"
+          }
+        }
+      ],
+      "reasoning_content": null,
+      "finish_reason": "tool_calls",
+      "usage": {
+        "prompt_tokens": 2165,
+        "completion_tokens": 81,
+        "total_tokens": 2246
+      }
+    },
+    {
+      "role": "tool",
+      "content": "1. **[d3f1f5d853827] A Dutch Courtyard — provenance**\n   Description: Source: https://www.nga.gov/artworks/63-dutch-courtyard\nLocator: Artwork history, provenance note 3\nContent kind: curated_evidence_digest\nEvidence:\nThe painting passed from Almina Victoria, Countess of Carnarvon, to Duveen Brothers in 1924, then to Andrew W. Mellon that November. The provenance note cites Getty’s Duveen Brothers Records, accession 960015: reel 292, box 437, folders 4–5, and reel 293, box 438, folders 1–2.\n   Relevance Score: 40.322\n\n2. **[dafa46f178a2b] Duveen Brothers Records — Carnarvon inventory**\n   Description: Source: https://corpus.inha.fr/gaael/ui/images/pdf/inventaire-duveen.pdf\nLocator: PDF pages 32 and 46; box/reel table and Carnarvon inventory entry\nContent kind: curated_evidence_digest\nEvidence:\nThe finding aid identifies collection 960015. Its container table puts Burchard through Carnarvon Inventory in box 437, reel 292 (INHA shelfmark MFilm 466 (292)). The detailed 1924 Carnarvon inventory entry lists approximately 250 items and inserted notes concerning cables from London.\n   Relevance Score: 21.788\n\n3. **[dfc034c8f535b] Duveen Brothers Records — Carnarvon correspondence**\n   Description: Source: https://www.getty.edu/research/collections/static/pdf/960015.pdf\nLocator: Container list: Lady Carnarvon\nContent kind: curated_evidence_digest\nEvidence:\nThe entry for Lady Carnarvon, circa 1922–1924, is in box 437, folder 4, reel 292 and comprises approximately 85 items.\n   Relevance Score: 20.977\n\n4. **[db1dbb7cc1ea8] Duveen Brothers Records — Carnarvon Collection**\n   Description: Source: https://www.getty.edu/research/collections/static/pdf/960015.pdf\nLocator: Container list: Carnarvon Collection\nContent kind: curated_evidence_digest\nEvidence:\nThe Carnarvon Collection entries are in box 438 on reel 293. Folder 1 covers approximately 1924–1925; folder 2 covers 1925–1933 and 1954. Each entry lists about 250 items.\n   Relevance Score: 20.499\n\n5. **[d3e431df00687] Duveen Brothers Records — Christie, Manson and Woods**\n   Description: Source: https://www.getty.edu/research/collections/static/pdf/960015.pdf\nLocator: Container list: Christie, Manson and Woods\nContent kind: curated_evidence_digest\nEvidence:\nChristie, Manson and Woods correspondence, approximately 1947–1965, is listed in box 439, folder 3, reel 294, with roughly 80 items.\n   Relevance Score: 7.917\n",
+      "tool_call_id": "call_414ddee8a8654a5ab60636a9",
+      "function": "search_wikipedia"
+    },
+    {
+      "role": "assistant",
+      "content": "{\n  \"answers\": {\n    \"artwork_accession\": \"1937.1.56\",\n    \"archive_accession\": \"960015\",\n    \"box\": \"437\",\n    \"reel\": \"292\",\n    \"approximate_items\": \"250\",\n    \"notes_city\": \"London\"\n  },\n  \"evidence\": [\n    {\n      \"field\": \"artwork_accession\",\n      \"doc_id\": \"d138a265fa9f6\",\n      \"quote\": \"Pieter de Hooch’s A Dutch Courtyard dates to 1658/1660 and has accession 1937.1.56.\",\n      \"claim\": \"The NGA artwork matching the description has accession number 1937.1.56.\"\n    },\n    {\n      \"field\": \"archive_accession\",\n      \"doc_id\": \"d3f1f5d853827\",\n      \"quote\": \"The provenance note cites Getty’s Duveen Brothers Records, accession 960015: reel 292, box 437, folders 4–5, and reel 293, box 438, folders 1–2.\",\n      \"claim\": \"The dealers’ archive cited for the 1924 sale is Getty’s Duveen Brothers Records, accession 960015.\"\n    },\n    {\n      \"field\": \"box\",\n      \"doc_id\": \"dafa46f178a2b\",\n      \"quote\": \"The finding aid identifies collection 960015. Its container table puts Burchard through Carnarvon Inventory in box 437, reel 292 (INHA shelfmark MFilm 466 (292)).\",\n      \"claim\": \"The 1924 inventory for the countess is in box 437.\"\n    },\n    {\n      \"field\": \"reel\",\n      \"doc_id\": \"dafa46f178a2b\",\n      \"quote\": \"The finding aid identifies collection 960015. Its container table puts Burchard through Carnarvon Inventory in box 437, reel 292 (INHA shelfmark MFilm 466 (292)).\",\n      \"claim\": \"The 1924 inventory for the countess is on reel 292.\"\n    },\n    {\n      \"field\": \"approximate_items\",\n      \"doc_id\": \"dafa46f178a2b\",\n      \"quote\": \"The detailed 1924 Carnarvon inventory entry lists approximately 250 items and inserted notes concerning cables from London.\",\n      \"claim\": \"The 1924 inventory entry for the countess contains approximately 250 items.\"\n    },\n    {\n      \"field\": \"notes_city\",\n      \"doc_id\": \"dafa46f178a2b\",\n      \"quote\": \"The detailed 1924 Carnarvon inventory entry lists approximately 250 items and inserted notes concerning cables from London.\",\n      \"claim\": \"The inventory entry’s inserted note mentions cables from London.\"\n    }\n  ],\n  \"unresolved\": []\n}",
+      "reasoning_content": null,
+      "finish_reason": "stop",
+      "content_source": "content",
+      "usage": {
+        "prompt_tokens": 3032,
+        "completion_tokens": 719,
+        "total_tokens": 3751
+      }
+    }
+  ],
+  "seen_titles": [
+    "[d138a265fa9f6] A Dutch Courtyard — artwork record",
+    "[d17ffdfd6bd24] A Woman and Child in a Courtyard",
+    "[da6a5c640afed] The Bedroom",
+    "[d959954269787] Lightship No. 112 — propulsion",
+    "[dfb2a481a74f6] Reconstructing the old Implacable",
+    "[d3f1f5d853827] A Dutch Courtyard — provenance",
+    "[db80908896c81] Implacable (formerly Duguay-Trouin) — stern carvings",
+    "[dafa46f178a2b] Duveen Brothers Records — Carnarvon inventory",
+    "[dfc034c8f535b] Duveen Brothers Records — Carnarvon correspondence",
+    "[db1dbb7cc1ea8] Duveen Brothers Records — Carnarvon Collection",
+    "[d3e431df00687] Duveen Brothers Records — Christie, Manson and Woods"
+  ],
+  "upstream_meta": {
+    "iterations": 4,
+    "searches": 3,
+    "finish_reason": "stop",
+    "content_source": "content",
+    "token_usage": {
+      "prompt_tokens": 7275,
+      "completion_tokens": 885,
+      "total_tokens": 8160
+    },
+    "duration_s": 55.94
+  },
+  "api_events": [
+    {
+      "max_tokens": 4096,
+      "tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "search_wikipedia"
+        }
+      },
+      "n_messages": 2,
+      "usage": {
+        "prompt_tokens": 667,
+        "completion_tokens": 39,
+        "total_tokens": 706
+      },
+      "finish_reasons": [
+        "tool_calls"
+      ],
+      "duration_s": 2.530235882848501
+    },
+    {
+      "max_tokens": 4096,
+      "tool_choice": "auto",
+      "n_messages": 4,
+      "usage": {
+        "prompt_tokens": 1411,
+        "completion_tokens": 46,
+        "total_tokens": 1457
+      },
+      "finish_reasons": [
+        "tool_calls"
+      ],
+      "duration_s": 2.995541339740157
+    },
+    {
+      "max_tokens": 4096,
+      "tool_choice": "auto",
+      "n_messages": 6,
+      "usage": {
+        "prompt_tokens": 2165,
+        "completion_tokens": 81,
+        "total_tokens": 2246
+      },
+      "finish_reasons": [
+        "tool_calls"
+      ],
+      "duration_s": 5.415410304442048
+    },
+    {
+      "max_tokens": 4096,
+      "tool_choice": "auto",
+      "n_messages": 8,
+      "usage": {
+        "prompt_tokens": 3032,
+        "completion_tokens": 719,
+        "total_tokens": 3751
+      },
+      "finish_reasons": [
+        "stop"
+      ],
+      "duration_s": 44.992370177060366
+    }
+  ],
+  "retrieval_audit": [
+    {
+      "query": "NGA painting woman drinking beside two men one wearing breastplate girl brings hot coals church tower",
+      "hits": [
+        {
+          "doc_id": "d138a265fa9f6",
+          "visible_text": "Pieter de Hooch’s A Dutch Courtyard dates to 1658/1660 and has accession 1937.1.56. A woman drinks beside two seated men, one wearing a breastplate. A girl carries hot coals for their pipes. A church tower appears behind the enclosed yard.",
+          "text_sha256": "f6fb63420f40bfdb19064b9bfb989e3cc6e3053f44bf6a96432332b928743f48",
+          "truncated": false
+        },
+        {
+          "doc_id": "d17ffdfd6bd24",
+          "visible_text": "The scene features a woman with a jar and basket, a child holding a birdcage and men drinking under an arbor.",
+          "text_sha256": "8dcf2e7eecac0288bc808eea3386af83b5571d0cebb13754c90bce3669086955",
+          "truncated": false
+        },
+        {
+          "doc_id": "da6a5c640afed",
+          "visible_text": "The domestic interior includes a woman and a child standing at an open door. It is a different composition from the courtyard drinking scene.",
+          "text_sha256": "482b73c50202793e46b6283e097b125f25914cef63b6ba75bdcbe3b83b3e7ab6",
+          "truncated": false
+        },
+        {
+          "doc_id": "d959954269787",
+          "visible_text": "The nomination describes the original plant as a 600-horsepower steam engine. In 1960 it was replaced by two Cooper-Bessemer diesel engines. Each was rated 450 HP at 720 RPM. The document also describes a radio beacon operating at 302 kHz and two 3.5-ton mushroom anchors.",
+          "text_sha256": "6c59f6cc7609e0fd177698481bd392199e814b9aa3cbe71d473cc0e656612f9f",
+          "truncated": false
+        },
+        {
+          "doc_id": "dfb2a481a74f6",
+          "visible_text": "Robert Borlase Smart made this painting in 1926; its museum ID is BHC3415. It concerns the former Duguay-Trouin. Its catalogue narrative gives 1949 as the ceremonial scuttling year. The suggested identification with Royal Academy exhibit 405 of 1926 is qualified, not certain.",
+          "text_sha256": "9d4b4ced0e0f54398fbe85ac72205a6181f3d0b481776e266d63569fdb4ab93f",
+          "truncated": false
+        }
+      ],
+      "call": 1,
+      "status": "ok"
+    },
+    {
+      "query": "Provenance of NGA 1937.1.56 Pieter de Hooch A Dutch Courtyard",
+      "hits": [
+        {
+          "doc_id": "d138a265fa9f6",
+          "visible_text": "Pieter de Hooch’s A Dutch Courtyard dates to 1658/1660 and has accession 1937.1.56. A woman drinks beside two seated men, one wearing a breastplate. A girl carries hot coals for their pipes. A church tower appears behind the enclosed yard.",
+          "text_sha256": "f6fb63420f40bfdb19064b9bfb989e3cc6e3053f44bf6a96432332b928743f48",
+          "truncated": false
+        },
+        {
+          "doc_id": "d3f1f5d853827",
+          "visible_text": "The painting passed from Almina Victoria, Countess of Carnarvon, to Duveen Brothers in 1924, then to Andrew W. Mellon that November. The provenance note cites Getty’s Duveen Brothers Records, accession 960015: reel 292, box 437, folders 4–5, and reel 293, box 438, folders 1–2.",
+          "text_sha256": "e575495fc30a7ffe6aab86c3c3254954a6ada048827e406697d6c104b0a48afe",
+          "truncated": false
+        },
+        {
+          "doc_id": "db80908896c81",
+          "visible_text": "The stern assemblage is catalogued as 56 parts, beginning ZBA0552.1. The ship was built at Rochefort as Duguay-Trouin and later renamed Implacable. This catalogue entry gives 1947 as the scuttling year. It describes reassembly of the decorations for Neptune Court during 1996–1999.",
+          "text_sha256": "60e83bbbfe8316472672bc6c806c11e515f6e0f7d63be21657ccbc8054268da4",
+          "truncated": false
+        },
+        {
+          "doc_id": "d17ffdfd6bd24",
+          "visible_text": "The scene features a woman with a jar and basket, a child holding a birdcage and men drinking under an arbor.",
+          "text_sha256": "8dcf2e7eecac0288bc808eea3386af83b5571d0cebb13754c90bce3669086955",
+          "truncated": false
+        },
+        {
+          "doc_id": "da6a5c640afed",
+          "visible_text": "The domestic interior includes a woman and a child standing at an open door. It is a different composition from the courtyard drinking scene.",
+          "text_sha256": "482b73c50202793e46b6283e097b125f25914cef63b6ba75bdcbe3b83b3e7ab6",
+          "truncated": false
+        }
+      ],
+      "call": 2,
+      "status": "ok"
+    },
+    {
+      "query": "Duveen Brothers Records Getty accession 960015 reel 292 box 437 folders 4-5 reel 293 box 438 folders 1-2 1924 inventory entry for Almina Victoria Countess of Carnarvon",
+      "hits": [
+        {
+          "doc_id": "d3f1f5d853827",
+          "visible_text": "The painting passed from Almina Victoria, Countess of Carnarvon, to Duveen Brothers in 1924, then to Andrew W. Mellon that November. The provenance note cites Getty’s Duveen Brothers Records, accession 960015: reel 292, box 437, folders 4–5, and reel 293, box 438, folders 1–2.",
+          "text_sha256": "e575495fc30a7ffe6aab86c3c3254954a6ada048827e406697d6c104b0a48afe",
+          "truncated": false
+        },
+        {
+          "doc_id": "dafa46f178a2b",
+          "visible_text": "The finding aid identifies collection 960015. Its container table puts Burchard through Carnarvon Inventory in box 437, reel 292 (INHA shelfmark MFilm 466 (292)). The detailed 1924 Carnarvon inventory entry lists approximately 250 items and inserted notes concerning cables from London.",
+          "text_sha256": "9cdfed8236b588ccc51681c52a56b84243043f18098cdae38c0200d230e1dc25",
+          "truncated": false
+        },
+        {
+          "doc_id": "dfc034c8f535b",
+          "visible_text": "The entry for Lady Carnarvon, circa 1922–1924, is in box 437, folder 4, reel 292 and comprises approximately 85 items.",
+          "text_sha256": "6754dc8418b7709bd0b4fd55133bf77cdd5c06283000e5da7cc92d77c05ddfc8",
+          "truncated": false
+        },
+        {
+          "doc_id": "db1dbb7cc1ea8",
+          "visible_text": "The Carnarvon Collection entries are in box 438 on reel 293. Folder 1 covers approximately 1924–1925; folder 2 covers 1925–1933 and 1954. Each entry lists about 250 items.",
+          "text_sha256": "bd5c546d6186e2cf5aad9cda6bad5c61dc5f96b065a7ecf97342c2bff83a76ff",
+          "truncated": false
+        },
+        {
+          "doc_id": "d3e431df00687",
+          "visible_text": "Christie, Manson and Woods correspondence, approximately 1947–1965, is listed in box 439, folder 3, reel 294, with roughly 80 items.",
+          "text_sha256": "48edd6d44f1fda13aa9ec1dc3bb97dab8ba53125734782b78da7afe469512537",
+          "truncated": false
+        }
+      ],
+      "call": 3,
+      "status": "ok"
+    }
+  ],
+  "answer": {
+    "answers": {
+      "artwork_accession": "1937.1.56",
+      "archive_accession": "960015",
+      "box": "437",
+      "reel": "292",
+      "approximate_items": "250",
+      "notes_city": "London"
+    },
+    "evidence": [
+      {
+        "field": "artwork_accession",
+        "doc_id": "d138a265fa9f6",
+        "quote": "Pieter de Hooch’s A Dutch Courtyard dates to 1658/1660 and has accession 1937.1.56.",
+        "claim": "The NGA artwork matching the description has accession number 1937.1.56."
+      },
+      {
+        "field": "archive_accession",
+        "doc_id": "d3f1f5d853827",
+        "quote": "The provenance note cites Getty’s Duveen Brothers Records, accession 960015: reel 292, box 437, folders 4–5, and reel 293, box 438, folders 1–2.",
+        "claim": "The dealers’ archive cited for the 1924 sale is Getty’s Duveen Brothers Records, accession 960015."
+      },
+      {
+        "field": "box",
+        "doc_id": "dafa46f178a2b",
+        "quote": "The finding aid identifies collection 960015. Its container table puts Burchard through Carnarvon Inventory in box 437, reel 292 (INHA shelfmark MFilm 466 (292)).",
+        "claim": "The 1924 inventory for the countess is in box 437."
+      },
+      {
+        "field": "reel",
+        "doc_id": "dafa46f178a2b",
+        "quote": "The finding aid identifies collection 960015. Its container table puts Burchard through Carnarvon Inventory in box 437, reel 292 (INHA shelfmark MFilm 466 (292)).",
+        "claim": "The 1924 inventory for the countess is on reel 292."
+      },
+      {
+        "field": "approximate_items",
+        "doc_id": "dafa46f178a2b",
+        "quote": "The detailed 1924 Carnarvon inventory entry lists approximately 250 items and inserted notes concerning cables from London.",
+        "claim": "The 1924 inventory entry for the countess contains approximately 250 items."
+      },
+      {
+        "field": "notes_city",
+        "doc_id": "dafa46f178a2b",
+        "quote": "The detailed 1924 Carnarvon inventory entry lists approximately 250 items and inserted notes concerning cables from London.",
+        "claim": "The inventory entry’s inserted note mentions cables from London."
+      }
+    ],
+    "unresolved": []
+  },
+  "status": "ok",
+  "task_id": "OI-003",
+  "run_fingerprint": "00a4aca1c2020b7c847e8b14aedd3cd0f245a525d4e5f66ef12f9e17c5858064",
+  "duration_s": 55.9356956332922,
+  "upstream": {
+    "commit": "9a63c31673d404f5107307539970bdebbea595ca",
+    "directory": "/home/anormalm/osint-investigation-bench/upstream"
+  },
+  "record_kind": "model_run"
+}

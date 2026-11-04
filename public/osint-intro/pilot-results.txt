@@ -1,0 +1,21 @@
+# Fixed-corpus pilot
+
+I ran Qwen3-VL-8B-Instruct through the pinned `_layer1_agentic_once` loop on five tasks using 22 researcher-written evidence digests. Search caps of 1, 4 and 12 give 15 executions. Retrieval used SQLite FTS5. The adaptation changed the prompt, retrieval tool and structured output; it omitted the original Wikipedia scoring.
+
+| Maximum search cap | Valid structured outputs | Fields matching digests |
+| --- | --- | --- |
+| 1 | 4/5 | 23/31 |
+| 4 | 5/5 | 31/31 |
+| 12 | 5/5 | 31/31 |
+
+Caps 4 and 12 returned the same answers on all five tasks. The cap-4 runs used one to three retrieval calls per task. At cap 1, OI-003 returned invalid JSON; two additional fields across OI-001 and OI-002 did not match.
+
+## OI-003, the trace in the talk
+
+The cap-4 execution made three searches: identify the painting, follow the Duveen records, then find the 1924 inventory digest. These labels paraphrase the logged queries. The answer's six fields were artwork accession 1937.1.56, archive accession 960015, box 437, reel 292, approximately 250 items, and London. The quotes occur in the retrieved digests. I have not checked the original archive. The log starts from a text description and does not establish image input.
+
+The record is bundled at `pilot-artifacts/B4/records/OI-003.json`. The original run is `results/first-real-pilot-instruct-gpu5-6-noreason-OI001/` in the parent workspace.
+
+## Scope
+
+This measures agreement with prepared digests. There was no live-web evaluation and no baseline agent. Matching an entity and extracting related fields is a narrow part of some OSINT tasks; these numbers do not measure complete investigation capability.
