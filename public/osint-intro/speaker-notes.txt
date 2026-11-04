@@ -1,6 +1,6 @@
 # Following clues on the open web · speaker notes
 
-24 slides. Right/Left: navigate. Space: pause or replay. F: fullscreen. S: speaker view.
+25 slides. Right/Left: navigate. Space: pause or replay. F: fullscreen. S: speaker view.
 
 ## 1. Following Clues on the Open Web
 
@@ -50,97 +50,103 @@ The driving side and the white rectangular plate help narrow the possibilities. 
 
 Sources: Dam Coffee · Highway to the Unknown · 29 March 2025 — https://medium.com/@dam_coffee/bellingcat-challenge-highway-to-the-unknown-f9d2d1447593
 
-## 9. Inspect the plate markings
+## 9. Compare the plate markings
+
+This is a reference plate labelled Lagos, alongside the original challenge photo. Its green design details give us something to compare with the unclear markings in the photo. That suggests a Nigeria hypothesis to check; the reference alone does not establish the location. Lagos is the label on this reference image, while the published route later reaches Abuja.
+
+Sources: Research proposal / introduction.
+
+## 10. Inspect the plate markings
 
 The author used Pixlr to inspect the green plate markings, which suggested Nigeria. The photograph on this slide stays unchanged, and Nigeria is still a hypothesis to check.
 
 Sources: Dam Coffee · Highway to the Unknown · 29 March 2025 — https://medium.com/@dam_coffee/bellingcat-challenge-highway-to-the-unknown-f9d2d1447593
 
-## 10. Turn the scene into a map query
+## 11. Turn the scene into a map query
 
 Now the scene becomes a map query: a four-lane road, a bridge and nearby buildings. The author used Bellingcat’s OpenStreetMap Search tool to look for that combination. This drawing is a schematic of the features.
 
 Sources: Dam Coffee · Highway to the Unknown · 29 March 2025 — https://medium.com/@dam_coffee/bellingcat-challenge-highway-to-the-unknown-f9d2d1447593
 
-## 11. How did Abuja enter the search?
+## 12. How did Abuja enter the search?
 
 The next decision is where to search. The author tried city-sized areas in Nigeria and reached Abuja. The write-up doesn’t list the earlier cities or their exact order.
 
 Sources: Dam Coffee · Highway to the Unknown · 29 March 2025 — https://medium.com/@dam_coffee/bellingcat-challenge-highway-to-the-unknown-f9d2d1447593
 
-## 12. Two nearby results
+## 13. Two nearby results
 
 The Abuja search returned two nearby candidates along Shehu Yar’Adua Way. Neither was the exact site, but they gave the author an area to inspect. Their positions in this diagram are schematic.
 
 Sources: Dam Coffee · Highway to the Unknown · 29 March 2025 — https://medium.com/@dam_coffee/bellingcat-challenge-highway-to-the-unknown-f9d2d1447593
 
-## 13. Check the area around the results
+## 14. Check the area around the results
 
 From those candidates, the author moved west to a matching bridge, then looked south for the building. Comparing against Street View established the bridge-and-building match. A retrieval hit alone didn’t establish it; the local comparison did.
 
 Sources: Dam Coffee · Highway to the Unknown · 29 March 2025 — https://medium.com/@dam_coffee/bellingcat-challenge-highway-to-the-unknown-f9d2d1447593
 
-## 14. Find the name on the wall
+## 15. Find the name on the wall
 
 The place record was Daughters of Abraham Foundation. Its Google Maps photos and video offered clearer views of the building. That gave the author another way to read the name on the wall.
 
 Sources: Dam Coffee · Highway to the Unknown · 29 March 2025 — https://medium.com/@dam_coffee/bellingcat-challenge-highway-to-the-unknown-f9d2d1447593
 
-## 15. Julie Useni Hall
+## 16. Julie Useni Hall
 
 Those views revealed Julie Useni Hall, giving the challenge answer Julie Useni. That completes the published route from the roadside photo to the name. I’m explaining the author’s solution, rather than reporting an agent result.
 
 Sources: Dam Coffee · Highway to the Unknown · 29 March 2025 — https://medium.com/@dam_coffee/bellingcat-challenge-highway-to-the-unknown-f9d2d1447593
 
-## 16. Those were two kinds of task
+## 17. Those were two kinds of task
 
 Those were two kinds of task, and there are many more. Alongside identifying objects and locating photos or videos, investigators work out when footage was filmed and check whether it supports its claimed context. They also follow accounts, domains or companies across sites, and reconstruct movements or events. The toolkit and framework links collect resources, while the Berkeley Protocol describes the broader investigation process.
 
 Sources: Bellingcat Toolkit — https://bellingcat.gitbook.io/toolkit; OSINT Framework — https://osintframework.com/; Berkeley Protocol · investigation process — https://humanrights.berkeley.edu/wp-content/uploads/2024/02/Berkeley-Protocol.pdf
 
-## 17. Where it is used
+## 18. Where it is used
 
 Storyful verifies footage against maps and street-level views. Amnesty’s Evidence Lab supports human rights investigations through digital verification and remote sensing. Bellingcat reconstructed movements in the MH17 investigation from public photos and video. These are practitioner applications, and they’re why I think it’s worth exploring where an agent could contribute.
 
 Sources: Storyful geolocation — https://storyful.com/news/verified-by-storyful/inside-storyful-verification-workflow-geolocation/; Amnesty Evidence Lab — https://citizenevidence.org/; Bellingcat MH17 report — https://www.bellingcat.com/news/europe/2015/10/08/mh17-the-open-source-evidence/
 
-## 18. Geolocation is already being tested
+## 19. Geolocation is already being tested
 
 The top screenshot is Bellingcat’s June 2025 article asking whether LLMs have mastered geolocation: they tested twenty models on twenty-five unpublished photos, and every model made some wrong guesses. Below is Anthropic’s September 2026 article on intelligence-targeting and conventional-weapons capabilities. The part relevant here tests photo geolocation without search tools. These are different evaluations, so I wouldn’t compare their scores directly.
 
 Sources: Bellingcat · Have LLMs Finally Mastered Geolocation? — https://www.bellingcat.com/resources/how-tos/2025/06/06/have-llms-finally-mastered-geolocation/; Anthropic · capability evaluations — https://www.anthropic.com/research/intelligence-targeting-conventional-weapons-capabilities
 
-## 19. Where entity matching fits
+## 20. Where entity matching fits
 
 The outer box is an investigation: collecting material, preserving it, verifying sources and analysing the evidence. Inside that, identifying a painting or ship can involve searching a clue, finding a candidate entity and then searching that name. That’s one place your iterative search could contribute. We could start with this part and learn what else the task needs.
 
 Sources: Berkeley Protocol · investigation process — https://humanrights.berkeley.edu/wp-content/uploads/2024/02/Berkeley-Protocol.pdf
 
-## 20. The entity-matching agent
+## 21. The entity-matching agent
 
 Your released agent already follows this pattern: make an initial retrieval call, read the result and let the model choose another query. The return arrow means another retrieval, until it stops or reaches the search cap. A later stage extracts an English Wikipedia title. I pinned the implementation to commit 9a63c316 and adapted the search loop for the pilot.
 
 Sources: Released implementation · 9a63c316 — https://github.com/neulab/think-before-you-link/tree/9a63c31673d404f5107307539970bdebbea595ca
 
-## 21. What I ran
+## 22. What I ran
 
 I used the upstream function shown here, layer one agentic once, with Qwen3-VL-8B-Instruct and search caps of one, four and twelve. Retrieval was SQLite FTS5, a local text-search index over twenty-two prepared source digests. I kept the iterative tool-response loop, adapted the prompt, retrieval and structured output, and left out the original Wikipedia scoring. The setup and results are linked below.
 
 Sources: Pinned upstream implementation — https://github.com/neulab/think-before-you-link/tree/9a63c31673d404f5107307539970bdebbea595ca; Pilot setup and results — pilot-results.txt
 
-## 22. One run: OI-003
+## 23. One run: OI-003
 
 Here’s OI-zero-zero-three at cap four: it searched for A Dutch Courtyard through the museum digest, followed the Duveen records through the dealer digest, then found the 1924 inventory in the archive digest. That returned about 250 items and notes mentioning London, and all six answer fields matched the supplied digests. I haven’t checked the original archive. The painting is context here; the execution log doesn’t establish that the model received an image.
 
 Sources: OI-003 · cap 4 · execution record — oi-003.json
 
-## 23. More searching helped, in a small pilot
+## 24. More searching helped, in a small pilot
 
 Across five tasks and twenty-two digests, I ran fifteen executions. At cap one, four out of five outputs were valid, and twenty-three of thirty-one fields matched. At cap four, that became five out of five and thirty-one of thirty-one, and cap twelve gave the same results. More searching helped in this small setup, but these numbers measure digest agreement; we haven’t evaluated live-web performance or compared against a baseline agent.
 
 Sources: Pilot results — pilot-results.txt
 
-## 24. How we could run the study
+## 25. How we could run the study
 
 I’d start by choosing a small subset of tasks and curating difficult cases that need several steps across sources, with checked answers and some cases held back from development. Then we’d give agents web access and record their evidence, dead ends and cost. Finally, we’d compare your loop with other agents, including a single-pass baseline, under the same tools, models and budgets. That’s the first study I’d like to work through together.
 
