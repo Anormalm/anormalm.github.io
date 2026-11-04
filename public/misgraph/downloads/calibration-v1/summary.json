@@ -1,0 +1,1072 @@
+{
+  "created_utc": "2026-11-04T18:49:46.756794+00:00",
+  "kind": "development calibration; excluded from scored leaderboard",
+  "planned_slots": 960,
+  "unique_slots": 770,
+  "usable_slots": 769,
+  "missing_or_unusable_slots": 191,
+  "attempts": 803,
+  "additional_attempts": 33,
+  "recorded_cost_usd": 2.190737296945,
+  "unsettled_reservations_usd": 0.0,
+  "approved_cap_usd": 10,
+  "within_cap": true,
+  "max_attempts_per_slot": 4,
+  "complete": false,
+  "source_and_fixture_hashes_verified": true,
+  "verified_exact_answer_certificates": 24,
+  "notes": [
+    "24 development graphs; four correlated conditions per graph. Do not rank models using this calibration.",
+    "Original accuracy intervals use 24 graph questions; agreement and survival intervals show their eligible graph counts.",
+    "All-condition rates and budget transitions are descriptive; their 96 prompt slots are not independent graphs.",
+    "A correct final answer counts as success even if the provider also reports a length finish reason.",
+    "Completed-pair diagnostics exclude unavailable pairs and are secondary to full-coverage outcomes.",
+    "The shared token request policy does not establish equal native compute. No future scored budget is selected automatically."
+  ],
+  "models": [
+    {
+      "model": "deepseek/deepseek-v4.1-flash-1017",
+      "endpoint": "sail-research/fp4",
+      "precision": "fp4",
+      "completion_cap": 16384,
+      "expected_responses": 96,
+      "returned_responses": 96,
+      "counts": {
+        "correct": 57,
+        "cutoff": 37,
+        "completed_wrong": 2,
+        "missing": 0
+      },
+      "original_accuracy": {
+        "n": 24,
+        "value": 0.625,
+        "ci95": [
+          0.42709962442674276,
+          0.7884063244045122
+        ]
+      },
+      "all_variant_accuracy": 0.59375,
+      "cutoff_rate": 0.3854166666666667,
+      "empty_final_text": 37,
+      "reported_usage_count": 96,
+      "maximum_reported_completion": 16384,
+      "above_requested_allowance": 0,
+      "recorded_cost_usd": 0.170268858265,
+      "diagnostics": {
+        "repeat": {
+          "available_pairs": 24,
+          "parseable_pairs": 15,
+          "agreement": {
+            "n": 15,
+            "value": 1.0,
+            "ci95": [
+              0.7961166989641515,
+              1
+            ]
+          },
+          "survival": {
+            "n": 15,
+            "value": 1.0,
+            "ci95": [
+              0.7961166989641515,
+              1
+            ]
+          },
+          "correct_original_transitions": {
+            "correct": 15
+          }
+        },
+        "neutral": {
+          "available_pairs": 24,
+          "parseable_pairs": 14,
+          "agreement": {
+            "n": 14,
+            "value": 1.0,
+            "ci95": [
+              0.7846891972623643,
+              1
+            ]
+          },
+          "survival": {
+            "n": 15,
+            "value": 0.9333333333333333,
+            "ci95": [
+              0.7018347012621998,
+              0.9881331045067315
+            ]
+          },
+          "correct_original_transitions": {
+            "correct": 14,
+            "cutoff": 1
+          }
+        },
+        "degree_reversed": {
+          "available_pairs": 24,
+          "parseable_pairs": 12,
+          "agreement": {
+            "n": 12,
+            "value": 1.0,
+            "ci95": [
+              0.7575059933447592,
+              1
+            ]
+          },
+          "survival": {
+            "n": 15,
+            "value": 0.8,
+            "ci95": [
+              0.5481455128483065,
+              0.9295245065301844
+            ]
+          },
+          "correct_original_transitions": {
+            "correct": 12,
+            "cutoff": 3
+          }
+        }
+      }
+    },
+    {
+      "model": "deepseek/deepseek-v4.1-flash-1017",
+      "endpoint": "sail-research/fp4",
+      "precision": "fp4",
+      "completion_cap": 32768,
+      "expected_responses": 96,
+      "returned_responses": 96,
+      "counts": {
+        "completed_wrong": 10,
+        "correct": 71,
+        "cutoff": 15,
+        "missing": 0
+      },
+      "original_accuracy": {
+        "n": 24,
+        "value": 0.75,
+        "ci95": [
+          0.55100555994846,
+          0.8800063377140499
+        ]
+      },
+      "all_variant_accuracy": 0.7395833333333334,
+      "cutoff_rate": 0.15625,
+      "empty_final_text": 15,
+      "reported_usage_count": 96,
+      "maximum_reported_completion": 32768,
+      "above_requested_allowance": 0,
+      "recorded_cost_usd": 0.21313788368,
+      "diagnostics": {
+        "repeat": {
+          "available_pairs": 24,
+          "parseable_pairs": 19,
+          "agreement": {
+            "n": 19,
+            "value": 0.8421052631578947,
+            "ci95": [
+              0.6243452472967093,
+              0.9447952836146585
+            ]
+          },
+          "survival": {
+            "n": 18,
+            "value": 0.8888888888888888,
+            "ci95": [
+              0.672002348698212,
+              0.9689804773543876
+            ]
+          },
+          "correct_original_transitions": {
+            "correct": 16,
+            "cutoff": 1,
+            "completed_wrong": 1
+          }
+        },
+        "neutral": {
+          "available_pairs": 24,
+          "parseable_pairs": 19,
+          "agreement": {
+            "n": 19,
+            "value": 0.8421052631578947,
+            "ci95": [
+              0.6243452472967093,
+              0.9447952836146585
+            ]
+          },
+          "survival": {
+            "n": 18,
+            "value": 0.8888888888888888,
+            "ci95": [
+              0.672002348698212,
+              0.9689804773543876
+            ]
+          },
+          "correct_original_transitions": {
+            "correct": 16,
+            "cutoff": 1,
+            "completed_wrong": 1
+          }
+        },
+        "degree_reversed": {
+          "available_pairs": 24,
+          "parseable_pairs": 18,
+          "agreement": {
+            "n": 18,
+            "value": 0.7777777777777778,
+            "ci95": [
+              0.5478541568378739,
+              0.9099907189139831
+            ]
+          },
+          "survival": {
+            "n": 18,
+            "value": 0.7777777777777778,
+            "ci95": [
+              0.5478541568378739,
+              0.9099907189139831
+            ]
+          },
+          "correct_original_transitions": {
+            "correct": 14,
+            "completed_wrong": 3,
+            "cutoff": 1
+          }
+        }
+      }
+    },
+    {
+      "model": "z-ai/glm-5.3",
+      "endpoint": "baidu/fp8",
+      "precision": "fp8",
+      "completion_cap": 16384,
+      "expected_responses": 96,
+      "returned_responses": 1,
+      "counts": {
+        "cutoff": 1,
+        "missing": 95
+      },
+      "original_accuracy": {
+        "n": 1,
+        "value": 0.0,
+        "ci95": [
+          0,
+          0.7934506856227626
+        ]
+      },
+      "all_variant_accuracy": 0.0,
+      "cutoff_rate": 1.0,
+      "empty_final_text": 1,
+      "reported_usage_count": 1,
+      "maximum_reported_completion": 16384,
+      "above_requested_allowance": 0,
+      "recorded_cost_usd": 0.0146506,
+      "diagnostics": {
+        "repeat": {
+          "available_pairs": 0,
+          "parseable_pairs": 0,
+          "agreement": {
+            "n": 0,
+            "value": null,
+            "ci95": null
+          },
+          "survival": {
+            "n": 0,
+            "value": null,
+            "ci95": null
+          },
+          "correct_original_transitions": {}
+        },
+        "neutral": {
+          "available_pairs": 0,
+          "parseable_pairs": 0,
+          "agreement": {
+            "n": 0,
+            "value": null,
+            "ci95": null
+          },
+          "survival": {
+            "n": 0,
+            "value": null,
+            "ci95": null
+          },
+          "correct_original_transitions": {}
+        },
+        "degree_reversed": {
+          "available_pairs": 0,
+          "parseable_pairs": 0,
+          "agreement": {
+            "n": 0,
+            "value": null,
+            "ci95": null
+          },
+          "survival": {
+            "n": 0,
+            "value": null,
+            "ci95": null
+          },
+          "correct_original_transitions": {}
+        }
+      }
+    },
+    {
+      "model": "z-ai/glm-5.3",
+      "endpoint": "baidu/fp8",
+      "precision": "fp8",
+      "completion_cap": 32768,
+      "expected_responses": 96,
+      "returned_responses": 0,
+      "counts": {
+        "provider_error": 1,
+        "missing": 95
+      },
+      "original_accuracy": {
+        "n": 0,
+        "value": null,
+        "ci95": null
+      },
+      "all_variant_accuracy": null,
+      "cutoff_rate": null,
+      "empty_final_text": 0,
+      "reported_usage_count": 0,
+      "maximum_reported_completion": null,
+      "above_requested_allowance": 0,
+      "recorded_cost_usd": 0.030454520000000002,
+      "diagnostics": {
+        "repeat": {
+          "available_pairs": 0,
+          "parseable_pairs": 0,
+          "agreement": {
+            "n": 0,
+            "value": null,
+            "ci95": null
+          },
+          "survival": {
+            "n": 0,
+            "value": null,
+            "ci95": null
+          },
+          "correct_original_transitions": {}
+        },
+        "neutral": {
+          "available_pairs": 0,
+          "parseable_pairs": 0,
+          "agreement": {
+            "n": 0,
+            "value": null,
+            "ci95": null
+          },
+          "survival": {
+            "n": 0,
+            "value": null,
+            "ci95": null
+          },
+          "correct_original_transitions": {}
+        },
+        "degree_reversed": {
+          "available_pairs": 0,
+          "parseable_pairs": 0,
+          "agreement": {
+            "n": 0,
+            "value": null,
+            "ci95": null
+          },
+          "survival": {
+            "n": 0,
+            "value": null,
+            "ci95": null
+          },
+          "correct_original_transitions": {}
+        }
+      }
+    },
+    {
+      "model": "minimax/minimax-m3.1-flash",
+      "endpoint": "tenstorrent/fp8",
+      "precision": "fp8",
+      "completion_cap": 16384,
+      "expected_responses": 96,
+      "returned_responses": 96,
+      "counts": {
+        "completed_wrong": 10,
+        "correct": 67,
+        "cutoff": 19,
+        "missing": 0
+      },
+      "original_accuracy": {
+        "n": 24,
+        "value": 0.6666666666666666,
+        "ci95": [
+          0.4670631683813174,
+          0.8202780967270225
+        ]
+      },
+      "all_variant_accuracy": 0.6979166666666666,
+      "cutoff_rate": 0.19791666666666666,
+      "empty_final_text": 19,
+      "reported_usage_count": 96,
+      "maximum_reported_completion": 16384,
+      "above_requested_allowance": 0,
+      "recorded_cost_usd": 0.14863905,
+      "diagnostics": {
+        "repeat": {
+          "available_pairs": 24,
+          "parseable_pairs": 17,
+          "agreement": {
+            "n": 17,
+            "value": 0.8235294117647058,
+            "ci95": [
+              0.5897054143116588,
+              0.9380887336237901
+            ]
+          },
+          "survival": {
+            "n": 16,
+            "value": 0.875,
+            "ci95": [
+              0.639771727342413,
+              0.9650225122567595
+            ]
+          },
+          "correct_original_transitions": {
+            "correct": 14,
+            "completed_wrong": 1,
+            "cutoff": 1
+          }
+        },
+        "neutral": {
+          "available_pairs": 24,
+          "parseable_pairs": 17,
+          "agreement": {
+            "n": 17,
+            "value": 0.8823529411764706,
+            "ci95": [
+              0.6566364940511412,
+              0.9671202262362074
+            ]
+          },
+          "survival": {
+            "n": 16,
+            "value": 0.9375,
+            "ci95": [
+              0.7167126242970107,
+              0.9888806552353576
+            ]
+          },
+          "correct_original_transitions": {
+            "correct": 15,
+            "cutoff": 1
+          }
+        },
+        "degree_reversed": {
+          "available_pairs": 24,
+          "parseable_pairs": 17,
+          "agreement": {
+            "n": 17,
+            "value": 0.7647058823529411,
+            "ci95": [
+              0.5273820188043501,
+              0.9044495567791988
+            ]
+          },
+          "survival": {
+            "n": 16,
+            "value": 0.75,
+            "ci95": [
+              0.5050168346449122,
+              0.8981793250878696
+            ]
+          },
+          "correct_original_transitions": {
+            "correct": 12,
+            "completed_wrong": 3,
+            "cutoff": 1
+          }
+        }
+      }
+    },
+    {
+      "model": "minimax/minimax-m3.1-flash",
+      "endpoint": "tenstorrent/fp8",
+      "precision": "fp8",
+      "completion_cap": 32768,
+      "expected_responses": 96,
+      "returned_responses": 96,
+      "counts": {
+        "completed_wrong": 25,
+        "correct": 60,
+        "cutoff": 10,
+        "invalid": 1,
+        "missing": 0
+      },
+      "original_accuracy": {
+        "n": 24,
+        "value": 0.5416666666666666,
+        "ci95": [
+          0.3507486535891948,
+          0.72108666268789
+        ]
+      },
+      "all_variant_accuracy": 0.625,
+      "cutoff_rate": 0.10416666666666667,
+      "empty_final_text": 10,
+      "reported_usage_count": 96,
+      "maximum_reported_completion": 32768,
+      "above_requested_allowance": 0,
+      "recorded_cost_usd": 0.18268189,
+      "diagnostics": {
+        "repeat": {
+          "available_pairs": 24,
+          "parseable_pairs": 21,
+          "agreement": {
+            "n": 21,
+            "value": 0.6190476190476191,
+            "ci95": [
+              0.4087865377511576,
+              0.7924898863143551
+            ]
+          },
+          "survival": {
+            "n": 13,
+            "value": 1.0,
+            "ci95": [
+              0.7719046276458016,
+              0.9999999999999999
+            ]
+          },
+          "correct_original_transitions": {
+            "correct": 13
+          }
+        },
+        "neutral": {
+          "available_pairs": 24,
+          "parseable_pairs": 21,
+          "agreement": {
+            "n": 21,
+            "value": 0.5714285714285714,
+            "ci95": [
+              0.3654655436930671,
+              0.7553003107462404
+            ]
+          },
+          "survival": {
+            "n": 13,
+            "value": 0.9230769230769231,
+            "ci95": [
+              0.6668604907890041,
+              0.9862895787574435
+            ]
+          },
+          "correct_original_transitions": {
+            "correct": 12,
+            "completed_wrong": 1
+          }
+        },
+        "degree_reversed": {
+          "available_pairs": 24,
+          "parseable_pairs": 19,
+          "agreement": {
+            "n": 19,
+            "value": 0.5789473684210527,
+            "ci95": [
+              0.3627590353425504,
+              0.7685810871754576
+            ]
+          },
+          "survival": {
+            "n": 13,
+            "value": 0.8461538461538461,
+            "ci95": [
+              0.5776536898051745,
+              0.9567418216419186
+            ]
+          },
+          "correct_original_transitions": {
+            "correct": 11,
+            "completed_wrong": 2
+          }
+        }
+      }
+    },
+    {
+      "model": "inclusionai/ling-3.1-flash",
+      "endpoint": "novita",
+      "precision": "unknown",
+      "completion_cap": 16384,
+      "expected_responses": 96,
+      "returned_responses": 96,
+      "counts": {
+        "cutoff": 60,
+        "correct": 34,
+        "invalid": 1,
+        "completed_wrong": 1,
+        "missing": 0
+      },
+      "original_accuracy": {
+        "n": 24,
+        "value": 0.4166666666666667,
+        "ci95": [
+          0.24467602609811764,
+          0.6116533413477124
+        ]
+      },
+      "all_variant_accuracy": 0.3541666666666667,
+      "cutoff_rate": 0.625,
+      "empty_final_text": 60,
+      "reported_usage_count": 96,
+      "maximum_reported_completion": 16384,
+      "above_requested_allowance": 0,
+      "recorded_cost_usd": 0.28345086,
+      "diagnostics": {
+        "repeat": {
+          "available_pairs": 24,
+          "parseable_pairs": 8,
+          "agreement": {
+            "n": 8,
+            "value": 1.0,
+            "ci95": [
+              0.6755924351161198,
+              1
+            ]
+          },
+          "survival": {
+            "n": 10,
+            "value": 0.8,
+            "ci95": [
+              0.49016247153664183,
+              0.9433178485456247
+            ]
+          },
+          "correct_original_transitions": {
+            "correct": 8,
+            "cutoff": 2
+          }
+        },
+        "neutral": {
+          "available_pairs": 24,
+          "parseable_pairs": 8,
+          "agreement": {
+            "n": 8,
+            "value": 0.875,
+            "ci95": [
+              0.5291118177871464,
+              0.9775825085499433
+            ]
+          },
+          "survival": {
+            "n": 10,
+            "value": 0.7,
+            "ci95": [
+              0.39677814746114537,
+              0.8922087325936989
+            ]
+          },
+          "correct_original_transitions": {
+            "correct": 7,
+            "completed_wrong": 1,
+            "cutoff": 2
+          }
+        },
+        "degree_reversed": {
+          "available_pairs": 24,
+          "parseable_pairs": 9,
+          "agreement": {
+            "n": 9,
+            "value": 1.0,
+            "ci95": [
+              0.7008549515804559,
+              1
+            ]
+          },
+          "survival": {
+            "n": 10,
+            "value": 0.9,
+            "ci95": [
+              0.5958499732047615,
+              0.9821237869049271
+            ]
+          },
+          "correct_original_transitions": {
+            "correct": 9,
+            "cutoff": 1
+          }
+        }
+      }
+    },
+    {
+      "model": "inclusionai/ling-3.1-flash",
+      "endpoint": "novita",
+      "precision": "unknown",
+      "completion_cap": 32768,
+      "expected_responses": 96,
+      "returned_responses": 96,
+      "counts": {
+        "correct": 50,
+        "cutoff": 44,
+        "completed_wrong": 2,
+        "missing": 0
+      },
+      "original_accuracy": {
+        "n": 24,
+        "value": 0.5,
+        "ci95": [
+          0.3142742581957335,
+          0.6857257418042665
+        ]
+      },
+      "all_variant_accuracy": 0.5208333333333334,
+      "cutoff_rate": 0.4583333333333333,
+      "empty_final_text": 42,
+      "reported_usage_count": 96,
+      "maximum_reported_completion": 32768,
+      "above_requested_allowance": 0,
+      "recorded_cost_usd": 0.492602415,
+      "diagnostics": {
+        "repeat": {
+          "available_pairs": 24,
+          "parseable_pairs": 12,
+          "agreement": {
+            "n": 12,
+            "value": 0.9166666666666666,
+            "ci95": [
+              0.646120088858883,
+              0.9851349055950829
+            ]
+          },
+          "survival": {
+            "n": 12,
+            "value": 0.9166666666666666,
+            "ci95": [
+              0.646120088858883,
+              0.9851349055950829
+            ]
+          },
+          "correct_original_transitions": {
+            "correct": 11,
+            "cutoff": 1
+          }
+        },
+        "neutral": {
+          "available_pairs": 24,
+          "parseable_pairs": 12,
+          "agreement": {
+            "n": 12,
+            "value": 0.9166666666666666,
+            "ci95": [
+              0.646120088858883,
+              0.9851349055950829
+            ]
+          },
+          "survival": {
+            "n": 12,
+            "value": 0.9166666666666666,
+            "ci95": [
+              0.646120088858883,
+              0.9851349055950829
+            ]
+          },
+          "correct_original_transitions": {
+            "correct": 11,
+            "cutoff": 1
+          }
+        },
+        "degree_reversed": {
+          "available_pairs": 24,
+          "parseable_pairs": 11,
+          "agreement": {
+            "n": 11,
+            "value": 1.0,
+            "ci95": [
+              0.7411670330319684,
+              1
+            ]
+          },
+          "survival": {
+            "n": 12,
+            "value": 0.9166666666666666,
+            "ci95": [
+              0.646120088858883,
+              0.9851349055950829
+            ]
+          },
+          "correct_original_transitions": {
+            "correct": 11,
+            "cutoff": 1
+          }
+        }
+      }
+    },
+    {
+      "model": "ibm-granite/granite-4.2-8b",
+      "endpoint": "coreweave/bf16",
+      "precision": "bf16",
+      "completion_cap": 16384,
+      "expected_responses": 96,
+      "returned_responses": 96,
+      "counts": {
+        "cutoff": 78,
+        "correct": 17,
+        "invalid": 1,
+        "missing": 0
+      },
+      "original_accuracy": {
+        "n": 24,
+        "value": 0.20833333333333334,
+        "ci95": [
+          0.09244825352851857,
+          0.40470453253188665
+        ]
+      },
+      "all_variant_accuracy": 0.17708333333333334,
+      "cutoff_rate": 0.8125,
+      "empty_final_text": 79,
+      "reported_usage_count": 96,
+      "maximum_reported_completion": 16384,
+      "above_requested_allowance": 0,
+      "recorded_cost_usd": 0.23842878,
+      "diagnostics": {
+        "repeat": {
+          "available_pairs": 24,
+          "parseable_pairs": 4,
+          "agreement": {
+            "n": 4,
+            "value": 1.0,
+            "ci95": [
+              0.5101091635454027,
+              1
+            ]
+          },
+          "survival": {
+            "n": 5,
+            "value": 0.8,
+            "ci95": [
+              0.37553462976252533,
+              0.9637758913675698
+            ]
+          },
+          "correct_original_transitions": {
+            "correct": 4,
+            "cutoff": 1
+          }
+        },
+        "neutral": {
+          "available_pairs": 24,
+          "parseable_pairs": 4,
+          "agreement": {
+            "n": 4,
+            "value": 1.0,
+            "ci95": [
+              0.5101091635454027,
+              1
+            ]
+          },
+          "survival": {
+            "n": 5,
+            "value": 0.8,
+            "ci95": [
+              0.37553462976252533,
+              0.9637758913675698
+            ]
+          },
+          "correct_original_transitions": {
+            "correct": 4,
+            "cutoff": 1
+          }
+        },
+        "degree_reversed": {
+          "available_pairs": 24,
+          "parseable_pairs": 1,
+          "agreement": {
+            "n": 1,
+            "value": 1.0,
+            "ci95": [
+              0.20654931437723745,
+              1
+            ]
+          },
+          "survival": {
+            "n": 5,
+            "value": 0.2,
+            "ci95": [
+              0.03622410863243014,
+              0.6244653702374747
+            ]
+          },
+          "correct_original_transitions": {
+            "cutoff": 4,
+            "correct": 1
+          }
+        }
+      }
+    },
+    {
+      "model": "ibm-granite/granite-4.2-8b",
+      "endpoint": "coreweave/bf16",
+      "precision": "bf16",
+      "completion_cap": 32768,
+      "expected_responses": 96,
+      "returned_responses": 96,
+      "counts": {
+        "cutoff": 63,
+        "correct": 28,
+        "completed_wrong": 3,
+        "invalid": 2,
+        "missing": 0
+      },
+      "original_accuracy": {
+        "n": 24,
+        "value": 0.3333333333333333,
+        "ci95": [
+          0.1797219032729775,
+          0.5329368316186824
+        ]
+      },
+      "all_variant_accuracy": 0.2916666666666667,
+      "cutoff_rate": 0.65625,
+      "empty_final_text": 65,
+      "reported_usage_count": 96,
+      "maximum_reported_completion": 32768,
+      "above_requested_allowance": 0,
+      "recorded_cost_usd": 0.41642244,
+      "diagnostics": {
+        "repeat": {
+          "available_pairs": 24,
+          "parseable_pairs": 7,
+          "agreement": {
+            "n": 7,
+            "value": 1.0,
+            "ci95": [
+              0.6456695649333126,
+              1
+            ]
+          },
+          "survival": {
+            "n": 8,
+            "value": 0.875,
+            "ci95": [
+              0.5291118177871464,
+              0.9775825085499433
+            ]
+          },
+          "correct_original_transitions": {
+            "correct": 7,
+            "cutoff": 1
+          }
+        },
+        "neutral": {
+          "available_pairs": 24,
+          "parseable_pairs": 7,
+          "agreement": {
+            "n": 7,
+            "value": 1.0,
+            "ci95": [
+              0.6456695649333126,
+              1
+            ]
+          },
+          "survival": {
+            "n": 8,
+            "value": 0.875,
+            "ci95": [
+              0.5291118177871464,
+              0.9775825085499433
+            ]
+          },
+          "correct_original_transitions": {
+            "correct": 7,
+            "cutoff": 1
+          }
+        },
+        "degree_reversed": {
+          "available_pairs": 24,
+          "parseable_pairs": 6,
+          "agreement": {
+            "n": 6,
+            "value": 0.8333333333333334,
+            "ci95": [
+              0.43649717781352987,
+              0.9699466302516935
+            ]
+          },
+          "survival": {
+            "n": 8,
+            "value": 0.625,
+            "ci95": [
+              0.30574239460262737,
+              0.8631557141764026
+            ]
+          },
+          "correct_original_transitions": {
+            "completed_wrong": 1,
+            "correct": 5,
+            "invalid": 1,
+            "cutoff": 1
+          }
+        }
+      }
+    }
+  ],
+  "budget_transitions": [
+    {
+      "model": "deepseek/deepseek-v4.1-flash-1017",
+      "paired_prompt_slots": 96,
+      "independent_graph_groups": 24,
+      "outcome_transitions": {
+        "correct -> correct": 54,
+        "cutoff -> correct": 15,
+        "correct -> completed_wrong": 3,
+        "completed_wrong -> correct": 2,
+        "cutoff -> cutoff": 15,
+        "cutoff -> completed_wrong": 7
+      }
+    },
+    {
+      "model": "z-ai/glm-5.3",
+      "paired_prompt_slots": 96,
+      "independent_graph_groups": 24,
+      "outcome_transitions": {
+        "missing -> missing": 95,
+        "cutoff -> provider_error": 1
+      }
+    },
+    {
+      "model": "minimax/minimax-m3.1-flash",
+      "paired_prompt_slots": 96,
+      "independent_graph_groups": 24,
+      "outcome_transitions": {
+        "correct -> correct": 53,
+        "completed_wrong -> correct": 3,
+        "correct -> completed_wrong": 13,
+        "completed_wrong -> completed_wrong": 7,
+        "cutoff -> completed_wrong": 5,
+        "cutoff -> correct": 4,
+        "cutoff -> cutoff": 10,
+        "correct -> invalid": 1
+      }
+    },
+    {
+      "model": "inclusionai/ling-3.1-flash",
+      "paired_prompt_slots": 96,
+      "independent_graph_groups": 24,
+      "outcome_transitions": {
+        "correct -> correct": 33,
+        "cutoff -> completed_wrong": 2,
+        "cutoff -> correct": 16,
+        "cutoff -> cutoff": 42,
+        "completed_wrong -> correct": 1,
+        "correct -> cutoff": 1,
+        "invalid -> cutoff": 1
+      }
+    },
+    {
+      "model": "ibm-granite/granite-4.2-8b",
+      "paired_prompt_slots": 96,
+      "independent_graph_groups": 24,
+      "outcome_transitions": {
+        "correct -> correct": 17,
+        "cutoff -> completed_wrong": 3,
+        "cutoff -> cutoff": 62,
+        "cutoff -> invalid": 2,
+        "invalid -> cutoff": 1,
+        "cutoff -> correct": 11
+      }
+    }
+  ]
+}
