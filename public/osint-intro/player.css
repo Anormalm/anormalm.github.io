@@ -8,3 +8,5 @@
 .research-cards{position:absolute;top:145px;left:220px;right:220px;display:flex;flex-direction:column;gap:30px}.research-cards article{text-align:left}.reveal .article-label{font-size:18px;color:#8995a1;margin-bottom:10px}.research-cards img{display:block;width:840px;height:155px;object-fit:contain;background:#faf9f5;margin:0}.reveal .article-caption{font-size:23px;margin-top:10px}
 
 .reveal{color:#e8edf3}.reveal .article-caption{color:#e8edf3}
+
+.intro-profile{position:absolute;inset:120px 100px 120px;display:flex;align-items:center;gap:70px;text-align:left}.intro-profile>img{width:400px;height:480px;object-fit:cover;object-position:73% center;border-radius:8px;flex-shrink:0}.intro-bio{flex:1}.reveal .intro-bio h2{position:static;font-size:52px;margin-bottom:24px}.reveal .intro-affiliation{font-size:28px;color:#6cb6ff;margin-bottom:36px}.reveal .intro-research{font-size:26px;line-height:1.5;color:#b9c3cc}
