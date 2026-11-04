@@ -92,8 +92,8 @@ At cap 1, four of the five outputs were valid and 23 of 31 fields matched the di
 
 Sources: Pilot results — pilot-results.txt
 
-## 16. Could we design the evaluation together?
+## 16. How we could run the study
 
-I’d like to choose specific task families and curate hard cases with adjudicated answers and held-out cases. We’d give agents web access and log evidence, dead ends and cost. We could compare your loop with other agents and a single-pass baseline under the same tools, models and budgets, reporting each task family separately. Would you want to design the task set with me?
+I’d like to choose specific task families and curate hard cases with adjudicated answers and held-out cases. We’d give agents web access and log evidence, dead ends and cost. We could compare your loop with other agents and a single-pass baseline under the same tools, models and budgets, reporting each task family separately.
 
 Sources: Research proposal / introduction.

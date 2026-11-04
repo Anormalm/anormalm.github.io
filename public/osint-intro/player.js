@@ -7,9 +7,10 @@
     document.querySelectorAll('.play-fallback').forEach(b=>b.hidden=true);
     const v=currentVideo();if(!v)return;
     v.muted=true;v.loop=false;v.currentTime=0;
-    v.play().catch(()=>showFallback(v));
+    v.play().catch(error=>{if(error.name!=='AbortError' && v===currentVideo() && v.paused && !v.ended)showFallback(v);});
   }
-  function togglePlayback(){const v=currentVideo();if(!v)return;if(v.paused){if(v.ended)v.currentTime=0;v.play().catch(()=>showFallback(v));}else v.pause();}
+  function togglePlayback(){const v=currentVideo();if(!v)return;if(v.paused){if(v.ended)v.currentTime=0;v.play().catch(error=>{if(error.name!=='AbortError' && v===currentVideo() && v.paused && !v.ended)showFallback(v);});}else v.pause();}
+  document.querySelectorAll('video.scene').forEach(v=>v.addEventListener('playing',()=>{v.parentElement.querySelector('.play-fallback').hidden=true;}));
   Reveal.initialize({width:1280,height:720,margin:.02,minScale:.1,maxScale:2,
     controls:false,progress:false,center:false,transition:'none',backgroundTransition:'none',
     hash:true,slideNumber:'c/t',autoSlide:0,autoPlayMedia:false,viewDistance:1,
