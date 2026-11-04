@@ -2,7 +2,7 @@
 
 24 slides. Right/Left: navigate. Space: pause or replay. F: fullscreen. S: speaker view.
 
-## 1. Lifan Hu
+## 1. Following Clues on the Open Web
 
 Hi Parin! I’m Lifan Hu, from the Department of Computer Science at NUS. It was great meeting you at EMNLP. Thanks for making time to chat; I wanted to show you something I tried with your search loop.
 
@@ -10,7 +10,7 @@ Sources: Research proposal / introduction.
 
 ## 2. Lifan Hu
 
-I’m currently working on graph-based reasoning, agentic systems and trustworthy AI, with experience in graph ML and evidence acquisition. I’ve also been exploring OSINT, particularly entity resolution and autonomous investigation. I think it would be fun to explore this together and see how your work could contribute to an active community of investigators. Today, I’d like to focus on how we could carry out a first study.
+I’m affiliated with XtraComputing and SMART. I’m currently working on graph-based reasoning, agentic systems and trustworthy AI, with experience in graph ML and evidence acquisition. I’ve also been exploring OSINT, particularly entity resolution and autonomous investigation. I think it would be fun to explore this together and see how your work could contribute to an active community of investigators. Today, I’d like to focus on how we could carry out a first study.
 
 Sources: anormalm.com — https://anormalm.com/
 

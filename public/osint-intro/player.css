@@ -11,4 +11,6 @@
 
 .intro-profile{position:absolute;inset:120px 100px 120px;display:flex;align-items:center;gap:70px;text-align:left}.intro-profile>img{width:400px;height:480px;object-fit:cover;object-position:73% center;border-radius:8px;flex-shrink:0}.intro-bio{flex:1}.reveal .intro-bio h2{position:static;font-size:52px;margin-bottom:24px}.reveal .intro-affiliation{font-size:28px;color:#6cb6ff;margin-bottom:36px}.reveal .intro-research{font-size:26px;line-height:1.5;color:#b9c3cc}
 
-.reveal .title-content{gap:25px}.reveal .title-content .nus-logo{width:310px;height:auto;margin-bottom:22px}.reveal .title-content h1{font-size:78px}.reveal .title-content .title-affiliation{font-size:28px;color:#b9c3cc}.reveal .title-content .talk-subtitle{font-size:22px;margin-top:30px;color:#8995a1}
+.reveal .title-content{gap:25px}.reveal .title-content .nus-logo{width:310px;height:auto;margin-bottom:22px}.reveal .title-content h1{font-size:54px;max-width:1150px}.reveal .title-content .title-affiliation{font-size:23px;color:#8995a1}.reveal .title-content .talk-subtitle{font-size:22px;margin-top:30px;color:#8995a1}
+
+.reveal .title-content .presenter-name{font-size:31px;color:#b9c3cc;margin-top:12px}

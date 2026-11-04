@@ -2,7 +2,7 @@ VERBATIM SCRIPT — Following clues on the open web
 
 Open slide 1. F: fullscreen. Each RIGHT advances one slide. Animations play automatically; do not click through their individual steps. Space pauses/resumes/replays.
 
-SLIDE 1: Lifan Hu
+SLIDE 1: Following Clues on the Open Web
 NO CLICK — opening slide.
 
 Hi Parin! I’m Lifan Hu, from the Department of Computer Science at NUS. It was great meeting you at EMNLP. Thanks for making time to chat; I wanted to show you something I tried with your search loop.
@@ -10,7 +10,7 @@ Hi Parin! I’m Lifan Hu, from the Department of Computer Science at NUS. It was
 SLIDE 2: Lifan Hu
 CLICK 1: press RIGHT once.
 
-I’m currently working on graph-based reasoning, agentic systems and trustworthy AI, with experience in graph ML and evidence acquisition. I’ve also been exploring OSINT, particularly entity resolution and autonomous investigation. I think it would be fun to explore this together and see how your work could contribute to an active community of investigators. Today, I’d like to focus on how we could carry out a first study.
+I’m affiliated with XtraComputing and SMART. I’m currently working on graph-based reasoning, agentic systems and trustworthy AI, with experience in graph ML and evidence acquisition. I’ve also been exploring OSINT, particularly entity resolution and autonomous investigation. I think it would be fun to explore this together and see how your work could contribute to an active community of investigators. Today, I’d like to focus on how we could carry out a first study.
 
 SLIDE 3: What is OSINT?
 CLICK 2: press RIGHT once.
