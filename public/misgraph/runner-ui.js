@@ -42,8 +42,8 @@ form.addEventListener('submit',async e=>{e.preventDefault();if(busy||!plan.lengt
   for(const diagnostic of selected.diagnostics){const button=document.createElement('button');button.className='text-button native-export';button.textContent=`Python audit file: ${diagnostic.replaceAll('_',' ')}`;button.addEventListener('click',()=>download(`results_browser_${diagnostic}.json`,report.results.filter(r=>r.diagnostic===diagnostic&&r.status==='ok')));$('native-exports').append(button);}
  }catch(e){error(e.message);$('run-state').textContent='Failed';}finally{config.apiKey='';setBusy(false);}
 });
-$('download-run').addEventListener('click',()=>{if(report)download('groundlm-run.json',report);});
-$('download-csv').addEventListener('click',()=>{if(!report)return;const lines=['metric,value,denominator',...Object.entries(report.summary.metrics).map(([k,v])=>[k,v.value??'',v.n??''].join(','))];download('groundlm-metrics.csv',lines.join('\r\n'),'text/csv');});
+$('download-run').addEventListener('click',()=>{if(report)download('misgraph-run.json',report);});
+$('download-csv').addEventListener('click',()=>{if(!report)return;const lines=['metric,value,denominator',...Object.entries(report.summary.metrics).map(([k,v])=>[k,v.value??'',v.n??''].join(','))];download('misgraph-metrics.csv',lines.join('\r\n'),'text/csv');});
 window.addEventListener('pagehide',()=>{$('api-key').value='';controller?.abort();});
 window.addEventListener('beforeunload',e=>{if(busy){e.preventDefault();e.returnValue='';}});
 try{const response=await fetch('data/benchmark/manifest.json');if(!response.ok)throw new Error('Could not load the benchmark manifest. Serve the site over HTTP and reload.');manifest=await response.json();await prepare();}catch(e){error(e.message);$('plan-count').textContent='Protocol unavailable';}

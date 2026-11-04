@@ -11,9 +11,9 @@ npm run dev
 
 ## Production build
 
-The GroundLM benchmark is available at [/groundlm/](https://anormalm.com/groundlm/).
+The MisGraph Benchmark is available at [/misgraph/](https://anormalm.com/misgraph/).
 Visitors can run evaluations using their own model endpoint and API key.
-See [GroundLM setup and deployment](docs/GROUNDLM.md).
+See [MisGraph setup and deployment](docs/GROUNDLM.md).
 
 ```bash
 npm run build

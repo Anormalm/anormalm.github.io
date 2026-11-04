@@ -4,13 +4,13 @@ import fs from 'node:fs';
 import crypto from 'node:crypto';
 import http from 'node:http';
 import {fileURLToPath} from 'node:url';
-import {summarize,selectRecords,compareModels,csv,estimate} from '../../public/groundlm/leaderboard-core.js';
-import {parseHardAnswer,selectCases,hardRequest,runHard} from '../../public/groundlm/hard-runner-core.js';
+import {summarize,selectRecords,compareModels,csv,estimate} from '../../public/misgraph/leaderboard-core.js';
+import {parseHardAnswer,selectCases,hardRequest,runHard} from '../../public/misgraph/hard-runner-core.js';
 process.chdir(fileURLToPath(new URL('../..',import.meta.url)));
-const data=JSON.parse(fs.readFileSync('public/groundlm/data/hard-v1/leaderboard.json'));
-const reference=JSON.parse(fs.readFileSync('public/groundlm/downloads/hard-v1/summary.json'));
-const manifest=JSON.parse(fs.readFileSync('public/groundlm/data/hard-v1/manifest.json'));
-const fixtures=()=>manifest.cases.flatMap(c=>JSON.parse(fs.readFileSync('public/groundlm/data/hard-v1/'+c.file)));
+const data=JSON.parse(fs.readFileSync('public/misgraph/data/hard-v1/leaderboard.json'));
+const reference=JSON.parse(fs.readFileSync('public/misgraph/downloads/hard-v1/summary.json'));
+const manifest=JSON.parse(fs.readFileSync('public/misgraph/data/hard-v1/manifest.json'));
+const fixtures=()=>manifest.cases.flatMap(c=>JSON.parse(fs.readFileSync('public/misgraph/data/hard-v1/'+c.file)));
 const cfg={endpoint:'http://127.0.0.1:8000/v1/chat/completions',model:'local-model',key:'dummy-secret',reasoning:'default',concurrency:1};
 
 test('dashboard matches every authoritative model count, cost and paired diagnostic',()=>{
@@ -37,7 +37,7 @@ test('invalid and cutoff partners fail survival but do not enter agreement',()=>
 test('frozen fixture hashes, counts and unchanged repeats are intact',()=>{
  assert.equal(manifest.cases.length,120);assert.equal(selectCases(manifest).length,12);assert.equal(selectCases(manifest,{profile:'full'}).length,120);
  assert.equal(selectCases(manifest,{profile:'full',task:'minimum_cut',size:'32'}).length,10);
- for(const c of manifest.cases){const bytes=fs.readFileSync('public/groundlm/data/hard-v1/'+c.file);assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'),c.sha256);const rows=JSON.parse(bytes);assert.equal(rows.length,8);assert.equal(rows.find(r=>r.variant==='repeat').prompt,rows.find(r=>r.variant==='original').prompt);assert.equal(new Set(rows.map(r=>r.ground_truth)).size,1);assert.ok(Number.isSafeInteger(rows[0].ground_truth));}
+ for(const c of manifest.cases){const bytes=fs.readFileSync('public/misgraph/data/hard-v1/'+c.file);assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'),c.sha256);const rows=JSON.parse(bytes);assert.equal(rows.length,8);assert.equal(rows.find(r=>r.variant==='repeat').prompt,rows.find(r=>r.variant==='original').prompt);assert.equal(new Set(rows.map(r=>r.ground_truth)).size,1);assert.ok(Number.isSafeInteger(rows[0].ground_truth));}
 });
 test('Hard v1 parser requires terminal nonnegative integer JSON',()=>{
  for(const text of ['{"answer":3}','```json\n{"answer":3}\n```','Reasoning 99.\n{"answer":3}'])assert.equal(parseHardAnswer(text),3);

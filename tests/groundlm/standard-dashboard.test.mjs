@@ -2,10 +2,10 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {fileURLToPath} from 'node:url';
-import {cohortRows,visibleRows,expectedScope,metricValue} from '../../public/groundlm/standard-core.js';
+import {cohortRows,visibleRows,expectedScope,metricValue} from '../../public/misgraph/standard-core.js';
 process.chdir(fileURLToPath(new URL('../..',import.meta.url)));
-const protocol=JSON.parse(fs.readFileSync('public/groundlm/data/protocol/standard.json'));
-const data=JSON.parse(fs.readFileSync('public/groundlm/data/hard-v1/leaderboard.json'));
+const protocol=JSON.parse(fs.readFileSync('public/misgraph/data/protocol/standard.json'));
+const data=JSON.parse(fs.readFileSync('public/misgraph/data/hard-v1/leaderboard.json'));
 
 test('registry scores only five fully covered configurations; sixteen await the protocol',()=>{
  const rows=cohortRows(protocol,data);
@@ -47,6 +47,6 @@ test('search, status, precision and metric sorting retain missing values',()=>{
 });
 test('main pages use the shared dashboard, preserve archive access and contain no old initialization target',()=>{
  for(const file of ['index.html','results.html']){
-  const html=fs.readFileSync('public/groundlm/'+file,'utf8');assert.match(html,/standard-dashboard.js/);assert.match(html,/id="canonical-dashboard"/);assert.doesNotMatch(html,/id="dashboard"/);assert.match(html,/history.html/);assert.match(html,/Awaiting matched evaluation/);
+  const html=fs.readFileSync('public/misgraph/'+file,'utf8');assert.match(html,/standard-dashboard.js/);assert.match(html,/id="canonical-dashboard"/);assert.doesNotMatch(html,/id="dashboard"/);assert.match(html,/history.html/);assert.match(html,/Awaiting matched evaluation/);
  }
 });
