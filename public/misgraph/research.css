@@ -168,3 +168,13 @@ h1 em{font-style:normal;color:inherit}
 
 .lab-page #leaderboard,.lab-page #performance,.lab-page #task-results{scroll-margin-top:20px}
 @media(max-width:760px){.lab-page #leaderboard,.lab-page #performance,.lab-page #task-results,.lab-page .detail{scroll-margin-top:40px}}
+
+/* Technical explanations stay available without interrupting the results. */
+.lab-page .reading-guide{border:1px solid var(--line);border-radius:8px;margin:18px 0;padding:0 20px;background:white;font-size:15px}
+.lab-page .reading-guide>summary{padding:15px 0;cursor:pointer;font-weight:600;color:var(--ink)}
+.lab-page .reading-guide[open]{padding-bottom:18px}
+.lab-page .reading-guide p,.lab-page .reading-guide li,.lab-page .reading-guide dd{color:var(--muted);line-height:1.65;max-width:850px}
+.lab-page .reading-guide dt{font-weight:600;margin-top:14px}
+.lab-page .reading-guide dd{margin:3px 0 0}
+.lab-page .reading-guide a{color:var(--cobalt);text-decoration:underline;text-underline-offset:3px}
+.lab-page .method-detail{scroll-margin-top:24px}
