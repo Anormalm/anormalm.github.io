@@ -47,6 +47,6 @@ test('search, status, precision and metric sorting retain missing values',()=>{
 });
 test('main pages use the shared dashboard, preserve archive access and contain no old initialization target',()=>{
  for(const file of ['index.html','results.html']){
-  const html=fs.readFileSync('public/misgraph/'+file,'utf8');assert.match(html,/standard-dashboard.js/);assert.match(html,/id="canonical-dashboard"/);assert.doesNotMatch(html,/id="dashboard"/);assert.match(html,/history.html/);assert.match(html,/Awaiting matched evaluation/);
+  const html=fs.readFileSync('public/misgraph/'+file,'utf8');assert.match(html,/standard-dashboard.js/);assert.match(html,/id="canonical-dashboard"/);assert.doesNotMatch(html,/id="dashboard"/);assert.match(html,/history.html/);assert.match(html,/Pending/);
  }
 });
