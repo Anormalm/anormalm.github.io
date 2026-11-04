@@ -221,3 +221,17 @@ h1 em{font-style:normal;color:inherit}
 @media(max-width:1100px){.benchmark-heading{align-items:flex-start;flex-direction:column;gap:16px}.benchmark-meta{gap:8px 18px}}
 @media(max-width:760px){.lab-page main{padding-top:22px}.lab-page h1{font-size:29px;line-height:1.2}.benchmark-heading{gap:14px;margin-bottom:18px}.benchmark-heading p{font-size:16px}.benchmark-actions{gap:8px}.benchmark-actions .button{font-size:13px;padding:9px 12px}.benchmark-meta{font-size:13px;gap:7px 16px}.benchmark-meta a{margin-left:0}.lab-page #leaderboard{margin-top:22px}.lab-page #leaderboard .toolbar label:not(.search){flex:1 1 40%}.advanced-filters{flex:1}.advanced-filters>summary{font-size:13px}.advanced-filters>div{left:0;right:auto;min-width:min(280px,80vw)}.results-meta{align-items:start;flex-direction:column;gap:5px}.lab-page #leaderboard .model-cell{min-width:155px;max-width:180px}.lab-page #leaderboard .model-icon{display:none}.lab-page #leaderboard tbody th{max-width:200px}.lab-page #leaderboard .model-button{font-size:13px;white-space:normal;text-align:left}.lab-page #leaderboard .model-cell small{font-size:11px;white-space:normal}.lab-page #leaderboard td{padding:12px;min-width:110px}.benchmark-resources{grid-template-columns:1fr}.benchmark-resources>a{border-right:0;border-bottom:1px solid var(--line);padding:17px 18px}}
 @media(max-width:760px){.lab-page nav{justify-content:flex-start;gap:18px;overflow-x:auto}.benchmark-actions{width:100%}.benchmark-actions .button{flex:1;font-size:12px;padding:10px 8px;text-align:center}.mobile-table-hint{display:block;margin:8px 0;font-size:12px;color:var(--muted)}}
+
+/* Release content remains readable before the interactive dashboard loads. */
+.benchmark-heading .benchmark-finding{font-size:17px;font-weight:650;line-height:1.45;color:#172b3a}
+.benchmark-finding span{font-size:14px;font-weight:400;color:var(--muted,#536575);display:block;margin-top:4px}
+.release-note{font-size:12px;color:var(--muted,#536575);margin:0 0 16px}
+.survival-hint{font-weight:400;white-space:normal;max-width:170px;margin-left:auto}
+#static-leaderboard th[scope="row"]{text-align:left}
+#static-leaderboard td{font-variant-numeric:tabular-nums}
+#cite pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px;line-height:1.6;background:#f6f8fb;padding:16px;border-radius:6px}
+.citation-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap;font-size:13px}
+#standard-retry{margin-left:8px}
+@media(max-width:640px){.benchmark-actions{flex-wrap:wrap}.benchmark-finding{font-size:17px}.survival-hint{font-size:10px}}
+
+#static-leaderboard tbody th,#static-leaderboard thead th:first-child{position:sticky;left:0;z-index:1;background:#fff;min-width:160px;max-width:220px;white-space:normal}

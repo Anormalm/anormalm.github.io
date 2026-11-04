@@ -51,9 +51,12 @@ function compare(){const rows=allRows().filter(r=>r.eligible&&selected.has(r.id)
  $('#standard-detail').scrollIntoView({behavior:'smooth'});$('#standard-detail-close').focus({preventScroll:true});
 }
 function filterChange(){page=0;selected.clear();$('#standard-detail').hidden=true;render();}
-async function start(){try{
- const responses=await Promise.all([fetch('data/protocol/standard.json'),fetch('data/hard-v1/leaderboard.json')]);if(responses.some(r=>!r.ok))throw Error();[protocol,data]=await Promise.all(responses.map(r=>r.json()));
- $('#standard-loading').hidden=true;$('#canonical-dashboard').hidden=false;$('#protocol-id').textContent=protocol.protocol_id;$('#protocol-fingerprint').textContent=protocol.protocol_sha256;
+async function start(){
+ $('#standard-loading').hidden=false;
+ try{
+ const responses=await Promise.all([fetch('data/protocol/standard.json',{signal:AbortSignal.timeout(15000)}),fetch('data/hard-v1/leaderboard.json',{signal:AbortSignal.timeout(15000)})]);if(responses.some(r=>!r.ok))throw Error();[protocol,data]=await Promise.all(responses.map(r=>r.json()));
+ if(!Array.isArray(data.records)||!data.records.length||!Array.isArray(protocol.registry)||!protocol.registry.length)throw Error('Invalid release data');
+ $('#protocol-id').textContent=protocol.protocol_id;$('#protocol-fingerprint').textContent=protocol.protocol_sha256;
  $('#standard-task').innerHTML='<option value="all">All six tasks</option>'+Object.entries(TASKS).map(([id,name])=>`<option value="${id}">${esc(name)}</option>`).join('');
  const p=new URLSearchParams(location.search);$('#standard-search').value=p.get('q')||'';for(const [param,id] of [['task','standard-task'],['size','standard-size'],['status','standard-status'],['precision','standard-precision']]){const el=$('#'+id);if([...el.options].some(o=>o.value===p.get(param)))el.value=p.get(param);}
  const filters=$('#advanced-filters');document.addEventListener('click',e=>{if(filters.open&&!filters.contains(e.target))filters.open=false;});filters.addEventListener('keydown',e=>{if(e.key==='Escape'){filters.open=false;filters.querySelector('summary').focus();}});
@@ -66,6 +69,11 @@ async function start(){try{
  $('#standard-compare').addEventListener('click',compare);$('#standard-detail-close').addEventListener('click',()=>{$('#standard-detail').hidden=true;$('#standard-search').focus();});
  $('#standard-export').addEventListener('click',()=>download('misgraph-shared-protocol.csv',csv([['protocol_id','model','provider','precision','status','task','nodes','original_accuracy','original_n_graphs','survival','survival_n_graphs','cutoff_rate','returned_slots','expected_slots','recorded_cost_per_1000_usd'],...shownRows().map(r=>[protocol.protocol_id,r.id,r.endpoint,r.precision,r.status,scope().task,scope().size,r.metrics?.original.value,r.metrics?.original.n,r.metrics?.survival.degree_reversed.value,r.metrics?.survival.degree_reversed.n,r.metrics?.cutoff,r.metrics?.returned??0,expectedScope(protocol,scope()),r.cost_per_1000])]),'text/csv'));
  render();
+ $('#standard-loading').hidden=true;$('#static-leaderboard').hidden=true;$('#canonical-dashboard').hidden=false;
  const anchor=location.hash.slice(1);if(['leaderboard','performance','task-results'].includes(anchor))document.getElementById(anchor)?.scrollIntoView({block:'start'});
- }catch{$('#standard-loading').innerHTML='The comparison data could not be loaded. <a href="history.html">Browse the saved experiment history</a> or reload.';}}
+ }catch{
+ $('#canonical-dashboard').hidden=true;$('#static-leaderboard').hidden=false;$('#standard-loading').hidden=false;
+ $('#standard-loading').innerHTML='Interactive results could not load. The frozen full-release table remains available. <button type="button" id="standard-retry">Retry</button>';
+ $('#standard-retry').addEventListener('click',()=>location.reload());
+ }}
 start();

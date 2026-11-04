@@ -12,3 +12,17 @@ function revealLinkedDetails(){
 }
 window.addEventListener('hashchange',revealLinkedDetails);
 revealLinkedDetails();
+
+const copyCitation=document.querySelector('#copy-citation');
+if(copyCitation){
+ copyCitation.hidden=false;
+ copyCitation.addEventListener('click',async()=>{
+  const status=document.querySelector('#citation-status');
+  try{
+   await navigator.clipboard.writeText(document.querySelector('#release-bibtex').textContent);
+   status.textContent='BibTeX copied.';
+  }catch{
+   status.textContent='Copy unavailable. Select the citation above or download the BibTeX file.';
+  }
+ });
+}

@@ -50,3 +50,32 @@ test('main pages use the shared dashboard, preserve archive access and contain n
   const html=fs.readFileSync('public/misgraph/'+file,'utf8');assert.match(html,/standard-dashboard.js/);assert.match(html,/id="canonical-dashboard"/);assert.doesNotMatch(html,/id="dashboard"/);assert.match(html,/history.html/);assert.match(html,/Pending/);
  }
 });
+
+
+test('static release matches interactive metrics, costs and protocol without JavaScript',()=>{
+ const expected=visibleRows(cohortRows(protocol,data),{status:'eligible',sort:'original'});
+ for(const file of ['index.html','results.html']){
+  const html=fs.readFileSync('public/misgraph/'+file,'utf8');
+  assert.match(html,/<section id="static-leaderboard" class="section"/);
+  assert.match(html,/<div id="canonical-dashboard" hidden>/);
+  assert.ok(html.includes(protocol.protocol_sha256));
+  const rows=[...html.matchAll(/<tr data-snapshot-model="([^"]+)">([\s\S]*?)<\/tr>/g)];
+  assert.equal(rows.length,expected.length);
+  for(let i=0;i<rows.length;i++){
+   const r=expected[i],m=r.metrics;
+   assert.equal(rows[i][1],r.id);
+   const cells=[...rows[i][2].matchAll(/<td>([\s\S]*?)<\/td>/g)].map(x=>x[1].replace(/<[^>]*>/g,''));
+   assert.ok(cells[0].startsWith((100*m.original.value).toFixed(1)+'%'));
+   assert.ok(cells[0].includes('n='+m.original.n));
+   assert.ok(cells[1].startsWith((100*m.survival.degree_reversed.value).toFixed(1)+'%'));
+   assert.ok(cells[1].includes('n='+m.survival.degree_reversed.n+' correct originals'));
+   assert.ok(cells[2].startsWith((100*m.cutoff).toFixed(1)+'%'));
+   assert.equal(cells[3],m.returned+'/960');
+   assert.equal(cells[4],'$'+r.cost_per_1000.toFixed(2));
+  }
+ }
+ const bib=fs.readFileSync('public/misgraph/downloads/hard-v1/citation.bib','utf8');
+ assert.ok(bib.includes(protocol.protocol_sha256));
+ assert.match(bib,/author = \{Hu, Lifan\}/);
+ assert.match(bib,/Hard v1/);
+});
