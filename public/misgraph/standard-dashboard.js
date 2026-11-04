@@ -13,7 +13,8 @@ function modelCell(r){return `<div class="model-cell"><input type="checkbox" dat
 function render(){
  const rows=shownRows(),perModel=expectedScope(protocol,scope()),pages=Math.max(1,Math.ceil(rows.length/10));page=Math.min(page,pages-1);
  const evaluated=rows.filter(r=>r.eligible),pending=rows.length-evaluated.length;
- $('#standard-count').textContent=`${rows.length} models · ${evaluated.length} evaluated · ${pending} pending/review`;
+ $('#standard-count').textContent=pending?`${evaluated.length} evaluated · ${pending} pending/review`:`${evaluated.length} evaluated configurations · ${perModel.toLocaleString()} responses each`;
+ $('#advanced-filters').querySelector('summary').textContent=(options().status!=='eligible'||options().precision!=='all')?'More filters · active':'More filters';
  $('#standard-rows').innerHTML=rows.slice(page*10,(page+1)*10).map(r=>{
   if(!r.eligible)return `<tr class="awaiting-row"><th scope="row">${modelCell(r)}</th><td>—</td><td>—</td><td>—</td><td>0/${perModel}</td><td>—</td></tr>`;
   const m=r.metrics;return `<tr><th scope="row">${modelCell(r)}</th><td><span class="metric-main">${percent(m.original.value)}</span><span class="metric-sub">n=${m.original.n}</span></td><td><span class="metric-main semantic-number">${percent(m.survival.degree_reversed.value)}</span><span class="metric-sub">n=${m.survival.degree_reversed.n}</span></td><td><span class="metric-main">${percent(m.cutoff)}</span><span class="metric-sub">${m.counts.cutoff}/${m.returned}</span></td><td><span class="metric-main">${m.returned}/${perModel}</span></td><td><span class="metric-main">${money(r.cost_per_1000)}</span></td></tr>`;
@@ -22,7 +23,7 @@ function render(){
  document.querySelectorAll('[data-standard-sort]').forEach(b=>b.closest('th').setAttribute('aria-sort',b.dataset.standardSort===sort?ascending?'ascending':'descending':'none'));
  $('#standard-compare').disabled=selected.size<2;$('#standard-compare').textContent=`Compare selected (${selected.size})`;
  renderCharts(evaluated);renderHeatmap(evaluated);
- const params=new URLSearchParams();for(const [k,v] of Object.entries(scope()))if(v!=='all')params.set(k,v);if(options().query)params.set('q',options().query);if(options().status!=='all')params.set('status',options().status);if(options().precision!=='all')params.set('precision',options().precision);
+ const params=new URLSearchParams();for(const [k,v] of Object.entries(scope()))if(v!=='all')params.set(k,v);if(options().query)params.set('q',options().query);if(options().status!=='eligible')params.set('status',options().status);if(options().precision!=='all')params.set('precision',options().precision);
  history.replaceState(null,'',location.pathname+(params.size?'?'+params:'')+location.hash);
 }
 function renderCharts(rows){
@@ -55,8 +56,10 @@ async function start(){try{
  $('#standard-loading').hidden=true;$('#canonical-dashboard').hidden=false;$('#protocol-id').textContent=protocol.protocol_id;$('#protocol-fingerprint').textContent=protocol.protocol_sha256;
  $('#standard-task').innerHTML='<option value="all">All six tasks</option>'+Object.entries(TASKS).map(([id,name])=>`<option value="${id}">${esc(name)}</option>`).join('');
  const p=new URLSearchParams(location.search);$('#standard-search').value=p.get('q')||'';for(const [param,id] of [['task','standard-task'],['size','standard-size'],['status','standard-status'],['precision','standard-precision']]){const el=$('#'+id);if([...el.options].some(o=>o.value===p.get(param)))el.value=p.get(param);}
+ const filters=$('#advanced-filters');document.addEventListener('click',e=>{if(filters.open&&!filters.contains(e.target))filters.open=false;});filters.addEventListener('keydown',e=>{if(e.key==='Escape'){filters.open=false;filters.querySelector('summary').focus();}});
+ if(p.has('status')||p.has('precision'))$('#advanced-filters').open=true;
  for(const id of ['standard-task','standard-size','standard-status','standard-precision'])$('#'+id).addEventListener('change',filterChange);$('#standard-search').addEventListener('input',filterChange);
- $('#standard-reset').addEventListener('click',()=>{for(const id of ['standard-task','standard-size','standard-status','standard-precision'])$('#'+id).value='all';$('#standard-search').value='';filterChange();});
+ $('#standard-reset').addEventListener('click',()=>{for(const id of ['standard-task','standard-size','standard-status','standard-precision'])$('#'+id).value=id==='standard-status'?'eligible':'all';$('#standard-search').value='';$('#advanced-filters').open=false;filterChange();});
  document.querySelectorAll('[data-standard-sort]').forEach(b=>b.addEventListener('click',()=>{ascending=sort===b.dataset.standardSort?!ascending:['cutoff','cost'].includes(b.dataset.standardSort);sort=b.dataset.standardSort;page=0;render();}));
  $('#standard-prev').addEventListener('click',()=>{page--;render();});$('#standard-next').addEventListener('click',()=>{page++;render();});
  $('#standard-rows').addEventListener('click',e=>{const b=e.target.closest('[data-model]');if(b)openDetail(b.dataset.model);});$('#standard-rows').addEventListener('change',e=>{if(e.target.matches('[data-select]')){if(e.target.checked)selected.add(e.target.dataset.select);else selected.delete(e.target.dataset.select);render();}});
