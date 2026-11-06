@@ -48,6 +48,14 @@ const SKILLS_ZH = ['Python', 'C/C++', 'PyTorch', '图机器学习', '多模态 A
 
 const CV_PHOTOS = [
   {
+    src: '/lifan-signal.webp',
+    alt: 'Lifan Hu standing in a garden at Sentosa, Singapore',
+    caption: 'Sentosa, Singapore',
+    context: 'September 2026',
+    width: 1600,
+    height: 1200,
+  },
+  {
     src: '/photos/danube-parliament.jpg',
     alt: 'Lifan Hu by the Danube, with the Hungarian Parliament lit up at night',
     caption: 'Across the Danube · Hungarian Parliament',
@@ -76,14 +84,6 @@ const CV_PHOTOS = [
     caption: 'Back at my high school for a visit and talk',
     width: 1276,
     height: 1276,
-  },
-  {
-    src: '/lifan-signal.webp',
-    alt: 'Lifan Hu standing in a garden at Sentosa, Singapore',
-    caption: 'Sentosa, Singapore',
-    context: 'September 2026',
-    width: 1600,
-    height: 1200,
   },
 ];
 
