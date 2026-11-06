@@ -4,7 +4,11 @@ import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
 
 export default [
-  { ignores: ['dist'] },
+  { ignores: ['dist', 'public/osint-intro/vendor/**'] },
+  {
+    files: ['public/osint-intro/player.js'],
+    languageOptions: { globals: { Reveal: 'readonly', RevealNotes: 'readonly' } },
+  },
   {
     files: ['**/*.{js,jsx}'],
     languageOptions: {

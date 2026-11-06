@@ -6,14 +6,15 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && node scripts/build-benchmark-alias.mjs && node scripts/build-worker.mjs && node scripts/pause-cv.mjs",
+    "build": "vite build && node scripts/build-benchmark-alias.mjs && node scripts/build-worker.mjs && node scripts/build-pages.mjs && node scripts/pause-cv.mjs",
     "db:generate": "drizzle-kit generate",
     "lint": "eslint .",
     "preview": "vite preview",
     "deploy": "gh-pages -d dist",
     "test:groundlm": "node --test tests/groundlm/*.test.mjs",
     "test:languages": "node --test tests/language-suggestion.test.mjs tests/locale-assets.test.mjs",
-    "test:visitors": "node --test tests/visitor-counts.test.mjs"
+    "test:visitors": "node --test tests/visitor-counts.test.mjs",
+    "test:pages": "node --test tests/pages.test.mjs"
   },
   "dependencies": {
     "framer-motion": "^12.4.11",

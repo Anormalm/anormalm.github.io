@@ -1,4 +1,6 @@
 {
+  "A reproducible graph-reasoning benchmark with paired node-renaming tests, inspectable model responses, and a browser-based evaluation runner.": "เกณฑ์ทดสอบการให้เหตุผลบนกราฟที่ทำซ้ำได้ พร้อมการทดสอบเปลี่ยนชื่อโหนดแบบจับคู่ คำตอบโมเดลที่ตรวจสอบได้ และเครื่องมือประเมินในเบราว์เซอร์",
+  "Page not found": "ไม่พบหน้านี้",
   "CV update in progress": "กำลังอัปเดตประวัติย่อ",
   "“I build and code": "“ผมสร้างและเขียนโค้ด",
   "{0} controls": "ตัวควบคุม {0} รายการ",

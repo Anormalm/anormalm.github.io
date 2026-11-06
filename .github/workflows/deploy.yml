@@ -24,10 +24,12 @@ jobs:
           node-version: 24
           cache: "npm"
       - run: npm ci
+      - run: npm run lint
       - run: npm run test:groundlm
       - run: npm run test:languages
       - run: npm run test:visitors
       - run: npm run build
+      - run: npm run test:pages
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

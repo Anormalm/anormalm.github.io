@@ -1,4 +1,6 @@
 {
+  "A reproducible graph-reasoning benchmark with paired node-renaming tests, inspectable model responses, and a browser-based evaluation runner.": "নোডের নাম পরিবর্তনের জোড়া পরীক্ষা, যাচাইযোগ্য মডেল উত্তর এবং ব্রাউজারভিত্তিক মূল্যায়ন সরঞ্জামসহ পুনরুৎপাদনযোগ্য গ্রাফ যুক্তি বেঞ্চমার্ক।",
+  "Page not found": "পৃষ্ঠাটি পাওয়া যায়নি",
   "CV update in progress": "সিভি হালনাগাদ চলছে",
   "“I build and code": "“আমি বানাই আর কোড লিখি",
   "{0} controls": "{0}টি নিয়ন্ত্রণ",

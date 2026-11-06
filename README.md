@@ -19,6 +19,22 @@ See [MisGraph setup and deployment](docs/GROUNDLM.md).
 npm run build
 ```
 
+The build emits an `index.html` for every portfolio route, each with crawlable
+content and its own title, description, social metadata, and canonical URL.
+GitHub Pages serves these real directories instead of recovering known pages
+through a 404 redirect. `robots.txt` and `sitemap.xml` are generated from the
+shared route registry in `src/data/pages.js`. Unknown URLs keep an HTTP 404 and
+display a useful Not Found page.
+
+CV downloads are temporarily paused. The CV page shows “CV update in progress”;
+`scripts/pause-cv.mjs` excludes both historical CV PDFs from published artifacts.
+The source PDFs are retained for revision.
+
+Run `npm run lint`, the three existing test suites, and `npm run test:pages`
+after building. The Pages deployment runs all of these checks. The artifact
+tests verify direct route serving, metadata, sitemap destinations, 404 behavior,
+and the absence of downloadable CV PDFs.
+
 The site is built with React, Vite, Tailwind CSS, and Framer Motion. Pushes to `main` are deployed to GitHub Pages by the workflow in `.github/workflows/deploy.yml`.
 
 ## Visitor counts

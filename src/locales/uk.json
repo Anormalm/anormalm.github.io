@@ -1,4 +1,6 @@
 {
+  "A reproducible graph-reasoning benchmark with paired node-renaming tests, inspectable model responses, and a browser-based evaluation runner.": "Відтворюваний бенчмарк міркування на графах із парними тестами перейменування вузлів, доступними для перевірки відповідями моделей і браузерним інструментом оцінювання.",
+  "Page not found": "Сторінку не знайдено",
   "CV update in progress": "Резюме оновлюється",
   "“I build and code": "«Створюю та програмую",
   "{0} controls": "Керування: {0}",

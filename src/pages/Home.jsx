@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
-import { AnimatePresence, motion as Motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
+import { AnimatePresence, motion as Motion, useReducedMotion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { FaGithub, FaLinkedin, FaMedium } from 'react-icons/fa';
 import { FiArrowDown, FiArrowUpRight, FiFileText, FiMail, FiMapPin } from 'react-icons/fi';
@@ -55,7 +55,6 @@ const SIGNAL_NODES = [
 const INTRO_FACTS = [
   'I’m a Computer Engineering student at NUS in Singapore.',
   'My academic detours include a second major in Innovation & Design and a minor in Mathematics.',
-  'Right now, I’m a Machine Learning Engineer Intern with TikTok’s BRIC team and a Research Assistant at NUS.',
   'I spend most of my research time around graph intelligence, grounded language models, edge AI, and distributed systems.',
   'One question I keep returning to is whether a model understands an actual graph—or merely the order in which someone wrote it down.',
   'I’ve also benchmarked quantized vision-language models on a Jetson Orin Nano Super: tiny hardware with surprisingly big opinions.',
@@ -72,7 +71,6 @@ const INTRO_FACTS = [
 const INTRO_FACTS_ZH = [
   '我是新加坡国立大学计算机工程专业的学生。',
   '同时修读创新与设计第二专业，以及数学辅修。',
-  '目前在 TikTok BRIC 团队担任机器学习工程实习生，并在新加坡国立大学担任研究助理。',
   '我的研究主要围绕图智能、基于图证据的语言模型、边缘 AI 和分布式系统。',
   '我经常追问：模型真的理解了一张图，还是只记住了它被写下来的顺序？',
   '我也在 Jetson Orin Nano Super 上评测过量化视觉语言模型——硬件很小，脾气不小。',
@@ -115,16 +113,17 @@ const Home = () => {
   const [ghostMode, setGhostMode] = useState(false);
   const [knowledgeLevel, setKnowledgeLevel] = useState(0);
   const reduceMotion = useReducedMotion();
-  const canDragSignal = useMemo(() => window.matchMedia('(pointer: fine)').matches && !reduceMotion, [reduceMotion]);
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ['start start', 'end start'],
-  });
-  const copyY = useTransform(scrollYProgress, [0, 1], [0, 120]);
-  const orbitY = useTransform(scrollYProgress, [0, 1], [0, -90]);
-  const orbitRotate = useTransform(scrollYProgress, [0, 1], [0, 28]);
+  const [desktopPointer, setDesktopPointer] = useState(() => window.matchMedia('(pointer: fine) and (min-width: 1024px)').matches);
+  const canDragSignal = desktopPointer && !reduceMotion;
   const revealedFactCount = Math.round((knowledgeLevel / 100) * INTRO_FACTS.length);
   const introFacts = isChinese ? INTRO_FACTS_ZH : INTRO_FACTS;
+
+  useEffect(() => {
+    const media = window.matchMedia('(pointer: fine) and (min-width: 1024px)');
+    const update = () => setDesktopPointer(media.matches);
+    media.addEventListener('change', update);
+    return () => media.removeEventListener('change', update);
+  }, []);
 
   useEffect(() => {
     if (!ghostMode) return undefined;
@@ -159,7 +158,7 @@ const Home = () => {
       <section ref={heroRef} className={`kinetic-hero ${ghostMode ? 'ghost-mode' : ''}`}>
         <div className="hero-coordinate hero-coordinate-right" aria-hidden="true">{isChinese ? '向下滚动探索' : 'SCROLL TO EXPLORE'}</div>
 
-        <Motion.div className="hero-copy" style={reduceMotion ? undefined : { y: copyY }}>
+        <div className="hero-copy">
           <h1 className={`kinetic-title ${isChinese ? 'is-chinese' : ''} ${isMultilingual ? 'is-multilingual' : ''}`} aria-label={isChinese ? '我构建会思考、会行动的系统' : 'I build systems that think and move'}>
             {isMultilingual ? <Motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }}>I build systems that think and move.</Motion.span> : <>
             <Motion.span
@@ -192,7 +191,7 @@ const Home = () => {
             <div className="intro-console">
               <p className="intro-copy" aria-live="polite">
                 <strong>{isChinese ? '我是胡立凡。' : 'I’m Lifan Hu.'}</strong>
-                <span className="intro-baseline"> {isChinese ? '我做东西、验证想法，也跟着好奇心走。' : 'I build things, test ideas, and follow curiosity.'}</span>
+                <span className="intro-baseline"> {isChinese ? '目前在 TikTok BRIC 团队担任机器学习工程实习生，并在新加坡国立大学担任研究助理。' : 'Right now, I’m a Machine Learning Engineer Intern with TikTok’s BRIC team and a Research Assistant at NUS.'}</span>
                 <AnimatePresence initial={false}>
                   {introFacts.slice(0, revealedFactCount).map((fact, index) => (
                     <Motion.span
@@ -255,11 +254,11 @@ const Home = () => {
               </div>
             </div>
           </div>
-        </Motion.div>
+        </div>
 
         <Motion.aside
+          key={canDragSignal ? 'draggable-map' : 'static-map'}
           className="signal-world"
-          style={reduceMotion ? undefined : { y: orbitY, rotate: orbitRotate }}
           initial={{ opacity: 0, scale: 0.75 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.32, duration: 1.05, ease: [0.22, 1, 0.36, 1] }}

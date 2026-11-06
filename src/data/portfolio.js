@@ -1,5 +1,19 @@
 export const projects = [
   {
+    title: 'MisGraph',
+    category: 'Research',
+    categoryZh: '研究',
+    status: 'Published',
+    statusZh: '已发表',
+    description: 'A reproducible graph-reasoning benchmark with paired node-renaming tests, inspectable model responses, and a browser-based evaluation runner.',
+    descriptionZh: '可复现的图推理评测基准，包含配对节点重命名测试、可检查的模型回答与浏览器评测工具。',
+    tags: ['Graph learning', 'LLM evaluation', 'Reproducibility'],
+    tagsZh: ['图学习', '大模型评测', '可复现性'],
+    link: 'https://github.com/Anormalm/graph_evidence',
+    live: '/misgraph/',
+    featured: true,
+  },
+  {
     title: 'shuorenhua Bench',
     titleZh: 'shuorenhua 评测基准',
     category: 'Evaluation',
@@ -41,7 +55,6 @@ export const projects = [
     tags: ['Graph learning', 'LLM reasoning', 'Fraud detection'],
     tagsZh: ['图学习', '大模型推理', '欺诈检测'],
     link: 'https://github.com/Anormalm/AGEA',
-    featured: true,
   },
   {
     title: 'C-OS',
