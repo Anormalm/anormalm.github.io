@@ -1,7 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
-import { createPortal } from 'react-dom';
+import { useRef, useState } from 'react';
 import { AnimatePresence, motion as Motion } from 'framer-motion';
-import { FiArrowLeft, FiArrowRight, FiDownload, FiExternalLink, FiX } from 'react-icons/fi';
+import { FiArrowLeft, FiArrowRight, FiExternalLink } from 'react-icons/fi';
 import { publications } from '../data/portfolio';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -46,12 +45,6 @@ const SKILLS = [
 ];
 
 const SKILLS_ZH = ['Python', 'C/C++', 'PyTorch', '图机器学习', '多模态 AI', '分布式系统', '边缘 AI', 'Docker'];
-
-const GATE_CHOICES = [
-  { label: 'Yes', labelZh: '是', message: 'Employer detected. Preparing the useful version.', messageZh: '检测到雇主信号，正在准备实用版本。' },
-  { label: 'Not yet', labelZh: '还不是', message: 'Future employer energy detected. Access granted.', messageZh: '检测到未来雇主能量，允许访问。' },
-  { label: 'Just curious', labelZh: '只是好奇', message: 'Curiosity is a valid credential. Access granted.', messageZh: '好奇心也是有效凭证，允许访问。' },
-];
 
 const CV_PHOTOS = [
   {
@@ -117,8 +110,6 @@ const Publication = ({ publication }) => {
 
 const CV = () => {
   const { isChinese, language, t } = useLanguage();
-  const [showGate, setShowGate] = useState(false);
-  const [gateMessage, setGateMessage] = useState('');
   const [activePhoto, setActivePhoto] = useState(0);
   const photoDragStart = useRef(null);
 
@@ -141,33 +132,6 @@ const CV = () => {
     if (Math.abs(distance) > 45) changePhoto(distance > 0 ? -1 : 1);
   };
 
-  useEffect(() => {
-    if (!showGate) return undefined;
-    const onKeyDown = (event) => {
-      if (event.key === 'Escape') setShowGate(false);
-    };
-    window.addEventListener('keydown', onKeyDown);
-    return () => window.removeEventListener('keydown', onKeyDown);
-  }, [showGate]);
-
-  const triggerDownload = () => {
-    const link = document.createElement('a');
-    link.href = '/CV-Lifan-Latest.pdf?v=20261030';
-    link.download = 'Hu-Lifan-CV.pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
-
-  const onGateChoice = (message) => {
-    setGateMessage(message);
-    window.setTimeout(triggerDownload, 360);
-    window.setTimeout(() => {
-      setShowGate(false);
-      setGateMessage('');
-    }, 1450);
-  };
-
   return (
     <div className="min-h-screen bg-grid">
       <section className="section">
@@ -181,8 +145,8 @@ const CV = () => {
               </p>
             </div>
             <div className="cv-hero-actions">
-              <button type="button" onClick={() => setShowGate(true)} className="button-primary">
-                {isChinese ? '下载履历' : 'Download'} <FiDownload />
+              <button type="button" disabled className="button-secondary disabled:cursor-not-allowed disabled:opacity-70">
+                {isChinese ? '履历更新中' : 'CV update in progress'}
               </button>
             </div>
           </div>
@@ -344,50 +308,6 @@ const CV = () => {
         </div>
       </section>
 
-      {createPortal(<AnimatePresence>
-        {showGate && (
-          <Motion.div
-            className="gate-backdrop"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onMouseDown={(event) => {
-              if (event.target === event.currentTarget) setShowGate(false);
-            }}
-          >
-            <Motion.section
-              role="dialog"
-              aria-modal="true"
-              aria-labelledby="cv-gate-title"
-              initial={{ opacity: 0, scale: 0.86, rotate: -3, y: 30 }}
-              animate={{ opacity: 1, scale: 1, rotate: 0, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, rotate: 2, y: 20 }}
-              transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
-              className="gate-card"
-            >
-              <button type="button" onClick={() => setShowGate(false)} className="gate-close" aria-label={isChinese ? '关闭' : 'Close'}>
-                <FiX />
-              </button>
-              <div className="gate-orbit" aria-hidden="true"><i /><i /><i /></div>
-              <div className="eyebrow">{isChinese ? '真人验证 / 非常认真' : 'Human verification / totally serious'}</div>
-              <h2 id="cv-gate-title">{isChinese ? '你是雇主吗？' : 'Are you an employer?'}</h2>
-              {gateMessage ? (
-                <Motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="gate-result">
-                  <span className="live-dot" /> {gateMessage}
-                </Motion.div>
-              ) : (
-                <div className="gate-options">
-                  {GATE_CHOICES.map((choice, index) => (
-                    <button key={choice.label} type="button" onClick={() => onGateChoice(isChinese ? choice.messageZh : choice.message)}>
-                      <span>0{index + 1}</span>{isChinese ? choice.labelZh : choice.label}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </Motion.section>
-          </Motion.div>
-        )}
-      </AnimatePresence>, document.body)}
     </div>
   );
 };
