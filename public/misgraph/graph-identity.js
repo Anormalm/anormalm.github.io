@@ -15,7 +15,7 @@ function start(){
   toggle.textContent=semantic?'Restore neutral names':'Rename nodes';
   svg.setAttribute('aria-label',`Six-node graph with eight unchanged edges. Node identifiers: ${names.join(', ')}.`);
   svg.innerHTML=`<title>Renaming preserves the graph</title><g class="identity-edges">${DEMO_EDGES.map(([a,b])=>`<line x1="${DEMO_NODES[a][0]}" y1="${DEMO_NODES[a][1]}" x2="${DEMO_NODES[b][0]}" y2="${DEMO_NODES[b][1]}"/>`).join('')}</g>${DEMO_NODES.map(([x,y],i)=>`<g class="identity-node" transform="translate(${x},${y})"><circle r="29"/><text text-anchor="middle" dominant-baseline="central">${names[i]}</text></g>`).join('')}`;
-  figure.querySelector('#identity-mode').textContent=semantic?'Semantic identifiers. The graph is unchanged.':'Neutral identifiers. Six nodes, eight edges.';
+  figure.querySelector('#identity-mode').textContent=semantic?'Descriptive names. The graph is unchanged.':'Neutral names. Six nodes, eight edges.';
   figure.querySelector('#identity-serialization').textContent=labeledEdges(semantic).slice(0,3).map(([a,b])=>`${a} ↔ ${b}`).join(', ')+' + 5 edges';
  }
  toggle.addEventListener('click',()=>{semantic=!semantic;render();});render();

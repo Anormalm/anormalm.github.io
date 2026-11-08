@@ -13,9 +13,9 @@ function budget(){const cap=$('token-field').value==='omit'?'Output limit: servi
 }
 async function prepare(){const current=++generation;plan=[];buttons();error();$('plan-count').textContent='Loading protocol...';
  try{if(!manifest)throw new Error('Benchmark data is not loaded yet.');const selection=scope(),graphs=selectGraphs(manifest,selection.profile);let cursor=0;
-  await Promise.all(Array.from({length:6},async()=>{while(cursor<graphs.length){const g=graphs[cursor++];if(!cache.has(g.id)){const response=await fetch('data/benchmark/'+g.file);if(!response.ok)throw new Error('Could not load graph fixtures. Reload the page.');cache.set(g.id,await response.json());}}}));
-  if(current!==generation)return;plan=makePlan(graphs.flatMap(g=>cache.get(g.id)),selection);if(!plan.length)throw new Error('No prompts match this selection.');$('plan-count').textContent=`${plan.length.toLocaleString()} model requests`;budget();
- }catch(e){if(current===generation){$('plan-count').textContent='Choose a valid scope';error(e.message);}}finally{if(current===generation)buttons();}
+  await Promise.all(Array.from({length:6},async()=>{while(cursor<graphs.length){const g=graphs[cursor++];if(!cache.has(g.id)){const response=await fetch('data/benchmark/'+g.file);if(!response.ok)throw new Error('Could not load the graph questions. Reload the page and try again.');cache.set(g.id,await response.json());}}}));
+  if(current!==generation)return;plan=makePlan(graphs.flatMap(g=>cache.get(g.id)),selection);if(!plan.length)throw new Error('No questions match this selection. Try another task or test.');$('plan-count').textContent=`${plan.length.toLocaleString()} model requests`;budget();
+ }catch(e){if(current===generation){$('plan-count').textContent='Choose the tasks and tests to run';error(e.message);}}finally{if(current===generation)buttons();}
 }
 function setBusy(value){busy=value;$('run-settings').disabled=value;buttons();}
 function download(name,data,type='application/json'){const blob=new Blob([typeof data==='string'?data:JSON.stringify(data,null,2)],{type}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
@@ -46,4 +46,4 @@ $('download-run').addEventListener('click',()=>{if(report)download('misgraph-run
 $('download-csv').addEventListener('click',()=>{if(!report)return;const lines=['metric,value,denominator',...Object.entries(report.summary.metrics).map(([k,v])=>[k,v.value??'',v.n??''].join(','))];download('misgraph-metrics.csv',lines.join('\r\n'),'text/csv');});
 window.addEventListener('pagehide',()=>{$('api-key').value='';controller?.abort();});
 window.addEventListener('beforeunload',e=>{if(busy){e.preventDefault();e.returnValue='';}});
-try{const response=await fetch('data/benchmark/manifest.json');if(!response.ok)throw new Error('Could not load the benchmark manifest. Serve the site over HTTP and reload.');manifest=await response.json();await prepare();}catch(e){error(e.message);$('plan-count').textContent='Protocol unavailable';}
+try{const response=await fetch('data/benchmark/manifest.json');if(!response.ok)throw new Error('Could not load the benchmark manifest. Serve the site over HTTP and reload.');manifest=await response.json();await prepare();}catch(e){error(e.message);$('plan-count').textContent='Benchmark questions unavailable';}

@@ -22,7 +22,7 @@ if(copyCitation){
    await navigator.clipboard.writeText(document.querySelector('#release-bibtex').textContent);
    status.textContent='BibTeX copied.';
   }catch{
-   status.textContent='Copy unavailable. Select the citation above or download the BibTeX file.';
+   status.textContent='Copying did not work. Select the citation above to copy it, or download the BibTeX file.';
   }
  });
 }
