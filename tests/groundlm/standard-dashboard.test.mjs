@@ -47,7 +47,7 @@ test('search, status, precision and metric sorting retain missing values',()=>{
 });
 test('main pages use the shared dashboard, preserve archive access and contain no old initialization target',()=>{
  for(const file of ['index.html','results.html']){
-  const html=fs.readFileSync('public/misgraph/'+file,'utf8');assert.match(html,/standard-dashboard.js/);assert.match(html,/id="canonical-dashboard"/);assert.doesNotMatch(html,/id="dashboard"/);assert.match(html,/history.html/);assert.match(html,/Pending/);
+  const html=fs.readFileSync('public/misgraph/'+file,'utf8');assert.match(html,/standard-dashboard.js/);assert.match(html,/id="canonical-dashboard"/);assert.doesNotMatch(html,/id="dashboard"/);assert.match(html,/history.html/);assert.match(html,/<option value="awaiting">Not yet scored<\/option>/);
  }
 });
 
@@ -68,7 +68,7 @@ test('static release matches interactive metrics, costs and protocol without Jav
    assert.ok(cells[0].startsWith((100*m.original.value).toFixed(1)+'%'));
    assert.ok(cells[0].includes('n='+m.original.n));
    assert.ok(cells[1].startsWith((100*m.survival.degree_reversed.value).toFixed(1)+'%'));
-   assert.ok(cells[1].includes('n='+m.survival.degree_reversed.n+' correct originals'));
+   assert.ok(cells[1].includes('n='+m.survival.degree_reversed.n+' initially correct answers'));
    assert.ok(cells[2].startsWith((100*m.cutoff).toFixed(1)+'%'));
    assert.equal(cells[3],m.returned+'/960');
    assert.equal(cells[4],'$'+r.cost_per_1000.toFixed(2));
