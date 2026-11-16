@@ -1,0 +1,152 @@
+{
+  "method": "Exhaustive enumeration of all unordered node triples in each saved prompt specification; no model calls.",
+  "source_results_sha256": "54430390aecc5c4a459cc434375f5facd58c83e4aab79a0ff7c5904ad4e69670",
+  "checked_prompts": 16,
+  "results": [
+    {
+      "case_id": "misgraph-difficulty-ladder-v1-triangle_count-n32-r0",
+      "variant": "original",
+      "independent_triangle_count": 201,
+      "answer": 201,
+      "error": 0,
+      "outcome": "correct",
+      "finish_reason": "stop"
+    },
+    {
+      "case_id": "misgraph-difficulty-ladder-v1-triangle_count-n32-r0",
+      "variant": "repeat",
+      "independent_triangle_count": 201,
+      "answer": 201,
+      "error": 0,
+      "outcome": "correct",
+      "finish_reason": "stop"
+    },
+    {
+      "case_id": "misgraph-difficulty-ladder-v1-triangle_count-n32-r0",
+      "variant": "neutral",
+      "independent_triangle_count": 201,
+      "answer": 198,
+      "error": -3,
+      "outcome": "wrong",
+      "finish_reason": "stop"
+    },
+    {
+      "case_id": "misgraph-difficulty-ladder-v1-triangle_count-n32-r0",
+      "variant": "degree_reversed",
+      "independent_triangle_count": 201,
+      "answer": 201,
+      "error": 0,
+      "outcome": "correct",
+      "finish_reason": "stop"
+    },
+    {
+      "case_id": "misgraph-difficulty-ladder-v1-triangle_count-n32-r1",
+      "variant": "original",
+      "independent_triangle_count": 203,
+      "answer": 203,
+      "error": 0,
+      "outcome": "correct",
+      "finish_reason": "stop"
+    },
+    {
+      "case_id": "misgraph-difficulty-ladder-v1-triangle_count-n32-r1",
+      "variant": "repeat",
+      "independent_triangle_count": 203,
+      "answer": 203,
+      "error": 0,
+      "outcome": "correct",
+      "finish_reason": "stop"
+    },
+    {
+      "case_id": "misgraph-difficulty-ladder-v1-triangle_count-n32-r1",
+      "variant": "neutral",
+      "independent_triangle_count": 203,
+      "answer": 205,
+      "error": 2,
+      "outcome": "wrong",
+      "finish_reason": "stop"
+    },
+    {
+      "case_id": "misgraph-difficulty-ladder-v1-triangle_count-n32-r1",
+      "variant": "degree_reversed",
+      "independent_triangle_count": 203,
+      "answer": 203,
+      "error": 0,
+      "outcome": "correct",
+      "finish_reason": "stop"
+    },
+    {
+      "case_id": "misgraph-difficulty-ladder-v1-triangle_count-n32-r2",
+      "variant": "original",
+      "independent_triangle_count": 202,
+      "answer": 202,
+      "error": 0,
+      "outcome": "correct",
+      "finish_reason": "stop"
+    },
+    {
+      "case_id": "misgraph-difficulty-ladder-v1-triangle_count-n32-r2",
+      "variant": "repeat",
+      "independent_triangle_count": 202,
+      "answer": 202,
+      "error": 0,
+      "outcome": "correct",
+      "finish_reason": "stop"
+    },
+    {
+      "case_id": "misgraph-difficulty-ladder-v1-triangle_count-n32-r2",
+      "variant": "neutral",
+      "independent_triangle_count": 202,
+      "answer": 201,
+      "error": -1,
+      "outcome": "wrong",
+      "finish_reason": "stop"
+    },
+    {
+      "case_id": "misgraph-difficulty-ladder-v1-triangle_count-n32-r2",
+      "variant": "degree_reversed",
+      "independent_triangle_count": 202,
+      "answer": 202,
+      "error": 0,
+      "outcome": "correct",
+      "finish_reason": "stop"
+    },
+    {
+      "case_id": "misgraph-difficulty-ladder-v1-triangle_count-n32-r3",
+      "variant": "original",
+      "independent_triangle_count": 216,
+      "answer": 216,
+      "error": 0,
+      "outcome": "correct",
+      "finish_reason": "stop"
+    },
+    {
+      "case_id": "misgraph-difficulty-ladder-v1-triangle_count-n32-r3",
+      "variant": "repeat",
+      "independent_triangle_count": 216,
+      "answer": 216,
+      "error": 0,
+      "outcome": "correct",
+      "finish_reason": "stop"
+    },
+    {
+      "case_id": "misgraph-difficulty-ladder-v1-triangle_count-n32-r3",
+      "variant": "neutral",
+      "independent_triangle_count": 216,
+      "answer": 215,
+      "error": -1,
+      "outcome": "wrong",
+      "finish_reason": "stop"
+    },
+    {
+      "case_id": "misgraph-difficulty-ladder-v1-triangle_count-n32-r3",
+      "variant": "degree_reversed",
+      "independent_triangle_count": 216,
+      "answer": 216,
+      "error": 0,
+      "outcome": "correct",
+      "finish_reason": "stop"
+    }
+  ],
+  "interpretation": "All four neutral-renamed answers are incorrect without cutoff; other three conditions are correct on each graph. This selected four-graph observation does not establish a mechanism or a general renaming effect. The full planned analysis did not pass Holm correction."
+}

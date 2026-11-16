@@ -1,0 +1,29 @@
+MisGraph difficulty study — reviewed_collection_analysis
+Exploratory development study. Four graphs per task/tier. Partial coverage is descriptive only; no pooled leaderboard.
+Recorded responses: 2157/2592; missing: 435.
+Reported charges: $26.796313; uncertain bounds: $0.200514; reservations: $0.000000.
+
+Model | coverage | original correct/recorded | repeat correct/recorded | reversed correct/recorded
+z-ai/glm-5.3 | 0/288 | 0/0 | 0/0 | 0/0
+minimax/minimax-m3.1-flash | 288/288 | 49/72 | 54/72 | 41/72
+inclusionai/ling-3.1-flash | 288/288 | 37/72 | 41/72 | 32/72
+ibm-granite/granite-4.2-8b | 287/288 | 17/72 | 14/72 | 10/72
+openai/gpt-6.1-sol | 288/288 | 72/72 | 72/72 | 71/72
+anthropic/claude-sonnet-5.5 | 288/288 | 60/72 | 65/72 | 58/72
+google/gemini-3.8-flash | 143/288 | 31/33 | 35/39 | 32/36
+qwen/qwen3.8-27b | 287/288 | 45/71 | 41/72 | 38/72
+meta-llama/llama-4-maverick | 288/288 | 4/72 | 4/72 | 2/72
+
+Paired analysis: rename accuracy minus identical-repeat accuracy.
+Negative changes indicate worse performance after renaming. Missing tests stay in the 18-test Holm family.
+Only complete configurations receive confidence intervals and inferential tests.
+minimax/minimax-m3.1-flash neutral: -4.17 pp, 95% CI [-13.92, 5.56], Holm p=1
+minimax/minimax-m3.1-flash degree_reversed: -18.06 pp, 95% CI [-29.17, -6.94], Holm p=0.2634
+inclusionai/ling-3.1-flash neutral: -6.94 pp, 95% CI [-15.28, 1.39], Holm p=1
+inclusionai/ling-3.1-flash degree_reversed: -12.50 pp, 95% CI [-20.83, -4.17], Holm p=0.5977
+openai/gpt-6.1-sol neutral: -2.78 pp, 95% CI [-5.56, 0.00], Holm p=1
+openai/gpt-6.1-sol degree_reversed: -1.39 pp, 95% CI [-4.17, 0.00], Holm p=1
+anthropic/claude-sonnet-5.5 neutral: -11.11 pp, 95% CI [-18.06, -4.17], Holm p=0.6172
+anthropic/claude-sonnet-5.5 degree_reversed: -9.72 pp, 95% CI [-18.06, -1.39], Holm p=1
+meta-llama/llama-4-maverick neutral: +1.39 pp, 95% CI [-2.78, 5.56], Holm p=1
+meta-llama/llama-4-maverick degree_reversed: -2.78 pp, 95% CI [-6.94, 1.39], Holm p=1

@@ -1,0 +1,112 @@
+{
+  "version": "misgraph-difficulty-ladder-v1",
+  "graphs": 72,
+  "sizes": [
+    16,
+    24,
+    32
+  ],
+  "tasks": [
+    "weighted_shortest_path",
+    "shortest_path_count",
+    "exact_walk_count",
+    "triangle_count",
+    "minimum_cut",
+    "constrained_reachability"
+  ],
+  "variants": [
+    "original",
+    "repeat",
+    "neutral",
+    "degree_reversed"
+  ],
+  "system_prompt": "You solve graph problems using only the explicitly supplied edges and rules. All node names are arbitrary identifiers; their meanings give no evidence about edges or roles. Return only a JSON object with one nonnegative integer field: {\"answer\": INTEGER}.",
+  "completion_cap": 16384,
+  "sampling_policy": "Version-derived independent seeds; accept first structurally eligible candidate. No inference-based filtering. Four graphs per task/tier; reachability balanced 2 yes/2 no. Structural criteria are in frozen core.py.",
+  "conditions_policy": "Original, byte-identical repeat, opaque-ID permutation and degree-reversed semantic names. Fixed graph/order/query per matched group. One map per rename condition; not an estimate over all possible names.",
+  "analysis_policy": "Per model/task/tier counts and denominators: correct, wrong, invalid, length finish, missing, usage and costs. Original accuracy uses independent graphs; variant results remain paired, never independent n. Repeat-adjusted rename effects across all 72 graphs; 20,000 stratified graph bootstrap draws seed 20261108, 18 task/tier strata; two-sided exact McNemar for repeat vs each rename, Holm across 18 model/condition contrasts including missing tests. Incomplete coverage descriptive only; no complete-case headline comparison. Four graphs per task/tier is exploratory, not powered for small differences.",
+  "comparability": "Same prompts/cap; native reasoning settings and hosted precision inherited unchanged. Tokenizers, reasoning labels and actual compute differ. Aliased hosted weights cannot be independently frozen. No aggregate ranking pooled with earlier studies.",
+  "plan_sha256": "b2385971849cf0c79362d4852492230c2ed058566726adb0059ab75df53dbd3c",
+  "results_sha256": "54430390aecc5c4a459cc434375f5facd58c83e4aab79a0ff7c5904ad4e69670",
+  "configurations": [
+    {
+      "model": "z-ai/glm-5.3",
+      "endpoint": "baidu/fp8",
+      "provider_name": "Baidu",
+      "precision": "fp8",
+      "reasoning": {
+        "effort": "high"
+      }
+    },
+    {
+      "model": "minimax/minimax-m3.1-flash",
+      "endpoint": "gmicloud/fp8",
+      "provider_name": "GMICloud",
+      "precision": "fp8",
+      "reasoning": {
+        "effort": "high"
+      }
+    },
+    {
+      "model": "inclusionai/ling-3.1-flash",
+      "endpoint": "novita",
+      "provider_name": "Novita",
+      "precision": "unknown",
+      "reasoning": {
+        "enabled": true
+      }
+    },
+    {
+      "model": "ibm-granite/granite-4.2-8b",
+      "endpoint": "coreweave/bf16",
+      "provider_name": "CoreWeave",
+      "precision": "bf16",
+      "reasoning": {
+        "effort": "high"
+      }
+    },
+    {
+      "model": "openai/gpt-6.1-sol",
+      "endpoint": "openai",
+      "provider_name": "OpenAI",
+      "precision": "unknown",
+      "reasoning": {
+        "effort": "high"
+      }
+    },
+    {
+      "model": "anthropic/claude-sonnet-5.5",
+      "endpoint": "anthropic",
+      "provider_name": "Anthropic",
+      "precision": "unknown",
+      "reasoning": {
+        "effort": "high"
+      }
+    },
+    {
+      "model": "google/gemini-3.8-flash",
+      "endpoint": "google-ai-studio",
+      "provider_name": "Google AI Studio",
+      "precision": "unknown",
+      "reasoning": {
+        "effort": "high"
+      }
+    },
+    {
+      "model": "qwen/qwen3.8-27b",
+      "endpoint": "deepinfra/bf16",
+      "provider_name": "DeepInfra",
+      "precision": "bf16",
+      "reasoning": {
+        "effort": "high"
+      }
+    },
+    {
+      "model": "meta-llama/llama-4-maverick",
+      "endpoint": "parasail/fp8",
+      "provider_name": "Parasail",
+      "precision": "fp8",
+      "reasoning": null
+    }
+  ]
+}

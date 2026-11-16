@@ -158,3 +158,18 @@ with redirects, preserving query strings, fragments and direct download links.
 Frozen data, protocol identifiers, archived filenames and hashes are unchanged.
 
 Run `npm run build` before previewing the legacy redirects.
+
+
+## Reviewed difficulty study (16 November 2026)
+
+`difficulty.html` presents 2,157/2,592 scored responses on 72 development graphs.
+Five configurations have full coverage. Frozen Hard v1 scores remain separate.
+The table is static HTML; public aggregates, settings and checksums are in
+`downloads/difficulty-v1/`. `analysis.html` separates invariance proofs from
+unconfirmed failure mechanisms and links primary research.
+
+The source generator is `D:/EMNLP_2026/website/scripts/build_difficulty.py`;
+it checks the final review and frozen result hash before exporting aggregates.
+The reviewed raw archive remains in the research workspace; public downloads
+contain no provider payloads, signed reasoning, credentials or account records.
+The Claude example is a post-hoc four-graph case study, not a confirmation test.

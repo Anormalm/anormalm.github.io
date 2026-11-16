@@ -235,3 +235,4 @@ h1 em{font-style:normal;color:inherit}
 @media(max-width:640px){.benchmark-actions{flex-wrap:wrap}.benchmark-finding{font-size:17px}.survival-hint{font-size:10px}}
 
 #static-leaderboard tbody th,#static-leaderboard thead th:first-child{position:sticky;left:0;z-index:1;background:#fff;min-width:160px;max-width:220px;white-space:normal}
+.study-update{border-left:3px solid #2458d3;padding:10px 14px;background:#f3f6fc;font-size:15px;line-height:1.5;margin:0 0 20px}.study-update a{font-weight:600}

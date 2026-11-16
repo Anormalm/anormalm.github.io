@@ -1,0 +1,7 @@
+#difficulty-results tbody th,#difficulty-results thead th:first-child{position:sticky;left:0;z-index:1;background:#fff;min-width:150px;white-space:normal;text-align:left}
+#difficulty-results th small{display:block;font-weight:400;color:#536575;margin-top:3px}
+.hypothesis-table th,.hypothesis-table td{white-space:normal;text-align:left;vertical-align:top;min-width:180px;max-width:560px}
+.hypothesis-table th{width:38%}
+.study-update{border-left:3px solid #2458d3;padding:10px 14px;background:#f3f6fc;font-size:15px;line-height:1.5;margin:0 0 20px}
+.study-update a{font-weight:600}
+@media(max-width:640px){#difficulty-results tbody th,#difficulty-results thead th:first-child{min-width:120px;max-width:150px}.stats{grid-template-columns:1fr}.intro{font-size:18px}}

@@ -1,0 +1,10 @@
+model,responses,planned,correct,wrong,invalid,cutoff,original,repeat,neutral,degree_reversed
+z-ai/glm-5.3,0,288,0,0,0,0,—,—,—,—
+minimax/minimax-m3.1-flash,288,288,195,42,5,46,49/72,54/72,51/72,41/72
+inclusionai/ling-3.1-flash,288,288,146,2,0,140,37/72,41/72,36/72,32/72
+ibm-granite/granite-4.2-8b,287,288,55,0,0,232,17/72,14/72,14/71,10/72
+openai/gpt-6.1-sol,288,288,285,2,0,1,72/72,72/72,70/72,71/72
+anthropic/claude-sonnet-5.5,288,288,240,32,0,16,60/72,65/72,57/72,58/72
+google/gemini-3.8-flash,143,288,127,6,0,10,31/33,35/39,29/35,32/36
+qwen/qwen3.8-27b,287,288,167,16,1,103,45/71,41/72,43/72,38/72
+meta-llama/llama-4-maverick,288,288,15,160,113,0,4/72,4/72,5/72,2/72
