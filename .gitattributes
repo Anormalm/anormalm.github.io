@@ -8,3 +8,5 @@ public/misgraph/downloads/history/** -text
 
 public/misgraph/data/protocol/** -text
 public/misgraph/downloads/difficulty-v1/** -text
+
+public/misgraph/downloads/triangle-v1/** -text

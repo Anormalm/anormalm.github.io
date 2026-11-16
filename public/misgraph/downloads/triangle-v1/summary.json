@@ -1,0 +1,112 @@
+{
+  "analysis": {
+    "planned_graphs": 96,
+    "usable_responses": 576,
+    "primary_pairs": 96,
+    "primary_complete": true,
+    "losses": 32,
+    "gains": 9,
+    "primary_p_two_sided": 0.000430857042374555,
+    "primary_delta_pp": -23.958333333333332,
+    "primary_ci95_pp": [
+      -36.45833333333333,
+      -11.458333333333332
+    ],
+    "complete_six_response_graphs": 96,
+    "secondary_mean_delta_pp": -19.44444444444444,
+    "secondary_ci95_pp": [
+      -26.38888888888889,
+      -12.5
+    ],
+    "outcomes": {
+      "wrong": 136,
+      "invalid": 0,
+      "correct": 440,
+      "cutoff": 0
+    },
+    "scope": "Primary inference requires 96 complete first-designated pairs. Secondary mean uses graph clusters and is exploratory. A negative result is not evidence of equivalence."
+  },
+  "variants": {
+    "neutral_0": {
+      "n": 96,
+      "correct": 60,
+      "mean_signed_error": -1.09375,
+      "mean_absolute_error": 1.7604166666666667
+    },
+    "neutral_1": {
+      "n": 96,
+      "correct": 63,
+      "mean_signed_error": -0.5416666666666666,
+      "mean_absolute_error": 1.1041666666666667
+    },
+    "neutral_2": {
+      "n": 96,
+      "correct": 69,
+      "mean_signed_error": 4.291666666666667,
+      "mean_absolute_error": 5.25
+    },
+    "original_0": {
+      "n": 96,
+      "correct": 83,
+      "mean_signed_error": -0.13541666666666666,
+      "mean_absolute_error": 0.15625
+    },
+    "original_1": {
+      "n": 96,
+      "correct": 83,
+      "mean_signed_error": -0.07291666666666667,
+      "mean_absolute_error": 0.15625
+    },
+    "original_2": {
+      "n": 96,
+      "correct": 82,
+      "mean_signed_error": -0.10416666666666667,
+      "mean_absolute_error": 0.16666666666666666
+    }
+  },
+  "disagreement": {
+    "original": {
+      "graph_count": 96,
+      "within_graph_pairs": 288,
+      "answer_disagreement_pairs": 71,
+      "correctness_disagreement_pairs": 68,
+      "graphs_with_varying_answers": 34
+    },
+    "neutral": {
+      "graph_count": 96,
+      "within_graph_pairs": 288,
+      "answer_disagreement_pairs": 159,
+      "correctness_disagreement_pairs": 136,
+      "graphs_with_varying_answers": 70
+    }
+  },
+  "usage_reported_successful_responses": {
+    "prompt_tokens": 890496,
+    "completion_tokens": 2354275,
+    "total_tokens": 3244771,
+    "reasoning_tokens": 2339210
+  },
+  "version": "misgraph-triangle-confirmation-v1",
+  "model": "anthropic/claude-sonnet-5.5",
+  "final_review": {
+    "passed": true,
+    "status": "finished",
+    "responses": 576,
+    "attempts": 578,
+    "attempt_histogram": {
+      "1": 574,
+      "2": 2
+    },
+    "ledger_cost_usd": "25.678838",
+    "outstanding_reservations_usd": "0",
+    "peak_exposure_usd": "25.804494",
+    "provider_reported_usd": "25.323742",
+    "uncertain_upper_bounds_usd": "0.355096",
+    "plan_sha256": "28162bccb62a4999721187311f627e8cd644574c85991b3da4bf3d4b53b7d31f",
+    "results_sha256": "182e754d1d57a8099173de34b3f5123ac2a028bab4d56c4341e416f568f6a02d",
+    "launches_sha256": "e5ccc29e4b907f87030baeb4335787145ab7913fbdea36d95d5be0257c1ab193",
+    "reviewed_utc": "2026-11-16T17:30:58.800071+00:00"
+  },
+  "completed_date": "2026-11-17",
+  "date_timezone": "Asia/Bangkok"
+}

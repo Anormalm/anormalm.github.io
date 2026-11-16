@@ -5,3 +5,8 @@
 .study-update{border-left:3px solid #2458d3;padding:10px 14px;background:#f3f6fc;font-size:15px;line-height:1.5;margin:0 0 20px}
 .study-update a{font-weight:600}
 @media(max-width:640px){#difficulty-results tbody th,#difficulty-results thead th:first-child{min-width:120px;max-width:150px}.stats{grid-template-columns:1fr}.intro{font-size:18px}}
+
+.triangle-bar{display:grid;grid-template-columns:120px minmax(40px,1fr) 56px;gap:12px;align-items:center;margin:24px 0;font-size:16px}.triangle-bar b{font-variant-numeric:tabular-nums;text-align:right}.triangle-track{background:#e8edf3;height:24px;border-radius:3px;overflow:hidden}.triangle-track>div{height:100%;background:#2458d3}.triangle-bar:nth-of-type(2) .triangle-track>div{background:repeating-linear-gradient(135deg,#456079 0,#456079 5px,#617b92 5px,#617b92 8px)}.triangle-result{font-size:16px;line-height:1.6}.triangle-result strong{font-size:26px;color:#142f48}
+@media(max-width:480px){.triangle-bar{grid-template-columns:94px minmax(30px,1fr) 48px;gap:8px;font-size:14px}.triangle-result strong{font-size:23px}}
+
+.triangle-comparison>*{min-width:0}.triangle-comparison{grid-template-columns:repeat(2,minmax(0,1fr))}@media(max-width:900px){.triangle-comparison{grid-template-columns:minmax(0,1fr)}}

@@ -1,0 +1,31 @@
+{
+  "version": "misgraph-triangle-confirmation-v1",
+  "independent_graphs": 96,
+  "new_slots": 576,
+  "model": "anthropic/claude-sonnet-5.5",
+  "provider": "anthropic",
+  "max_tokens": 16384,
+  "repetitions_per_condition": 3,
+  "primary": "Exact two-sided McNemar test on original_0 versus neutral_0 across 96 graphs, alpha 0.05. All returned wrong, invalid and cutoff answers score zero; infrastructure missingness is not zero. No confirmatory test unless all 192 primary slots have usable first responses.",
+  "secondary": "Graph-cluster bootstrap of mean accuracy across three repeats versus three renamings; repeat agreement; completed-answer accuracy; signed triangle-count errors; cutoff and reported-token counts. Exploratory, no extra confirmatory tests.",
+  "selection": "Fresh seeds, same Watts-Strogatz n32/k10/p0.22 family and structural eligibility as the motivating study. No response-dependent selection. Same X000..X031 vocabulary; preserve edge/node occurrence order under mapping. Token counts may still vary with identifier frequencies; no semantic causal claim.",
+  "retry_policy": "Infrastructure only. Never retry wrong, invalid or cutoff output. No previous requests retried.",
+  "prepared_files_sha256": {
+    "data/cases.json": "f09b9a4486d36e1ffd9c1fb95431c9fb7e2d7bbc4b53d888ce1132b33564bc62",
+    "data/prompts.json": "8ef4c2f8537a3608221f210c222b47d151c8ee7fbd7b3a980e724a9f083e2ed3",
+    "data/certificates.json": "c73217d9eb8fb6d0b01d8136f694ec2922449f7a382f1db81b4c0be16ad02b6c",
+    "request_plan.json": "1a8d69241cdd21dc5fc260d6bf61980a1f398c7e801375b5ae3ee073d81b5cc4"
+  },
+  "reasoning": "high",
+  "tools": false,
+  "provider_fallbacks": false,
+  "sampling": "provider defaults",
+  "plan_sha256": "28162bccb62a4999721187311f627e8cd644574c85991b3da4bf3d4b53b7d31f",
+  "results_sha256": "182e754d1d57a8099173de34b3f5123ac2a028bab4d56c4341e416f568f6a02d",
+  "inference_unit": "96 independent graphs; six related responses per graph",
+  "bootstrap": {
+    "unit": "graph",
+    "draws": 20000,
+    "seed": 20261116
+  }
+}
