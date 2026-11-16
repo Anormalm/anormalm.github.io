@@ -173,3 +173,6 @@ it checks the final review and frozen result hash before exporting aggregates.
 The reviewed raw archive remains in the research workspace; public downloads
 contain no provider payloads, signed reasoning, credentials or account records.
 The Claude example is a post-hoc four-graph case study, not a confirmation test.
+
+## Triangle confirmation v1 (17 November 2026)
+The separate triangle.html page publishes the reviewed 96-graph Claude Sonnet 5.5 study: 576 responses, zero cutoffs, primary original_0 83/96 versus neutral_0 60/96. The planned paired test and exploratory repeat analysis remain separate from Hard v1. Public downloads include aggregate analysis, per-graph numeric scores, graph fixtures, settings and SHA-256 checksums; provider payloads and reasoning traces stay local. The new test independently counts all graph triangles and reconciles the public CSV with reported paired outcomes.
