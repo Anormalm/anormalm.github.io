@@ -14,7 +14,7 @@
   });
   function notes() {
     document.querySelector('#notes-title').textContent = `${slide + 1}. ${slides[slide].querySelector('h1').textContent}`;
-    document.querySelector('#notes-text').textContent = slides[slide].querySelector('.speaker-note').textContent;
+    document.querySelector('#notes-text').textContent = slides[slide].querySelector(`[data-script-step="${step}"]`).textContent;
     document.querySelector('#notes-build').textContent = `Build ${step} of ${max(slide)}. Right advances one build; Left reverses it.`;
   }
   function show(i, j, hash = true) {
