@@ -2,56 +2,56 @@
 
 Progress update, 20 November 2026.
 
-318 spoken words. Allow about three to four minutes with the builds. Each numbered click is one advance from the opening frame. N shows the current spoken segment.
+323 spoken words. Allow about three to four minutes with the builds. Each numbered click is one advance from the opening frame. N shows the current spoken segment.
 
 ## 1. Following clues on the open web
 
 Arrive after 0 advances from the title.
 
-Since the 60-case checkpoint, I've added four cases. The snapshot now has 64 cases across 61 split clusters, and 130 typed fields across eighteen cases.
+I've added four cases since the 60-case checkpoint. We now have 64 cases in 61 split clusters, with 130 typed answer fields across eighteen cases.
 
-Click 1 (build 1): There are six new image inputs. I haven't run a new model experiment.
+Click 1 (build 1): The additions include six images. I haven't run a new model experiment.
 
 ## 2. Four additions to inspect
 
 Arrive after 2 advances from the title.
 
-Two additions check vessel identities and identifier roles. Two check geographic records, including actual versus model-analog station positions and conflicting iceberg records.
+Two cases follow vessel identities and identifier roles. Two check geographic records: station coordinates with different meanings, and an iceberg image with a conflicting later notice.
 
-Click 3 (build 1): Together they add 26 fields: eighteen answered, five refuted and three unresolved. Visible names are starting clues. A cheap solve should lower the difficulty label.
+Click 3 (build 1): They add 26 fields: eighteen answered, five refuted and three unresolved. Names already visible in an input don't earn discovery credit. If the whole task has an easy shortcut, we should lower its difficulty label.
 
 ## 3. Keep the source conflict in the key
 
 Arrive after 4 advances from the title.
 
-Here's one change in what the keys require. This USNIC notice has an 18 August dateline, but its body and figure say 30 August.
+For example, this USNIC notice has an 18 August dateline, but the body and figure say 30 August.
 
-Click 5 (build 1): The key preserves that conflict. The retained copy doesn't establish its first publication date.
+Click 5 (build 1): The key keeps the conflict. This copy doesn't establish when the notice first appeared.
 
-Click 6 (build 2): The July image also labels different fragments. The reported G and H centers are about 24.1 kilometres apart; that doesn't establish an edge-to-edge gap.
+Click 6 (build 2): The July image shows different fragments too. The later G and H centers are about 24.1 kilometres apart. We can't get an edge-to-edge gap from those centers.
 
 ## 4. Runner fixes are now in v0.2
 
 Arrive after 7 advances from the title.
 
-The first control runs exposed runner problems, including an unfinished field that passed the initial checks.
+The first control runs exposed runner bugs. One unfinished field even passed the initial checks.
 
-Click 8 (build 1): Version 0.2 keeps that field unfinished, counts rejected calls, delivers precision and scope, and shares the payload budget across responses. Regressions cover the fixes. The historical three-of-six result is unchanged; these fixes still need a model rerun.
+Click 8 (build 1): The patches keep that field unfinished, count rejected calls, pass through precision and scope, and enforce a shared payload limit. The regression tests pass. We still need to rerun the model; the old three-of-six result hasn't changed.
 
 ## 5. Checks completed; review still pending
 
 Arrive after 9 advances from the title.
 
-The automated audit now covers all 64 exports, 75 PNG containers, twelve saved requests and 114 run-artifact hashes. It found zero flags. The CPU suite passes 295 tests.
+The automated checks cover 64 exports, 75 PNG containers, twelve saved requests and 114 run-file hashes. They found no flags. The CPU suite passes 295 tests.
 
-Click 10 (build 1): We still have zero independent adjudications and zero blind policy comparisons. Pixel leakage, source support and pretraining exposure remain review work.
+Click 10 (build 1): We still need independent review and a blind comparison. These checks don't settle visible-image leakage, source support or pretraining exposure.
 
 ## 6. What to settle this week
 
 Arrive after 11 advances from the title.
 
-I'd keep the snapshot fixed and test the four additions for shortcuts first.
+I'd keep the collection at 64 for now and check the additions for shortcuts.
 
-Click 12 (build 1): Then rerun all three controls on version 0.2, with the same caps and the changed inputs recorded.
+Click 12 (build 1): Then rerun all three controls with the patched runner, keeping the caps and recording the changed inputs.
 
-Click 13 (build 2): For discovery, we need to choose the first task slice and its search, PDF and image tools. I'd like your advice on budgets. We also need an implementation owner and reliable compute. The full case library is linked below.
+Click 13 (build 2): For discovery, we need to choose the first task slice, its tools and the total budget. I'd like your advice on that. We also need to settle implementation ownership and compute. I'll open the cases library next.
