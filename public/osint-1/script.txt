@@ -1,115 +1,57 @@
 # Following clues on the open web
 
-Research discussion, 20 November 2026.
+Progress update, 20 November 2026.
 
-Right, Space or a click advances one build. Left reverses it. N opens notes. Home returns to the title; End holds the final frame. Links and notes controls do not advance the deck.
-
-Verbatim script: 549 spoken words. Allow about five to six minutes with the builds. Click numbers count every advance from the title.
+318 spoken words. Allow about three to four minutes with the builds. Each numbered click is one advance from the opening frame. N shows the current spoken segment.
 
 ## 1. Following clues on the open web
 
 Arrive after 0 advances from the title.
 
-I'm building an evaluation for agents that investigate public web sources. We have 64 author-curated cases. Here's the task design and what we've tested.
+Since the 60-case checkpoint, I've added four cases. The snapshot now has 64 cases across 61 split clusters, and 130 typed fields across eighteen cases.
 
-## 2. When does iterative retrieval help?
+Click 1 (build 1): There are six new image inputs. I haven't run a new model experiment.
 
-Arrive after 1 advances from the title.
+## 2. Four additions to inspect
 
-Does choosing the next search after reading a result improve supported accuracy?
+Arrive after 2 advances from the title.
 
-Click 2 (build 1): The agent starts with a question and searches.
+Two additions check vessel identities and identifier roles. Two check geographic records, including actual versus model-analog station positions and conflicting iceberg records.
 
-Click 3 (build 2): It reads a source and records the evidence location.
+Click 3 (build 1): Together they add 26 fields: eighteen answered, five refuted and three unresolved. Visible names are starting clues. A cheap solve should lower the difficulty label.
 
-Click 4 (build 3): That result determines what it searches next. We'll compare this with fixed retrieval.
+## 3. Keep the source conflict in the key
 
-## 3. Task inputs and outputs
+Arrive after 4 advances from the title.
 
-Arrive after 5 advances from the title.
+Here's one change in what the keys require. This USNIC notice has an 18 August dateline, but its body and figure say 30 August.
 
-The input is a question with images or files.
+Click 5 (build 1): The key preserves that conflict. The retained copy doesn't establish its first publication date.
 
-Click 6 (build 1): Each answer field cites a source observation and an exact location. Answer keys stay private.
+Click 6 (build 2): The July image also labels different fragments. The reported G and H centers are about 24.1 kilometres apart; that doesn't establish an edge-to-edge gap.
 
-Click 7 (build 2): Factual fields allow unresolved answers where justified. Verification uses supported, refuted or insufficient evidence. Some existing rubrics still need migration.
+## 4. Runner fixes are now in v0.2
 
-## 4. The 64-case collection
+Arrive after 7 advances from the title.
 
-Arrive after 8 advances from the title.
+The first control runs exposed runner problems, including an unfinished field that passed the initial checks.
 
-The 64 cases span six subsets: eleven entity-resolution, six geolocation, seven time-reconstruction, thirteen claim-checking, ten provenance and seventeen event-reconstruction cases. There are 61 split clusters and 75 image inputs.
+Click 8 (build 1): Version 0.2 keeps that field unfinished, counts rejected calls, delivers precision and scope, and shares the payload budget across responses. Regressions cover the fixes. The historical three-of-six result is unchanged; these fixes still need a model rerun.
 
-Click 9 (build 1): That's 54 investigations and ten easy controls. Independent adjudications are still at zero; difficulty needs blind testing.
+## 5. Checks completed; review still pending
 
-## 5. Two releases of one flood map
+Arrive after 9 advances from the title.
 
-Arrive after 10 advances from the title.
+The automated audit now covers all 64 exports, 75 PNG containers, twelve saved requests and 114 run-artifact hashes. It found zero flags. The CPU suite passes 295 tests.
 
-This Copernicus case asks whether flood-map revisions show new damage. The releases are dated 4 and 6 November 2024.
+Click 10 (build 1): We still have zero independent adjudications and zero blind policy comparisons. Pixel leakage, source support and pretraining exposure remain review work.
 
-Click 11 (build 1): Both source tables point to the same GeoEye-1 image: 31 October, 10:22 UTC, damage source four.
+## 6. What to settle this week
 
-Click 12 (build 2): The revision corrected missing flood traces. Damage between release dates remains unresolved.
+Arrive after 11 advances from the title.
 
-## 6. Reconcile the records
+I'd keep the snapshot fixed and test the four additions for shortcuts first.
 
-Arrive after 13 advances from the title.
+Click 12 (build 1): Then rerun all three controls on version 0.2, with the same caps and the changed inputs recorded.
 
-Each release has 3,906 building points. Comparing row positions suggests 168 grade differences.
-
-Click 14 (build 1): Join by unique coordinates and every full record matches. Reordering explains the apparent changes.
-
-Click 15 (build 2): The green overlay adds 111.934 hectares of flood trace and removes 0.005, using repaired polygons in UTM zone 30 north. That's a product revision; physical change remains unresolved.
-
-## 7. Evidence-supported scoring
-
-Arrive after 16 advances from the title.
-
-This scoring example has three required claims. Two answers are correct; one is missing.
-
-Click 17 (build 1): Only the first also has supporting evidence, so only that claim earns credit.
-
-Click 18 (build 2): The score is one third. Missing fields stay in the denominator. We average claims within cases, cases within subsets, then represented subsets.
-
-## 8. Fixed versus adaptive retrieval
-
-Arrive after 19 advances from the title.
-
-The fixed baseline chooses all queries from the original task and follows a predeclared opening rule.
-
-Click 20 (build 1): The adaptive policy uses what it reads to choose another query.
-
-Click 21 (build 2): Both get the same checkpoint, tools and budget. We'll report supported accuracy, calls, tokens, time and cost, including failures.
-
-## 9. Existing benchmark audits
-
-Arrive after 22 advances from the title.
-
-The pinned audit covers 162 encrypted MERRIN rows, 63 MMSearch-Plus rows out of 311 reported, 152 AVerImaTeC validation rows and metadata for 830 BrowseComp-Plus queries. We haven't fetched that last corpus. These are inspection counts; future runs need each benchmark's native splits and evaluator.
-
-## 10. Current implementation
-
-Arrive after 23 advances from the title.
-
-The Qwen controller can fetch a supplied page and return cited fields. The input audit covered 64 exports, 75 image containers, twelve requests and 114 artifact hashes, with zero automated flags. Pixel leakage and evidence support still need review.
-
-Click 24 (build 1): General search and artifact, PDF and image transport still need integration.
-
-## 11. Six diagnostic runs
-
-Arrive after 25 advances from the title.
-
-Qwen3-VL-8B-Instruct ran three supplied-page controls twice. Initial output checks passed zero of two photo-date attempts, one of two warning-time attempts and two of two satellite-release attempts. Median times were 19.8, 26.5 and 21.4 seconds.
-
-Click 26 (build 1): All six fetches succeeded; three outputs passed JSON and citation-ID checks. Accuracy remains unscored, and the saved answers contain errors.
-
-## 12. Next experiment
-
-Arrive after 27 advances from the title.
-
-I'll keep this 64-case snapshot fixed and related cases in the same split.
-
-Click 28 (build 1): First we need independent review of ambiguity, evidence support and acceptable unresolved answers.
-
-Click 29 (build 2): Then we can run the paired comparison. We still need to agree implementation ownership and reliable compute. The case links are below.
+Click 13 (build 2): For discovery, we need to choose the first task slice and its search, PDF and image tools. I'd like your advice on budgets. We also need an implementation owner and reliable compute. The full case library is linked below.
