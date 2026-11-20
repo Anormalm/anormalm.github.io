@@ -2,80 +2,50 @@
 
 Follow-up discussion, 20 November 2026.
 
-932 spoken words. Detailed reading copy. Allow about seven minutes for the slides; the library demo is optional. Each numbered click is one advance from the opening frame. N shows the current spoken segment.
+583 spoken words. Detailed reading copy. Allow about four to five minutes for today’s discussion; the implementation note and library demo are available for detail. Each numbered click is one advance from the opening frame. N shows the current spoken segment.
 
 ## 1. Following clues on the open web
 
 Arrive after 0 advances from the title.
 
-Following our last discussion, I've been working on investigation tasks. I'd like to use this meeting to choose what a more open-ended evaluation and agent should look like. The task library gives us concrete source material to work from, but I don't think we've settled the right investigation setup yet.
+I wanted to use today to show where the case work stands and discuss the next implementation problem. I think there is good material in these cases: they involve real records, source conflicts and questions that need more than finding a name. Manual checking is still incomplete, so this is work for us to refine.
 
-Click 1 (build 1): The direction I want to explore is an agent that chooses which questions to pursue and builds an account from the evidence it finds. Entity matching would be one operation within that investigation.
+Click 1 (build 1): The next question is how an agent should construct and carry out an investigation using tools it is already given. I've written a more detailed implementation proposal, but today I'd mainly like to agree the direction and the next work.
 
-## 2. The tasks I want to develop
+## 2. Cases to refine into investigation briefs
 
 Arrive after 2 advances from the title.
 
-One possible brief is to investigate the breakup of iceberg A-23A over July and August 2025. The agent would need to find observations, work out which fragments and dates they describe, and explain what happened over that period. We would give it the scope without prescribing every source to visit.
+One candidate brief is to investigate the breakup of iceberg A-23A over July and August 2025. The source material includes observations that need to be reconciled across dates and fragments. That gives an agent decisions about what to look for and what the records actually support.
 
-Click 3 (build 1): Another brief could investigate Laura Bassi's changes of name and operation. That involves following historical records and distinguishing the roles of different organisations. These are candidate briefs based on material in the library. I'd like to refine them into tasks where the agent has useful decisions to make.
+Click 3 (build 1): Another could investigate Laura Bassi's changes of name and operation. The sources distinguish historical names and organisational roles. I think these are useful starting points. We still need to finish checking their source support and wording, then decide how open the investigation brief should be.
 
-## 3. Conflicting dates change the investigation
+## 3. The agent receives tools and builds a plan
 
 Arrive after 4 advances from the title.
 
-This notice shows one of those decisions. Its dateline says 18 August, while the body and figure say 30 August. Reading the document successfully still leaves the agent with a conflict to investigate.
+The agent should receive the brief, the starting evidence and the tool interfaces at the beginning. Web search and OSINT tools are part of that setup. Building those interfaces is implementation work for us; constructing the investigation is the agent's job.
 
-Click 5 (build 1): It could search for another dated copy, look for a separate observation, or check whether the two dates refer to different events. I'd like the next action to depend on what is actually missing from the account.
+Click 5 (build 1): Its first step would be to generate working questions from the brief and identify what evidence would help answer them. That plan should be provisional. We shouldn't have to supply a complete sequence of lookups.
 
-Click 6 (build 2): If the available evidence doesn't resolve the dates, the report should retain that conflict. We should judge whether the conclusion follows from the evidence, including when the justified conclusion is uncertainty.
+Click 6 (build 2): It would then choose a tool call, inspect the result and update its evidence. A result might support a claim, expose a conflict or change the next question. The implementation needs to retain those observations and revisions so we can inspect how the account was built.
 
-## 4. Design the agent’s decision loop
+Click 7 (build 3): I don't want to define the investigation by a time budget. We can record the resources it uses, but the important question is why it decides it has enough evidence to report, and what remains unresolved. The written plan sets out the state, execution loop and reporting checks in more detail.
 
-Arrive after 7 advances from the title.
+## 4. A question from the practitioner conversations
 
-This is the decision loop I'd like us to design. The brief supplies the goal and scope. The agent chooses a subquestion that would move the investigation forward, rather than receiving a complete list of lookups from us.
+Arrive after 8 advances from the title.
 
-Click 8 (build 1): It then chooses an individual tool call. That could be a web search, opening a source, inspecting an image or checking geographic data. Tool choice is part of the policy we'd want to study.
+The brief conversations with PUDO and Bellingcat helped sharpen the guidance question. PUDO mentioned some internal model training. The Bellingcat point is how much expert workflow we should give the agent in its instructions. I value their judgment of investigations; the design question concerns the agent.
 
-Click 9 (build 2): The result updates an evidence record: what claim it bears on, where it came from, and whether it conflicts with something already found. A result might settle a question or reveal a better one. We need to decide how much of this state the model sees at each step.
+Click 9 (build 1): We could compare a brief and the available tools with the same setup plus a generic investigation guide. That would help us decide which parts of the workflow the agent can construct itself. I've also heard about European geolocation work using web tools, though I haven't checked the details. This is context for the next work, not a result we're claiming.
 
-Click 10 (build 3): We also need a stopping rule. The agent might have enough evidence for a useful report, or reach its budget with important gaps. Its report should explain those gaps. I'd like your advice on which decisions belong to the model and which limits the controller should enforce.
+## 5. What I want to discuss today
 
-## 5. Tools for the investigation
+Arrive after 10 advances from the title.
 
-Arrive after 11 advances from the title.
+My immediate priority is to finish manually checking the cases and keep refining the investigation briefs. I think the material is worth building on, and I want the manual review to make that assessment more dependable.
 
-Yes, I'd allow web search and OSINT tools in the proposed setup. Search helps it find leads; page, PDF and image readers let it inspect the actual material. The compared agents would receive the same enabled tools and their calling instructions.
+Click 11 (build 1): In parallel, I'd like us to agree one complete agent workflow: how it generates questions, calls the provided tools, records evidence and revises its plan. The next implementation should let us follow a whole investigation rather than demonstrate isolated calls.
 
-Click 12 (build 1): For open-source analysis tools, ExifTool could read file metadata, Tesseract could extract text from an image, and GDAL could inspect or process geographic data. These are candidate integrations. The agent would call individual tools through defined interfaces. We aren't proposing a separate library of investigation skills.
-
-Click 13 (build 2): The working harness currently fetches supplied pages. General search and the wider file, image and geographic interfaces still need integration. Every call should retain its inputs, result, source reference and cost, including failed attempts. A tool result would still need interpretation before it supports a claim.
-
-## 6. What I learned from the conversations
-
-Arrive after 14 advances from the title.
-
-I got brief tips from PUDO and Bellingcat. PUDO mentioned some internal model training. The useful question from the Bellingcat conversations is how much expert workflow we should give the agent in its instructions. Their investigative judgment can inform the task design and review criteria.
-
-Click 15 (build 1): I've also heard about European groups using web tools for geolocation, though I haven't checked the details. That is useful context for the direction we're discussing. Some shared tasks may be useful for training; we'd need to confirm their use before building a training pool.
-
-## 7. How much workflow should we prescribe?
-
-Arrive after 16 advances from the title.
-
-We could compare the same investigation brief on its own with the brief plus a generic investigation guide. For example, the guide might remind it to check what a date describes and compare conflicting records. It would not contain the answer or a route tailored to one case.
-
-Click 17 (build 1): Both settings would have the same model, tools and total budget. We would count the extra instruction tokens too. That lets us ask whether writing down more of the expert workflow helps the agent use its resources well.
-
-Click 18 (build 2): Reviewers would assess useful coverage and whether the findings are supported. We would also record unsupported claims, tool use and cost. Different investigation routes could be acceptable. We need to agree what a good report should establish before treating the comparison as an experiment.
-
-## 8. What we should design together
-
-Arrive after 19 advances from the title.
-
-The immediate task is to refine these investigation briefs: what the question covers, which source material makes it workable, and how we will review a report. I want to keep curating tasks while making those decisions explicit.
-
-Click 20 (build 1): Alongside that, I'd like your advice on the agent flow: generating subquestions, choosing tools, updating evidence and deciding when to stop. The task design should expose those decisions, and the available tools should make the task genuinely runnable.
-
-Click 21 (build 2): Then we can choose one investigation and a small first comparison. I'd suggest agreeing the tool access and budget before varying the instruction detail. Which brief would you start with, and which tool calls would you expect the agent to need? I can open the library so we can inspect the source material together.
+Click 12 (build 2): Then we can inspect its report and the decisions that led to it. Which case would you use to develop that workflow, and what would you expect a good investigation to establish? That's the main discussion I'd like to have today.
