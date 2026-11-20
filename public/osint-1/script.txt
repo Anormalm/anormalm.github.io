@@ -1,67 +1,71 @@
 # Following clues on the open web
 
-Progress update, 20 November 2026.
+Follow-up discussion, 20 November 2026.
 
-424 spoken words. Allow about four minutes with the builds. Each numbered click is one advance from the opening frame. N shows the current spoken segment.
+463 spoken words. Allow about four minutes with the builds. Each numbered click is one advance from the opening frame. N shows the current spoken segment.
 
 ## 1. Following clues on the open web
 
 Arrive after 0 advances from the title.
 
-I've added four cases since the 60-case checkpoint. We now have 64 cases in 61 split clusters, with 130 typed answer fields across eighteen cases.
+Following our last discussion, I've been working on investigation tasks. I'd like to use this meeting to choose what a more open-ended evaluation and agent should look like.
 
-Click 1 (build 1): The additions include six images. I haven't run a new model experiment.
+Click 1 (build 1): The agent would decide which questions to pursue and build an account from the evidence it finds.
 
-## 2. Four additions to inspect
+## 2. The tasks I want to develop
 
 Arrive after 2 advances from the title.
 
-Two cases follow vessel identities and identifier roles. Two check geographic records: station coordinates with different meanings, and an iceberg image with a conflicting later notice.
+For example, we could ask it to investigate the breakup of iceberg A-23A over July and August 2025. It would have to find the relevant observations and work out which ones belong together.
 
-Click 3 (build 1): They add 26 fields: eighteen answered, five refuted and three unresolved. Names already visible in an input don't earn discovery credit. If the whole task has an easy shortcut, we should lower its difficulty label.
+Click 3 (build 1): Or investigate Laura Bassi's changes of name and operation. The library gives us source material for these tasks. I'd now refine some of it into broader investigation briefs.
 
-## 3. Keep the source conflict in the key
+## 3. Conflicting dates change the investigation
 
 Arrive after 4 advances from the title.
 
-For example, this USNIC notice has an 18 August dateline, but the body and figure say 30 August.
+This notice gives a simple example of a decision inside an investigation. The dateline says 18 August; the body and figure say 30 August.
 
-Click 5 (build 1): The key keeps the conflict. This copy doesn't establish when the notice first appeared.
+Click 5 (build 1): Does the agent look for another dated copy or a separate observation? That's a choice it needs to make from what it has found.
 
-Click 6 (build 2): The July image shows different fragments too. The later G and H centers are about 24.1 kilometres apart. We can't get an edge-to-edge gap from those centers.
+Click 6 (build 2): If the evidence doesn't resolve the dates, the report should retain that conflict.
 
-## 4. Runner fixes are now in v0.2
+## 4. Design the agent’s decision loop
 
 Arrive after 7 advances from the title.
 
-The first control runs exposed runner bugs. One unfinished field even passed the initial checks.
+I'd like us to work out this decision loop. The brief gives the goal and scope; the agent chooses a question that would move the investigation forward.
 
-Click 8 (build 1): The patches keep that field unfinished, count rejected calls, pass through precision and scope, and enforce a shared payload limit. The regression tests pass. We still need to rerun the model; the old three-of-six result hasn't changed.
+Click 8 (build 1): It then chooses a tool: a search, a page, a map or an image check.
 
-## 5. Conversations with PUDO and Bellingcat
+Click 9 (build 2): The result updates its evidence and may change the next question. We need to decide what the agent remembers about claims and conflicting sources.
 
-Arrive after 9 advances from the title.
+Click 10 (build 3): We also need a stopping rule. When should it keep investigating, and when should it write a report with the remaining gaps?
 
-I got short tips from PUDO and Bellingcat. PUDO mentioned doing some internal model training and still working out the best approach for agents.
-
-Click 10 (build 1): My understanding is that other European groups are using web tools to automate geolocation. I haven't checked the details. I also heard that some tasks are being shared for internal training; we'd need to confirm which ones we can use.
-
-## 6. How much guidance should we give?
+## 5. What I learned from the conversations
 
 Arrive after 11 advances from the title.
 
-One question from those conversations was how detailed our instructions should be. I'd compare the task on its own with the same task plus a generic OSINT checklist.
+I got brief tips from PUDO and Bellingcat. PUDO mentioned some internal model training. The question from the Bellingcat conversations is how much guidance to give the agent, drawing on how experts investigate.
 
-Click 12 (build 1): Both settings would use the same model, tools and total budget. We'd count the extra prompt tokens, and the checklist would stay the same across cases.
+Click 12 (build 1): I've also heard about European groups using web tools for geolocation, though I haven't checked the details. Our discussion is about a broader investigation workflow. Some shared tasks may be useful for training; we'd need to confirm their use.
 
-Click 13 (build 2): Then we can measure whether the added guidance improves supported answers and what it costs. That gives us evidence for how much workflow knowledge to put into the prompt.
+## 6. How much workflow should we prescribe?
 
-## 7. What to settle this week
+Arrive after 13 advances from the title.
 
-Arrive after 14 advances from the title.
+We could compare the same brief on its own with the brief plus an investigation guide. That lets us test how much expert workflow to put in the instructions.
 
-I'd keep the collection at 64 for now and check the additions for shortcuts.
+Click 14 (build 1): Keep the model, tools and total budget the same, including the extra prompt tokens. Use one generic guide across tasks.
 
-Click 15 (build 1): Then rerun all three controls with the patched runner, keeping the caps and recording the changed inputs.
+Click 15 (build 2): Reviewers would judge useful coverage and source support, and we'd report the cost. We'd need to agree that review before running the comparison.
 
-Click 16 (build 2): For discovery, we need to choose the first task slice, its tools and the total budget. I'd like your advice on that. We also need to settle implementation ownership and compute. I'll open the cases library next.
+## 7. What we should design together
+
+Arrive after 16 advances from the title.
+
+The next step is to refine the investigation briefs, including their scope and how we'll review the answers.
+
+Click 17 (build 1): Alongside that, I'd like your advice on question selection, tool use and stopping. Those choices should shape the tasks too.
+
+Click 18 (build 2): Then we can choose one brief and a small first comparison. Which investigation would you start with, and how much guidance would you give the agent?
