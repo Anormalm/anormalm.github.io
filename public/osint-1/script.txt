@@ -1,8 +1,8 @@
 # Following clues on the open web
 
-Follow-up discussion, 20 November 2026.
+Follow-up discussion, 20 November 2026. Benchmark update added 22 November.
 
-583 spoken words. Detailed reading copy. Allow about four to five minutes for today’s discussion; the implementation note and library demo are available for detail. Each numbered click is one advance from the opening frame. N shows the current spoken segment.
+Detailed reading copy. Allow about four to five minutes for today’s discussion; the implementation note and library demo are available for detail. Each numbered click is one advance from the opening frame. N shows the current spoken segment.
 
 ## 1. Following clues on the open web
 
@@ -49,3 +49,11 @@ My immediate priority is to finish manually checking the cases and keep refining
 Click 11 (build 1): In parallel, I'd like us to agree one complete agent workflow: how it generates questions, calls the provided tools, records evidence and revises its plan. The next implementation should let us follow a whole investigation rather than demonstrate isolated calls.
 
 Click 12 (build 2): Then we can inspect its report and the decisions that led to it. Which case would you use to develop that workflow, and what would you expect a good investigation to establish? That's the main discussion I'd like to have today.
+
+## 6. How the benchmark runs
+
+Arrive after 13 advances from the title.
+
+Here’s the setting we’re using now. The model gets the brief without links. It can search, fetch pages and files, and use the calculator or the analysis sandbox. I check each finding against the observations it cites.
+
+Click 14 (build 1): Both frontier models worked through the Kodiak bulletin case. The buoy case also needed an exact join between two archives. Astra got the 13 values right. I could confirm both the answer and the required citation roles for seven fields. Sol spent its last call downloading the recovered archive and never submitted.
