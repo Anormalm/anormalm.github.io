@@ -71,6 +71,12 @@
 <p>In fresh runs, both Qwen checkpoints fetched and extracted the two filings before exceeding their context limit. With shorter tool excerpts, the base checkpoint reached the report call. Its draft recovered the four numeric values, then ran out of output tokens. The draft also had the wrong threshold verdict.</p>
 <p>The reward trainer now checks probabilities under the same JSON grammar used to sample actions. A reduced vision checkpoint completed and reloaded an update using fixture rewards.</p>
 <p>Two full Qwen3.8-27B rollouts on the revised filing brief earned evidence rewards of 0.5 and 1. Both found the right values. One report omitted a crosswalk citation. A separate cached replay reproduced all six sampled actions and their token probabilities. The full checkpoint took one reward update. The changed adapter reloaded in a fresh process and generated a valid tool action on a retained prompt. The next check is performance on withheld cases.</p>
+<section id="case-difficulty">
+<h2>How we’ll make the cases harder</h2>
+<p>Keep simple lookups as controls. For the harder cases, the first result should give the investigator a lead. A second record should change what they can conclude.</p>
+<p>Start with the brief and any images. Use the same logged web tools for each model. In development, compare 35 and 20 model calls with the last call reserved for the report. The shorter run measures efficiency.</p>
+<p>Two fresh cases are ready for independent solves. Their briefs and references are private. Difficulty rankings will follow reviewed runs across model families.</p>
+</section>
 </main>
 </body>
 </html>
