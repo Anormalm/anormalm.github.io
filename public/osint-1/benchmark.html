@@ -15,7 +15,7 @@
 <h1>Open-web benchmark update</h1>
 <p class="lede">The model starts with an investigation brief and zero source URLs. It chooses where to look and has to show where each finding came from.</p>
 <h2>What the harness gives the model</h2>
-<p>The current cases allow web search, page fetch, downloads, a calculator and sandboxed code. The model submits typed findings with citations to observations it received through those tools.</p>
+<p>The current cases allow web search, page fetch, downloads, a calculator and sandboxed code. The model submits findings with citations to observations it received through those tools.</p>
 <p>We check the findings and their evidence. A no-retrieval control helps catch answers the brief gives away. The Kodiak runs had a 25-call diagnostic guard and no elapsed-time budget.</p>
 <h2>Kodiak case checks</h2>
 <p>The first case joins forecast bulletins to gauge records. The buoy case joins raw telemetry to recovered pressure samples. It asks the model to distinguish a pressure excursion from the arrival of a tsunami.</p>
@@ -29,6 +29,9 @@
 </table>
 <p class="muted">This is one development event and one model family. Independent review and blind solves are still pending.</p>
 
+<h2>Harder cases</h2>
+<p>We added a museum restitution case that asks the investigator to reconcile a catalogue correction, two ownership lists and the signed transfer. Exact counts only earn full credit when the records support what those counts describe.</p>
+<p>The first two open-web runs hit the call guard after search requests failed. One found the key reports through a sitemap. With four source links supplied, both models answered all 12 reviewed claims. This case is useful for checking the workflow. It still needs a clean open-web comparison before we can rank its difficulty.</p>
 <h2>Training</h2>
 <p>The local Qwen pipeline has sampled its own tool commands, taken an evidence-reward update and reloaded the adapter. That check used arithmetic tasks. Qwen3.8-27B is the candidate for full training on investigations.</p>
 </main>
