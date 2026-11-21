@@ -35,8 +35,10 @@
 <h2>A rerun with working search</h2>
 <p>We reran both models from the same briefs with no starting links. They used the same search backend, which returned URLs for every query. The models still had to open and check the sources.</p>
 <p>Both models matched all 13 reference findings for the Kodiak buoy case in 14 and 15 calls. Their calculations cited both NOAA archives and the USGS origin time. On restitution, both reached the key records and used all 25 calls without submitting.</p>
+<h2>Give the agent a final report call</h2>
+<p>A second restitution run reserved call 25 for a report. The model could still finish earlier. Astra submitted in 18 calls and Sol used the reserve. I checked the cited evidence and found support for all 12 claims in both reports. This makes restitution a development case for testing when agents decide they have enough evidence.</p>
 <h2>Training</h2>
-<p>The local Qwen pipeline has sampled its own tool commands, taken an evidence-reward update and reloaded the adapter. That check used arithmetic tasks. All 18 Qwen3.8-27B weight shards passed verification and the model loaded locally. The first training run is waiting for an idle GPU.</p>
+<p>The local Qwen pipeline has sampled its own tool commands, taken an evidence-reward update and reloaded the adapter. That check used arithmetic tasks. The full Qwen3.8-27B checkpoint completed a forward pass on a real image-bearing investigation input. A one-step CPU training check is running while the GPU run waits for a free device.</p>
 </main>
 </body>
 </html>
