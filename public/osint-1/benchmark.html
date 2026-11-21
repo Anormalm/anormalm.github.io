@@ -41,6 +41,9 @@
 <p>A Connecticut case asks the model to reconstruct how residents counted under the old counties overlap the new planning regions. Both models recovered all 19 populated overlaps in 13 calls. They used different public records to check the join.</p>
 <p>In a separate 12-call run, Sol submitted the full reconstruction. Astra also calculated all 19 overlaps, but an extra brace in its final response caused the harness to reject it. The tighter limit exposed a submission failure. Without tools, Sol still got 13 of the 19 overlaps and the main conclusion. I’d keep this as a reconstruction check and look for cases where the decisive finding depends on evidence the model has to discover.</p>
 <p class="muted">Development results from one model family. Independent review and repeated trials are pending.</p>
+<h2>Running the benchmark in Harbor</h2>
+<p>Harbor scheduled a live Connecticut trial. The task container had no network. The model reached public records through the same logged tools as before. Sol recovered all 19 overlaps in 12 calls, and Harbor collected the report.</p>
+<p>A separate calculator run passed in a second offline container. That check confirms that Harbor can hand a submitted answer to a verifier. The investigation still needs independent evidence review before it contributes a benchmark score.</p>
 <h2>Training</h2>
 <p>The local Qwen pipeline has sampled its own tool commands, taken an evidence-reward update and reloaded the adapter. That check used arithmetic tasks. The full Qwen3.8-27B checkpoint completed one supervised update on a reviewed filing action. Validation action loss fell from 0.0380 to 0.0309 on one example from a separate development case. Reloading the adapter reproduced that loss. The base-versus-adapter tool runs are underway.</p>
 </main>
