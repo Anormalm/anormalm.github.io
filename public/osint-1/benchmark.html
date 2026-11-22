@@ -37,7 +37,7 @@
 <p>Both models matched all 13 reference findings for the Kodiak buoy case in 14 and 15 calls. Their calculations cited both NOAA archives and the USGS origin time. On restitution, both reached the key records and used all 25 calls without submitting.</p>
 <h2>Give the agent a final report call</h2>
 <p>A second restitution run reserved call 25 for a report. The model could still finish earlier. Astra submitted in 18 calls and Sol used the reserve. I checked the cited evidence and found support for all 12 claims in both reports. This makes restitution a development case for testing when agents decide they have enough evidence.</p>
-<h2>Can tighter limits make the cases harder?</h2>
+<h2>What a tighter limit tells us</h2>
 <p>A Connecticut case asks the model to reconstruct how residents counted under the old counties overlap the new planning regions. Both models recovered all 19 populated overlaps in 13 calls. They used different public records to check the join.</p>
 <p>In a separate 12-call run, Sol submitted the full reconstruction. Astra also calculated all 19 overlaps, but an extra brace in its final response caused the harness to reject it. The tighter limit exposed a submission failure. Without tools, Sol still got 13 of the 19 overlaps and the main conclusion. I’d keep this as a reconstruction check and look for cases where the decisive finding depends on evidence the model has to discover.</p>
 <p class="muted">Development results from one model family. Independent review and repeated trials are pending.</p>
@@ -73,7 +73,7 @@
 <p>Two full Qwen3.8-27B rollouts on the revised filing brief earned evidence rewards of 0.5 and 1. Both found the right values. One report omitted a crosswalk citation. A separate cached replay reproduced all six sampled actions and their token probabilities. The full checkpoint took one reward update. The changed adapter reloaded in a fresh process and generated a valid tool action on a retained prompt. The next check is performance on withheld cases.</p>
 <section id="case-difficulty">
 <h2>Where we’ll raise the difficulty</h2>
-<p>The harder briefs ask for a finding that no single source settles. Finding the right record should get an investigator far enough to compare it with another record or test a claim against the underlying data.</p>
+<p>For each hard case, we ask what a plausible first search would turn up and what evidence could change the answer. Finding the subject can be the first step. The work is checking what the records establish together.</p>
 <p>One new development case asks whether rebuilding a public chart from same-site measurements changes its weekly picture. Recognizing the station switch gets the model started. The answer requires three daily series and a like-for-like comparison. Astra reconstructed it under both the 20- and 35-call ceilings. We’ll keep it for calibration.</p>
 <p>In the latest four-case check, Astra recovered all of the findings in our draft rubrics. We’re using those cases to check the setup. A new case asks whether a dashboard’s full daily history is enough to identify the rule that produced it. An investigator has to find the documented method, replay plausible alternatives and say what additional evidence would settle the question.</p>
 <h3>A shorter brief</h3>
@@ -96,7 +96,7 @@
 <p>A follow-up to the New Zealand gauge case asks which five-minute movements belong before or after a warning was cancelled. Two archives label the same readings one minute apart, and the official report gives two cancellation times. The investigator has to check which phase labels hold under all four combinations.</p>
 <p>I reproduced the catalogue from the archived gauge files. The new brief still needs a blind solve and repeated model runs. We’ll use the same 35-call setting to test the case and run the 20-call version separately to measure efficiency.</p>
 <h3>What the tools allow</h3>
-<p>Each model starts with the brief and any case assets. It can search the public web, fetch records and use the case’s declared analysis tools through the harness. The main comparison gives each model 34 research calls and one reserved report call. The 20-call comparison measures efficiency under a tighter budget. We log elapsed time without using it as a scoring limit.</p>
+<p>For difficulty rankings, each model starts with the brief and any case assets. It has no supplied source links. It can search the public web, fetch records and use the case’s declared analysis tools. The harness checks for 35 model calls with the last reserved for the report. There’s no research timer. We use a separate 20-call run to compare efficiency.</p>
 <p>We’ll assign difficulty after independent solvers reproduce the findings and repeated model runs show which evidence steps cause trouble. A search outage or a rejected submission gets its own entry in the run log.</p>
 </section>
 </main>
