@@ -72,10 +72,12 @@
 <p>The reward trainer now checks probabilities under the same JSON grammar used to sample actions. A reduced vision checkpoint completed and reloaded an update using fixture rewards.</p>
 <p>Two full Qwen3.8-27B rollouts on the revised filing brief earned evidence rewards of 0.5 and 1. Both found the right values. One report omitted a crosswalk citation. A separate cached replay reproduced all six sampled actions and their token probabilities. The full checkpoint took one reward update. The changed adapter reloaded in a fresh process and generated a valid tool action on a retained prompt. The next check is performance on withheld cases.</p>
 <section id="case-difficulty">
-<h2>How we’ll make the cases harder</h2>
-<p>Keep simple lookups as controls. For the harder cases, the first result should give the investigator a lead. A second record should change what they can conclude.</p>
-<p>Start with the brief and any images. Use the same logged web tools for each model. In development, compare 35 and 20 model calls with the last call reserved for the report. The shorter run measures efficiency.</p>
-<p>Two fresh cases are ready for independent solves. Their briefs and references are private. Difficulty rankings will follow reviewed runs across model families.</p>
+<h2>Where we’ll raise the difficulty</h2>
+<p>The harder briefs ask for a finding that no single source settles. Finding the right record should get an investigator far enough to compare it with another record or test a claim against the underlying data.</p>
+<p>One new development case asks whether rebuilding a public chart from same-site measurements changes its weekly picture. Recognizing the station switch gets the model started. The answer requires three daily series and a like-for-like comparison. Astra reconstructed it under both the 20- and 35-call ceilings. We’ll keep it for calibration.</p>
+<h3>What the tools allow</h3>
+<p>Each model starts with the brief and any case assets. It can search the public web, fetch records and use the case’s declared analysis tools through the harness. The report has a reserved call. The shorter run measures how much evidence an agent can assemble with fewer calls. We record elapsed time separately.</p>
+<p>We’ll assign difficulty after independent solvers reproduce the findings and repeated model runs show which evidence steps cause trouble. A search outage or a rejected submission gets its own entry in the run log.</p>
 </section>
 </main>
 </body>
