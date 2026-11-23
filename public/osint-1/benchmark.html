@@ -17,6 +17,8 @@
 <h2>What the harness gives the model</h2>
 <p>The current cases allow web search, page fetch, downloads, a calculator and sandboxed code. The model submits findings with citations to observations it received through those tools.</p>
 <p>We check the findings and their evidence. A no-retrieval control helps catch answers the brief gives away. The Kodiak runs had a 25-call diagnostic guard and no elapsed-time budget.</p>
+<h2>Collection coverage</h2>
+<p>The development library has 54 investigations and 10 controls across six subsets. Thirty-three investigations start without supplied source URLs. Their evaluator drafts still need independent review.</p>
 <h2>Kodiak case checks</h2>
 <p>The first case joins forecast bulletins to gauge records. The buoy case joins raw telemetry to recovered pressure samples. It asks the model to distinguish a pressure excursion from the arrival of a tsunami.</p>
 <table>
@@ -95,6 +97,7 @@
 <h3 id="dashboard-rule-change">Could the dashboard have changed its rule?</h3>
 <p>The next Great Lakes case allows the rule for missing gauges to change once. Finding the method and station records gets an investigator started. They then have to work out which histories fit the records and what an auditor would still need to recover. The author calculation is complete. Independent and frontier trials are pending.</p>
 <p>A Qwen adapter trained on three verified actions from the New Zealand case. In a one-call Great Lakes check, it and base Qwen ran the same file preview and hit the output limit. Neither saved a daily table.</p>
+<p>With a two-row preview, both models ran the Great Lakes calculation. Base Qwen matched 186 of 744 cells as saved and all 744 after we standardized the rule names. The adapter matched zero. A sandbox replay traced the error to its averaging function, which returned sums.</p>
 <h3 id="gauge-review-catalogue">Which movements can we date confidently?</h3>
 <p>A follow-up to the New Zealand gauge case asks which five-minute movements belong before or after a warning was cancelled. The investigator has to line up two gauge archives and reconcile two cancellation times in the official report. The resulting catalogue shows which labels hold across all four combinations.</p>
 <p>I reproduced the catalogue from the archived gauge files. The new brief still needs a blind solve and repeated model runs. We’ll use the same 35-call setting to test the case and run the 20-call version separately to measure efficiency.</p>
