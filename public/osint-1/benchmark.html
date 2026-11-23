@@ -101,6 +101,7 @@
 <p>We tried telling Qwen to start with the table comparison and kept the same 12 research calls. It still spent its calls previewing records and saved no calculation. This was a local check on a development case.</p>
 <p>Showing the headers and two rows from each table changed Qwen’s first move. It loaded both tables and found all four sensor streams. A later comparison found a match for one stream, but the tool dropped the result when the debug output hit its limit. We recovered the match by replaying the same code with a shorter output. Qwen also recovered on its own and aligned all four sensor streams.</p>
 <p>In the next call, base Qwen and both trained adapters started writing the calculation. All three reached the 1,400-token limit before they could run it. Base Qwen continued the same draft with 2,800 tokens and still ran out before it could execute.</p>
+<p>When we asked Qwen to save one part at a time, its first command ran in 481 tokens. It saved the clock shift and made errors in the UTC conversion and match-count format. We’re checking the remaining steps.</p>
 <h3 id="harder-clock-audit">Can one clock correction fit?</h3>
 <p>We added a third exposure to the photo timing case. The investigator has to reconcile two published timelines, test a fixed offset and constant rate, and show how close any correction can get. A correct photo match gets the work started.</p>
 <p>The author calculation is reproducible. The case still needs an independent solve and repeated frontier trials.</p>
