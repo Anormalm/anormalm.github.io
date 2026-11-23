@@ -125,6 +125,7 @@
 <p>We’ll assign difficulty after independent solvers reproduce the findings and repeated model runs show which evidence steps cause trouble. A search outage or a rejected submission gets its own entry in the run log.</p>
 <h3 id="split-audit">How we check for overlap</h3>
 <p>The audit found no reserved source digests in 45 optimizer files. It also flagged none of 1,185 wording comparisons or 125 image comparisons. The image check screened the single reserved image for identical pixels, resizes and fixed crops. Reviewers still need to check paraphrases and other edits.</p>
+<p>We also checked 236 training and validation records for passages of 16 consecutive words copied from reserved sources. The check found no matches across the nine source captures we could verify. Five more captures and any paraphrases still need review.</p>
 </section>
 </main>
 </body>
