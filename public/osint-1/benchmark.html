@@ -11,7 +11,7 @@
 <body>
 <header class="top"><a href="./">Presentation</a><a href="https://open-web-osint-review.hulifan55555.chatgpt.site/benchmark.html">Private case library</a></header>
 <main class="report">
-<time datetime="2026-11-22">22 November 2026</time>
+<time datetime="2026-11-23">23 November 2026</time>
 <h1>Open-web benchmark update</h1>
 <p class="lede">The model starts with an investigation brief and zero source URLs. It chooses where to look and has to show where each finding came from.</p>
 <h2>What the harness gives the model</h2>
@@ -105,7 +105,7 @@
 <p>I checked the calculation against the Census records in the sandbox. Qwen’s brief-only and first-pass search controls both left the chart unresolved. The new case still needs an independent solve and repeated frontier runs before we assign a difficulty rank.</p>
 <h3 id="county-chart-omission">Would dropping one county help?</h3>
 <p>The Connecticut follow-up asks whether a newspaper can make its historical chart more representative by omitting one county. Finding the Census tables still leaves a decision to defend. The investigator has to rebuild the overlaps and show how the weakest match changes for each possible omission.</p>
-<p>I checked the draft answer two ways. The case still needs an independent solve and repeated frontier runs.</p>
+<p>In a supplied-record diagnostic, base Qwen downloaded all three primary records and left the join unfinished. A separate replay reached all 19 pairings and still saved an empty population matrix. The case needs an independent solve and repeated frontier runs before we rank it.</p>
 <h3 id="hard-case-qualification">What earns a hard rating?</h3>
 <p>We’ll start with cases where an obvious match leaves a real question open. In the photo timing case, finding the pictures gives us a candidate. To check the caption, we still have to reconcile the records that timestamp the exposures.</p>
 <p>Before ranking a case, we’ll try the brief alone and then a fixed first pass of search. If either already supports the central claim, the case belongs in calibration or needs a new question. Next we’ll ask an independent investigator to solve it using the same tools and run the open-web comparison on two model families.</p>
@@ -114,6 +114,8 @@
 <h3>What the tools allow</h3>
 <p>For difficulty rankings, each model starts with the brief and any case assets. It has no supplied source links. It can search the public web, fetch records and use the case’s declared analysis tools. The harness checks for 35 model calls with the last reserved for the report. There’s no research timer. We use a separate 20-call run to compare efficiency.</p>
 <p>We’ll assign difficulty after independent solvers reproduce the findings and repeated model runs show which evidence steps cause trouble. A search outage or a rejected submission gets its own entry in the run log.</p>
+<h3 id="split-audit">How we check for overlap</h3>
+<p>We compare reserved questions against exposed briefs and optimizer examples, and check optimizer images against the reserved image files. The latest pass flagged none of 1,176 wording comparisons and found no exact reuse of reserved PNGs in optimizer histories. Semantic and visual review are still pending.</p>
 </section>
 </main>
 </body>
