@@ -1,0 +1,616 @@
+{
+  "study": "misgraph-matched-ordering-breadth-v1",
+  "reported_date": "2026-11-24",
+  "plan_sha256": "1e162a450fe2839abfc6cfb4b28369bd53c114707eb1db81de3eec3bf39c44fc",
+  "schedule_sha256": "134360972674d47ddf56bf4cf95f4ab53002bd18e274ca17273e579e0e1963d0",
+  "requested_completion_token_limit": 16384,
+  "planned_new_responses": 300,
+  "eligible_new_responses": 216,
+  "reused_responses": 12,
+  "complete_configurations": 19,
+  "complete_developers": 16,
+  "matched_pairs": 114,
+  "graphs": [
+    [
+      "groundlm-hard-v1-exact_walk_count-n32-r05",
+      "exact_walk_count",
+      32
+    ],
+    [
+      "groundlm-hard-v1-exact_walk_count-n64-r05",
+      "exact_walk_count",
+      64
+    ],
+    [
+      "groundlm-hard-v1-triangle_count-n32-r04",
+      "triangle_count",
+      32
+    ],
+    [
+      "groundlm-hard-v1-triangle_count-n64-r02",
+      "triangle_count",
+      64
+    ],
+    [
+      "groundlm-hard-v1-weighted_shortest_path-n32-r05",
+      "weighted_shortest_path",
+      32
+    ],
+    [
+      "groundlm-hard-v1-weighted_shortest_path-n64-r04",
+      "weighted_shortest_path",
+      64
+    ]
+  ],
+  "totals": {
+    "graphdo-bfs": {
+      "exact": 66,
+      "wrong": 2,
+      "invalid": 0,
+      "cutoff": 46,
+      "cost_usd": "4.845561527"
+    },
+    "edge-frontier": {
+      "exact": 64,
+      "wrong": 1,
+      "invalid": 0,
+      "cutoff": 49,
+      "cost_usd": "5.076794172"
+    }
+  },
+  "pair_transitions": {
+    "correct/correct": 59,
+    "cutoff/cutoff": 43,
+    "cutoff/correct": 3,
+    "correct/wrong": 1,
+    "wrong/correct": 2,
+    "correct/cutoff": 6
+  },
+  "configuration_changes": {
+    "tied": 9,
+    "higher": 4,
+    "lower": 6
+  },
+  "configurations": [
+    {
+      "model": "Amazon Nova 2 Lite",
+      "snapshot": "amazon/nova-2-lite-v1",
+      "developer": "amazon",
+      "provider": "Amazon Bedrock",
+      "endpoint": "amazon-bedrock/eu-west-1",
+      "pairs": 0,
+      "status": "Exceeded token limit",
+      "reused": false,
+      "bfs": null,
+      "frontier": null
+    },
+    {
+      "model": "Claude Fable 5.2",
+      "snapshot": "anthropic/claude-fable-5.2-20261109",
+      "developer": "anthropic",
+      "provider": "Anthropic",
+      "endpoint": "anthropic",
+      "pairs": 6,
+      "status": "complete",
+      "reused": false,
+      "bfs": {
+        "exact": 5,
+        "wrong": 0,
+        "invalid": 0,
+        "cutoff": 1,
+        "cost_usd": "1.324888"
+      },
+      "frontier": {
+        "exact": 5,
+        "wrong": 0,
+        "invalid": 0,
+        "cutoff": 1,
+        "cost_usd": "1.477728"
+      }
+    },
+    {
+      "model": "Claude Haiku 5.5",
+      "snapshot": "anthropic/claude-haiku-5.5-20261007",
+      "developer": "anthropic",
+      "provider": "Anthropic",
+      "endpoint": "anthropic",
+      "pairs": 6,
+      "status": "complete",
+      "reused": false,
+      "bfs": {
+        "exact": 4,
+        "wrong": 0,
+        "invalid": 0,
+        "cutoff": 2,
+        "cost_usd": "0.0235666"
+      },
+      "frontier": {
+        "exact": 4,
+        "wrong": 0,
+        "invalid": 0,
+        "cutoff": 2,
+        "cost_usd": "0.0223421"
+      }
+    },
+    {
+      "model": "Claude Sonnet 5.5",
+      "snapshot": "anthropic/claude-sonnet-5.5-20260928",
+      "developer": "anthropic",
+      "provider": "Anthropic",
+      "endpoint": "anthropic",
+      "pairs": 6,
+      "status": "complete",
+      "reused": false,
+      "bfs": {
+        "exact": 5,
+        "wrong": 0,
+        "invalid": 0,
+        "cutoff": 1,
+        "cost_usd": "0.334242"
+      },
+      "frontier": {
+        "exact": 5,
+        "wrong": 0,
+        "invalid": 0,
+        "cutoff": 1,
+        "cost_usd": "0.292092"
+      }
+    },
+    {
+      "model": "Command A+",
+      "snapshot": "cohere/command-a-plus-05-2026",
+      "developer": "cohere",
+      "provider": "Cohere",
+      "endpoint": "cohere/fp8",
+      "pairs": 6,
+      "status": "complete",
+      "reused": false,
+      "bfs": {
+        "exact": 1,
+        "wrong": 0,
+        "invalid": 0,
+        "cutoff": 5,
+        "cost_usd": "0.1421799"
+      },
+      "frontier": {
+        "exact": 2,
+        "wrong": 0,
+        "invalid": 0,
+        "cutoff": 4,
+        "cost_usd": "0.1286109"
+      }
+    },
+    {
+      "model": "DeepSeek V4.1 Flash",
+      "snapshot": "deepseek/deepseek-v4.1-flash-20261017",
+      "developer": "deepseek",
+      "provider": "Morph",
+      "endpoint": "morph/fp8",
+      "pairs": 6,
+      "status": "complete",
+      "reused": false,
+      "bfs": {
+        "exact": 3,
+        "wrong": 0,
+        "invalid": 0,
+        "cutoff": 3,
+        "cost_usd": "0.034004525"
+      },
+      "frontier": {
+        "exact": 4,
+        "wrong": 0,
+        "invalid": 0,
+        "cutoff": 2,
+        "cost_usd": "0.035256165"
+      }
+    },
+    {
+      "model": "ERNIE Light DT 1.0",
+      "snapshot": "baidu/ernie-light-dt-1.0-intl-20261110",
+      "developer": "baidu",
+      "provider": "Baidu",
+      "endpoint": "baidu",
+      "pairs": 6,
+      "status": "complete",
+      "reused": false,
+      "bfs": {
+        "exact": 2,
+        "wrong": 1,
+        "invalid": 0,
+        "cutoff": 3,
+        "cost_usd": "0.247182186"
+      },
+      "frontier": {
+        "exact": 2,
+        "wrong": 1,
+        "invalid": 0,
+        "cutoff": 3,
+        "cost_usd": "0.281550622"
+      }
+    },
+    {
+      "model": "Gemini 4 Carbon",
+      "snapshot": "google/gemini-4-carbon-20261110",
+      "developer": "google",
+      "provider": "Google",
+      "endpoint": "google-vertex/global",
+      "pairs": 0,
+      "status": "HTTP 403",
+      "reused": false,
+      "bfs": null,
+      "frontier": null
+    },
+    {
+      "model": "Gemini 4 Hydrogen",
+      "snapshot": "google/gemini-4-hydrogen-20261112",
+      "developer": "google",
+      "provider": "Google",
+      "endpoint": "google-vertex/global",
+      "pairs": 6,
+      "status": "complete",
+      "reused": false,
+      "bfs": {
+        "exact": 4,
+        "wrong": 0,
+        "invalid": 0,
+        "cutoff": 2,
+        "cost_usd": "0.4664655"
+      },
+      "frontier": {
+        "exact": 4,
+        "wrong": 0,
+        "invalid": 0,
+        "cutoff": 2,
+        "cost_usd": "0.4737105"
+      }
+    },
+    {
+      "model": "Gemini 4 Neon",
+      "snapshot": "google/gemini-4-neon-20261118",
+      "developer": "google",
+      "provider": "Google",
+      "endpoint": "google-vertex/global",
+      "pairs": 0,
+      "status": "HTTP 403",
+      "reused": false,
+      "bfs": null,
+      "frontier": null
+    },
+    {
+      "model": "GLM 5.3 Prime",
+      "snapshot": "z-ai/glm-5.3-prime-20260921",
+      "developer": "z-ai",
+      "provider": "Alibaba",
+      "endpoint": "alibaba",
+      "pairs": 6,
+      "status": "complete",
+      "reused": false,
+      "bfs": {
+        "exact": 4,
+        "wrong": 0,
+        "invalid": 0,
+        "cutoff": 2,
+        "cost_usd": "0.325054896"
+      },
+      "frontier": {
+        "exact": 3,
+        "wrong": 0,
+        "invalid": 0,
+        "cutoff": 3,
+        "cost_usd": "0.360398352"
+      }
+    },
+    {
+      "model": "GPT-6.2 Astra",
+      "snapshot": "openai/gpt-6.2-astra-20261117",
+      "developer": "openai",
+      "provider": "OpenAI",
+      "endpoint": "openai",
+      "pairs": 6,
+      "status": "complete",
+      "reused": false,
+      "bfs": {
+        "exact": 6,
+        "wrong": 0,
+        "invalid": 0,
+        "cutoff": 0,
+        "cost_usd": "0.725244"
+      },
+      "frontier": {
+        "exact": 6,
+        "wrong": 0,
+        "invalid": 0,
+        "cutoff": 0,
+        "cost_usd": "0.752364"
+      }
+    },
+    {
+      "model": "GPT-6.2 Sol",
+      "snapshot": "openai/gpt-6.2-sol-20261117",
+      "developer": "openai",
+      "provider": "OpenAI",
+      "endpoint": "openai",
+      "pairs": 6,
+      "status": "complete",
+      "reused": false,
+      "bfs": {
+        "exact": 6,
+        "wrong": 0,
+        "invalid": 0,
+        "cutoff": 0,
+        "cost_usd": "0.226851"
+      },
+      "frontier": {
+        "exact": 5,
+        "wrong": 0,
+        "invalid": 0,
+        "cutoff": 1,
+        "cost_usd": "0.239851"
+      }
+    },
+    {
+      "model": "Granite 4.2 8B",
+      "snapshot": "ibm-granite/granite-4.2-8b-20260831",
+      "developer": "ibm-granite",
+      "provider": "CoreWeave",
+      "endpoint": "coreweave/bf16",
+      "pairs": 6,
+      "status": "complete",
+      "reused": false,
+      "bfs": {
+        "exact": 0,
+        "wrong": 0,
+        "invalid": 0,
+        "cutoff": 6,
+        "cost_usd": "0.01506522"
+      },
+      "frontier": {
+        "exact": 0,
+        "wrong": 0,
+        "invalid": 0,
+        "cutoff": 6,
+        "cost_usd": "0.01505514"
+      }
+    },
+    {
+      "model": "Grok 4.7",
+      "snapshot": "x-ai/grok-4.7-20260916",
+      "developer": "x-ai",
+      "provider": "xAI",
+      "endpoint": "xai/zdr",
+      "pairs": 0,
+      "status": "Exceeded token limit",
+      "reused": false,
+      "bfs": null,
+      "frontier": null
+    },
+    {
+      "model": "Hy4 Flash",
+      "snapshot": "tencent/hy4-flash-20261116",
+      "developer": "tencent",
+      "provider": "Tencent",
+      "endpoint": "tencent/fp8",
+      "pairs": 6,
+      "status": "complete",
+      "reused": false,
+      "bfs": {
+        "exact": 4,
+        "wrong": 0,
+        "invalid": 0,
+        "cutoff": 2,
+        "cost_usd": "0.008969535"
+      },
+      "frontier": {
+        "exact": 4,
+        "wrong": 0,
+        "invalid": 0,
+        "cutoff": 2,
+        "cost_usd": "0.008218703"
+      }
+    },
+    {
+      "model": "Kimi K3.1 Pro",
+      "snapshot": "moonshotai/kimi-k3.1-pro-20261023",
+      "developer": "moonshotai",
+      "provider": "DeepInfra",
+      "endpoint": "deepinfra/bf16",
+      "pairs": 6,
+      "status": "complete",
+      "reused": false,
+      "bfs": {
+        "exact": 4,
+        "wrong": 0,
+        "invalid": 0,
+        "cutoff": 2,
+        "cost_usd": "0.4208652"
+      },
+      "frontier": {
+        "exact": 5,
+        "wrong": 0,
+        "invalid": 0,
+        "cutoff": 1,
+        "cost_usd": "0.4244182"
+      }
+    },
+    {
+      "model": "Ling 3.1 Flash",
+      "snapshot": "inclusionai/ling-3.1-flash-20261002",
+      "developer": "inclusionai",
+      "provider": "Novita",
+      "endpoint": "novita",
+      "pairs": 6,
+      "status": "complete",
+      "reused": false,
+      "bfs": {
+        "exact": 1,
+        "wrong": 1,
+        "invalid": 0,
+        "cutoff": 4,
+        "cost_usd": "0.01388868"
+      },
+      "frontier": {
+        "exact": 2,
+        "wrong": 0,
+        "invalid": 0,
+        "cutoff": 4,
+        "cost_usd": "0.01437576"
+      }
+    },
+    {
+      "model": "MiMo V2.6 Pro",
+      "snapshot": "xiaomi/mimo-v2.6-pro-20260921",
+      "developer": "xiaomi",
+      "provider": "Xiaomi",
+      "endpoint": "xiaomi/fp8",
+      "pairs": 6,
+      "status": "complete",
+      "reused": false,
+      "bfs": {
+        "exact": 3,
+        "wrong": 0,
+        "invalid": 0,
+        "cutoff": 3,
+        "cost_usd": "0.074771715"
+      },
+      "frontier": {
+        "exact": 3,
+        "wrong": 0,
+        "invalid": 0,
+        "cutoff": 3,
+        "cost_usd": "0.071705835"
+      }
+    },
+    {
+      "model": "MiniMax M3.1 Flash",
+      "snapshot": "minimax/minimax-m3.1-flash-20261019",
+      "developer": "minimax",
+      "provider": "Fireworks",
+      "endpoint": "fireworks",
+      "pairs": 0,
+      "status": "Pinned route unavailable",
+      "reused": false,
+      "bfs": null,
+      "frontier": null
+    },
+    {
+      "model": "Mistral Large 4",
+      "snapshot": "mistralai/mistral-large-4-0-20261006",
+      "developer": "mistralai",
+      "provider": "Mistral",
+      "endpoint": "mistral/zdr",
+      "pairs": 6,
+      "status": "complete",
+      "reused": false,
+      "bfs": {
+        "exact": 3,
+        "wrong": 0,
+        "invalid": 0,
+        "cutoff": 3,
+        "cost_usd": "0.1594285"
+      },
+      "frontier": {
+        "exact": 2,
+        "wrong": 0,
+        "invalid": 0,
+        "cutoff": 4,
+        "cost_usd": "0.1614319"
+      }
+    },
+    {
+      "model": "Muse Ember",
+      "snapshot": "meta/muse-ember-20261109",
+      "developer": "meta",
+      "provider": "Meta",
+      "endpoint": "meta",
+      "pairs": 6,
+      "status": "complete",
+      "reused": false,
+      "bfs": {
+        "exact": 5,
+        "wrong": 0,
+        "invalid": 0,
+        "cutoff": 1,
+        "cost_usd": "0.0282054"
+      },
+      "frontier": {
+        "exact": 4,
+        "wrong": 0,
+        "invalid": 0,
+        "cutoff": 2,
+        "cost_usd": "0.0299154"
+      }
+    },
+    {
+      "model": "Muse Spark Open",
+      "snapshot": "meta/muse-spark-open-20261015",
+      "developer": "meta",
+      "provider": "Modal",
+      "endpoint": "modal",
+      "pairs": 0,
+      "status": "HTTP 429",
+      "reused": false,
+      "bfs": null,
+      "frontier": null
+    },
+    {
+      "model": "Nemotron 3.5 Super VL",
+      "snapshot": "nvidia/nemotron-3.5-super-vl-20261015",
+      "developer": "nvidia",
+      "provider": "Crusoe",
+      "endpoint": "crusoe/bf16",
+      "pairs": 6,
+      "status": "complete",
+      "reused": false,
+      "bfs": {
+        "exact": 2,
+        "wrong": 0,
+        "invalid": 0,
+        "cutoff": 4,
+        "cost_usd": "0.0349803"
+      },
+      "frontier": {
+        "exact": 1,
+        "wrong": 0,
+        "invalid": 0,
+        "cutoff": 5,
+        "cost_usd": "0.0354115"
+      }
+    },
+    {
+      "model": "Qwen4-Max",
+      "snapshot": "qwen/qwen4-max-20261115",
+      "developer": "qwen",
+      "provider": "Alibaba",
+      "endpoint": "alibaba",
+      "pairs": 6,
+      "status": "complete",
+      "reused": true,
+      "bfs": {
+        "exact": 4,
+        "wrong": 0,
+        "invalid": 0,
+        "cutoff": 2,
+        "cost_usd": "0.239708370"
+      },
+      "frontier": {
+        "exact": 3,
+        "wrong": 0,
+        "invalid": 0,
+        "cutoff": 3,
+        "cost_usd": "0.252358095"
+      }
+    },
+    {
+      "model": "Step 5 Preview",
+      "snapshot": "stepfun/step-5-preview-20261008",
+      "developer": "stepfun",
+      "provider": "StepFun",
+      "endpoint": "stepfun/fp8",
+      "pairs": 0,
+      "status": "Pinned route unavailable",
+      "reused": false,
+      "bfs": null,
+      "frontier": null
+    }
+  ]
+}
