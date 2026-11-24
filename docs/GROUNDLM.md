@@ -176,3 +176,13 @@ The Claude example is a post-hoc four-graph case study, not a confirmation test.
 
 ## Triangle confirmation v1 (17 November 2026)
 The separate triangle.html page publishes the reviewed 96-graph Claude Sonnet 5.5 study: 576 responses, zero cutoffs, primary original_0 83/96 versus neutral_0 60/96. The planned paired test and exploratory repeat analysis remain separate from Hard v1. Public downloads include aggregate analysis, per-graph numeric scores, graph fixtures, settings and SHA-256 checksums; provider payloads and reasoning traces stay local. The new test independently counts all graph triangles and reconciles the public CSV with reported paired outcomes.
+
+## Multi-model edge ordering study
+
+`ordering.html` compares GraphDO breadth-first ordering with a frontier-based
+layout on six shared public graphs. The study reports 19 complete configurations
+out of 26 planned, with unavailable configurations described separately.
+The static page and aggregate downloads are separate from the frozen Hard v1
+leaderboard. `downloads/ordering-panel-v1/` contains model-level scores,
+settings, graph identifiers and SHA-256 checksums. No provider payloads or
+account details are included.

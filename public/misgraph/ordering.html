@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Edge ordering study | MisGraph Benchmark</title><meta name="description" content="Matched evidence from 19 model configurations on two graph edge orderings.">
+<meta name="theme-color" content="#142f48"><link rel="icon" href="assets/mark.svg" type="image/svg+xml"><link rel="preload" href="assets/fonts/source-sans-3-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="leaderboard.css"><link rel="stylesheet" href="research.css?v=20261108-copy"><script type="module" src="site-ui.js?v=20261108-copy"></script><link rel="stylesheet" href="study.css"><link rel="canonical" href="https://anormalm.com/misgraph/ordering.html"></head>
+<body class="lab-page"><a class="skip" href="#main">Skip to content</a><header><div class="nav"><a class="brand" href="index.html"><img src="assets/mark.svg" alt="" width="32" height="32">MisGraph<small>Benchmark</small></a><nav aria-label="Main navigation"><a href="index.html">Leaderboard</a><a href="history.html">All results</a><a href="methodology.html">Methodology</a><a href="run.html">Evaluate</a></nav><details class="resource-menu"><summary>Resources</summary><div><a href="ordering.html" aria-current="page">Edge ordering study</a><a href="triangle.html">Triangle confirmation</a><a href="difficulty.html">Difficulty study</a><a href="analysis.html">Understanding graph failures</a><a href="calibration.html">16K vs. 32K token study</a><a href="pilot.html">21-model pilot study</a><a href="paper-results.html">Results from the paper</a><a href="benchmark.html">Try the graph demo</a><a href="reproduce.html">Reproduce the paper</a><a href="downloads/hard-v1/groundlm_hard_v1.zip">Download data</a><a href="downloads/hard-v1/summary.json">Download scores (JSON)</a><a href="https://github.com/Anormalm/graph_evidence">Source on GitHub</a></div></details></div></header>
+<div class="layout"><main id="main">
+<div class="eyebrow">Edge ordering study / 24 Nov 2026</div>
+<h1>Does edge order improve graph reasoning?</h1>
+<p class="intro">Across 19 model configurations, GraphDO breadth-first ordering produced <b>66 exact answers out of 114</b>. A layout designed to keep fewer vertices active produced <b>64 out of 114</b> and cost slightly more.</p>
+<div class="benchmark-meta" aria-label="Study scope"><span><b>19 / 26</b> configurations complete</span><span><b>16</b> model developers</span><span><b>6</b> shared graphs</span><span><b>216 / 300</b> new eligible responses</span></div>
+<p class="release-note">Exploratory study on public graphs. Scores are reported separately from the <a href="index.html">Hard v1 leaderboard</a>.</p>
+<section class="section" aria-labelledby="ordering-summary-title">
+<h2 id="ordering-summary-title">Matched accuracy and cost</h2>
+<div class="table-scroll" role="region" aria-label="Matched accuracy and cost" tabindex="0">
+<table><caption>114 eligible responses per layout, including the six reused Qwen responses in each arm.</caption>
+<thead><tr><th scope="col">Edge order</th><th scope="col">Exact</th><th scope="col">Wrong</th><th scope="col">Cutoffs</th><th scope="col">Response cost</th></tr></thead>
+<tbody><tr><th scope="row">GraphDO BFS</th><td>66 / 114</td><td>2</td><td>46</td><td>US$4.85</td></tr>
+<tr><th scope="row">Edge-frontier layout</th><td>64 / 114</td><td>1</td><td>49</td><td>US$5.08</td></tr></tbody></table>
+</div>
+<p>The frontier layout scored higher on 4 configurations, tied on 9, and scored lower on 6. It gained 5 exact answers and lost 7. Six of the losses were responses that hit the token limit. Every configuration saw the same six graphs, so the pooled counts describe this set.</p>
+</section>
+<section class="section" aria-labelledby="ordering-model-title">
+<h2 id="ordering-model-title">Results by configuration</h2>
+<div class="table-scroll" role="region" aria-label="Results by model configuration" tabindex="0">
+<table id="ordering-models"><caption>Exact answers and cutoffs out of six responses per layout.</caption>
+<thead><tr><th scope="col">Model</th><th scope="col">BFS exact</th><th scope="col">Frontier exact</th><th scope="col">BFS cutoffs</th><th scope="col">Frontier cutoffs</th></tr></thead>
+<tbody>
+<tr><th scope="row">Claude Fable 5.2</th><td>5 / 6</td><td>5 / 6</td><td>1 / 6</td><td>1 / 6</td></tr>
+<tr><th scope="row">Claude Haiku 5.5</th><td>4 / 6</td><td>4 / 6</td><td>2 / 6</td><td>2 / 6</td></tr>
+<tr><th scope="row">Claude Sonnet 5.5</th><td>5 / 6</td><td>5 / 6</td><td>1 / 6</td><td>1 / 6</td></tr>
+<tr><th scope="row">Command A+</th><td>1 / 6</td><td>2 / 6</td><td>5 / 6</td><td>4 / 6</td></tr>
+<tr><th scope="row">DeepSeek V4.1 Flash</th><td>3 / 6</td><td>4 / 6</td><td>3 / 6</td><td>2 / 6</td></tr>
+<tr><th scope="row">ERNIE Light DT 1.0</th><td>2 / 6</td><td>2 / 6</td><td>3 / 6</td><td>3 / 6</td></tr>
+<tr><th scope="row">Gemini 4 Hydrogen</th><td>4 / 6</td><td>4 / 6</td><td>2 / 6</td><td>2 / 6</td></tr>
+<tr><th scope="row">GLM 5.3 Prime</th><td>4 / 6</td><td>3 / 6</td><td>2 / 6</td><td>3 / 6</td></tr>
+<tr><th scope="row">GPT-6.2 Astra</th><td>6 / 6</td><td>6 / 6</td><td>0 / 6</td><td>0 / 6</td></tr>
+<tr><th scope="row">GPT-6.2 Sol</th><td>6 / 6</td><td>5 / 6</td><td>0 / 6</td><td>1 / 6</td></tr>
+<tr><th scope="row">Granite 4.2 8B</th><td>0 / 6</td><td>0 / 6</td><td>6 / 6</td><td>6 / 6</td></tr>
+<tr><th scope="row">Hy4 Flash</th><td>4 / 6</td><td>4 / 6</td><td>2 / 6</td><td>2 / 6</td></tr>
+<tr><th scope="row">Kimi K3.1 Pro</th><td>4 / 6</td><td>5 / 6</td><td>2 / 6</td><td>1 / 6</td></tr>
+<tr><th scope="row">Ling 3.1 Flash</th><td>1 / 6</td><td>2 / 6</td><td>4 / 6</td><td>4 / 6</td></tr>
+<tr><th scope="row">MiMo V2.6 Pro</th><td>3 / 6</td><td>3 / 6</td><td>3 / 6</td><td>3 / 6</td></tr>
+<tr><th scope="row">Mistral Large 4</th><td>3 / 6</td><td>2 / 6</td><td>3 / 6</td><td>4 / 6</td></tr>
+<tr><th scope="row">Muse Ember</th><td>5 / 6</td><td>4 / 6</td><td>1 / 6</td><td>2 / 6</td></tr>
+<tr><th scope="row">Nemotron 3.5 Super VL</th><td>2 / 6</td><td>1 / 6</td><td>4 / 6</td><td>5 / 6</td></tr>
+<tr><th scope="row">Qwen4-Max <small>(reused)</small></th><td>4 / 6</td><td>3 / 6</td><td>2 / 6</td><td>3 / 6</td></tr>
+</tbody></table>
+</div>
+</section>
+<details class="reading-guide">
+<summary>Coverage and unavailable configurations</summary>
+<p>Of 300 planned new slots, 216 yielded eligible responses. The collector sent 221 unique requests. Three were rejected and two returned responses above the requested completion limit. The study also reused 12 eligible Qwen responses. The seven configurations below have zero eligible pairs and are excluded from the accuracy denominator.</p>
+<ul>
+<li><b>Amazon Nova 2 Lite</b> · Exceeded token limit</li>
+<li><b>Gemini 4 Carbon</b> · HTTP 403</li>
+<li><b>Gemini 4 Neon</b> · HTTP 403</li>
+<li><b>Grok 4.7</b> · Exceeded token limit</li>
+<li><b>MiniMax M3.1 Flash</b> · Pinned route unavailable</li>
+<li><b>Muse Spark Open</b> · HTTP 429</li>
+<li><b>Step 5 Preview</b> · Pinned route unavailable</li>
+</ul>
+</details>
+<details class="reading-guide">
+<summary>How we ran the study</summary>
+<p>Both layouts used the same edges, canonical node IDs and question text. We selected one public Hard v1 graph for each combination of task and size. The tasks were triangle counting, weighted shortest path and exact-length walk counting, at 32 and 64 vertices.</p>
+<p>Starting from <a href="https://aclanthology.org/2025.acl-long.321/">GraphDO’s breadth-first edge order</a>, we swapped rows to reduce the peak number of vertices with incident edges both before and after a row boundary. We requested a 16,384-token completion limit for each call. A returned cutoff counts as an incorrect response. Rejected calls and responses above the requested limit are excluded.</p>
+</details>
+<div class="download-links"><a href="downloads/ordering-panel-v1/summary.json">Results and settings JSON ↓</a><a href="downloads/ordering-panel-v1/scores.csv">Per-model CSV ↓</a><a href="downloads/ordering-panel-v1/manifest.json">Download checksums</a></div>
+<footer><span><b>MisGraph</b> · Lifan Hu · National University of Singapore<br>Graph Evidence Is Not Text Evidence · GroundLM Workshop, EMNLP 2026</span><span><a href="downloads/paper.pdf">Paper</a> &nbsp; / &nbsp; <a href="downloads/poster.pdf">Poster</a> &nbsp; / &nbsp; <a href="mailto:lifan.hu@u.nus.edu">Contact</a></span></footer></main></div></body></html>

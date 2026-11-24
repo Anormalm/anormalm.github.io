@@ -1,0 +1,27 @@
+model,snapshot,provider,endpoint,pairs,status,reused,bfs_exact,bfs_cutoff,frontier_exact,frontier_cutoff
+Amazon Nova 2 Lite,amazon/nova-2-lite-v1,Amazon Bedrock,amazon-bedrock/eu-west-1,0,Exceeded token limit,False,,,,
+Claude Fable 5.2,anthropic/claude-fable-5.2-20261109,Anthropic,anthropic,6,complete,False,5,1,5,1
+Claude Haiku 5.5,anthropic/claude-haiku-5.5-20261007,Anthropic,anthropic,6,complete,False,4,2,4,2
+Claude Sonnet 5.5,anthropic/claude-sonnet-5.5-20260928,Anthropic,anthropic,6,complete,False,5,1,5,1
+Command A+,cohere/command-a-plus-05-2026,Cohere,cohere/fp8,6,complete,False,1,5,2,4
+DeepSeek V4.1 Flash,deepseek/deepseek-v4.1-flash-20261017,Morph,morph/fp8,6,complete,False,3,3,4,2
+ERNIE Light DT 1.0,baidu/ernie-light-dt-1.0-intl-20261110,Baidu,baidu,6,complete,False,2,3,2,3
+Gemini 4 Carbon,google/gemini-4-carbon-20261110,Google,google-vertex/global,0,HTTP 403,False,,,,
+Gemini 4 Hydrogen,google/gemini-4-hydrogen-20261112,Google,google-vertex/global,6,complete,False,4,2,4,2
+Gemini 4 Neon,google/gemini-4-neon-20261118,Google,google-vertex/global,0,HTTP 403,False,,,,
+GLM 5.3 Prime,z-ai/glm-5.3-prime-20260921,Alibaba,alibaba,6,complete,False,4,2,3,3
+GPT-6.2 Astra,openai/gpt-6.2-astra-20261117,OpenAI,openai,6,complete,False,6,0,6,0
+GPT-6.2 Sol,openai/gpt-6.2-sol-20261117,OpenAI,openai,6,complete,False,6,0,5,1
+Granite 4.2 8B,ibm-granite/granite-4.2-8b-20260831,CoreWeave,coreweave/bf16,6,complete,False,0,6,0,6
+Grok 4.7,x-ai/grok-4.7-20260916,xAI,xai/zdr,0,Exceeded token limit,False,,,,
+Hy4 Flash,tencent/hy4-flash-20261116,Tencent,tencent/fp8,6,complete,False,4,2,4,2
+Kimi K3.1 Pro,moonshotai/kimi-k3.1-pro-20261023,DeepInfra,deepinfra/bf16,6,complete,False,4,2,5,1
+Ling 3.1 Flash,inclusionai/ling-3.1-flash-20261002,Novita,novita,6,complete,False,1,4,2,4
+MiMo V2.6 Pro,xiaomi/mimo-v2.6-pro-20260921,Xiaomi,xiaomi/fp8,6,complete,False,3,3,3,3
+MiniMax M3.1 Flash,minimax/minimax-m3.1-flash-20261019,Fireworks,fireworks,0,Pinned route unavailable,False,,,,
+Mistral Large 4,mistralai/mistral-large-4-0-20261006,Mistral,mistral/zdr,6,complete,False,3,3,2,4
+Muse Ember,meta/muse-ember-20261109,Meta,meta,6,complete,False,5,1,4,2
+Muse Spark Open,meta/muse-spark-open-20261015,Modal,modal,0,HTTP 429,False,,,,
+Nemotron 3.5 Super VL,nvidia/nemotron-3.5-super-vl-20261015,Crusoe,crusoe/bf16,6,complete,False,2,4,1,5
+Qwen4-Max,qwen/qwen4-max-20261115,Alibaba,alibaba,6,complete,True,4,2,3,3
+Step 5 Preview,stepfun/step-5-preview-20261008,StepFun,stepfun/fp8,0,Pinned route unavailable,False,,,,
