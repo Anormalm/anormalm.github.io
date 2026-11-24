@@ -612,5 +612,67 @@
       "bfs": null,
       "frontier": null
     }
+  ],
+  "tasks": [
+    {
+      "task": "triangle_count",
+      "label": "Triangle counting",
+      "graphs": 2,
+      "responses_per_layout": 38,
+      "outcomes": {
+        "graphdo-bfs": {
+          "correct": 26,
+          "wrong": 0,
+          "invalid": 0,
+          "cutoff": 12
+        },
+        "edge-frontier": {
+          "correct": 23,
+          "wrong": 1,
+          "invalid": 0,
+          "cutoff": 14
+        }
+      }
+    },
+    {
+      "task": "weighted_shortest_path",
+      "label": "Weighted shortest path",
+      "graphs": 2,
+      "responses_per_layout": 38,
+      "outcomes": {
+        "graphdo-bfs": {
+          "correct": 33,
+          "wrong": 2,
+          "invalid": 0,
+          "cutoff": 3
+        },
+        "edge-frontier": {
+          "correct": 35,
+          "wrong": 0,
+          "invalid": 0,
+          "cutoff": 3
+        }
+      }
+    },
+    {
+      "task": "exact_walk_count",
+      "label": "Exact-length walk counting",
+      "graphs": 2,
+      "responses_per_layout": 38,
+      "outcomes": {
+        "graphdo-bfs": {
+          "correct": 7,
+          "wrong": 0,
+          "invalid": 0,
+          "cutoff": 31
+        },
+        "edge-frontier": {
+          "correct": 6,
+          "wrong": 0,
+          "invalid": 0,
+          "cutoff": 32
+        }
+      }
+    }
   ]
 }

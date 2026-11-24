@@ -57,3 +57,29 @@ test('ordering study links, public graph identifiers, and download hashes resolv
   assert.equal(csv.length, summary.configurations.length);
   assert.equal(csv.filter(row => row.endsWith(',,,,')).length, 7);
 });
+
+test('the main benchmark figure and table reproduce the published task and model scores', () => {
+  const home = read('index.html');
+  const figure = home.slice(home.indexOf('id="ordering-figure-title"'), home.indexOf('</figure>'));
+  assert.equal(summary.tasks.length, 3);
+  let cutoffs = 0;
+  for (const task of summary.tasks) {
+    assert.equal(task.graphs, 2);
+    assert.equal(task.responses_per_layout, 38);
+    assert.ok(figure.includes(task.label));
+    for (const [method, label] of [['graphdo-bfs', 'GraphDO BFS'], ['edge-frontier', 'Edge frontier']]) {
+      const { correct, wrong, invalid, cutoff } = task.outcomes[method];
+      assert.equal(correct + wrong + invalid + cutoff, 38);
+      cutoffs += cutoff;
+      assert.ok(figure.includes(`aria-label="${label}, ${correct} exact, ${wrong + invalid} other, ${cutoff} cutoffs out of 38"`));
+    }
+  }
+  assert.equal(cutoffs, 95);
+  assert.equal(summary.tasks.find(task => task.task === 'exact_walk_count').outcomes['edge-frontier'].cutoff, 32);
+  assert.ok(figure.includes('63 of 95 cutoffs'));
+  const table = home.match(/<table id="ordering-main-table">([\s\S]*?)<\/table>/)[1];
+  assert.equal([...table.matchAll(/<th scope="row">/g)].length, 19);
+  assert.match(home, /id="hard-v1"/);
+  assert.match(home, /id="static-leaderboard"/);
+  assert.match(html, /id="ordering-coverage"/);
+});
