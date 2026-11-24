@@ -1,13 +1,117 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Leaderboard · Hard v1 | MisGraph Benchmark</title><meta name="description" content="See how models solve graph problems and whether their answers hold up when node names change.">
-<meta name="theme-color" content="#142f48"><link rel="icon" href="assets/mark.svg" type="image/svg+xml"><link rel="preload" href="assets/fonts/source-sans-3-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="leaderboard.css"><link rel="stylesheet" href="research.css?v=20261108-copy"><script type="module" src="site-ui.js?v=20261108-copy"></script><script type="module" src="standard-dashboard.js?v=20261108-copy"></script><link rel="stylesheet" href="study.css?v=ordering-overview"><link rel="canonical" href="https://anormalm.com/misgraph/"></head>
+<meta name="theme-color" content="#142f48"><link rel="icon" href="assets/mark.svg" type="image/svg+xml"><link rel="preload" href="assets/fonts/source-sans-3-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="leaderboard.css"><link rel="stylesheet" href="research.css?v=20261108-copy"><script type="module" src="site-ui.js?v=20261108-copy"></script><script type="module" src="standard-dashboard.js?v=20261108-copy"></script><link rel="stylesheet" href="study.css?v=ordering-performance"><link rel="canonical" href="https://anormalm.com/misgraph/"></head>
 <body class="lab-page"><a class="skip" href="#main">Skip to content</a><header><div class="nav"><a class="brand" href="index.html"><img src="assets/mark.svg" alt="" width="32" height="32">MisGraph<small>Benchmark</small></a><nav aria-label="Main navigation"><a href="index.html" aria-current="page">Leaderboard</a><a href="history.html">All results</a><a href="methodology.html">Methodology</a><a href="run.html">Evaluate</a></nav><details class="resource-menu"><summary>Resources</summary><div><a href="ordering.html">Edge ordering study</a><a href="triangle.html">Triangle confirmation</a><a href="difficulty.html">Difficulty study</a><a href="analysis.html">Understanding graph failures</a><a href="calibration.html">16K vs. 32K token study</a><a href="pilot.html">21-model pilot study</a><a href="paper-results.html">Results from the paper</a><a href="benchmark.html">Try the graph demo</a><a href="reproduce.html">Reproduce the paper</a><a href="downloads/hard-v1/groundlm_hard_v1.zip">Download data</a><a href="downloads/hard-v1/summary.json">Download scores (JSON)</a><a href="https://github.com/Anormalm/graph_evidence">Source on GitHub</a></div></details></div></header>
 <div class="layout"><main id="main"><section class="benchmark-heading" aria-labelledby="benchmark-title"><div><div class="eyebrow">MisGraph</div><h1 id="benchmark-title">Graph reasoning benchmark</h1><p class="benchmark-finding">Compare how model answers change with graph presentation. Explore the latest edge-ordering study, the <a href="#hard-v1">Hard v1 leaderboard</a>, and the <a href="triangle.html">triangle confirmation</a>.</p></div><div class="benchmark-actions"><a class="button secondary" href="#cite">Cite</a><a class="button secondary" href="downloads/hard-v1/groundlm_hard_v1.zip">Download Hard v1 ↓</a><a class="button" href="run.html">Evaluate a model →</a></div></section>
 <!-- ordering overview start -->
 <section class="section" id="ordering-overview" aria-labelledby="ordering-overview-title">
 <div class="section-head"><div><h2 id="ordering-overview-title">Edge ordering across model families</h2><p>Exploratory study on six shared graphs. 19 of 26 configurations completed every pair.</p></div><a href="ordering.html">Study and downloads →</a></div>
 <div class="benchmark-meta" aria-label="Ordering study results"><span><b>66 / 114</b> exact with GraphDO BFS</span><span><b>64 / 114</b> exact with edge frontier</span><span><b>16</b> model developers</span></div>
+<figure class="chart-panel ordering-figure performance-figure" aria-labelledby="ordering-performance-title">
+<h3 id="ordering-performance-title">Exact answers by model</h3>
+<div class="ordering-legend"><span><i class="ordering-column-bfs"></i>GraphDO BFS</span><span><i class="ordering-column-frontier"></i>Edge frontier</span></div>
+<div class="ordering-performance-scroll" role="region" aria-label="Model scores, scroll to see all models" tabindex="0">
+<div class="ordering-performance-axis" aria-hidden="true"><span>6</span><span>4</span><span>2</span><span>0</span></div>
+<ul class="ordering-model-columns" role="list" style="--series-min-width:1140px">
+<li class="ordering-model-column" aria-label="GPT-6.2 Astra: GraphDO BFS 6 of 6, edge frontier 6 of 6" data-bfs="6" data-frontier="6">
+<div class="ordering-model-bars" aria-hidden="true">
+<div class="ordering-column-bfs" style="height:100.000000%"><b>6</b></div>
+<div class="ordering-column-frontier" style="height:100.000000%"><b>6</b></div>
+</div><span class="ordering-model-label" aria-hidden="true">GPT-6.2 Astra</span></li>
+<li class="ordering-model-column" aria-label="GPT-6.2 Sol: GraphDO BFS 6 of 6, edge frontier 5 of 6" data-bfs="6" data-frontier="5">
+<div class="ordering-model-bars" aria-hidden="true">
+<div class="ordering-column-bfs" style="height:100.000000%"><b>6</b></div>
+<div class="ordering-column-frontier" style="height:83.333333%"><b>5</b></div>
+</div><span class="ordering-model-label" aria-hidden="true">GPT-6.2 Sol</span></li>
+<li class="ordering-model-column" aria-label="Claude Fable 5.2: GraphDO BFS 5 of 6, edge frontier 5 of 6" data-bfs="5" data-frontier="5">
+<div class="ordering-model-bars" aria-hidden="true">
+<div class="ordering-column-bfs" style="height:83.333333%"><b>5</b></div>
+<div class="ordering-column-frontier" style="height:83.333333%"><b>5</b></div>
+</div><span class="ordering-model-label" aria-hidden="true">Claude Fable 5.2</span></li>
+<li class="ordering-model-column" aria-label="Claude Sonnet 5.5: GraphDO BFS 5 of 6, edge frontier 5 of 6" data-bfs="5" data-frontier="5">
+<div class="ordering-model-bars" aria-hidden="true">
+<div class="ordering-column-bfs" style="height:83.333333%"><b>5</b></div>
+<div class="ordering-column-frontier" style="height:83.333333%"><b>5</b></div>
+</div><span class="ordering-model-label" aria-hidden="true">Claude Sonnet 5.5</span></li>
+<li class="ordering-model-column" aria-label="Muse Ember: GraphDO BFS 5 of 6, edge frontier 4 of 6" data-bfs="5" data-frontier="4">
+<div class="ordering-model-bars" aria-hidden="true">
+<div class="ordering-column-bfs" style="height:83.333333%"><b>5</b></div>
+<div class="ordering-column-frontier" style="height:66.666667%"><b>4</b></div>
+</div><span class="ordering-model-label" aria-hidden="true">Muse Ember</span></li>
+<li class="ordering-model-column" aria-label="Kimi K3.1 Pro: GraphDO BFS 4 of 6, edge frontier 5 of 6" data-bfs="4" data-frontier="5">
+<div class="ordering-model-bars" aria-hidden="true">
+<div class="ordering-column-bfs" style="height:66.666667%"><b>4</b></div>
+<div class="ordering-column-frontier" style="height:83.333333%"><b>5</b></div>
+</div><span class="ordering-model-label" aria-hidden="true">Kimi K3.1 Pro</span></li>
+<li class="ordering-model-column" aria-label="Claude Haiku 5.5: GraphDO BFS 4 of 6, edge frontier 4 of 6" data-bfs="4" data-frontier="4">
+<div class="ordering-model-bars" aria-hidden="true">
+<div class="ordering-column-bfs" style="height:66.666667%"><b>4</b></div>
+<div class="ordering-column-frontier" style="height:66.666667%"><b>4</b></div>
+</div><span class="ordering-model-label" aria-hidden="true">Claude Haiku 5.5</span></li>
+<li class="ordering-model-column" aria-label="Gemini 4 Hydrogen: GraphDO BFS 4 of 6, edge frontier 4 of 6" data-bfs="4" data-frontier="4">
+<div class="ordering-model-bars" aria-hidden="true">
+<div class="ordering-column-bfs" style="height:66.666667%"><b>4</b></div>
+<div class="ordering-column-frontier" style="height:66.666667%"><b>4</b></div>
+</div><span class="ordering-model-label" aria-hidden="true">Gemini 4 Hydrogen</span></li>
+<li class="ordering-model-column" aria-label="Hy4 Flash: GraphDO BFS 4 of 6, edge frontier 4 of 6" data-bfs="4" data-frontier="4">
+<div class="ordering-model-bars" aria-hidden="true">
+<div class="ordering-column-bfs" style="height:66.666667%"><b>4</b></div>
+<div class="ordering-column-frontier" style="height:66.666667%"><b>4</b></div>
+</div><span class="ordering-model-label" aria-hidden="true">Hy4 Flash</span></li>
+<li class="ordering-model-column" aria-label="GLM 5.3 Prime: GraphDO BFS 4 of 6, edge frontier 3 of 6" data-bfs="4" data-frontier="3">
+<div class="ordering-model-bars" aria-hidden="true">
+<div class="ordering-column-bfs" style="height:66.666667%"><b>4</b></div>
+<div class="ordering-column-frontier" style="height:50.000000%"><b>3</b></div>
+</div><span class="ordering-model-label" aria-hidden="true">GLM 5.3 Prime</span></li>
+<li class="ordering-model-column" aria-label="Qwen4-Max: GraphDO BFS 4 of 6, edge frontier 3 of 6" data-bfs="4" data-frontier="3">
+<div class="ordering-model-bars" aria-hidden="true">
+<div class="ordering-column-bfs" style="height:66.666667%"><b>4</b></div>
+<div class="ordering-column-frontier" style="height:50.000000%"><b>3</b></div>
+</div><span class="ordering-model-label" aria-hidden="true">Qwen4-Max</span></li>
+<li class="ordering-model-column" aria-label="DeepSeek V4.1 Flash: GraphDO BFS 3 of 6, edge frontier 4 of 6" data-bfs="3" data-frontier="4">
+<div class="ordering-model-bars" aria-hidden="true">
+<div class="ordering-column-bfs" style="height:50.000000%"><b>3</b></div>
+<div class="ordering-column-frontier" style="height:66.666667%"><b>4</b></div>
+</div><span class="ordering-model-label" aria-hidden="true">DeepSeek V4.1 Flash</span></li>
+<li class="ordering-model-column" aria-label="MiMo V2.6 Pro: GraphDO BFS 3 of 6, edge frontier 3 of 6" data-bfs="3" data-frontier="3">
+<div class="ordering-model-bars" aria-hidden="true">
+<div class="ordering-column-bfs" style="height:50.000000%"><b>3</b></div>
+<div class="ordering-column-frontier" style="height:50.000000%"><b>3</b></div>
+</div><span class="ordering-model-label" aria-hidden="true">MiMo V2.6 Pro</span></li>
+<li class="ordering-model-column" aria-label="Mistral Large 4: GraphDO BFS 3 of 6, edge frontier 2 of 6" data-bfs="3" data-frontier="2">
+<div class="ordering-model-bars" aria-hidden="true">
+<div class="ordering-column-bfs" style="height:50.000000%"><b>3</b></div>
+<div class="ordering-column-frontier" style="height:33.333333%"><b>2</b></div>
+</div><span class="ordering-model-label" aria-hidden="true">Mistral Large 4</span></li>
+<li class="ordering-model-column" aria-label="ERNIE Light DT 1.0: GraphDO BFS 2 of 6, edge frontier 2 of 6" data-bfs="2" data-frontier="2">
+<div class="ordering-model-bars" aria-hidden="true">
+<div class="ordering-column-bfs" style="height:33.333333%"><b>2</b></div>
+<div class="ordering-column-frontier" style="height:33.333333%"><b>2</b></div>
+</div><span class="ordering-model-label" aria-hidden="true">ERNIE Light DT 1.0</span></li>
+<li class="ordering-model-column" aria-label="Nemotron 3.5 Super VL: GraphDO BFS 2 of 6, edge frontier 1 of 6" data-bfs="2" data-frontier="1">
+<div class="ordering-model-bars" aria-hidden="true">
+<div class="ordering-column-bfs" style="height:33.333333%"><b>2</b></div>
+<div class="ordering-column-frontier" style="height:16.666667%"><b>1</b></div>
+</div><span class="ordering-model-label" aria-hidden="true">Nemotron 3.5 Super VL</span></li>
+<li class="ordering-model-column" aria-label="Command A+: GraphDO BFS 1 of 6, edge frontier 2 of 6" data-bfs="1" data-frontier="2">
+<div class="ordering-model-bars" aria-hidden="true">
+<div class="ordering-column-bfs" style="height:16.666667%"><b>1</b></div>
+<div class="ordering-column-frontier" style="height:33.333333%"><b>2</b></div>
+</div><span class="ordering-model-label" aria-hidden="true">Command A+</span></li>
+<li class="ordering-model-column" aria-label="Ling 3.1 Flash: GraphDO BFS 1 of 6, edge frontier 2 of 6" data-bfs="1" data-frontier="2">
+<div class="ordering-model-bars" aria-hidden="true">
+<div class="ordering-column-bfs" style="height:16.666667%"><b>1</b></div>
+<div class="ordering-column-frontier" style="height:33.333333%"><b>2</b></div>
+</div><span class="ordering-model-label" aria-hidden="true">Ling 3.1 Flash</span></li>
+<li class="ordering-model-column" aria-label="Granite 4.2 8B: GraphDO BFS 0 of 6, edge frontier 0 of 6" data-bfs="0" data-frontier="0">
+<div class="ordering-model-bars" aria-hidden="true">
+<div class="ordering-column-bfs" style="height:0.000000%"><b>0</b></div>
+<div class="ordering-column-frontier" style="height:0.000000%"><b>0</b></div>
+</div><span class="ordering-model-label" aria-hidden="true">Granite 4.2 8B</span></li>
+</ul></div>
+<figcaption>Exact answers out of six shared graphs, sorted by BFS score. GPT-6.2 Astra scored 6/6 with each layout. Seven configurations lacked eligible pairs. <a href="#ordering-main-table-title">See the scores as a table</a>.</figcaption>
+</figure>
 <figure class="chart-panel ordering-figure" aria-labelledby="ordering-figure-title">
 <h3 id="ordering-figure-title">Where responses hit the token limit</h3>
 <div class="ordering-legend"><span><i class="ordering-exact"></i>Exact</span><span><i class="ordering-other"></i>Wrong</span><span><i class="ordering-cutoff"></i>Cutoff</span></div>
