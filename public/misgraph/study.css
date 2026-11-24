@@ -25,3 +25,16 @@
 .ordering-other{background:#c5892c}
 .ordering-cutoff{background:repeating-linear-gradient(135deg,#dce4ef 0,#dce4ef 5px,#e9eef5 5px,#e9eef5 8px);color:#142f48}
 .ordering-figure figcaption{margin-top:16px;color:#526374;font-size:14px}
+
+.ordering-performance-scroll{position:relative;display:flex;overflow-x:auto;padding-top:24px}
+.ordering-performance-scroll:focus-visible{outline:3px solid var(--cobalt);outline-offset:3px}
+.ordering-performance-axis{position:sticky;left:0;z-index:1;display:flex;flex:0 0 2rem;flex-direction:column;justify-content:space-between;height:10rem;background:#fff;color:#526374;font-size:12px}
+.ordering-performance-axis span{height:0;line-height:0;padding-left:4px}
+.ordering-model-columns{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(60px,1fr);flex:1;min-width:var(--series-min-width);margin:0;padding:0;list-style:none}
+.ordering-model-column{min-width:0;text-align:center}
+.ordering-model-bars{height:10rem;display:flex;align-items:flex-end;justify-content:center;gap:5px;border-top:1px solid #dce3ed;border-bottom:1px solid #b6c3d2;background:repeating-linear-gradient(to top,transparent 0,transparent calc(33.333% - 1px),#e0e7ef calc(33.333% - 1px),#e0e7ef 33.333%)}
+.ordering-model-bars div{position:relative;width:16px;border-radius:3px 3px 0 0}
+.ordering-model-bars b{position:absolute;left:0;bottom:100%;width:100%;font-size:11px;color:#142f48}
+.ordering-column-bfs{background:#2458b8}
+.ordering-column-frontier{background:#187b73}
+.ordering-model-label{display:block;max-width:74px;margin:8px auto 0;padding:0 3px 8px;overflow-wrap:anywhere;font-size:11px;line-height:1.2;font-weight:600}

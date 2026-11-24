@@ -60,7 +60,8 @@ test('ordering study links, public graph identifiers, and download hashes resolv
 
 test('the main benchmark figure and table reproduce the published task and model scores', () => {
   const home = read('index.html');
-  const figure = home.slice(home.indexOf('id="ordering-figure-title"'), home.indexOf('</figure>'));
+  const start = home.indexOf('id="ordering-figure-title"');
+  const figure = home.slice(start, home.indexOf('</figure>', start));
   assert.equal(summary.tasks.length, 3);
   let cutoffs = 0;
   for (const task of summary.tasks) {
@@ -82,4 +83,19 @@ test('the main benchmark figure and table reproduce the published task and model
   assert.match(home, /id="hard-v1"/);
   assert.match(home, /id="static-leaderboard"/);
   assert.match(html, /id="ordering-coverage"/);
+});
+
+test('vertical performance bars rank complete configurations by exact BFS answers', () => {
+  const home = read('index.html');
+  const plotted = [...home.matchAll(/class="ordering-model-column" aria-label="([^"]+)" data-bfs="(\d)" data-frontier="(\d)"/g)];
+  const complete = summary.configurations.filter(row => row.status === 'complete');
+  assert.equal(plotted.length, complete.length);
+  for (const row of complete) {
+    const match = plotted.find(([, name]) => name.startsWith(row.model + ':'));
+    assert.equal(Number(match[2]), row.bfs.exact);
+    assert.equal(Number(match[3]), row.frontier.exact);
+  }
+  const scores = plotted.map(([, , bfs]) => Number(bfs));
+  assert.deepEqual(scores, [...scores].sort((a, b) => b - a));
+  assert.ok(home.includes('Exact answers out of six shared graphs'));
 });
