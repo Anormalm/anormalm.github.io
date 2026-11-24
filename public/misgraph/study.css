@@ -10,3 +10,18 @@
 @media(max-width:480px){.triangle-bar{grid-template-columns:94px minmax(30px,1fr) 48px;gap:8px;font-size:14px}.triangle-result strong{font-size:23px}}
 
 .triangle-comparison>*{min-width:0}.triangle-comparison{grid-template-columns:repeat(2,minmax(0,1fr))}@media(max-width:900px){.triangle-comparison{grid-template-columns:minmax(0,1fr)}}
+
+.ordering-figure{margin:24px 0 32px}
+.ordering-figure h3{margin:0 0 12px}
+.ordering-legend{display:flex;flex-wrap:wrap;gap:8px 18px;margin-bottom:18px;font-size:14px}
+.ordering-legend span{display:inline-flex;align-items:center;gap:6px}
+.ordering-legend i{display:inline-block;width:14px;height:14px;border-radius:2px}
+.ordering-task+.ordering-task{margin-top:18px}
+.ordering-task h3{margin:0 0 6px;font-size:16px}
+.ordering-bar{display:grid;grid-template-columns:6rem minmax(0,1fr);gap:8px;align-items:center;margin:4px 0;font-size:13px}
+.ordering-track{display:flex;height:24px;overflow:hidden;border-radius:3px}
+.ordering-track span{display:grid;place-items:center;flex-shrink:0;font-weight:650;font-variant-numeric:tabular-nums}
+.ordering-exact{background:#2458d3;color:#fff}
+.ordering-other{background:#c5892c}
+.ordering-cutoff{background:repeating-linear-gradient(135deg,#dce4ef 0,#dce4ef 5px,#e9eef5 5px,#e9eef5 8px);color:#142f48}
+.ordering-figure figcaption{margin-top:16px;color:#526374;font-size:14px}
